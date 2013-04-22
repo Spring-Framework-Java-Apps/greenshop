@@ -33,15 +33,6 @@
 	</bean>
 	
 	<jpa:repositories base-package="org.woehlke.greenshop" />
-	
-	<!--
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
-		<property name="url" value="jdbc:mysql://localhost:3306/greenshop"/> 
-		<property name="username" value="greenshop"/>
-		<property name="password" value="greenshoppwd"/>
-	</bean>
-	-->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
@@ -93,9 +84,9 @@
 	<!-- Mail service -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	    <property name="host" value="smtp.1und1.de"/>
-	    <property name="port" value="25"/>
-	    <property name="username" value="thomas@woehlke.org"/>
-	    <property name="password" value="Recoil89"/>
+	    <property name="port" value="587"/>
+	    <property name="username" value="cdshcdsbjcahdscjadscjh@online.de"/>
+	    <property name="password" value="front242"/>
 	    <property name="javaMailProperties">
 	        <props>
 	            <!-- Use SMTP-AUTH to authenticate to SMTP server -->
@@ -108,7 +99,7 @@
 	
 	<!-- this is a template message that we can pre-load with default state -->
 	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
-  		<property name="from" value="thomas@woehlke.org"/>
+  		<property name="from" value="cdshcdsbjcahdscjadscjh@online.de"/>
   		<property name="subject" value="Greeting from Greenshop"/>
 	</bean>
 
