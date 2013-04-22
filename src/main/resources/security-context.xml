@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+        
+	<!-- Spring security -->
+	
+	<!-- 
+	http://static.springsource.org/spring-security/site/docs/3.1.x/reference/springsecurity-single.html
+	 -->
+    
+    <security:http pattern="/resources/**" security="none"/>
+    <security:http pattern="/product/**" security="none"/>
+    <security:http pattern="/manufacturer/**" security="none"/>
+    <security:http pattern="/category/**" security="none"/>
+    <security:http pattern="/" security="none"/>
+
+    <security:http auto-config='true' use-expressions='true'>
+    	<security:intercept-url pattern="/" access="permitAll"/>
+    	<security:intercept-url pattern="/product/**" access="permitAll"/>
+    	<security:intercept-url pattern="/manufacturer/**" access="permitAll"/>
+    	<security:intercept-url pattern="/category/**" access="permitAll"/>
+    	<security:intercept-url pattern="/login*" access="permitAll"/>
+    	<security:intercept-url pattern="/createAccount*" access="permitAll"/>
+    	<security:intercept-url pattern="/shoppingCart/**" access="permitAll"/>
+    	<security:intercept-url pattern="/**" access="fullyAuthenticated" />
+    	<security:form-login 
+    		login-page='/login' 
+    		authentication-failure-url="/login?login_error=1" 
+            authentication-success-handler-ref="populateBasketAfterLogin"/>
+    	<security:logout invalidate-session="true" delete-cookies="JSESSIONID" />
+  	</security:http>
+  	
+  	<security:authentication-manager alias="authenticationManager">
+    	<security:authentication-provider user-service-ref="customerService">
+    		<security:password-encoder hash="md5"/>
+    	</security:authentication-provider>
+  	</security:authentication-manager>
+  	
+  	<bean id="authenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+  		<property name="authenticationManager" ref="authenticationManager"/>
+  		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
+	</bean>
+
+</beans>
+       

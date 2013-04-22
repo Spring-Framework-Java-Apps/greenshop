@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-mongodb="http://www.springframework.org/schema/integration/mongodb"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+	http://www.springframework.org/schema/integration/mongodb
+	http://www.springframework.org/schema/integration/mongodb/spring-integration-mongodb.xsd
+	http://www.springframework.org/schema/integration
+	http://www.springframework.org/schema/integration/spring-integration.xsd">
+	
+	<bean id="mongoDbFactory"
+		class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
+		<constructor-arg>
+			<bean class="com.mongodb.Mongo" />
+		</constructor-arg>
+		<constructor-arg value="test" />
+	</bean>
+
+	<bean id="mongoDbMessageStore"
+		class="org.springframework.integration.mongodb.store.MongoDbMessageStore">
+		<constructor-arg ref="mongoDbFactory" />
+	</bean>
+	
+	<jpa:repositories base-package="org.woehlke.greenshop" />
+	
+	<!--
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
+		<property name="url" value="jdbc:mysql://localhost:3306/greenshop"/> 
+		<property name="username" value="greenshop"/>
+		<property name="password" value="greenshoppwd"/>
+	</bean>
+	-->
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
+		<property name="url" value="jdbc:mysql://localhost:3306/oscommerce2"/> 
+		<property name="username" value="oscommerce2"/>
+		<property name="password" value="oscommerce2pwd"/>
+	</bean>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+  		<property name="dataSource" ref="dataSource"/>
+  		<property name="persistenceUnitName" value="greenshopPU"/>
+ 	</bean>
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- JPA Configuration -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="jpaDialect" ref="jpaDialect" />
+	</bean>
+
+	<!-- Transactions -->
+	<tx:annotation-driven transaction-manager="transactionManager" />	
+	
+	<context:component-scan base-package="org.woehlke.greenshop" />
+	
+	<!-- Integration -->
+	
+	<int:poller default="true" fixed-rate="500" />
+	
+	<int:channel id="controlBusChannel" />
+	<!-- See also: http://static.springsource.org/spring-integration/reference/htmlsingle/#control-bus 
+		http://www.eaipatterns.com/ControlBus.html -->
+	<int:control-bus id="controlBus" input-channel="controlBusChannel" />
+	
+	<int:channel id="emailChannel">
+		<int:queue message-store="mongoDbMessageStore" />
+	</int:channel>
+	
+	<!--  
+	<int:service-activator input-channel="emailChannel"
+		output-channel="nullChannel" id="sendMail"
+		ref="registrationService" method="sendMail" />-->
+		
+	<!-- Mail service -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.1und1.de"/>
+	    <property name="port" value="25"/>
+	    <property name="username" value="thomas@woehlke.org"/>
+	    <property name="password" value="Recoil89"/>
+	    <property name="javaMailProperties">
+	        <props>
+	            <!-- Use SMTP-AUTH to authenticate to SMTP server -->
+	            <prop key="mail.smtp.auth">true</prop>
+	            <!-- Use TLS to encrypt communication with SMTP server -->
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	        </props>
+	    </property>
+	</bean>
+	
+	<!-- this is a template message that we can pre-load with default state -->
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+  		<property name="from" value="thomas@woehlke.org"/>
+  		<property name="subject" value="Greeting from Greenshop"/>
+	</bean>
+
+</beans>

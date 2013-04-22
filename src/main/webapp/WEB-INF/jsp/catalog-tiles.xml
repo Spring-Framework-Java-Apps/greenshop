@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="home" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/home.jsp" />
+	</definition>
+
+	<definition name="manufacturer" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/manufacturer.jsp" />
+	</definition>
+
+	<definition name="product" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/product.jsp" />
+	</definition>
+
+	<definition name="category" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/category.jsp" />
+	</definition>
+
+	<definition name="login" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/login.jsp" />
+	</definition>
+
+	<definition name="createAccount" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/createAccount.jsp" />
+	</definition>
+
+	<definition name="createdAccount" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/createdAccount.jsp" />
+	</definition>
+
+	<definition name="account" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/account.jsp" />
+	</definition>
+
+	<definition name="accountPassword" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/accountPassword.jsp" />
+	</definition>
+
+	<definition name="accountEdit" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/accountEdit.jsp" />
+	</definition>
+
+	<definition name="addressBook" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/addressBook.jsp" />
+	</definition>
+
+	<definition name="addressBookEdit" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/addressBookEdit.jsp" />
+	</definition>
+	
+	<definition name="addressBookAdd" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/addressBookAdd.jsp" />
+	</definition>
+
+	<definition name="accountHistory" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/accountHistory.jsp" />
+	</definition>
+
+	<definition name="accountNewsletter" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/accountNewsletter.jsp" />
+	</definition>
+
+	<definition name="accountNotifications" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/accountNotifications.jsp" />
+	</definition>
+
+	<definition name="accountHistoryInfo" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/accountHistoryInfo.jsp" />
+	</definition>
+
+	<definition name="shoppingCart" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/shoppingCart.jsp" />
+	</definition>
+
+	<definition name="checkoutShipping" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/checkoutShipping.jsp" />
+	</definition>
+
+	<definition name="checkoutPayment" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/checkoutPayment.jsp" />
+	</definition>
+
+	<definition name="checkoutConfirmation" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/checkoutConfirmation.jsp" />
+	</definition>
+
+	<definition name="checkoutShippingAddress" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/checkoutShippingAddress.jsp" />
+	</definition>
+
+	<definition name="checkoutPaymentAddress" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/checkoutPaymentAddress.jsp" />
+	</definition>
+
+	<definition name="checkoutSuccess" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/checkoutSuccess.jsp" />
+	</definition>
+	
+</tiles-definitions>
