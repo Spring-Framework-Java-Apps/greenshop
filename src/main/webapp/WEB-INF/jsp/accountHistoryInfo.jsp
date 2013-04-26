@@ -1,3 +1,4 @@
+<%@ include file="/WEB-INF/layout/taglibs.jsp"%>
 <h1>Order Information</h1>
 
 <div class="contentContainer">
@@ -95,5 +96,5 @@
 
 
   <div class="buttonSet">
-    <span class="tdbLink"><a id="tdb5" href="http://localhost/oscommerce2/account_history.php">Back</a></span><script type="text/javascript">$("#tdb5").button({icons:{primary:"ui-icon-triangle-1-w"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>  </div>
+    <span class="tdbLink"><a id="tdb5" href='<c:url value="/accountHistory" />'>Back</a></span><script type="text/javascript">$("#tdb5").button({icons:{primary:"ui-icon-triangle-1-w"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>  </div>
 </div>
