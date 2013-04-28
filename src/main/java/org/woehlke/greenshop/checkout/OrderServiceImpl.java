@@ -18,6 +18,7 @@ import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
 import org.woehlke.greenshop.checkout.entities.OrderTotal;
 import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
+import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
 import org.woehlke.greenshop.checkout.repository.OrderProductAttributeRepository;
 import org.woehlke.greenshop.checkout.repository.OrderProductRepository;
 import org.woehlke.greenshop.checkout.repository.OrderRepository;
@@ -56,8 +57,19 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order findOrderById(long orderId) {
-		return orderRepository.findOne(orderId);
+	public OrderHistoryDetailsBean findOrderDetailsById(long orderId) {
+		Language language = catalogService.findLanguageByCode("en");
+		OrderHistoryDetailsBean o = new OrderHistoryDetailsBean();
+		Order order = orderRepository.findOne(orderId);
+		o.setOrder(order);
+		OrderStatusId id = new OrderStatusId();
+		id.setLanguage(language);
+		id.setId(order.getOrdersStatus());
+		OrderStatus orderStatus = orderStatusRepository.findOne(id);
+		o.setOrderStatus(orderStatus);
+		List<OrderProduct> orderProducts = orderProductRepository.findByOrder(order);
+		o.setOrderProducts(orderProducts);
+		return o;
 	}
 
 	@Override

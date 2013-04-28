@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
@@ -249,6 +250,16 @@ public class Order {
 	@Column(name="currency_value",columnDefinition = "decimal(14,6)")
 	private Double currencyValue;
 
+	@Transient
+	public String getFormattedDeliveryAddress(){
+		return deliveryName+"<br/>"+deliveryStreetAddress+"<br/>"+deliveryPostcode+" "+deliveryCity+"<br/>"+deliveryCountry;
+	}
+	
+	@Transient
+	public String getFormattedBillingAddress(){
+		return billingName+"<br/>"+billingStreetAddress+"<br/>"+billingPostcode+" "+billingCity+"<br/>"+billingCountry;
+	}
+	
 	public Long getId() {
 		return id;
 	}

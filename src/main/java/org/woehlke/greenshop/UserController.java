@@ -21,6 +21,7 @@ import org.woehlke.greenshop.cart.CartService;
 import org.woehlke.greenshop.checkout.OrderService;
 import org.woehlke.greenshop.checkout.entities.Order;
 import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
+import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.AddressBook;
 import org.woehlke.greenshop.customer.entities.Country;
@@ -251,7 +252,8 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/accountHistoryInfo/{orderId}", method = RequestMethod.GET)
 	public String accountHistoryInfo(@PathVariable long orderId, Model model){
 		super.getDefaultBoxContent(model);
-		Order order = this.orderService.findOrderById(orderId);
+		OrderHistoryDetailsBean orderHistoryDetailsBean = this.orderService.findOrderDetailsById(orderId);
+		model.addAttribute("orderHistoryDetailsBean",orderHistoryDetailsBean);
 		return "accountHistoryInfo";
 	}
 	

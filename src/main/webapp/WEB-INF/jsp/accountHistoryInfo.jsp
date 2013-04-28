@@ -2,7 +2,7 @@
 <h1>Order Information</h1>
 
 <div class="contentContainer">
-  <h2>Order #1 <span class="contentText">(Pending)</span></h2>
+  <h2>Order #1 <span class="contentText">(${orderHistoryDetailsBean.orderStatus.ordersStatusName})</span></h2>
 
   <div class="contentText">
     <div>
@@ -17,7 +17,7 @@
             <td><strong>Delivery Address</strong></td>
           </tr>
           <tr>
-            <td>Thomas Woehlke <br /> Kirchstr. 3<br /> 10551 Berlin<br /> Germany</td>
+            <td>${orderHistoryDetailsBean.order.formattedDeliveryAddress} </td>
           </tr>
           <tr>
             <td><strong>Shipping Method</strong></td>
@@ -51,13 +51,13 @@
             <td><strong>Billing Address</strong></td>
           </tr>
           <tr>
-            <td>Thomas Woehlke <br /> Kirchstr. 3<br /> 10551 Berlin<br /> Germany</td>
+            <td>${orderHistoryDetailsBean.order.formattedBillingAddress}</td>
           </tr>
           <tr>
             <td><strong>Payment Method</strong></td>
           </tr>
           <tr>
-            <td>Cash on Delivery</td>
+            <td>${orderHistoryDetailsBean.order.paymentMethod}</td>
           </tr>
         </table></td>
         <td width="70%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
