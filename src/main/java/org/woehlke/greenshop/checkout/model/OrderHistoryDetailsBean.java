@@ -12,6 +12,8 @@ public class OrderHistoryDetailsBean {
 	private OrderStatus orderStatus;
 	private List<OrderTotal> orderTotal;
 	private List<OrderProduct> orderProducts;
+	private List<OrderStatusHistoryBean> orderStatusHistoryBeans;
+	
 	public Order getOrder() {
 		return order;
 	}
@@ -35,6 +37,13 @@ public class OrderHistoryDetailsBean {
 	}
 	public void setOrderProducts(List<OrderProduct> orderProducts) {
 		this.orderProducts = orderProducts;
+	}
+	public List<OrderStatusHistoryBean> getOrderStatusHistoryBeans() {
+		return orderStatusHistoryBeans;
+	}
+	public void setOrderStatusHistoryBeans(
+			List<OrderStatusHistoryBean> orderStatusHistoryBeans) {
+		this.orderStatusHistoryBeans = orderStatusHistoryBeans;
 	}
 	
 }

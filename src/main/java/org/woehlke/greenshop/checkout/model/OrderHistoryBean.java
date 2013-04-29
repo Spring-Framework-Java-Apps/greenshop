@@ -94,5 +94,4 @@ public class OrderHistoryBean {
 		return true;
 	}
 	
-	
 }

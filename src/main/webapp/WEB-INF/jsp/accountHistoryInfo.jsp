@@ -84,11 +84,19 @@
     <table border="0" width="100%" cellspacing="1" cellpadding="2">
       <tr>
         <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td valign="top" width="70">01/28/2013</td>
-            <td valign="top" width="70">Pending</td>
-            <td valign="top">&nbsp;</td>
-          </tr>
+          
+          	<c:forEach items="${orderHistoryDetailsBean.orderStatusHistoryBeans}" var="orderStatusHistoryBean">
+          	<tr>
+          		<td valign="top" width="70">${orderStatusHistoryBean.dateAdded}</td>
+            	<td valign="top" width="70">${orderStatusHistoryBean.status}</td>
+            	<td valign="top">&nbsp;${orderStatusHistoryBean.comments}</td>
+            	<!-- 
+            	<td valign="top" width="70">01/28/2013</td>
+            	<td valign="top" width="70">Pending</td>
+            	<td valign="top">&nbsp;</td>
+            	-->
+            </tr>
+          	</c:forEach>
         </table></td>
       </tr>
     </table>

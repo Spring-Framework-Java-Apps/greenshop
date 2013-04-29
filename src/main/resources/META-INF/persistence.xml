@@ -28,6 +28,7 @@
         <class>org.woehlke.greenshop.checkout.entities.OrderProduct</class>
         <class>org.woehlke.greenshop.checkout.entities.OrderProductAttribute</class>
         <class>org.woehlke.greenshop.checkout.entities.OrderTotal</class>
+        <class>org.woehlke.greenshop.checkout.entities.OrderStatusHistory</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
 

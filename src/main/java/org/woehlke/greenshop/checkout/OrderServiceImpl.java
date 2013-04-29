@@ -19,9 +19,11 @@ import org.woehlke.greenshop.checkout.entities.OrderStatusId;
 import org.woehlke.greenshop.checkout.entities.OrderTotal;
 import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
 import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
+import org.woehlke.greenshop.checkout.model.OrderStatusHistoryBean;
 import org.woehlke.greenshop.checkout.repository.OrderProductAttributeRepository;
 import org.woehlke.greenshop.checkout.repository.OrderProductRepository;
 import org.woehlke.greenshop.checkout.repository.OrderRepository;
+import org.woehlke.greenshop.checkout.repository.OrderStatusHistoryRepository;
 import org.woehlke.greenshop.checkout.repository.OrderStatusRepository;
 import org.woehlke.greenshop.checkout.repository.OrderTotalRepository;
 import org.woehlke.greenshop.customer.entities.Customer;
@@ -47,9 +49,13 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Inject
 	private OrderStatusRepository orderStatusRepository;
+
+	@Inject
+	private OrderStatusHistoryRepository orderStatusHistoryRepository;
 	
 	@Inject
 	protected CatalogService catalogService;
+
 
 	@Override
 	public List<Order> findOrdersForCustomer(Customer customer) {
@@ -69,6 +75,8 @@ public class OrderServiceImpl implements OrderService {
 		o.setOrderStatus(orderStatus);
 		List<OrderProduct> orderProducts = orderProductRepository.findByOrder(order);
 		o.setOrderProducts(orderProducts);
+		List<OrderStatusHistoryBean> orderStatusHistoryBeans = orderStatusHistoryRepository.findByOrder(order, language);
+		o.setOrderStatusHistoryBeans(orderStatusHistoryBeans);
 		return o;
 	}
 

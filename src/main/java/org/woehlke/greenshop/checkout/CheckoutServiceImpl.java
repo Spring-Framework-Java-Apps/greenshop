@@ -19,12 +19,14 @@ import org.woehlke.greenshop.catalog.model.ProductOptionAttribute;
 import org.woehlke.greenshop.checkout.entities.Order;
 import org.woehlke.greenshop.checkout.entities.OrderProduct;
 import org.woehlke.greenshop.checkout.entities.OrderProductAttribute;
+import org.woehlke.greenshop.checkout.entities.OrderStatusHistory;
 import org.woehlke.greenshop.checkout.entities.OrderTotal;
 import org.woehlke.greenshop.checkout.model.AddressBean;
 import org.woehlke.greenshop.checkout.model.CheckoutBean;
 import org.woehlke.greenshop.checkout.repository.OrderProductAttributeRepository;
 import org.woehlke.greenshop.checkout.repository.OrderProductRepository;
 import org.woehlke.greenshop.checkout.repository.OrderRepository;
+import org.woehlke.greenshop.checkout.repository.OrderStatusHistoryRepository;
 import org.woehlke.greenshop.checkout.repository.OrderTotalRepository;
 import org.woehlke.greenshop.customer.entities.AddressBook;
 import org.woehlke.greenshop.customer.entities.Country;
@@ -57,6 +59,9 @@ public class CheckoutServiceImpl implements CheckoutService {
 	
 	@Inject
 	private OrderTotalRepository orderTotalRepository;
+	
+	@Inject
+	private OrderStatusHistoryRepository orderStatusHistoryRepository;
 	
 	public AddressBean transformPersistentAddressToBean(AddressBook choosenAddress){
 		AddressBean transientAddress = new AddressBean();
@@ -161,6 +166,11 @@ public class CheckoutServiceImpl implements CheckoutService {
 		orderTotalRepository.save(subTotalOrderTotal);
 		orderTotalRepository.save(shippingOrderTotal);
 		orderTotalRepository.save(totalOrderTotal);
+		OrderStatusHistory orderStatusHistory = new OrderStatusHistory();
+		orderStatusHistory.setOrder(order);
+		orderStatusHistory.setDateAdded(new Date());
+		orderStatusHistory.setOrdersStatusId(1);
+		orderStatusHistoryRepository.save(orderStatusHistory);
 		for(CustomersBasketAttribute customersBasketAttribute:customersBasketAttributeRepository.findByCustomer(customer)){
 			customersBasketAttributeRepository.delete(customersBasketAttribute);
 		}
