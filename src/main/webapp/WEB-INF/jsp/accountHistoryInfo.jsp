@@ -2,7 +2,7 @@
 <h1>Order Information</h1>
 
 <div class="contentContainer">
-  <h2>Order #1 <span class="contentText">(${orderHistoryDetailsBean.orderStatus.ordersStatusName})</span></h2>
+  <h2>Order #${orderHistoryDetailsBean.order.id} <span class="contentText">(${orderHistoryDetailsBean.orderStatus.ordersStatusName})</span></h2>
 
   <div class="contentText">
     <div>

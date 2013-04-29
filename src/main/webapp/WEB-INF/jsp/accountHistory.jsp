@@ -6,7 +6,7 @@
 
 <c:forEach items="${orders}" var="order" varStatus="status">
   <c:set var="myindex" value="${status.index}" />
-  <h2>Order Number: ${status.index+1} <span class="contentText">(${order.status})</span></h2>
+  <h2>Order Number: ${order.orderId} <span class="contentText">(${order.status})</span></h2>
 
   <div class="contentText">
     <table border="0" width="100%" cellspacing="2" cellpadding="2">
