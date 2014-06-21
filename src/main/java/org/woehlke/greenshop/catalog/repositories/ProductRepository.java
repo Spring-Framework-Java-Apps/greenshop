@@ -9,6 +9,6 @@ import org.woehlke.greenshop.catalog.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-	@Query("select p from Product p where MONTH(p.dateAdded)=:month and YEAR(p.dateAdded)=:year and p.status=true order by p.dateAdded DESC limit 9")
+	@Query("select p from Product p where MONTH(p.dateAdded)=:month and YEAR(p.dateAdded)=:year and p.status=true order by p.dateAdded DESC")
 	List<Product> findByMonth(@Param("month") int month, @Param("year") int year);
 }
