@@ -1,7 +1,6 @@
 package org.woehlke.greenshop;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.woehlke.greenshop.cart.CartService;
 import org.woehlke.greenshop.cart.model.TransientBasket;
-import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.model.CategoryTree;

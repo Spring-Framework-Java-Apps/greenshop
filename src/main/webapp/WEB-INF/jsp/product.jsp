@@ -24,8 +24,6 @@ $("#piGal a[rel^='fancybox']").fancybox({
 
 ${product.description}
 
-
-
     <p>Available Options:</p>
 	<c:forEach items="${productAttributes.mapProductOptionAttribute}" var="productAttribute" varStatus="status">
     <p>
