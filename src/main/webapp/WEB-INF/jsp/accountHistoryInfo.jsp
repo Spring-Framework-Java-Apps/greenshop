@@ -68,6 +68,14 @@
           </tr>
         </table></td>
         <td width="70%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+
+          <c:forEach var="orderTotal" items="${orderHistoryDetailsBean.orderTotal}">
+            <tr>
+              <td align="right" width="100%">${orderTotal.title}</td>
+              <td align="right">${orderTotal.text}</td>
+            </tr>
+          </c:forEach>
+          <!--
           <tr>
             <td align="right" width="100%">Sub-Total:</td>
             <td align="right">$299.99</td>
@@ -80,6 +88,7 @@
             <td align="right" width="100%">Total:</td>
             <td align="right"><strong>$304.99</strong></td>
           </tr>
+          -->
         </table></td>
       </tr>
     </table>

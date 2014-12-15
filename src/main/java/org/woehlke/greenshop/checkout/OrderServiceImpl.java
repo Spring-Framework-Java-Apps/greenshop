@@ -76,6 +76,8 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderProduct> orderProducts = orderProductRepository.findByOrder(order);
 		o.setOrderProducts(orderProducts);
 		List<OrderStatusHistoryBean> orderStatusHistoryBeans = orderStatusHistoryRepository.findByOrder(order, language);
+		List<OrderTotal> orderTotal = orderTotalRepository.findByOrder(order);
+		o.setOrderTotal(orderTotal);
 		o.setOrderStatusHistoryBeans(orderStatusHistoryBeans);
 		return o;
 	}
