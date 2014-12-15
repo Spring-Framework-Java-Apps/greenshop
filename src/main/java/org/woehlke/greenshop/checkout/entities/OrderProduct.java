@@ -58,6 +58,9 @@ public class OrderProduct {
 	@ManyToOne
 	@JoinColumn(name="products_id")
 	private Product product;
+
+	@OneToMany(mappedBy="orderProduct",fetch = FetchType.EAGER)
+	private List<OrderProductAttribute> orderProductAttribute;
 	
 	@Column(name="products_model",columnDefinition = "varchar(12)")
 	private String productsModel;
@@ -148,6 +151,15 @@ public class OrderProduct {
 
 	public int getProductsQuantity() {
 		return productsQuantity;
+	}
+
+
+	public List<OrderProductAttribute> getOrderProductAttribute() {
+		return orderProductAttribute;
+	}
+
+	public void setOrderProductAttribute(List<OrderProductAttribute> orderProductAttribute) {
+		this.orderProductAttribute = orderProductAttribute;
 	}
 
 	public void setProductsQuantity(int productsQuantity) {

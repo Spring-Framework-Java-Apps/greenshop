@@ -31,11 +31,18 @@
             <td colspan="2"><strong>Products</strong></td>
             <td align="right"><strong>Total</strong></td>
           </tr>
+          <c:forEach var="orderProduct" items="${orderHistoryDetailsBean.orderProducts}">
           <tr>
-            <td align="right" valign="top" width="30">1&nbsp;x&nbsp;</td>
-            <td valign="top">Matrox G200 MMS<br /><nobr><small>&nbsp;<i> - Memory: 4 mb</i></small></nobr><br /><nobr><small>&nbsp;<i> - Model: Value</i></small></nobr></td>
-            <td align="right" valign="top">$299.99</td>
+            <td align="right" valign="top" width="30">${orderProduct.productsQuantity}&nbsp;x&nbsp;</td>
+            <td valign="top">
+                ${orderProduct.productsName}<br />
+                  <c:forEach var="atribute" items="${orderProduct.orderProductAttribute}">
+                  <nobr><small>&nbsp;<i> - ${atribute.productOption}: ${atribute.productOptionValue}</i></small></nobr><br />
+                  </c:forEach>
+            </td>
+            <td align="right" valign="top">${orderProduct.finalPrice}</td>
           </tr>
+          </c:forEach>
         </table></td>
       </tr>
     </table>
