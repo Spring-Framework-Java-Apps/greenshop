@@ -1,5 +1,7 @@
 package org.woehlke.greenshop;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,19 +9,17 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.cart.CartService;
 import org.woehlke.greenshop.checkout.OrderService;
-import org.woehlke.greenshop.checkout.entities.Order;
 import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
 import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
 import org.woehlke.greenshop.customer.CustomerService;
@@ -43,6 +43,15 @@ public class UserController extends AbstractController {
 	
 	@Inject
 	private OrderService orderService;
+
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+
 	
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	public String account(Model model){
@@ -225,7 +234,7 @@ public class UserController extends AbstractController {
 		if(customer.getPassword().equals(changePasswordBean.getPasswordCurrentEncoded())&&changePasswordBean.isConfirmed()){
 			customer.setPassword(changePasswordBean.getPasswordNewEncoded());
 			customerService.updateCustomer(customer);
-			return "redirect:/addressBook";
+			return "redirect:/account";
 		} else {
 			if(!changePasswordBean.isConfirmed()){
 				FieldError e = new FieldError("changePasswordBean","passwordConfirmation","Passwords don't match");
@@ -258,9 +267,29 @@ public class UserController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/accountNewsletter", method = RequestMethod.GET)
-	public String accountNewsletter(Model model){
+	 public String accountNewsletter(Model model){
 		super.getDefaultBoxContent(model);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String customerEmail = auth.getName();
+		Customer customer = customerService.findCustomerByEmail(customerEmail);
+		model.addAttribute("customer", customer);
 		return "accountNewsletter";
+	}
+
+	@RequestMapping(value = "/accountNewsletter", method = RequestMethod.POST)
+	public String accountNewsletterPerform(Customer customer, BindingResult result, Model model) {
+		super.getDefaultBoxContent(model);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String customerEmail = auth.getName();
+		Customer myCustomer = customerService.findCustomerByEmail(customerEmail);
+		if(result.hasErrors()){
+			model.addAttribute("customer", myCustomer);
+			return "accountNewsletter";
+		} else {
+			myCustomer.setNewsletter(customer.getNewsletter());
+			customerService.updateCustomer(myCustomer);
+			return "redirect:/account";
+		}
 	}
 	
 	@RequestMapping(value = "/accountNotifications", method = RequestMethod.GET)

@@ -107,7 +107,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 		order.setDatePurchased(new Date());
 		order.setCustomersEmailAddress(customer.getEmailAddress());
 		order.setCustomersTelephone(customer.getTelephone());
-		order.setPaymentMethod("TODO paymentMethod");
+		order.setPaymentMethod("TODO paymentMethod");  //TODO: paymentMethod
 		order.setOrdersStatus(1);
 		order.setCurrency("USD");
 		order.setCurrencyValue(1.0d);
@@ -137,7 +137,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 				orderProductAttributeRepository.save(orderProductAttribute);
 			}
 		}
-		 //Todo:shipping
+		//Todo:shipping
 		//Todo:PaymentCost
 		double shipping = 5.0d;
 		double payment = 0.0d;

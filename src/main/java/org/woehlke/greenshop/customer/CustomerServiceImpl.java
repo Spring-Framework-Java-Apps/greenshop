@@ -94,11 +94,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setFirstname(createNewCustomerFormBean.getFirstname());
 		customer.setGender(createNewCustomerFormBean.getGender());
 		customer.setLastname(createNewCustomerFormBean.getLastname());
-		if(createNewCustomerFormBean.getNewsletter()){
-			customer.setNewsletter("1");
-		} else {
-			customer.setNewsletter("");
-		}
+		customer.setNewsletter(createNewCustomerFormBean.getNewsletter());
 		//TODO: password encryption like in PHP
 		PasswordEncoder encoder = new Md5PasswordEncoder();
 		String codedPassword = encoder.encodePassword(createNewCustomerFormBean.getPassword(),null);

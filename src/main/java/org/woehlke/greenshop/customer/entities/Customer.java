@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 /*
 customers_id	int(11)	NO	PRI		auto_increment
@@ -45,24 +46,28 @@ public class Customer {
 	
 	@Column(name="customers_lastname")
 	private String lastname;
-	
+
+	@NotNull
 	@Temporal(value=TemporalType.DATE)
 	@Column(name="customers_dob",columnDefinition = "datetime")
 	private Date dob;
-	
+
+	@NotNull
 	@Column(name="customers_email_address")
 	private String emailAddress; 
 	
 	@OneToOne
 	@JoinColumn(name="customers_default_address_id")
 	private AddressBook defaultAddress;
-	
+
+	@NotNull
 	@Column(name="customers_telephone")
 	private String telephone;
 	
 	@Column(name="customers_fax")
 	private String fax;
-	
+
+	@NotNull
 	@Column(name="customers_password")
 	private String password;
 	
@@ -159,12 +164,12 @@ public class Customer {
 		this.password = password;
 	}
 
-	public String getNewsletter() {
-		return newsletter;
+	public boolean getNewsletter() {
+		return this.newsletter.contentEquals("1");
 	}
 
-	public void setNewsletter(String newsletter) {
-		this.newsletter = newsletter;
+	public void setNewsletter(boolean newsletter) {
+		this.newsletter = newsletter?"1":"0";
 	}
 
 	@Override
