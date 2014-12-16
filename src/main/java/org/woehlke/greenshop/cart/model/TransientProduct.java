@@ -2,10 +2,8 @@ package org.woehlke.greenshop.cart.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
-import org.woehlke.greenshop.catalog.entities.ProductOption;
 import org.woehlke.greenshop.catalog.model.ProductOptionAttribute;
 
 public class TransientProduct {

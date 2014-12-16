@@ -1,6 +1,7 @@
 package org.woehlke.greenshop.checkout;
 
 import java.util.Date;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -142,27 +143,30 @@ public class CheckoutServiceImpl implements CheckoutService {
 		double shipping = 5.0d;
 		double payment = 0.0d;
 		double total = subtotal+shipping+payment;
+		String totalAsString = String.format(Locale.ENGLISH,"%.2f", total); //TODO: Language
+		String shippingAsString =  String.format(Locale.ENGLISH,"%.2f", shipping); //TODO: Language
+		String subtotalAsString =  String.format(Locale.ENGLISH,"%.2f", subtotal); //TODO: Language
 		OrderTotal subTotalOrderTotal = new OrderTotal();
 		subTotalOrderTotal.setOrder(order);
 		subTotalOrderTotal.setTitle("Sub-Total:");
 		subTotalOrderTotal.setTotalClass("ot_subtotal");
 		subTotalOrderTotal.setSortOrder(1);
 		subTotalOrderTotal.setValue(subtotal);
-		subTotalOrderTotal.setText("$"+subtotal);
+		subTotalOrderTotal.setText("$"+subtotalAsString);
 		OrderTotal shippingOrderTotal = new OrderTotal();
 		shippingOrderTotal.setOrder(order);
 		shippingOrderTotal.setTitle("Flat Rate (Best Way):");
 		shippingOrderTotal.setTotalClass("ot_shipping");
 		shippingOrderTotal.setSortOrder(2);
 		shippingOrderTotal.setValue(shipping);
-		shippingOrderTotal.setText("$"+shipping);
+		shippingOrderTotal.setText("$"+shippingAsString);
 		OrderTotal totalOrderTotal = new OrderTotal();
 		totalOrderTotal.setOrder(order);
 		totalOrderTotal.setTitle("Total:");
 		totalOrderTotal.setTotalClass("ot_total");
 		totalOrderTotal.setSortOrder(4);
 		totalOrderTotal.setValue(total);
-		totalOrderTotal.setText("<strong>$"+total+"</strong>");
+		totalOrderTotal.setText("<strong>$"+totalAsString+"</strong>");
 		orderTotalRepository.save(subTotalOrderTotal);
 		orderTotalRepository.save(shippingOrderTotal);
 		orderTotalRepository.save(totalOrderTotal);

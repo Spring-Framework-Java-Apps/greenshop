@@ -37,10 +37,15 @@
             <td valign="top">
                 ${orderProduct.productsName}<br />
                   <c:forEach var="atribute" items="${orderProduct.orderProductAttribute}">
-                  <nobr><small>&nbsp;<i> - ${atribute.productOption}: ${atribute.productOptionValue}</i></small></nobr><br />
+                  <nobr><small>&nbsp;<i> - ${atribute.productOption}: ${atribute.productOptionValue}</i></small></nobr>
+                    <br />
                   </c:forEach>
             </td>
-            <td align="right" valign="top">${orderProduct.finalPrice}</td>
+            <td align="right" valign="top">
+              <fmt:formatNumber value="${orderProduct.finalPrice}"
+                                maxFractionDigits="2" minFractionDigits="2"
+                                type="currency" currencySymbol="$"/>
+            </td>
           </tr>
           </c:forEach>
         </table></td>

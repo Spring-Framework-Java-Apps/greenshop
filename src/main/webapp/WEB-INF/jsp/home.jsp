@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/layout/taglibs.jsp"%>
 <div class="contentContainer">
 
-  <h1>Welcome to osCommerce2</h1>
+  <h1>Welcome to Greenshop</h1>
 
   <div class="contentText">
     Welcome <span class="greetUser">Guest!</span> Would you like to <a href="http://shadowfax/oscommerce2/login.php"><u>log yourself in</u></a>? Or would you prefer to <a href="http://shadowfax/oscommerce2/create_account.php"><u>create an account</u></a>?  </div>

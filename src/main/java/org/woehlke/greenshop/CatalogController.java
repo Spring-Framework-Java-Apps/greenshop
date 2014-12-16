@@ -2,22 +2,15 @@ package org.woehlke.greenshop;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
-import org.woehlke.greenshop.cart.CartService;
-import org.woehlke.greenshop.cart.model.TransientBasket;
-import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
@@ -33,9 +26,6 @@ import org.woehlke.greenshop.catalog.model.ProductsByManufacturer;
 public class CatalogController extends AbstractController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CatalogController.class);
-	
-	@Inject
-	private CartService cartService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model){

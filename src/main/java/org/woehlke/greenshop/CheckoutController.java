@@ -5,8 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +16,6 @@ import org.woehlke.greenshop.cart.model.TransientBasket;
 import org.woehlke.greenshop.checkout.CheckoutService;
 import org.woehlke.greenshop.checkout.model.AddressBean;
 import org.woehlke.greenshop.checkout.model.CheckoutBean;
-import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.AddressBook;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Customer;
@@ -37,60 +34,83 @@ public class CheckoutController extends AbstractController {
 	
 	@RequestMapping(value = "/checkout/shipping", method = RequestMethod.GET)
 	public String checkoutShipping(
-			@ModelAttribute("checkout") CheckoutBean checkout, Model model){
+			@ModelAttribute("checkout") CheckoutBean checkout,
+			@ModelAttribute("transientBasket") TransientBasket transientBasket, Model model){
 		super.getDefaultBoxContent(model);
-		Customer customer = super.getLoggedInCustomer();
-		AddressBook defaultAddress = customer.getDefaultAddress();
-		AddressBean customersAddress = checkoutService.transformPersistentAddressToBean(defaultAddress);
-		checkout.setCustomersAddress(customersAddress);
-		if(checkout.getShippingAddress()==null){
-			checkout.setShippingAddress(customersAddress);
+		if (transientBasket.isEmptyCart()){
+			return "redirect:/shoppingCart";
+		} else {
+			Customer customer = super.getLoggedInCustomer();
+			AddressBook defaultAddress = customer.getDefaultAddress();
+			AddressBean customersAddress = checkoutService.transformPersistentAddressToBean(defaultAddress);
+			checkout.setCustomersAddress(customersAddress);
+			if (checkout.getShippingAddress() == null) {
+				checkout.setShippingAddress(customersAddress);
+			}
+			if (checkout.getPaymentAddress() == null) {
+				checkout.setPaymentAddress(customersAddress);
+			}
+			return "checkoutShipping";
 		}
-		if(checkout.getPaymentAddress()==null){
-			checkout.setPaymentAddress(customersAddress);
-		}
-		return "checkoutShipping";
 	}
 	
 	@RequestMapping(value = "/checkout/payment", method = RequestMethod.GET)
 	public String checkoutPayment(
-			@ModelAttribute("checkout") CheckoutBean checkout, Model model){
+			@ModelAttribute("checkout") CheckoutBean checkout,
+			@ModelAttribute("transientBasket") TransientBasket transientBasket, Model model){
 		super.getDefaultBoxContent(model);
-		Customer customer = super.getLoggedInCustomer();
-		return "checkoutPayment";
+		if (transientBasket.isEmptyCart()){
+			return "redirect:/shoppingCart";
+		} else {
+			Customer customer = super.getLoggedInCustomer();
+			return "checkoutPayment";
+		}
 	}	
 	
 	@RequestMapping(value = "/checkout/confirmation", method = RequestMethod.GET)
 	public String checkoutConfirmation(
-			@ModelAttribute("checkout") CheckoutBean checkout, Model model){
-		super.getDefaultBoxContent(model);
-		return "checkoutConfirmation";
+			@ModelAttribute("checkout") CheckoutBean checkout,
+			@ModelAttribute("transientBasket") TransientBasket transientBasket, Model model){
+		super.getDefaultBoxContent(model);if (transientBasket.isEmptyCart()){
+			return "redirect:/shoppingCart";
+		} else {
+			return "checkoutConfirmation";
+		}
 	}	
 	
 	@RequestMapping(value = "/checkout/confirmation", method = RequestMethod.POST)
-	public String checkoutConfirmation(
-			@ModelAttribute("checkout") CheckoutBean checkout, 
+	public String checkoutConfirmationPerform(
+			@ModelAttribute("checkout") CheckoutBean checkout,
 			@ModelAttribute("transientBasket") TransientBasket transientBasket,
 			Model model){
 		super.getDefaultBoxContent(model);
-		Customer customer = super.getLoggedInCustomer();
-		checkoutService.placeOrder(checkout,transientBasket,customer);
-		return "redirect:/checkout/performed";
+		if (transientBasket.isEmptyCart()){
+			return "redirect:/shoppingCart";
+		} else {
+			Customer customer = super.getLoggedInCustomer();
+			checkoutService.placeOrder(checkout, transientBasket, customer);
+			return "redirect:/checkout/performed";
+		}
 	}
 	
 	@RequestMapping(value = "/checkout/shippingAddress", method = RequestMethod.GET)
 	public String checkoutShippingAddress(
-			@ModelAttribute("checkout") CheckoutBean checkout, Model model){
+			@ModelAttribute("checkout") CheckoutBean checkout,
+			@ModelAttribute("transientBasket") TransientBasket transientBasket, Model model){
 		super.getDefaultBoxContent(model);
-		Customer customer = super.getLoggedInCustomer();
-		List<AddressBook> addressBook = super.customerService.findAddressBookForCustomer(customer);
-		model.addAttribute("addressBook", addressBook);
-		AddressBean newAddress = new AddressBean();
-		newAddress.setChoosenAddressId(customer.getDefaultAddress().getId());
-		model.addAttribute("newAddress", newAddress);
-		List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
-		model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
-		return "checkoutShippingAddress";
+		if (transientBasket.isEmptyCart()){
+			return "redirect:/shoppingCart";
+		} else {
+			Customer customer = super.getLoggedInCustomer();
+			List<AddressBook> addressBook = super.customerService.findAddressBookForCustomer(customer);
+			model.addAttribute("addressBook", addressBook);
+			AddressBean newAddress = new AddressBean();
+			newAddress.setChoosenAddressId(customer.getDefaultAddress().getId());
+			model.addAttribute("newAddress", newAddress);
+			List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+			model.addAttribute("allCountriesOrderByName", allCountriesOrderByName);
+			return "checkoutShippingAddress";
+		}
 	}
 	
 	@RequestMapping(value = "/checkout/shippingAddress", method = RequestMethod.POST)
@@ -127,17 +147,22 @@ public class CheckoutController extends AbstractController {
 	
 	@RequestMapping(value = "/checkout/paymentAddress", method = RequestMethod.GET)
 	public String checkoutPaymentAddress(
-			@ModelAttribute("checkout") CheckoutBean checkout, Model model){
+			@ModelAttribute("checkout") CheckoutBean checkout,
+			@ModelAttribute("transientBasket") TransientBasket transientBasket, Model model){
 		super.getDefaultBoxContent(model);
-		Customer customer = super.getLoggedInCustomer();
-		List<AddressBook> addressBook = super.customerService.findAddressBookForCustomer(customer);
-		model.addAttribute("addressBook", addressBook);
-		AddressBean newAddress = new AddressBean();
-		newAddress.setChoosenAddressId(customer.getDefaultAddress().getId());
-		model.addAttribute("newAddress", newAddress);
-		List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
-		model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
-		return "checkoutPaymentAddress";
+		if (transientBasket.isEmptyCart()){
+			return "redirect:/shoppingCart";
+		} else {
+			Customer customer = super.getLoggedInCustomer();
+			List<AddressBook> addressBook = super.customerService.findAddressBookForCustomer(customer);
+			model.addAttribute("addressBook", addressBook);
+			AddressBean newAddress = new AddressBean();
+			newAddress.setChoosenAddressId(customer.getDefaultAddress().getId());
+			model.addAttribute("newAddress", newAddress);
+			List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+			model.addAttribute("allCountriesOrderByName", allCountriesOrderByName);
+			return "checkoutPaymentAddress";
+		}
 	}
 	
 	@RequestMapping(value = "/checkout/paymentAddress", method = RequestMethod.POST)

@@ -18,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.woehlke.greenshop.cart.CartService;
 import org.woehlke.greenshop.checkout.OrderService;
 import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
 import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
@@ -37,9 +36,6 @@ public class UserController extends AbstractController {
 	
 	@Inject
 	private CustomerService customerService;
-	
-	@Inject
-	private CartService cartService;
 	
 	@Inject
 	private OrderService orderService;

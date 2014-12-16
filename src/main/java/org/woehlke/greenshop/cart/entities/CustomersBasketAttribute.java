@@ -8,9 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.woehlke.greenshop.catalog.entities.ProductOption;
-import org.woehlke.greenshop.catalog.entities.ProductOptionValue;
 import org.woehlke.greenshop.customer.entities.Customer;
 
 /**
@@ -45,17 +44,21 @@ public class CustomersBasketAttribute {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="customers_basket_attributes_id",columnDefinition = "INT(11)")
 	private Long id;
-	
+
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="customers_id")
 	private Customer customer;
-	
+
+	@NotNull
 	@Column(name="products_id",columnDefinition = "tinytext")
 	private String productId;
-	
+
+	@NotNull
 	@Column(name="products_options_id",columnDefinition = "INT(11)")
 	private Long productOptionId;
-	
+
+	@NotNull
 	@Column(name="products_options_value_id",columnDefinition = "INT(11)")
 	private Long productOptionValueId;
 
