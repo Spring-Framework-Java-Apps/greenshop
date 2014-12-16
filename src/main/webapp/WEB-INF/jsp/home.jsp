@@ -16,7 +16,8 @@
    	<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr>
    	<c:forEach items="${newProducts}" var="newProduct" varStatus="status">
    		<td width="33%" align="center" valign="top">
-   		<a href='<c:url value="/product/${newProduct.product.id}" />'><img src='http://shadowfax/oscommerce2/images/<c:out value="${newProduct.product.image}"/>'/></a><br/><a href='<c:url value="/product/${newProduct.product.id}" />'><c:out value="${newProduct.name}"/></a><br/>$<c:out value="${newProduct.product.price}"/><br/>
+   			<a href='<c:url value="/product/${newProduct.product.id}" />'><img src='<c:url value="/resources/images/${newProduct.product.image}" />'/></a><br/>
+			<a href='<c:url value="/product/${newProduct.product.id}" />'><c:out value="${newProduct.name}"/></a><br/>$<c:out value="${newProduct.product.price}"/><br/>
    		</td>
    		<c:if test="${status.index % 3 == 2}">
    			</tr><tr>	

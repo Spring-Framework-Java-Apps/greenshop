@@ -69,7 +69,12 @@
 	<td align="center"><a href='<c:url value="/product/${product.product.id}" />'><img src="images/${product.product.image}" alt="${product.name}" title="${product.name}" width="100" height="80" /></a></td>        
 	<td><a href='<c:url value="/product/${product.product.id}" />'>${product.name}</a></td>        
 	<td align="right">$${product.product.price}</td>        
-	<td align="center"><span class="tdbLink"><a id="tdb${status.index + 4}" href="<c:url value="/shoppingCart/add/${product.product.id}" />">Buy Now</a></span><script type="text/javascript">$("#tdb${status.index + 4}").button({icons:{primary:"ui-icon-cart"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>      
+	<td align="center">
+		<span class="tdbLink">
+			<a id="tdb${status.index + 4}" href="<c:url value="/shoppingCart/add/${product.product.id}" />">Buy Now</a>
+		</span>
+		<script type="text/javascript">$("#tdb${status.index + 4}").button({icons:{primary:"ui-icon-cart"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>
+	</td>
 </tr>
 </c:forEach>      
 </table>  
@@ -95,7 +100,7 @@
    	<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr>
    	<c:forEach items="${newProducts}" var="newProduct" varStatus="status">
    		<td width="33%" align="center" valign="top">
-   		<a href='<c:url value="/product/${newProduct.product.id}" />'><img src='http://shadowfax/oscommerce2/images/<c:out value="${newProduct.product.image}"/>'/></a><br/><a href='<c:url value="/product/${newProduct.product.id}" />'><c:out value="${newProduct.name}"/></a><br/>$<c:out value="${newProduct.product.price}"/><br/>
+   		<a href='<c:url value="/product/${newProduct.product.id}" />'><img src='<c:url value="/resources/images/${newProduct.product.image}" />'/></a><br/><a href='<c:url value="/product/${newProduct.product.id}" />'><c:out value="${newProduct.name}"/></a><br/>$<c:out value="${newProduct.product.price}"/><br/>
    		</td>
    		<c:if test="${status.index % 3 == 2}">
    			</tr><tr>	

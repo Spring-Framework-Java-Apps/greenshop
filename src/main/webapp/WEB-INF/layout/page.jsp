@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>osCommerce2</title>
+<title>Greenshop</title>
 <base href='<c:url value="/resources/"/>' />
 <link rel="stylesheet" type="text/css" href="ext/jquery/ui/redmond/jquery-ui-1.8.6.css" />
 <script type="text/javascript" src="ext/jquery/jquery-1.4.2.min.js"></script>

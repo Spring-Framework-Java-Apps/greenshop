@@ -146,6 +146,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public TransientBasket polulateByPersistentBasket(TransientBasket transientBasket,Language language,Authentication auth) {
 		if(auth!=null && auth.isAuthenticated()){
 			String customerEmail = auth.getName();
