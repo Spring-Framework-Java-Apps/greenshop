@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.woehlke.greenshop.customer.entities.AddressBook;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Customer;
+import org.woehlke.greenshop.customer.entities.CustomerInfo;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
 
 public interface CustomerService extends UserDetailsService {
@@ -31,4 +32,8 @@ public interface CustomerService extends UserDetailsService {
 	void deleteAddress(AddressBook customersAddress);
 
 	void addAddress(AddressBook transientAddress);
+
+	CustomerInfo findCustomerInfoByCustomer(Customer customer);
+
+	void updateCustomerInfo(CustomerInfo myCustomerInfo);
 }

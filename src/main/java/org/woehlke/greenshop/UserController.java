@@ -25,6 +25,7 @@ import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.AddressBook;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Customer;
+import org.woehlke.greenshop.customer.entities.CustomerInfo;
 import org.woehlke.greenshop.customer.model.ChangePasswordBean;
 import org.woehlke.greenshop.customer.model.CustomerAddressBean;
 
@@ -291,6 +292,30 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/accountNotifications", method = RequestMethod.GET)
 	public String accountNotifications(Model model){
 		super.getDefaultBoxContent(model);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String customerEmail = auth.getName();
+		Customer customer = customerService.findCustomerByEmail(customerEmail);
+		CustomerInfo customerInfo = customerService.findCustomerInfoByCustomer(customer);
+		model.addAttribute("customerInfo", customerInfo);
+		model.addAttribute("customer", customer);
 		return "accountNotifications";
+	}
+
+	@RequestMapping(value = "/accountNotifications", method = RequestMethod.POST)
+	public String accountNotificationsPerform(CustomerInfo customerInfo, BindingResult result, Model model){
+		super.getDefaultBoxContent(model);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String customerEmail = auth.getName();
+		Customer myCustomer = customerService.findCustomerByEmail(customerEmail);
+		CustomerInfo myCustomerInfo = customerService.findCustomerInfoByCustomer(myCustomer);
+		if(result.hasErrors()){
+			model.addAttribute("customerInfo", myCustomerInfo);
+			model.addAttribute("customer", myCustomer);
+			return "accountNotifications";
+		} else {
+			myCustomerInfo.setGlobalProductNotifications(customerInfo.getGlobalProductNotifications());
+			customerService.updateCustomerInfo(myCustomerInfo);
+			return "redirect:/account";
+		}
 	}
 }

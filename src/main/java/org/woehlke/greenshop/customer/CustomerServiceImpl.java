@@ -15,17 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.woehlke.greenshop.customer.entities.AddressBook;
-import org.woehlke.greenshop.customer.entities.Country;
-import org.woehlke.greenshop.customer.entities.Customer;
-import org.woehlke.greenshop.customer.entities.Zone;
+import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
 import org.woehlke.greenshop.customer.model.UserDetailsBean;
-import org.woehlke.greenshop.customer.repository.AddressBookRepository;
-import org.woehlke.greenshop.customer.repository.AddressFormatRepository;
-import org.woehlke.greenshop.customer.repository.CountryRepository;
-import org.woehlke.greenshop.customer.repository.CustomerRepository;
-import org.woehlke.greenshop.customer.repository.ZoneRepository;
+import org.woehlke.greenshop.customer.repository.*;
 
 @Named("customerService")
 @Transactional(readOnly=true,propagation=Propagation.REQUIRED)
@@ -41,6 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Inject
 	private CustomerRepository customerRepository;
+
+	@Inject
+	private CustomerInfoRepository customerInfoRepository;
 	
 	@Inject
 	private ZoneRepository zoneRepository;
@@ -68,6 +64,10 @@ public class CustomerServiceImpl implements CustomerService {
 		defaultAddress.setCustomer(customer);
 		customer=customerRepository.save(customer);
 		defaultAddress=addressBookRepository.save(defaultAddress);
+		CustomerInfo myCustomerInfo = new CustomerInfo();
+		myCustomerInfo.setId(customer.getId());
+		myCustomerInfo.setAccountCreated(new Date());
+		customerInfoRepository.save(myCustomerInfo);
 	}
 	
 	private AddressBook createNewCustomerFormBean2AddressBook(CreateNewCustomerFormBean createNewCustomerFormBean){
@@ -163,5 +163,16 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void addAddress(AddressBook transientAddress) {
 		transientAddress=addressBookRepository.saveAndFlush(transientAddress);	
+	}
+
+	@Override
+	public CustomerInfo findCustomerInfoByCustomer(Customer customer) {
+		return customerInfoRepository.findOne(customer.getId());
+	}
+
+	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+	public void updateCustomerInfo(CustomerInfo myCustomerInfo) {
+		customerInfoRepository.save(myCustomerInfo);
 	}
 }

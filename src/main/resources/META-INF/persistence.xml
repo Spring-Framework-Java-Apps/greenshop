@@ -20,6 +20,7 @@
         <class>org.woehlke.greenshop.customer.entities.Country</class>
         <class>org.woehlke.greenshop.customer.entities.AddressBook</class>
         <class>org.woehlke.greenshop.customer.entities.Customer</class>
+        <class>org.woehlke.greenshop.customer.entities.CustomerInfo</class>
         <class>org.woehlke.greenshop.customer.entities.Zone</class>
         <class>org.woehlke.greenshop.cart.entities.CustomersBasket</class>
         <class>org.woehlke.greenshop.cart.entities.CustomersBasketAttribute</class>
