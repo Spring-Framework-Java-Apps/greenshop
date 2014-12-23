@@ -3,9 +3,11 @@ package org.woehlke.greenshop.customer;
 import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Product;
 import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
+import org.woehlke.greenshop.customer.model.ProductNotificationBean;
 
 public interface CustomerService extends UserDetailsService {
 	
@@ -35,7 +37,7 @@ public interface CustomerService extends UserDetailsService {
 
 	void updateCustomerInfo(CustomerInfo myCustomerInfo);
 
-	List<ProductNotification> findAllProductNotificationsForCustomer(Customer customer);
+	List<ProductNotificationBean> findAllProductNotificationsForCustomer(Customer customer, Language language);
 
 	void addProductNotification(Product product, Customer customer);
 }

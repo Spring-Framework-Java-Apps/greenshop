@@ -21,7 +21,7 @@
           <!-- <input type="checkbox" name="product_global" value="1" onclick="checkBox('product_global')" /> -->
           <form:checkbox path="globalProductNotifications"/>
         </td>
-        <td><strong>Global Product Notifications</strong><br />Recieve notifications on all available products.</td>
+        <td><strong>Global Product Notifications</strong><br />Receive notifications on all available products.</td>
       </tr>
     </table>
   </div>
@@ -37,8 +37,8 @@
 
       <c:forEach var="productNotification" items="${productNotifications}">
       <tr>
-        <td width="30"><input type="checkbox" name="products[${productNotification.id.productId}]" value="1" checked="checked" onclick="checkBox('products[${productNotification.id.productId}]')" /></td>
-        <td><strong>Matrox G200 MMS ${productNotification.id.productId}</strong></td>
+        <td width="30"><input type="checkbox" name="products[${productNotification.productId}]" value="1" checked="checked" onclick="checkBox('products[${productNotification.productId}]')" /></td>
+        <td><strong>${productNotification.productName}</strong></td>
       </tr>
       </c:forEach>
 

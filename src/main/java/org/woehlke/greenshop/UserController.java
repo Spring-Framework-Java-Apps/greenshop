@@ -27,6 +27,7 @@ import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.ChangePasswordBean;
 import org.woehlke.greenshop.customer.model.CustomerAddressBean;
+import org.woehlke.greenshop.customer.model.ProductNotificationBean;
 
 @Controller
 @SessionAttributes({"transientBasket"})
@@ -227,7 +228,8 @@ public class UserController extends AbstractController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String customerEmail = auth.getName();
 		Customer customer = customerService.findCustomerByEmail(customerEmail);
-		if(customer.getPassword().equals(changePasswordBean.getPasswordCurrentEncoded())&&changePasswordBean.isConfirmed()){
+		if(customer.getPassword().equals(changePasswordBean.getPasswordCurrentEncoded())
+				&&changePasswordBean.isConfirmed()){
 			customer.setPassword(changePasswordBean.getPasswordNewEncoded());
 			customerService.updateCustomer(customer);
 			return "redirect:/account";
@@ -291,13 +293,15 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/accountNotifications", method = RequestMethod.GET)
 	public String accountNotifications(Model model){
 		super.getDefaultBoxContent(model);
+		Language language = catalogService.findLanguageByCode("en");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String customerEmail = auth.getName();
 		Customer customer = customerService.findCustomerByEmail(customerEmail);
 		CustomerInfo customerInfo = customerService.findCustomerInfoByCustomer(customer);
 		model.addAttribute("customerInfo", customerInfo);
 		model.addAttribute("customer", customer);
-		List<ProductNotification> productNotifications = customerService.findAllProductNotificationsForCustomer(customer);
+		List<ProductNotificationBean> productNotifications =
+				customerService.findAllProductNotificationsForCustomer(customer,language);
 		model.addAttribute("productNotifications", productNotifications);
 		return "accountNotifications";
 	}

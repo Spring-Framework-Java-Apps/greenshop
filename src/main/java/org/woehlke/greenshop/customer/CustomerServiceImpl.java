@@ -1,5 +1,6 @@
 package org.woehlke.greenshop.customer;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +16,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Product;
+import org.woehlke.greenshop.catalog.entities.ProductDescription;
+import org.woehlke.greenshop.catalog.entities.ProductDescriptionId;
+import org.woehlke.greenshop.catalog.repositories.ProductDescriptionRepository;
+import org.woehlke.greenshop.catalog.repositories.ProductRepository;
 import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
+import org.woehlke.greenshop.customer.model.ProductNotificationBean;
 import org.woehlke.greenshop.customer.model.UserDetailsBean;
 import org.woehlke.greenshop.customer.repository.*;
 
@@ -50,6 +57,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Inject
 	private ProductNotificationDao productNotificationDao;
+
+	@Inject
+	private ProductRepository productRepository;
+
+	@Inject
+	private ProductDescriptionRepository productDescriptionRepository;
 	
 	@Override
 	public List<Country> findAllCountriesOrderByName() {
@@ -184,8 +197,21 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<ProductNotification> findAllProductNotificationsForCustomer(Customer customer) {
-		return productNotificationDao.findAllProductNotificationsForCustomerId(customer.getId());
+	public List<ProductNotificationBean> findAllProductNotificationsForCustomer(Customer customer,Language language) {
+		List<ProductNotification> notifications = productNotificationDao.findAllProductNotificationsForCustomerId(customer.getId());
+		List<ProductNotificationBean> notificationBeans = new ArrayList<ProductNotificationBean>();
+		for(ProductNotification notification:notifications){
+			Product product = productRepository.findOne(notification.getId().getProductId());
+			ProductDescriptionId id = new ProductDescriptionId();
+			id.setLanguage(language);
+			id.setProduct(product);
+			ProductDescription productDescription=productDescriptionRepository.findOne(id);
+			ProductNotificationBean bean = new ProductNotificationBean();
+			bean.setProductId(notification.getId().getProductId());
+			bean.setProductName(productDescription.getName());
+			notificationBeans.add(bean);
+		}
+		return notificationBeans;
 	}
 
 	@Override
