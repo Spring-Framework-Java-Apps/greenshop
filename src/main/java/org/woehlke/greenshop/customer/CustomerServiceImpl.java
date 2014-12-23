@@ -233,8 +233,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void updateProductNotifications(Customer customer, long[] productNotification) {
 		List<Long> choosenProducts = new ArrayList<Long>();
-		for(long id : productNotification){
-			choosenProducts.add(id);
+		if(productNotification!=null && productNotification.length>0) {
+			for (long id : productNotification) {
+					choosenProducts.add(id);
+			}
 		}
 		List<ProductNotification> notifications = productNotificationDao.findAllProductNotificationsForCustomerId(customer.getId());
 		for(ProductNotification notification:notifications){

@@ -309,7 +309,7 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/accountNotifications", method = RequestMethod.POST)
 	public String accountNotificationsPerform(
 			CustomerInfo customerInfo,
-			@RequestParam("products[]") long productNotification[],
+			@RequestParam(value="products[]",required=false) long productNotification[],
 			BindingResult result, Model model){
 		super.getDefaultBoxContent(model);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
