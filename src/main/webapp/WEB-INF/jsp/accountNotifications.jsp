@@ -37,7 +37,7 @@
 
       <c:forEach var="productNotification" items="${productNotifications}">
       <tr>
-        <td width="30"><input type="checkbox" name="products[${productNotification.productId}]" value="1" checked="checked" onclick="checkBox('products[${productNotification.productId}]')" /></td>
+        <td width="30"><input type="checkbox" name="products[]" value="${productNotification.productId}" checked="checked" onclick="checkBox('products[${productNotification.productId}]')" /></td>
         <td><strong>${productNotification.productName}</strong></td>
       </tr>
       </c:forEach>

@@ -228,4 +228,20 @@ public class CustomerServiceImpl implements CustomerService {
 		notification.setDateAdded(new Date());
 		productNotificationRepository.save(notification);
 	}
+
+	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+	public void updateProductNotifications(Customer customer, long[] productNotification) {
+		List<Long> choosenProducts = new ArrayList<Long>();
+		for(long id : productNotification){
+			choosenProducts.add(id);
+		}
+		List<ProductNotification> notifications = productNotificationDao.findAllProductNotificationsForCustomerId(customer.getId());
+		for(ProductNotification notification:notifications){
+		 	Long productId = notification.getId().getProductId();
+			if(!choosenProducts.contains(productId)){
+				productNotificationRepository.delete(notification);
+			}
+		}
+	}
 }

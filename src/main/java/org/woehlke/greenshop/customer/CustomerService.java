@@ -40,4 +40,6 @@ public interface CustomerService extends UserDetailsService {
 	List<ProductNotificationBean> findAllProductNotificationsForCustomer(Customer customer, Language language);
 
 	void addProductNotification(Product product, Customer customer);
+
+	void updateProductNotifications(Customer customer, long[] productNotification);
 }

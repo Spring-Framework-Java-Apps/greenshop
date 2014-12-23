@@ -307,7 +307,10 @@ public class UserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/accountNotifications", method = RequestMethod.POST)
-	public String accountNotificationsPerform(CustomerInfo customerInfo, BindingResult result, Model model){
+	public String accountNotificationsPerform(
+			CustomerInfo customerInfo,
+			@RequestParam("products[]") long productNotification[],
+			BindingResult result, Model model){
 		super.getDefaultBoxContent(model);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String customerEmail = auth.getName();
@@ -320,6 +323,7 @@ public class UserController extends AbstractController {
 		} else {
 			myCustomerInfo.setGlobalProductNotifications(customerInfo.getGlobalProductNotifications());
 			customerService.updateCustomerInfo(myCustomerInfo);
+			customerService.updateProductNotifications(myCustomer,productNotification);
 			return "redirect:/account";
 		}
 	}
