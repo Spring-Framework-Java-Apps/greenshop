@@ -18,6 +18,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.woehlke.greenshop.catalog.entities.Language;
+import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.checkout.OrderService;
 import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
 import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
@@ -316,5 +318,17 @@ public class UserController extends AbstractController {
 			customerService.updateCustomerInfo(myCustomerInfo);
 			return "redirect:/account";
 		}
+	}
+
+	@RequestMapping(value = "/account/addProductNotification/{productId}", method = RequestMethod.GET)
+	public String addProductNotification(@PathVariable long productId, Model model) {
+		super.getDefaultBoxContent(model);
+		Language language = catalogService.findLanguageByCode("en");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String customerEmail = auth.getName();
+		Customer myCustomer = customerService.findCustomerByEmail(customerEmail);
+		ProductDescription product = catalogService.findProductById(productId, language);
+		customerService.addProductNotification(product.getProduct(),myCustomer);
+		return "redirect:/product/"+productId;
 	}
 }

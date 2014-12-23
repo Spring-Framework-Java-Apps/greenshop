@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.woehlke.greenshop.catalog.entities.Product;
 import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
 import org.woehlke.greenshop.customer.model.UserDetailsBean;
@@ -185,5 +186,20 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<ProductNotification> findAllProductNotificationsForCustomer(Customer customer) {
 		return productNotificationDao.findAllProductNotificationsForCustomerId(customer.getId());
+	}
+
+	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+	public void addProductNotification(Product product, Customer customer) {
+		ProductNotificationId id = new ProductNotificationId();
+		id.setCustomerId(customer.getId());
+		id.setProductId(product.getId());
+		ProductNotification notification = productNotificationRepository.findOne(id);
+		if (notification == null){
+			notification = new ProductNotification();
+			notification.setId(id);
+		}
+		notification.setDateAdded(new Date());
+		productNotificationRepository.save(notification);
 	}
 }
