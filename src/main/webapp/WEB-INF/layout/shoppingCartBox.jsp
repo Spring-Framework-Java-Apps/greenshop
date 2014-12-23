@@ -1,7 +1,12 @@
 <%@ include file="/WEB-INF/layout/taglibs.jsp"%>
 <c:choose>
     <c:when test="${transientBasket.emptyCart}">
-        <div class="ui-widget infoBoxContainer">  <div class="ui-widget-header infoBoxHeading"><a href="<c:url value="/shoppingCart" />">Shopping Cart</a></div>  <div class="ui-widget-content infoBoxContents">0 items</div></div>
+        <div class="ui-widget infoBoxContainer">
+            <div class="ui-widget-header infoBoxHeading">
+                <a href="<c:url value="/shoppingCart" />">Shopping Cart</a>
+            </div>
+            <div class="ui-widget-content infoBoxContents">0 items</div>
+        </div>
     </c:when>
     <c:otherwise>
         <div class="ui-widget infoBoxContainer">
