@@ -31,17 +31,16 @@
 
   <div class="contentText">
 
-
     <div>To remove a product notification, clear the products checkbox and click on Continue.</div>
 
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
 
-
+      <c:forEach var="productNotification" items="${productNotifications}">
       <tr>
-        <td width="30"><input type="checkbox" name="products[0]" value="1" checked="checked" onclick="checkBox('products[0]')" /></td>
-        <td><strong>Matrox G200 MMS</strong></td>
+        <td width="30"><input type="checkbox" name="products[${productNotification.id.productId}]" value="1" checked="checked" onclick="checkBox('products[${productNotification.id.productId}]')" /></td>
+        <td><strong>Matrox G200 MMS ${productNotification.id.productId}</strong></td>
       </tr>
-
+      </c:forEach>
 
     </table>
 
