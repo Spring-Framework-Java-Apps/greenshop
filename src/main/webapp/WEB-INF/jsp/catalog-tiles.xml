@@ -13,6 +13,9 @@
 
 	<definition name="product" extends="page">
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/product.jsp" />
+		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
+		<put-attribute name="specialsBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
+		<put-attribute name="reviewsBox" value="/WEB-INF/layout/writeReviewBox.jsp" />
 	</definition>
 
 	<definition name="category" extends="page">
