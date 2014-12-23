@@ -22,6 +22,7 @@
         <class>org.woehlke.greenshop.customer.entities.Customer</class>
         <class>org.woehlke.greenshop.customer.entities.CustomerInfo</class>
         <class>org.woehlke.greenshop.customer.entities.Zone</class>
+        <class>org.woehlke.greenshop.customer.entities.ProductNotification</class>
         <class>org.woehlke.greenshop.cart.entities.CustomersBasket</class>
         <class>org.woehlke.greenshop.cart.entities.CustomersBasketAttribute</class>
         <class>org.woehlke.greenshop.checkout.entities.Order</class>

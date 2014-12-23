@@ -43,6 +43,12 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Inject
 	private AddressFormatRepository addressFormatRepository;
+
+	@Inject
+	private ProductNotificationRepository productNotificationRepository;
+
+	@Inject
+	private ProductNotificationDao productNotificationDao;
 	
 	@Override
 	public List<Country> findAllCountriesOrderByName() {
@@ -174,5 +180,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void updateCustomerInfo(CustomerInfo myCustomerInfo) {
 		customerInfoRepository.save(myCustomerInfo);
+	}
+
+	@Override
+	public List<ProductNotification> findAllProductNotificationsForCustomer(Customer customer) {
+		return productNotificationDao.findAllProductNotificationsForCustomerId(customer.getId());
 	}
 }

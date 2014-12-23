@@ -22,10 +22,7 @@ import org.woehlke.greenshop.checkout.OrderService;
 import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
 import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
 import org.woehlke.greenshop.customer.CustomerService;
-import org.woehlke.greenshop.customer.entities.AddressBook;
-import org.woehlke.greenshop.customer.entities.Country;
-import org.woehlke.greenshop.customer.entities.Customer;
-import org.woehlke.greenshop.customer.entities.CustomerInfo;
+import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.ChangePasswordBean;
 import org.woehlke.greenshop.customer.model.CustomerAddressBean;
 
@@ -298,6 +295,8 @@ public class UserController extends AbstractController {
 		CustomerInfo customerInfo = customerService.findCustomerInfoByCustomer(customer);
 		model.addAttribute("customerInfo", customerInfo);
 		model.addAttribute("customer", customer);
+		List<ProductNotification> productNotifications = customerService.findAllProductNotificationsForCustomer(customer);
+		model.addAttribute("productNotifications", productNotifications);
 		return "accountNotifications";
 	}
 

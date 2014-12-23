@@ -4,6 +4,25 @@
 <tiles-definitions>
         
 	<definition name="page" templateExpression="/WEB-INF/layout/page.jsp">
+		<!-- header -->
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+		<put-attribute name="breadcrumb" value="/WEB-INF/layout/breadcrumb.jsp" />
+		<!-- columns left -->
+		<put-attribute name="categoryBox" value="/WEB-INF/layout/categoryBox.jsp" />
+		<put-attribute name="manufacturersBox" value="/WEB-INF/layout/manufacturersBox.jsp" />
+		<put-attribute name="quickFindBox" value="/WEB-INF/layout/quickFindBox.jsp" />
+		<put-attribute name="newProductsBox" value="/WEB-INF/layout/newProductsBox.jsp" />
+		<put-attribute name="informationPagesBox" value="/WEB-INF/layout/informationPagesBox.jsp" />
+		<!-- columns right -->
+		<put-attribute name="shoppingCartBox" value="/WEB-INF/layout/shoppingCartBox.jsp" />
+		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/bestsellersBox.jsp" />
+		<put-attribute name="specialsBox" value="/WEB-INF/layout/specialsBox.jsp" />
+		<put-attribute name="reviewsBox" value="/WEB-INF/layout/reviewsBox.jsp" />
+		<put-attribute name="currenciesBox" value="/WEB-INF/layout/currenciesBox.jsp" />
+		<!-- footer -->
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+		<put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" />
+
 	</definition>
         
 </tiles-definitions>
