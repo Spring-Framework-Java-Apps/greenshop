@@ -37,6 +37,7 @@
 <tiles:insertAttribute name="shoppingCartBox" />
 <tiles:insertAttribute name="bestsellersBox" />
 <tiles:insertAttribute name="specialsBox" />
+<tiles:insertAttribute name="shareProductBox" />
 <tiles:insertAttribute name="reviewsBox" />
 <tiles:insertAttribute name="currenciesBox" />
 </div>

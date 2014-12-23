@@ -19,6 +19,7 @@
 		<put-attribute name="specialsBox" value="/WEB-INF/layout/specialsBox.jsp" />
 		<put-attribute name="reviewsBox" value="/WEB-INF/layout/reviewsBox.jsp" />
 		<put-attribute name="currenciesBox" value="/WEB-INF/layout/currenciesBox.jsp" />
+		<put-attribute name="shareProductBox" value="/WEB-INF/layout/emptyBox.jsp" />
 		<!-- footer -->
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 		<put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" />
