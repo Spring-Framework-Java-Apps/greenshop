@@ -153,4 +153,18 @@ public class CustomerInfo {
         result = 31 * result + (passwordResetDate != null ? passwordResetDate.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerInfo{" +
+                "id=" + id +
+                ", lastLogin=" + lastLogin +
+                ", numberOfLogons=" + numberOfLogons +
+                ", accountCreated=" + accountCreated +
+                ", accountLastModified=" + accountLastModified +
+                ", globalProductNotifications=" + globalProductNotifications +
+                ", passwordResetKey='" + passwordResetKey + '\'' +
+                ", passwordResetDate=" + passwordResetDate +
+                '}';
+    }
 }

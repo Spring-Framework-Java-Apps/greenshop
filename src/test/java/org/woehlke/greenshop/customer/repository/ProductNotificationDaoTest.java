@@ -21,7 +21,7 @@ import java.util.List;
 @ContextConfiguration("classpath:/servlet-context.xml")
 public class ProductNotificationDaoTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductNotificationRepositoryTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductNotificationDaoTest.class);
 
     @Inject
     private ProductNotificationDao productNotificationDao;
