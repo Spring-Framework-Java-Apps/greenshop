@@ -1,5 +1,8 @@
 package org.woehlke.greenshop;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -15,11 +18,11 @@ import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.ManufacturerInfo;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
-import org.woehlke.greenshop.catalog.model.CategoryTree;
-import org.woehlke.greenshop.catalog.model.Manufacturers;
-import org.woehlke.greenshop.catalog.model.ProductAttributes;
-import org.woehlke.greenshop.catalog.model.ProductsByCategory;
-import org.woehlke.greenshop.catalog.model.ProductsByManufacturer;
+import org.woehlke.greenshop.catalog.model.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpUtils;
 
 
 @Controller
@@ -76,7 +79,10 @@ public class CatalogController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/product/{productId}", method = RequestMethod.GET)
-	public String product(@PathVariable long productId,Model model){
+	public String product(@PathVariable long productId,
+						  HttpServletRequest request,
+						  HttpServletResponse response,
+						  Model model){
 		Language language = catalogService.findLanguageByCode("en");
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		model.addAttribute("product", productDescription);
@@ -88,6 +94,26 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("productAttributes", productAttributes);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
+		ShareProductBean shareProductBean = new ShareProductBean();
+		String productUrl = request.getRequestURL().toString();
+		shareProductBean.setProductUrl(URLEncoder.encode(productUrl));
+		shareProductBean.setProductName(URLEncoder.encode(productDescription.getName()));
+		try {
+			URL imageUrl = new URL(request.getRequestURL().toString());
+			StringBuffer sb = new StringBuffer();
+			sb.append(imageUrl.getProtocol());
+			sb.append("://");
+			sb.append(imageUrl.getHost());
+			sb.append(":");
+			sb.append(imageUrl.getPort());
+			sb.append(request.getContextPath());
+			sb.append("/resources/images/");
+			sb.append(productDescription.getProduct().getImage());
+			shareProductBean.setProductImageUrl(sb.toString());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("shareProductBean", shareProductBean);
 		return "product";
 	}
 	

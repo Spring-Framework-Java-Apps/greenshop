@@ -36,7 +36,7 @@ public class ProductDescription {
 	@Null
 	@Max(255)
 	@Column(name="products_url",columnDefinition="varchar(255)")
-	private String products_url;
+	private String productsUrl;
 	
 	@Column(name="products_name")
 	private String name;
@@ -73,12 +73,12 @@ public class ProductDescription {
 		this.description = description;
 	}
 
-	public String getProducts_url() {
-		return products_url;
+	public String getProductsUrl() {
+		return productsUrl;
 	}
 
-	public void setProducts_url(String products_url) {
-		this.products_url = products_url;
+	public void setProductsUrl(String products_url) {
+		this.productsUrl = products_url;
 	}
 
 	public String getName() {
@@ -93,7 +93,7 @@ public class ProductDescription {
 	public String toString() {
 		return "ProductDescription [product=" + product + ", language="
 				+ language + ", viewed=" + viewed + ", description="
-				+ description + ", products_url=" + products_url + ", name="
+				+ description + ", products_url=" + productsUrl + ", name="
 				+ name + "]";
 	}
 	
@@ -109,7 +109,7 @@ public class ProductDescription {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
-				+ ((products_url == null) ? 0 : products_url.hashCode());
+				+ ((productsUrl == null) ? 0 : productsUrl.hashCode());
 		result = prime * result + viewed;
 		return result;
 	}
@@ -143,10 +143,10 @@ public class ProductDescription {
 				return false;
 		} else if (!product.equals(other.product))
 			return false;
-		if (products_url == null) {
-			if (other.products_url != null)
+		if (productsUrl == null) {
+			if (other.productsUrl != null)
 				return false;
-		} else if (!products_url.equals(other.products_url))
+		} else if (!productsUrl.equals(other.productsUrl))
 			return false;
 		if (viewed != other.viewed)
 			return false;
