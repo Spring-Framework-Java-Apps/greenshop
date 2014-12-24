@@ -1,6 +1,5 @@
 package org.woehlke.greenshop.catalog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.woehlke.greenshop.catalog.entities.CategoryDescription;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Product;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;

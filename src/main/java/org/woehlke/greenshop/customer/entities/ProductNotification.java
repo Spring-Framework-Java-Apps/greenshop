@@ -63,4 +63,12 @@ public class ProductNotification {
         result = 31 * result + (dateAdded != null ? dateAdded.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ProductNotification{" +
+                "id=" + id +
+                ", dateAdded=" + dateAdded +
+                '}';
+    }
 }

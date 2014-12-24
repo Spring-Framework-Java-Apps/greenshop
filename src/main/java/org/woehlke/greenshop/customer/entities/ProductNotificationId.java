@@ -61,4 +61,12 @@ public class ProductNotificationId implements Serializable {
         result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ProductNotificationId{" +
+                "productId=" + productId +
+                ", customerId=" + customerId +
+                '}';
+    }
 }
