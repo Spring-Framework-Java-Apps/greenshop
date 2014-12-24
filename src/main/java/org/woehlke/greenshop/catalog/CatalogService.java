@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
+import org.woehlke.greenshop.catalog.entities.ManufacturerInfo;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
@@ -41,4 +42,8 @@ public interface CatalogService {
 	
 	ProductsByCategory getProductsByCategoryAndManufacturer(long categoryId,
 			long manufacturerId, Language language);
+
+	ManufacturerInfo findManufacturerInfo(long manufacturerId, Language language);
+
+	ManufacturerInfo clickManufacturerUrl(ManufacturerInfo manufacturerInfo);
 }

@@ -14,6 +14,7 @@
         <class>org.woehlke.greenshop.catalog.entities.ProductAttribute</class>
         <class>org.woehlke.greenshop.catalog.entities.Language</class>
         <class>org.woehlke.greenshop.catalog.entities.Manufacturer</class>
+        <class>org.woehlke.greenshop.catalog.entities.ManufacturerInfo</class>
         <class>org.woehlke.greenshop.catalog.entities.Category</class>
         <class>org.woehlke.greenshop.catalog.entities.CategoryDescription</class>
         <class>org.woehlke.greenshop.customer.entities.AddressFormat</class>

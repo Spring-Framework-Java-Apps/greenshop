@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
+import org.woehlke.greenshop.catalog.entities.ManufacturerInfo;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
@@ -144,5 +145,15 @@ public class CatalogController extends AbstractController {
 		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
 		return "manufacturer";
+	}
+
+	@RequestMapping(value = "/manufacturer/redirect/{manufacturerId}", method = RequestMethod.GET)
+	public String manufacturerRedirect(@PathVariable long manufacturerId,Model model) {
+		logger.info("manufacturers_id=" + manufacturerId);
+		Language language = catalogService.findLanguageByCode("en");
+		ManufacturerInfo manufacturerInfo=catalogService.findManufacturerInfo(manufacturerId,language);
+		manufacturerInfo=catalogService.clickManufacturerUrl(manufacturerInfo);
+		model.addAttribute("manufacturer", manufacturerInfo);
+		return "manufacturerRedirect";
 	}
 }

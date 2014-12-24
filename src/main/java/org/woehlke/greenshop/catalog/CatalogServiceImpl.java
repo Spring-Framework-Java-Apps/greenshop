@@ -10,17 +10,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.data.domain.Sort;
-import org.woehlke.greenshop.catalog.entities.Category;
-import org.woehlke.greenshop.catalog.entities.CategoryDescription;
-import org.woehlke.greenshop.catalog.entities.CategoryDescriptionId;
-import org.woehlke.greenshop.catalog.entities.Language;
-import org.woehlke.greenshop.catalog.entities.Manufacturer;
-import org.woehlke.greenshop.catalog.entities.ProductAttribute;
-import org.woehlke.greenshop.catalog.entities.ProductDescription;
-import org.woehlke.greenshop.catalog.entities.ProductOption;
-import org.woehlke.greenshop.catalog.entities.ProductOptionId;
-import org.woehlke.greenshop.catalog.entities.ProductOptionValue;
-import org.woehlke.greenshop.catalog.entities.ProductOptionValueId;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.CategoryTreeNode;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
@@ -28,18 +20,10 @@ import org.woehlke.greenshop.catalog.model.ProductAttributes;
 import org.woehlke.greenshop.catalog.model.ProductOptionAttribute;
 import org.woehlke.greenshop.catalog.model.ProductsByCategory;
 import org.woehlke.greenshop.catalog.model.ProductsByManufacturer;
-import org.woehlke.greenshop.catalog.repositories.CategoryDescriptionRepository;
-import org.woehlke.greenshop.catalog.repositories.CategoryDescriptionRepositoryDao;
-import org.woehlke.greenshop.catalog.repositories.CategoryRepository;
-import org.woehlke.greenshop.catalog.repositories.LanguageRepository;
-import org.woehlke.greenshop.catalog.repositories.ManufacturerRepository;
-import org.woehlke.greenshop.catalog.repositories.ProductAttributeRepository;
-import org.woehlke.greenshop.catalog.repositories.ProductDescriptionRepository;
-import org.woehlke.greenshop.catalog.repositories.ProductDescriptionRepositoryDao;
-import org.woehlke.greenshop.catalog.repositories.ProductOptionRepository;
-import org.woehlke.greenshop.catalog.repositories.ProductOptionValueRepository;
+import org.woehlke.greenshop.catalog.repositories.*;
 
 @Named
+@Transactional(readOnly=true,propagation= Propagation.REQUIRED)
 public class CatalogServiceImpl implements CatalogService {
 
 	@Inject
@@ -53,6 +37,12 @@ public class CatalogServiceImpl implements CatalogService {
 	
 	@Inject
 	private ManufacturerRepository manufacturerRepository;
+
+	@Inject
+	private ManufacturerInfoRepository manufacturerInfoRepository;
+
+	@Inject
+	private ManufacturerInfoDao manufacturerInfoDao;
 	
 	@Inject
 	private ProductAttributeRepository productAttributeRepository;
@@ -365,6 +355,22 @@ public class CatalogServiceImpl implements CatalogService {
 		List<CategoryDescription> childCategories = categoryDescriptionRepositoryDao.findCategoriesByParentId(categoryId, language);
 		productsByCategory.setChildCategories(childCategories);
 		return productsByCategory;
+	}
+
+	@Override
+	public ManufacturerInfo findManufacturerInfo(long manufacturerId, Language language) {
+		Manufacturer manufacturer = manufacturerRepository.findOne(manufacturerId);
+		ManufacturerInfoId manufacturerInfoId = new ManufacturerInfoId();
+		manufacturerInfoId.setLanguage(language);
+		manufacturerInfoId.setManufacturer(manufacturer);
+		return manufacturerInfoRepository.findOne(manufacturerInfoId);
+	}
+
+	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+	public ManufacturerInfo clickManufacturerUrl(ManufacturerInfo manufacturerInfo) {
+		manufacturerInfo.addClick();
+		return manufacturerInfoDao.update(manufacturerInfo);
 	}
 
 
