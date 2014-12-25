@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.woehlke.greenshop.catalog.entities.Language;
-import org.woehlke.greenshop.catalog.entities.Manufacturer;
-import org.woehlke.greenshop.catalog.entities.ManufacturerInfo;
-import org.woehlke.greenshop.catalog.entities.ProductDescription;
+import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.*;
 import org.woehlke.greenshop.customer.entities.Customer;
 
@@ -194,9 +191,10 @@ public class CatalogController extends AbstractController {
 											   HttpServletRequest request,
 											   HttpServletResponse response,
 											   Model model){
+		Language language = catalogService.findLanguageByCode("en");
+		ProductDescription productDescription = catalogService.findProductById(productId,language);
+		Customer customer = super.getLoggedInCustomer();
 		if(result.hasErrors()){
-			Language language = catalogService.findLanguageByCode("en");
-			ProductDescription productDescription = catalogService.findProductById(productId,language);
 			model.addAttribute("product", productDescription);
 			logger.info(productDescription.toString());
 			Manufacturers manufacturers=catalogService.findManufacturers();
@@ -209,13 +207,15 @@ public class CatalogController extends AbstractController {
 			model.addAttribute("categoryTree", categoryTree);
 			ShareProductBean shareProductBean = getShareProductBean(request, productDescription);
 			model.addAttribute("shareProductBean", shareProductBean);
-			Customer customer = super.getLoggedInCustomer();
 			model.addAttribute("customer", customer);
 			return "writeReviewForProduct";
 		} else {
 			logger.info("##################################");
 			logger.info(writeReviewBean.toString());
 			logger.info("##################################");
+			ReviewDescription reviewDescription = catalogService.
+			saveReview(writeReviewBean, productDescription.getProduct(), customer,language);
+			logger.info(reviewDescription.toString());
 			return "redirect:/product/"+productId;
 		}
 	}

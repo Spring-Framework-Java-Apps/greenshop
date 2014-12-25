@@ -1,10 +1,6 @@
 package org.woehlke.greenshop.catalog;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,14 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.catalog.entities.*;
-import org.woehlke.greenshop.catalog.model.CategoryTree;
-import org.woehlke.greenshop.catalog.model.CategoryTreeNode;
-import org.woehlke.greenshop.catalog.model.Manufacturers;
-import org.woehlke.greenshop.catalog.model.ProductAttributes;
-import org.woehlke.greenshop.catalog.model.ProductOptionAttribute;
-import org.woehlke.greenshop.catalog.model.ProductsByCategory;
-import org.woehlke.greenshop.catalog.model.ProductsByManufacturer;
+import org.woehlke.greenshop.catalog.model.*;
 import org.woehlke.greenshop.catalog.repositories.*;
+import org.woehlke.greenshop.customer.entities.Customer;
 
 @Named
 @Transactional(readOnly=true,propagation= Propagation.REQUIRED)
@@ -61,6 +52,15 @@ public class CatalogServiceImpl implements CatalogService {
 	
 	@Inject
 	private CategoryRepository categoryRepository;
+
+	@Inject
+	private ReviewRepository reviewRepository;
+
+	@Inject
+	private ReviewDescriptionRepository reviewDescriptionRepository;
+
+	@Inject
+	private ReviewDescriptionDao reviewDescriptionDao;
 	
 	@Override
 	public List<ProductDescription> recommenderNewProducts(Language language) {
@@ -371,6 +371,32 @@ public class CatalogServiceImpl implements CatalogService {
 	public ManufacturerInfo clickManufacturerUrl(ManufacturerInfo manufacturerInfo) {
 		manufacturerInfo.addClick();
 		return manufacturerInfoDao.update(manufacturerInfo);
+	}
+
+	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+	public ReviewDescription saveReview(WriteReviewBean writeReviewBean,
+										Product product, Customer customer, Language language) {
+		language=languageRepository.findOne(language.getId());
+		ReviewDescription reviewDescription = new ReviewDescription();
+		Review review = new Review();
+		if(customer==null){
+			review.setCustomersId(0L);
+		} else {
+			review.setCustomersId(customer.getId());
+		}
+		review.setProduct(product);
+		review.setCustomersName(customer.getFirstname()+" "+customer.getLastname());
+		review.setDateAdded(new Date());
+		review.setRating(writeReviewBean.getRating());
+		review.setStatus(1);
+		review.setReviewsRead(0);
+		review=reviewRepository.save(review);
+		reviewDescription.setReview(review);
+		reviewDescription.setLanguage(language);
+		reviewDescription.setReviewText(writeReviewBean.getReviewText());
+		reviewDescription=reviewDescriptionDao.create(reviewDescription);
+		return reviewDescription;
 	}
 
 

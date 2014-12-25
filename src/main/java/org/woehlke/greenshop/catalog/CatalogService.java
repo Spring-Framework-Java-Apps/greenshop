@@ -3,15 +3,9 @@ package org.woehlke.greenshop.catalog;
 import java.util.List;
 
 
-import org.woehlke.greenshop.catalog.entities.Language;
-import org.woehlke.greenshop.catalog.entities.Manufacturer;
-import org.woehlke.greenshop.catalog.entities.ManufacturerInfo;
-import org.woehlke.greenshop.catalog.entities.ProductDescription;
-import org.woehlke.greenshop.catalog.model.CategoryTree;
-import org.woehlke.greenshop.catalog.model.Manufacturers;
-import org.woehlke.greenshop.catalog.model.ProductAttributes;
-import org.woehlke.greenshop.catalog.model.ProductsByCategory;
-import org.woehlke.greenshop.catalog.model.ProductsByManufacturer;
+import org.woehlke.greenshop.catalog.entities.*;
+import org.woehlke.greenshop.catalog.model.*;
+import org.woehlke.greenshop.customer.entities.Customer;
 
 
 public interface CatalogService {
@@ -46,4 +40,6 @@ public interface CatalogService {
 	ManufacturerInfo findManufacturerInfo(long manufacturerId, Language language);
 
 	ManufacturerInfo clickManufacturerUrl(ManufacturerInfo manufacturerInfo);
+
+	ReviewDescription saveReview(WriteReviewBean writeReviewBean, Product product, Customer customer, Language language);
 }
