@@ -1,28 +1,24 @@
 package org.woehlke.greenshop;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
+
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.ManufacturerInfo;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.model.*;
+import org.woehlke.greenshop.customer.entities.Customer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpUtils;
+import javax.validation.Valid;
 
 
 @Controller
@@ -94,25 +90,7 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("productAttributes", productAttributes);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		ShareProductBean shareProductBean = new ShareProductBean();
-		String productUrl = request.getRequestURL().toString();
-		shareProductBean.setProductUrl(URLEncoder.encode(productUrl));
-		shareProductBean.setProductName(URLEncoder.encode(productDescription.getName()));
-		try {
-			URL imageUrl = new URL(request.getRequestURL().toString());
-			StringBuffer sb = new StringBuffer();
-			sb.append(imageUrl.getProtocol());
-			sb.append("://");
-			sb.append(imageUrl.getHost());
-			sb.append(":");
-			sb.append(imageUrl.getPort());
-			sb.append(request.getContextPath());
-			sb.append("/resources/images/");
-			sb.append(productDescription.getProduct().getImage());
-			shareProductBean.setProductImageUrl(sb.toString());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+		ShareProductBean shareProductBean = getShareProductBean(request,productDescription);
 		model.addAttribute("shareProductBean", shareProductBean);
 		return "product";
 	}
@@ -181,5 +159,64 @@ public class CatalogController extends AbstractController {
 		manufacturerInfo=catalogService.clickManufacturerUrl(manufacturerInfo);
 		model.addAttribute("manufacturer", manufacturerInfo);
 		return "manufacturerRedirect";
+	}
+
+	@RequestMapping(value = "/review/write/product/{productId}", method = RequestMethod.GET)
+	public String writeReviewForProduct(@PathVariable long productId,
+										HttpServletRequest request,
+										HttpServletResponse response,
+										Model model){
+		Language language = catalogService.findLanguageByCode("en");
+		ProductDescription productDescription = catalogService.findProductById(productId,language);
+		model.addAttribute("product", productDescription);
+		logger.info(productDescription.toString());
+		Manufacturers manufacturers=catalogService.findManufacturers();
+		model.addAttribute("manufacturers", manufacturers);
+		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+		logger.info(productAttributes.toString());
+		model.addAttribute("productAttributes", productAttributes);
+		CategoryTree categoryTree =
+				catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+		model.addAttribute("categoryTree", categoryTree);
+		ShareProductBean shareProductBean = getShareProductBean(request, productDescription);
+		model.addAttribute("shareProductBean", shareProductBean);
+		Customer customer = super.getLoggedInCustomer();
+		model.addAttribute("customer", customer);
+		WriteReviewBean writeReviewBean = new WriteReviewBean();
+		model.addAttribute("writeReviewBean", writeReviewBean);
+		return "writeReviewForProduct";
+	}
+
+	@RequestMapping(value = "/review/write/product/{productId}", method = RequestMethod.POST)
+	public String writeReviewForProductPerform(@ModelAttribute("writeReviewBean") @Valid WriteReviewBean writeReviewBean,
+											   BindingResult result, //BindingResult must be here after validated Object
+											   @PathVariable long productId,
+											   HttpServletRequest request,
+											   HttpServletResponse response,
+											   Model model){
+		if(result.hasErrors()){
+			Language language = catalogService.findLanguageByCode("en");
+			ProductDescription productDescription = catalogService.findProductById(productId,language);
+			model.addAttribute("product", productDescription);
+			logger.info(productDescription.toString());
+			Manufacturers manufacturers=catalogService.findManufacturers();
+			model.addAttribute("manufacturers", manufacturers);
+			ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+			logger.info(productAttributes.toString());
+			model.addAttribute("productAttributes", productAttributes);
+			CategoryTree categoryTree =
+					catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+			model.addAttribute("categoryTree", categoryTree);
+			ShareProductBean shareProductBean = getShareProductBean(request, productDescription);
+			model.addAttribute("shareProductBean", shareProductBean);
+			Customer customer = super.getLoggedInCustomer();
+			model.addAttribute("customer", customer);
+			return "writeReviewForProduct";
+		} else {
+			logger.info("##################################");
+			logger.info(writeReviewBean.toString());
+			logger.info("##################################");
+			return "redirect:/product/"+productId;
+		}
 	}
 }

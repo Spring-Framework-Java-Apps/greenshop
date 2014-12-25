@@ -1,8 +1,12 @@
 package org.woehlke.greenshop;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +18,7 @@ import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
+import org.woehlke.greenshop.catalog.model.ShareProductBean;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Customer;
 
@@ -45,5 +50,28 @@ public abstract class AbstractController {
 		String customerEmail = auth.getName();
 		Customer customer = customerService.findCustomerByEmail(customerEmail);
 		return customer;
+	}
+
+	protected ShareProductBean getShareProductBean(HttpServletRequest request,ProductDescription productDescription){
+		ShareProductBean shareProductBean = new ShareProductBean();
+		String productUrl = request.getRequestURL().toString();
+		shareProductBean.setProductUrl(URLEncoder.encode(productUrl));
+		shareProductBean.setProductName(URLEncoder.encode(productDescription.getName()));
+		try {
+			URL imageUrl = new URL(request.getRequestURL().toString());
+			StringBuffer sb = new StringBuffer();
+			sb.append(imageUrl.getProtocol());
+			sb.append("://");
+			sb.append(imageUrl.getHost());
+			sb.append(":");
+			sb.append(imageUrl.getPort());
+			sb.append(request.getContextPath());
+			sb.append("/resources/images/");
+			sb.append(productDescription.getProduct().getImage());
+			shareProductBean.setProductImageUrl(sb.toString());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return shareProductBean;
 	}
 }

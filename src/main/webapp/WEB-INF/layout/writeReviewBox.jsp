@@ -8,7 +8,7 @@
             </a>
             </td>
             <td>
-                <a href="http://localhost/oscommerce2/product_reviews_write.php?products_id=28">Write a review on this product!</a>
+                <a href="<c:url value="/review/write/product/${product.product.id}"/>">Write a review on this product!</a>
             </td>
         </tr>
     </table>
