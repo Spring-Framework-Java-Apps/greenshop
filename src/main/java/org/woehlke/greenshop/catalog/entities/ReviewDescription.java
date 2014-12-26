@@ -30,6 +30,18 @@ public class ReviewDescription {
     @Column(name="reviews_text",columnDefinition = "text")
     private String reviewText;
 
+
+    private final static int SHORT_TEXT_LENGTH = 70;
+
+    public String getReviewTextShort() {
+        if(reviewText.length() > SHORT_TEXT_LENGTH){
+            String shortText = reviewText.substring(0,SHORT_TEXT_LENGTH);
+            return shortText+"...";
+        } else {
+            return reviewText;
+        }
+    }
+
     public Review getReview() {
         return review;
     }

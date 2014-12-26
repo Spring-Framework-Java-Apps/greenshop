@@ -219,4 +219,50 @@ public class CatalogController extends AbstractController {
 			return "redirect:/product/"+productId;
 		}
 	}
+
+	@RequestMapping(value = "/product/reviews/{productId}", method = RequestMethod.GET)
+	 public String showReviews(@PathVariable long productId,
+							   HttpServletRequest request,
+							   HttpServletResponse response,
+							   Model model){
+		Language language = catalogService.findLanguageByCode("en");
+		ProductDescription productDescription = catalogService.findProductById(productId,language);
+		model.addAttribute("product", productDescription);
+		logger.info(productDescription.toString());
+		Manufacturers manufacturers=catalogService.findManufacturers();
+		model.addAttribute("manufacturers", manufacturers);
+		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+		logger.info(productAttributes.toString());
+		model.addAttribute("productAttributes", productAttributes);
+		CategoryTree categoryTree = catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+		model.addAttribute("categoryTree", categoryTree);
+		ShareProductBean shareProductBean = getShareProductBean(request,productDescription);
+		model.addAttribute("shareProductBean", shareProductBean);
+		List<ReviewDescription> reviewDescriptions = catalogService.findReviewsForProduct(productDescription);
+		model.addAttribute("reviewDescriptions", reviewDescriptions);
+		return "showReviews";
+	}
+
+	@RequestMapping(value = "/product/review/{reviewId}", method = RequestMethod.GET)
+	public String showReview(@PathVariable long reviewId,
+							  HttpServletRequest request,
+							  HttpServletResponse response,
+							  Model model){
+		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription reviewDescription = catalogService.findReviewById(reviewId,language);
+		model.addAttribute("reviewDescription", reviewDescription);
+		ProductDescription productDescription = catalogService.findProductById(reviewDescription.getReview().getProduct().getId(),language);
+		model.addAttribute("product", productDescription);
+		logger.info(productDescription.toString());
+		Manufacturers manufacturers=catalogService.findManufacturers();
+		model.addAttribute("manufacturers", manufacturers);
+		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+		logger.info(productAttributes.toString());
+		model.addAttribute("productAttributes", productAttributes);
+		CategoryTree categoryTree = catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+		model.addAttribute("categoryTree", categoryTree);
+		ShareProductBean shareProductBean = getShareProductBean(request, productDescription);
+		model.addAttribute("shareProductBean", shareProductBean);
+		return "showReview";
+	}
 }

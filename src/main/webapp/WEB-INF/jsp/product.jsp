@@ -54,7 +54,7 @@ ${product.description}
     </span>
 
     <span class="tdbLink">
-        <a id="tdb5" href="http://shadowfax/oscommerce2/product_reviews.php?cPath=2_19&amp;products_id=22">Reviews</a>
+        <a id="tdb5" href="<c:url value="/product/reviews/${product.product.id}"/>">Reviews</a>
     </span>
       <script type="text/javascript">$("#tdb5").button({icons:{primary:"ui-icon-comment"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>
   </div>

@@ -399,5 +399,16 @@ public class CatalogServiceImpl implements CatalogService {
 		return reviewDescription;
 	}
 
+	@Override
+	public List<ReviewDescription> findReviewsForProduct(ProductDescription productDescription) {
+		return reviewDescriptionDao.findReviewsForProductAndLanguage(
+				productDescription.getProduct(),productDescription.getLanguage());
+	}
+
+	@Override
+	public ReviewDescription findReviewById(long reviewId, Language language) {
+		return reviewDescriptionDao.findReviewsForReviewIdAndLanguage(reviewId, language);
+	}
+
 
 }

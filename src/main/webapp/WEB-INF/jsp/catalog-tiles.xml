@@ -110,5 +110,20 @@
 		<put-attribute name="shareProductBox" value="/WEB-INF/layout/shareProductBox.jsp" />
 		<put-attribute name="reviewsBox" value="/WEB-INF/layout/writeReviewBox.jsp" />
 	</definition>
+
+	<definition name="showReviews" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/showReviews.jsp" />
+		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
+		<put-attribute name="specialsBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
+		<put-attribute name="shareProductBox" value="/WEB-INF/layout/shareProductBox.jsp" />
+	</definition>
+
+	<definition name="showReview" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/showReview.jsp" />
+		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
+		<put-attribute name="specialsBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
+		<put-attribute name="shareProductBox" value="/WEB-INF/layout/shareProductBox.jsp" />
+	</definition>
+
 	
 </tiles-definitions>

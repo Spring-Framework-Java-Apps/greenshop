@@ -42,4 +42,8 @@ public interface CatalogService {
 	ManufacturerInfo clickManufacturerUrl(ManufacturerInfo manufacturerInfo);
 
 	ReviewDescription saveReview(WriteReviewBean writeReviewBean, Product product, Customer customer, Language language);
+
+	List<ReviewDescription> findReviewsForProduct(ProductDescription productDescription);
+
+	ReviewDescription findReviewById(long reviewId, Language language);
 }
