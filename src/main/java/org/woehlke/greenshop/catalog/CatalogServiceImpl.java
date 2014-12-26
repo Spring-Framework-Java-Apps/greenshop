@@ -410,5 +410,11 @@ public class CatalogServiceImpl implements CatalogService {
 		return reviewDescriptionDao.findReviewsForReviewIdAndLanguage(reviewId, language);
 	}
 
+	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+	public void update(Review review) {
+		review=reviewRepository.save(review);
+	}
+
 
 }

@@ -55,6 +55,10 @@ public class Review {
     @Column(name="reviews_read",columnDefinition = "int(5)")
     private int reviewsRead;
 
+    public void increaseReviewsRead() {
+        reviewsRead++;
+    }
+
     public Long getId() {
         return id;
     }

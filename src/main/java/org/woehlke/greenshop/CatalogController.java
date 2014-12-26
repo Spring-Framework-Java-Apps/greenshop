@@ -239,6 +239,12 @@ public class CatalogController extends AbstractController {
 		ShareProductBean shareProductBean = getShareProductBean(request,productDescription);
 		model.addAttribute("shareProductBean", shareProductBean);
 		List<ReviewDescription> reviewDescriptions = catalogService.findReviewsForProduct(productDescription);
+		for(ReviewDescription reviewDescription:reviewDescriptions){
+		  	Review review = reviewDescription.getReview();
+			review.increaseReviewsRead();
+			catalogService.update(review);
+		}
+		reviewDescriptions = catalogService.findReviewsForProduct(productDescription);
 		model.addAttribute("reviewDescriptions", reviewDescriptions);
 		return "showReviews";
 	}
@@ -250,6 +256,10 @@ public class CatalogController extends AbstractController {
 							  Model model){
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription reviewDescription = catalogService.findReviewById(reviewId,language);
+		Review review = reviewDescription.getReview();
+		review.increaseReviewsRead();
+		catalogService.update(review);
+		reviewDescription = catalogService.findReviewById(reviewId,language);
 		model.addAttribute("reviewDescription", reviewDescription);
 		ProductDescription productDescription = catalogService.findProductById(reviewDescription.getReview().getProduct().getId(),language);
 		model.addAttribute("product", productDescription);

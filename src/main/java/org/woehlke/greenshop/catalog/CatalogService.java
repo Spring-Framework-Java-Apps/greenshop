@@ -46,4 +46,6 @@ public interface CatalogService {
 	List<ReviewDescription> findReviewsForProduct(ProductDescription productDescription);
 
 	ReviewDescription findReviewById(long reviewId, Language language);
+
+	void update(Review review);
 }
