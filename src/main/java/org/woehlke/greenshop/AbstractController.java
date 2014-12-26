@@ -16,6 +16,7 @@ import org.woehlke.greenshop.cart.model.TransientBasket;
 import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
+import org.woehlke.greenshop.catalog.entities.ReviewDescription;
 import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
 import org.woehlke.greenshop.catalog.model.ShareProductBean;
@@ -43,6 +44,8 @@ public abstract class AbstractController {
 		model.addAttribute("manufacturers", manufacturers);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 	}
 	
 	protected Customer getLoggedInCustomer(){

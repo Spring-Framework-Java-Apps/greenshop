@@ -33,6 +33,8 @@ public class CatalogController extends AbstractController {
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
 	public String category(@PathVariable long categoryId,Model model){
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
@@ -60,6 +62,8 @@ public class CatalogController extends AbstractController {
 			@PathVariable long categoryId,
 			@PathVariable long manufacturerId, Model model){
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
@@ -77,6 +81,8 @@ public class CatalogController extends AbstractController {
 						  HttpServletResponse response,
 						  Model model){
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		model.addAttribute("product", productDescription);
 		logger.info(productDescription.toString());
@@ -102,6 +108,8 @@ public class CatalogController extends AbstractController {
 	public String manufacturer(@PathVariable long manufacturerId,Model model){
 		logger.info("manufacturers_id="+manufacturerId);
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
@@ -133,6 +141,8 @@ public class CatalogController extends AbstractController {
 			@PathVariable long categoryId, Model model){
 		logger.info("manufacturers_id="+manufacturerId);
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
@@ -152,6 +162,8 @@ public class CatalogController extends AbstractController {
 	public String manufacturerRedirect(@PathVariable long manufacturerId,Model model) {
 		logger.info("manufacturers_id=" + manufacturerId);
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		ManufacturerInfo manufacturerInfo=catalogService.findManufacturerInfo(manufacturerId,language);
 		manufacturerInfo=catalogService.clickManufacturerUrl(manufacturerInfo);
 		model.addAttribute("manufacturer", manufacturerInfo);
@@ -164,6 +176,8 @@ public class CatalogController extends AbstractController {
 										HttpServletResponse response,
 										Model model){
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		model.addAttribute("product", productDescription);
 		logger.info(productDescription.toString());
@@ -192,6 +206,8 @@ public class CatalogController extends AbstractController {
 											   HttpServletResponse response,
 											   Model model){
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		Customer customer = super.getLoggedInCustomer();
 		if(result.hasErrors()){
@@ -226,6 +242,8 @@ public class CatalogController extends AbstractController {
 							   HttpServletResponse response,
 							   Model model){
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		model.addAttribute("product", productDescription);
 		logger.info(productDescription.toString());
@@ -255,6 +273,8 @@ public class CatalogController extends AbstractController {
 							  HttpServletResponse response,
 							  Model model){
 		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
 		ReviewDescription reviewDescription = catalogService.findReviewById(reviewId,language);
 		Review review = reviewDescription.getReview();
 		review.increaseReviewsRead();

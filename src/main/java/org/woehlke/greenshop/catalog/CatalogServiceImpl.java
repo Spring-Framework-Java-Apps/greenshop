@@ -416,5 +416,15 @@ public class CatalogServiceImpl implements CatalogService {
 		review=reviewRepository.save(review);
 	}
 
+	@Override
+	public ReviewDescription getRandomReview(Language language) {
+		List<Review> reviews=reviewRepository.findAll();
+		int listLength = reviews.size();
+		Random random = new Random();
+		int index = random.nextInt(listLength);
+		Review review = reviews.get(index);
+		return reviewDescriptionDao.findReviewsForReviewIdAndLanguage(review.getId(), language);
+	}
+
 
 }

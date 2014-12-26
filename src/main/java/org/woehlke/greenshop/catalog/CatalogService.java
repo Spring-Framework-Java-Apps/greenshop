@@ -48,4 +48,6 @@ public interface CatalogService {
 	ReviewDescription findReviewById(long reviewId, Language language);
 
 	void update(Review review);
+
+	ReviewDescription getRandomReview(Language language);
 }
