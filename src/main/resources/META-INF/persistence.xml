@@ -19,6 +19,7 @@
         <class>org.woehlke.greenshop.catalog.entities.CategoryDescription</class>
         <class>org.woehlke.greenshop.catalog.entities.Review</class>
         <class>org.woehlke.greenshop.catalog.entities.ReviewDescription</class>
+        <class>org.woehlke.greenshop.catalog.entities.Special</class>
         <class>org.woehlke.greenshop.customer.entities.AddressFormat</class>
         <class>org.woehlke.greenshop.customer.entities.Country</class>
         <class>org.woehlke.greenshop.customer.entities.AddressBook</class>

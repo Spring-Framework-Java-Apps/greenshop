@@ -61,6 +61,9 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Inject
 	private ReviewDescriptionDao reviewDescriptionDao;
+
+	@Inject
+	private SpecialRepository specialRepository;
 	
 	@Override
 	public List<ProductDescription> recommenderNewProducts(Language language) {
@@ -424,6 +427,22 @@ public class CatalogServiceImpl implements CatalogService {
 		int index = random.nextInt(listLength);
 		Review review = reviews.get(index);
 		return reviewDescriptionDao.findReviewsForReviewIdAndLanguage(review.getId(), language);
+	}
+
+	@Override
+	public SpecialProduct getRandomSpecial(Language language) {
+		SpecialProduct specialProduct = new SpecialProduct();
+		List<Special> specials = specialRepository.findAll();
+		int listLength = specials.size();
+		Random random = new Random();
+		int index = random.nextInt(listLength);
+		Special special = specials.get(index);
+		specialProduct.setSpecial(special);
+		ProductDescription productDescription =
+				productDescriptionRepositoryDao.findByProductIdAndLanguage(
+						special.getProduct().getId(),language);
+		specialProduct.setProductDescription(productDescription);
+		return specialProduct;
 	}
 
 

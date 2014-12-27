@@ -20,6 +20,7 @@ import org.woehlke.greenshop.catalog.entities.ReviewDescription;
 import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
 import org.woehlke.greenshop.catalog.model.ShareProductBean;
+import org.woehlke.greenshop.catalog.model.SpecialProduct;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Customer;
 
@@ -46,6 +47,8 @@ public abstract class AbstractController {
 		model.addAttribute("categoryTree", categoryTree);
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 	}
 	
 	protected Customer getLoggedInCustomer(){

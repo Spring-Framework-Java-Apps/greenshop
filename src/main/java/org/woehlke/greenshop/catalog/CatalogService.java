@@ -50,4 +50,6 @@ public interface CatalogService {
 	void update(Review review);
 
 	ReviewDescription getRandomReview(Language language);
+
+	SpecialProduct getRandomSpecial(Language language);
 }

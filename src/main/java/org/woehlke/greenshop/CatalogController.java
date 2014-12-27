@@ -35,6 +35,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
@@ -64,6 +66,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
@@ -83,6 +87,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		model.addAttribute("product", productDescription);
 		logger.info(productDescription.toString());
@@ -110,6 +116,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
@@ -143,6 +151,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
@@ -164,6 +174,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		ManufacturerInfo manufacturerInfo=catalogService.findManufacturerInfo(manufacturerId,language);
 		manufacturerInfo=catalogService.clickManufacturerUrl(manufacturerInfo);
 		model.addAttribute("manufacturer", manufacturerInfo);
@@ -178,6 +190,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		model.addAttribute("product", productDescription);
 		logger.info(productDescription.toString());
@@ -208,6 +222,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		Customer customer = super.getLoggedInCustomer();
 		if(result.hasErrors()){
@@ -244,6 +260,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		ProductDescription productDescription = catalogService.findProductById(productId,language);
 		model.addAttribute("product", productDescription);
 		logger.info(productDescription.toString());
@@ -275,6 +293,8 @@ public class CatalogController extends AbstractController {
 		Language language = catalogService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		ReviewDescription reviewDescription = catalogService.findReviewById(reviewId,language);
 		Review review = reviewDescription.getReview();
 		review.increaseReviewsRead();

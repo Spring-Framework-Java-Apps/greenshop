@@ -18,7 +18,8 @@
 	http://www.springframework.org/schema/integration/mongodb/spring-integration-mongodb.xsd
 	http://www.springframework.org/schema/integration
 	http://www.springframework.org/schema/integration/spring-integration.xsd">
-	
+
+	<!--
 	<bean id="mongoDbFactory"
 		class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
 		<constructor-arg>
@@ -31,6 +32,7 @@
 		class="org.springframework.integration.mongodb.store.MongoDbMessageStore">
 		<constructor-arg ref="mongoDbFactory" />
 	</bean>
+	-->
 	
 	<jpa:repositories base-package="org.woehlke.greenshop" />
 
@@ -73,7 +75,10 @@
 	<int:control-bus id="controlBus" input-channel="controlBusChannel" />
 	
 	<int:channel id="emailChannel">
+		<!--
 		<int:queue message-store="mongoDbMessageStore" />
+		-->
+		<int:queue capacity="20"/>
 	</int:channel>
 	
 	<!--  
