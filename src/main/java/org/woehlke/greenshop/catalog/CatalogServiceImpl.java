@@ -445,5 +445,21 @@ public class CatalogServiceImpl implements CatalogService {
 		return specialProduct;
 	}
 
+	@Override
+	public List<SpecialProduct> getSpecialProducts(Language language) {
+		List<SpecialProduct> specialProducts = new ArrayList<SpecialProduct>();
+		List<Special> specials = specialRepository.findAll();
+		for(Special special:specials){
+			SpecialProduct specialProduct = new SpecialProduct();
+			specialProduct.setSpecial(special);
+			ProductDescription productDescription =
+					productDescriptionRepositoryDao.findByProductIdAndLanguage(
+							special.getProduct().getId(),language);
+			specialProduct.setProductDescription(productDescription);
+			specialProducts.add(specialProduct);
+		}
+		return specialProducts;
+	}
+
 
 }

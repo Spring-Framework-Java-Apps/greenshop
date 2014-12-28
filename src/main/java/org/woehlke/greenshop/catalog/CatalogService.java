@@ -52,4 +52,6 @@ public interface CatalogService {
 	ReviewDescription getRandomReview(Language language);
 
 	SpecialProduct getRandomSpecial(Language language);
+
+	List<SpecialProduct> getSpecialProducts(Language language);
 }

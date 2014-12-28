@@ -10,7 +10,7 @@
                  title=" ${randomSpecialProduct.productDescription.name} " width="100" height="80" />
         </a>
         <br />
-        <a href="http://shadowfax/oscommerce2/product_info.php?products_id=16">
+        <a href="<c:url value="/product/${randomSpecialProduct.productDescription.product.id}"/>">
             <c:out value="${randomSpecialProduct.productDescription.name}" />
         </a>
         <br />

@@ -125,5 +125,9 @@
 		<put-attribute name="shareProductBox" value="/WEB-INF/layout/shareProductBox.jsp" />
 	</definition>
 
+	<definition name="specials" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/specials.jsp" />
+	</definition>
+
 	
 </tiles-definitions>
