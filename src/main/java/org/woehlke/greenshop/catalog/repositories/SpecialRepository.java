@@ -1,6 +1,7 @@
 package org.woehlke.greenshop.catalog.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.woehlke.greenshop.catalog.entities.Product;
 import org.woehlke.greenshop.catalog.entities.Special;
 
 /**
@@ -8,4 +9,6 @@ import org.woehlke.greenshop.catalog.entities.Special;
  */
 public interface SpecialRepository  extends
         JpaRepository<Special,Long> {
+
+        Special findByProduct(Product product);
 }

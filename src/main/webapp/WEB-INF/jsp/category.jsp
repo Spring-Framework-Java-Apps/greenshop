@@ -20,7 +20,7 @@
 </c:if>
 <div class="contentContainer">
 
-<c:if test="${! empty productsByCategory.productDescriptions}">
+<c:if test="${! empty productsByCategory.products}">
 
 <div>
 <form name="filter" action='<c:url value="/category/${productsByCategory.thisCategory.category.id}/manufacturer/"/>' method="get">
@@ -64,14 +64,31 @@
 </div>  
 <div class="ui-widget-content ui-corner-bottom productListTable">    
 <table border="0" width="100%" cellspacing="0" cellpadding="2" class="productListingData">
-<c:forEach items="${productsByCategory.productDescriptions}" var="product" varStatus="status">       
+<c:forEach items="${productsByCategory.products}" var="product" varStatus="status">
 <tr> 	
-	<td align="center"><a href='<c:url value="/product/${product.product.id}" />'><img src="images/${product.product.image}" alt="${product.name}" title="${product.name}" width="100" height="80" /></a></td>        
-	<td><a href='<c:url value="/product/${product.product.id}" />'>${product.name}</a></td>        
-	<td align="right">$${product.product.price}</td>        
+	<td align="center"><a href='<c:url value="/product/${product.productDescription.product.id}" />'><img
+			src="images/${product.productDescription.product.image}"
+			alt="${product.productDescription.name}"
+			title="${product.productDescription.name}"
+			width="100" height="80" /></a></td>
+	<td><a href='<c:url value="/product/${product.productDescription.product.id}" />'>${product.productDescription.name}</a></td>
+	<td align="right">
+		<c:if test="${! product.specialProduct}">
+		$${product.productDescription.product.price}
+		</c:if>
+		<c:if test="${product.specialProduct}">
+		<del>$<fmt:formatNumber
+				value="${product.productDescription.product.price}"
+				minFractionDigits="2" maxFractionDigits="2" /></del>&nbsp;&nbsp;
+			<span class="productSpecialPrice">$<fmt:formatNumber
+					value="${product.special.newPrice}"
+					minFractionDigits="2" maxFractionDigits="2" /></span>
+		</c:if>
+	</td>
 	<td align="center">
 		<span class="tdbLink">
-			<a id="tdb${status.index + 4}" href="<c:url value="/shoppingCart/add/${product.product.id}" />">Buy Now</a>
+			<a id="tdb${status.index + 4}"
+			   href="<c:url value="/shoppingCart/add/${product.productDescription.product.id}" />">Buy Now</a>
 		</span>
 		<script type="text/javascript">$("#tdb${status.index + 4}").button({icons:{primary:"ui-icon-cart"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>
 	</td>
@@ -90,7 +107,7 @@
 
 </c:if>
 
-<c:if test="${empty productsByCategory.productDescriptions}">
+<c:if test="${empty productsByCategory.products}">
   <h2>New Products</h2>
 
   <div class="contentText">

@@ -16,11 +16,7 @@ import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Product;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.entities.ProductOption;
-import org.woehlke.greenshop.catalog.model.CategoryTree;
-import org.woehlke.greenshop.catalog.model.CategoryTreeNode;
-import org.woehlke.greenshop.catalog.model.ProductAttributes;
-import org.woehlke.greenshop.catalog.model.ProductOptionAttribute;
-import org.woehlke.greenshop.catalog.model.ProductsByCategory;
+import org.woehlke.greenshop.catalog.model.*;
 import org.woehlke.greenshop.catalog.repositories.CategoryDescriptionRepositoryDao;
 import org.woehlke.greenshop.catalog.repositories.ProductRepository;
 
@@ -113,8 +109,8 @@ public class CatalogServiceImplTest {
 		for(long categoryId:rootCategoryId){
 			ProductsByCategory p = catalogService.getProductsByCategory(categoryId,language);
 			logger.info("@ ---------------------------------------");
-			for(ProductDescription pd:p.getProductDescriptions()){
-				logger.info("@ ["+categoryId+"]: "+pd.getProduct().getId()+" : "+pd.getName());
+			for(SpecialProduct pd:p.getProducts()){
+				logger.info("@ ["+categoryId+"]: "+pd.getProductDescription().getProduct().getId()+" : "+pd.getProductDescription().getName());
 			}
 			logger.info("@ ---------------------------------------");
 		}

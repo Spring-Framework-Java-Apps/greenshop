@@ -315,8 +315,16 @@ public class CatalogServiceImpl implements CatalogService {
 	public ProductsByCategory getProductsByCategory(long categoryId,Language language){
 		ProductsByCategory productsByCategory = new ProductsByCategory();
 		Category category = categoryRepository.findOne(categoryId);
+		List<SpecialProduct> products = new ArrayList<SpecialProduct>();
 		List<ProductDescription> productDescriptions=productDescriptionRepositoryDao.findByCategory(category,language);
-		productsByCategory.setProductDescriptions(productDescriptions);
+		for(ProductDescription productDescription:productDescriptions){
+			SpecialProduct specialProduct = new SpecialProduct();
+			specialProduct.setProductDescription(productDescription);
+			Special special = specialRepository.findByProduct(productDescription.getProduct());
+			specialProduct.setSpecial(special);
+			products.add(specialProduct);
+		}
+		productsByCategory.setProducts(products);
 		List<Manufacturer> manufacturers = new ArrayList<Manufacturer>();
 		for(ProductDescription pd:productDescriptions){
 			if(!manufacturers.contains(pd.getProduct().getManufacturer())){
@@ -341,8 +349,16 @@ public class CatalogServiceImpl implements CatalogService {
 		productsByCategory.setManufacturerId(manufacturerId);
 		Category category = categoryRepository.findOne(categoryId);
 		Manufacturer manufacturer = manufacturerRepository.findOne(manufacturerId);
+		List<SpecialProduct> products = new ArrayList<SpecialProduct>();
 		List<ProductDescription> productDescriptions=productDescriptionRepositoryDao.findByCategoryAndManufacturer(category,manufacturer,language);
-		productsByCategory.setProductDescriptions(productDescriptions);
+		for(ProductDescription productDescription:productDescriptions){
+			SpecialProduct specialProduct = new SpecialProduct();
+			specialProduct.setProductDescription(productDescription);
+			Special special = specialRepository.findByProduct(productDescription.getProduct());
+			specialProduct.setSpecial(special);
+			products.add(specialProduct);
+		}
+		productsByCategory.setProducts(products);
 		List<Manufacturer> manufacturers = new ArrayList<Manufacturer>();
 		for(ProductDescription pd:productDescriptions){
 			if(!manufacturers.contains(pd.getProduct().getManufacturer())){

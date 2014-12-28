@@ -11,6 +11,10 @@ public class SpecialProduct {
     private Special special;
     private ProductDescription productDescription;
 
+    public boolean isSpecialProduct(){
+        return special != null;
+    }
+
     public Special getSpecial() {
         return special;
     }

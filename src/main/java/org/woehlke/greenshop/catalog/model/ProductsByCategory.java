@@ -4,22 +4,21 @@ import java.util.List;
 
 import org.woehlke.greenshop.catalog.entities.CategoryDescription;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
-import org.woehlke.greenshop.catalog.entities.ProductDescription;
 
 public class ProductsByCategory {
 	
 	private CategoryDescription thisCategory;
-	private List<ProductDescription> productDescriptions;
+	private List<SpecialProduct> products;
 	private List<CategoryDescription> childCategories;
 	private List<Manufacturer> manufacturers;
 	private long manufacturerId = 0;
 
-	public List<ProductDescription> getProductDescriptions() {
-		return productDescriptions;
+	public List<SpecialProduct> getProducts() {
+		return products;
 	}
 
-	public void setProductDescriptions(List<ProductDescription> productDescriptions) {
-		this.productDescriptions = productDescriptions;
+	public void setProducts(List<SpecialProduct> products) {
+		this.products = products;
 	}
 
 	public CategoryDescription getThisCategory() {
@@ -55,12 +54,41 @@ public class ProductsByCategory {
 	}
 
 	@Override
-	public String toString() {
-		return "ProductsByCategory [thisCategory=" + thisCategory
-				+ ", productDescriptions=" + productDescriptions
-				+ ", childCategories=" + childCategories + ", manufacturers="
-				+ manufacturers + ", manufacturerId=" + manufacturerId + "]";
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ProductsByCategory)) return false;
+
+		ProductsByCategory that = (ProductsByCategory) o;
+
+		if (manufacturerId != that.manufacturerId) return false;
+		if (childCategories != null ? !childCategories.equals(that.childCategories) : that.childCategories != null)
+			return false;
+		if (manufacturers != null ? !manufacturers.equals(that.manufacturers) : that.manufacturers != null)
+			return false;
+		if (products != null ? !products.equals(that.products) : that.products != null) return false;
+		if (thisCategory != null ? !thisCategory.equals(that.thisCategory) : that.thisCategory != null) return false;
+
+		return true;
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		int result = thisCategory != null ? thisCategory.hashCode() : 0;
+		result = 31 * result + (products != null ? products.hashCode() : 0);
+		result = 31 * result + (childCategories != null ? childCategories.hashCode() : 0);
+		result = 31 * result + (manufacturers != null ? manufacturers.hashCode() : 0);
+		result = 31 * result + (int) (manufacturerId ^ (manufacturerId >>> 32));
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductsByCategory{" +
+				"thisCategory=" + thisCategory +
+				", products=" + products +
+				", childCategories=" + childCategories +
+				", manufacturers=" + manufacturers +
+				", manufacturerId=" + manufacturerId +
+				'}';
+	}
 }
