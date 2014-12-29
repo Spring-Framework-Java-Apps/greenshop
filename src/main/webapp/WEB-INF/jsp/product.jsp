@@ -1,10 +1,18 @@
 <%@ include file="/WEB-INF/layout/taglibs.jsp"%>
 
 <!--  <form name="cart_quantity" action="http://shadowfax/oscommerce2/product_info.php?cPath=2_19&amp;products_id=22&amp;action=add_product" method="post">-->
-<form action='<c:url value="/shoppingCart/add/${product.product.id}"/>' method="get">
+<form action='<c:url value="/shoppingCart/add/${product.productDescription.product.id}"/>' method="get">
 <div>
-  <h1 style="float: right;">$<c:out value="${product.product.price}"/></h1>
-  <h1><c:out value="${product.name}"/><br /><span class="smallText">[<c:out value="${product.product.model}"/>]</span></h1>
+  <h1 style="float: right;">
+      <c:if test="${! product.specialProduct}">
+      $<c:out value="${product.productDescription.product.price}"/>
+      </c:if>
+      <c:if test="${product.specialProduct}">
+          <del>$<c:out value="${product.productDescription.product.price}"/></del>
+          <span class="productSpecialPrice">$${product.special.newPrice}</span>
+      </c:if>
+  </h1>
+  <h1><c:out value="${product.productDescription.name}"/><br /><span class="smallText">[<c:out value="${product.productDescription.product.model}"/>]</span></h1>
 </div>
 
 <div class="contentContainer">
@@ -12,8 +20,8 @@
 
 
     <div id="piGal" style="float: right;">
-      <a href='images/<c:out value="${product.product.image}"/>' target='_blank' rel='fancybox'>
-          <img src='images/<c:out value="${product.product.image}"/>' alt='<c:out value="${product.name}"/>' title=' <c:out value="${product.name}"/> ' width="100" height="80" hspace="5" vspace="5" />
+      <a href='images/<c:out value="${product.productDescription.product.image}"/>' target='_blank' rel='fancybox'>
+          <img src='images/<c:out value="${product.productDescription.product.image}"/>' alt='<c:out value="${product.productDescription.name}"/>' title=' <c:out value="${product.productDescription.name}"/> ' width="100" height="80" hspace="5" vspace="5" />
       </a>
     </div>
 
@@ -25,7 +33,7 @@ $("#piGal a[rel^='fancybox']").fancybox({
 </script>
 
 
-${product.description}
+${product.productDescription.description}
 
     <p>Available Options:</p>
 	<c:forEach items="${productAttributes.mapProductOptionAttribute}" var="productAttribute" varStatus="status">
@@ -54,7 +62,7 @@ ${product.description}
     </span>
 
     <span class="tdbLink">
-        <a id="tdb5" href="<c:url value="/product/reviews/${product.product.id}"/>">Reviews</a>
+        <a id="tdb5" href="<c:url value="/product/reviews/${product.productDescription.product.id}"/>">Reviews</a>
     </span>
       <script type="text/javascript">$("#tdb5").button({icons:{primary:"ui-icon-comment"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>
   </div>

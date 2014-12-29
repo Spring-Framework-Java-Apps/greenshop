@@ -89,17 +89,17 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		ProductDescription productDescription = catalogService.findProductById(productId,language);
-		model.addAttribute("product", productDescription);
-		logger.info(productDescription.toString());
+		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId,language);
+		model.addAttribute("product", thisProduct);
+		logger.info(thisProduct.toString());
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		ShareProductBean shareProductBean = getShareProductBean(request,productDescription);
+		ShareProductBean shareProductBean = getShareProductBean(request,thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
 		return "product";
 	}

@@ -23,8 +23,10 @@ public interface CatalogService {
 	
 	ProductsByManufacturer findProductsByManufacturerAndCategory(
 			Manufacturer manufacturer, long categoryId, Language language);
-	
+
 	ProductDescription findProductById(long productId, Language language);
+
+	SpecialProduct findSpecialProductById(long productId, Language language);
 	
 	ProductAttributes findProductOptionsByProduct(ProductDescription product);
 	

@@ -8,7 +8,7 @@
         <a href="http://www.facebook.com/share.php?u=${shareProductBean.productUrl}" target="_blank">
             <img src="images/social_bookmarks/facebook.png" border="0" title="Share on Facebook" alt="Share on Facebook" />
         </a>
-        <div class="g-plus" data-action="share" data-href="<c:url value="/product/${product.product.id}"/>" data-annotation="none" data-height="15" data-align="left">
+        <div class="g-plus" data-action="share" data-href='<c:url value="/product/${product.productDescription.product.id}"/>' data-annotation="none" data-height="15" data-align="left">
 
         </div>
         <script type="text/javascript">

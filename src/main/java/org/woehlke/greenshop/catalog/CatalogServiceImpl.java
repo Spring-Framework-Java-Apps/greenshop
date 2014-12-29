@@ -144,10 +144,21 @@ public class CatalogServiceImpl implements CatalogService {
 		productsByManufacturer.setCategoriesOfProducts(categoriesOfProducts);
 		return productsByManufacturer;
 	}
-	
+
 	@Override
 	public ProductDescription findProductById(long productId, Language language) {
 		return productDescriptionRepositoryDao.findByProductIdAndLanguage(productId, language);
+	}
+
+	@Override
+	public SpecialProduct findSpecialProductById(long productId, Language language) {
+		ProductDescription productDescription =
+				productDescriptionRepositoryDao.findByProductIdAndLanguage(productId, language);
+		Special special = specialRepository.findByProduct(productDescription.getProduct());
+		SpecialProduct specialProduct = new SpecialProduct();
+		specialProduct.setProductDescription(productDescription);
+		specialProduct.setSpecial(special);
+		return specialProduct;
 	}
 
 	@Override
