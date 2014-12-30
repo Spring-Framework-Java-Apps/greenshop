@@ -192,18 +192,18 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		ProductDescription productDescription = catalogService.findProductById(productId,language);
-		model.addAttribute("product", productDescription);
-		logger.info(productDescription.toString());
+		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		model.addAttribute("product", thisProduct);
+		logger.info(thisProduct.toString());
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
 		CategoryTree categoryTree =
-				catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+				catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		ShareProductBean shareProductBean = getShareProductBean(request, productDescription);
+		ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
 		Customer customer = super.getLoggedInCustomer();
 		model.addAttribute("customer", customer);
@@ -224,20 +224,20 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		ProductDescription productDescription = catalogService.findProductById(productId,language);
+		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
 		Customer customer = super.getLoggedInCustomer();
 		if(result.hasErrors()){
-			model.addAttribute("product", productDescription);
-			logger.info(productDescription.toString());
+			model.addAttribute("product", thisProduct);
+			logger.info(thisProduct.toString());
 			Manufacturers manufacturers=catalogService.findManufacturers();
 			model.addAttribute("manufacturers", manufacturers);
-			ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+			ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 			logger.info(productAttributes.toString());
 			model.addAttribute("productAttributes", productAttributes);
 			CategoryTree categoryTree =
-					catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+					catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 			model.addAttribute("categoryTree", categoryTree);
-			ShareProductBean shareProductBean = getShareProductBean(request, productDescription);
+			ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 			model.addAttribute("shareProductBean", shareProductBean);
 			model.addAttribute("customer", customer);
 			return "writeReviewForProduct";
@@ -246,7 +246,7 @@ public class CatalogController extends AbstractController {
 			logger.info(writeReviewBean.toString());
 			logger.info("##################################");
 			ReviewDescription reviewDescription = catalogService.
-			saveReview(writeReviewBean, productDescription.getProduct(), customer,language);
+			saveReview(writeReviewBean, thisProduct.getProductDescription().getProduct(), customer,language);
 			logger.info(reviewDescription.toString());
 			return "redirect:/product/"+productId;
 		}
@@ -262,25 +262,25 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		ProductDescription productDescription = catalogService.findProductById(productId,language);
-		model.addAttribute("product", productDescription);
-		logger.info(productDescription.toString());
+		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		model.addAttribute("product", thisProduct);
+		logger.info(thisProduct.toString());
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		ShareProductBean shareProductBean = getShareProductBean(request,productDescription);
+		ShareProductBean shareProductBean = getShareProductBean(request,thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
-		List<ReviewDescription> reviewDescriptions = catalogService.findReviewsForProduct(productDescription);
+		List<ReviewDescription> reviewDescriptions = catalogService.findReviewsForProduct(thisProduct.getProductDescription());
 		for(ReviewDescription reviewDescription:reviewDescriptions){
 		  	Review review = reviewDescription.getReview();
 			review.increaseReviewsRead();
 			catalogService.update(review);
 		}
-		reviewDescriptions = catalogService.findReviewsForProduct(productDescription);
+		reviewDescriptions = catalogService.findReviewsForProduct(thisProduct.getProductDescription());
 		model.addAttribute("reviewDescriptions", reviewDescriptions);
 		return "showReviews";
 	}
@@ -301,17 +301,18 @@ public class CatalogController extends AbstractController {
 		catalogService.update(review);
 		reviewDescription = catalogService.findReviewById(reviewId,language);
 		model.addAttribute("reviewDescription", reviewDescription);
-		ProductDescription productDescription = catalogService.findProductById(reviewDescription.getReview().getProduct().getId(),language);
-		model.addAttribute("product", productDescription);
-		logger.info(productDescription.toString());
+		Long productId = reviewDescription.getReview().getProduct().getId();
+		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		model.addAttribute("product", thisProduct);
+		logger.info(thisProduct.toString());
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(productDescription);
+		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(productDescription.getProduct().getCategories().iterator().next().getId(), language);
+		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		ShareProductBean shareProductBean = getShareProductBean(request, productDescription);
+		ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
 		return "showReview";
 	}

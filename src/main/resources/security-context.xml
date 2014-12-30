@@ -48,7 +48,8 @@
     	</security:authentication-provider>
   	</security:authentication-manager>
   	
-  	<bean id="authenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+  	<bean id="authenticationFilter"
+		  class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
   		<property name="authenticationManager" ref="authenticationManager"/>
   		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
 	</bean>
