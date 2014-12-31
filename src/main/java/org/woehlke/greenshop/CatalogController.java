@@ -317,6 +317,24 @@ public class CatalogController extends AbstractController {
 		return "showReview";
 	}
 
+	@RequestMapping(value = "/reviews", method = RequestMethod.GET)
+	public String reviews(HttpServletRequest request,
+						   HttpServletResponse response,
+						   Model model) {
+		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
+		Manufacturers manufacturers=catalogService.findManufacturers();
+		model.addAttribute("manufacturers", manufacturers);
+		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
+		model.addAttribute("categoryTree", categoryTree);
+		List<ReviewProduct> reviews = catalogService.getAllReviews(language);
+		model.addAttribute("reviews", reviews);
+		return "reviews";
+	}
+
 	@RequestMapping(value = "/specials", method = RequestMethod.GET)
 	public String specials(HttpServletRequest request,
 							 HttpServletResponse response,

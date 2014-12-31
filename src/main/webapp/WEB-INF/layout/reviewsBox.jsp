@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/layout/taglibs.jsp"%>
 <div class="ui-widget infoBoxContainer">
     <div class="ui-widget-header infoBoxHeading">
-        <a href="http://shadowfax/oscommerce2/reviews.php">Reviews</a>
+        <a href="<c:url value="/reviews"/>">Reviews</a>
     </div>
     <div class="ui-widget-content infoBoxContents">
         <div align="center">

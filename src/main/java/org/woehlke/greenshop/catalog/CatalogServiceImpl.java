@@ -488,5 +488,22 @@ public class CatalogServiceImpl implements CatalogService {
 		return specialProducts;
 	}
 
+	@Override
+	public List<ReviewProduct> getAllReviews(Language language) {
+		List<ReviewProduct> reviews = new ArrayList<ReviewProduct>();
+		List<ReviewDescription> reviewDescriptions =
+				reviewDescriptionRepository.findByLanguage(language);
+		for(ReviewDescription reviewDescription:reviewDescriptions){
+			ReviewProduct review = new ReviewProduct();
+			review.setReview(reviewDescription);
+			ProductDescription productDescription =
+					productDescriptionRepositoryDao.findByProductIdAndLanguage(
+							reviewDescription.getReview().getProduct().getId(),language);
+			review.setProduct(productDescription);
+			reviews.add(review);
+		}
+		return reviews;
+	}
+
 
 }

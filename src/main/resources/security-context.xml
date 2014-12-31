@@ -34,6 +34,7 @@
     	<security:intercept-url pattern="/createAccount*" access="permitAll"/>
     	<security:intercept-url pattern="/shoppingCart/**" access="permitAll"/>
 		<security:intercept-url pattern="/specials*" access="permitAll"/>
+		<security:intercept-url pattern="/reviews*" access="permitAll"/>
     	<security:intercept-url pattern="/**" access="fullyAuthenticated" />
     	<security:form-login 
     		login-page='/login' 
