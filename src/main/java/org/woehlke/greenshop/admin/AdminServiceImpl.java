@@ -15,7 +15,7 @@ import javax.inject.Named;
  * Created by tw on 31.12.14.
  */
 @Named("adminService")
-@Transactional(readOnly=true,propagation= Propagation.REQUIRED)
+@Transactional(readOnly=true, propagation= Propagation.REQUIRED)
 public class AdminServiceImpl implements AdminService {
 
     @Inject

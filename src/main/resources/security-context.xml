@@ -33,13 +33,13 @@
 		<security:form-login
 				login-page="/admin/login"
 				authentication-failure-url="/admin/login?login_error=1"
-				default-target-url="/admin"/>
+				default-target-url="/admin/"/>
 		<security:logout
 				logout-url="/admin/j_spring_security_logout"
-				logout-success-url="/admin"
+				logout-success-url="/admin/"
 				invalidate-session="true"
 				delete-cookies="JSESSIONID" />
-		<security:custom-filter after="FORM_LOGIN_FILTER" ref="authenticationFilterAdmin" />
+		<security:custom-filter before="FORM_LOGIN_FILTER" ref="authenticationFilterAdmin" />
 	</security:http>
 
     <security:http pattern="/**"
@@ -62,7 +62,7 @@
     	<security:logout
 				logout-url="/j_spring_security_logout"
 				invalidate-session="true" delete-cookies="JSESSIONID" />
-		<security:custom-filter after="FORM_LOGIN_FILTER" ref="authenticationFilterCustomer" />
+		<security:custom-filter before="FORM_LOGIN_FILTER" ref="authenticationFilterCustomer" />
   	</security:http>
 
 	<security:authentication-manager alias="authenticationManagerAdmin">
