@@ -25,7 +25,22 @@
     <security:http pattern="/category/**" security="none"/>
     <security:http pattern="/" security="none"/>
 
-    <security:http auto-config='true' use-expressions='true'>
+	<security:http pattern="/admin/**"
+				   authentication-manager-ref="authenticationManagerAdmin"
+				   use-expressions='true'>
+		<security:intercept-url pattern="/admin/login*" access="permitAll"/>
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<security:form-login
+				login-page='/admin/login'
+				authentication-failure-url="/admin/login?login_error=1"
+				authentication-success-handler-ref="populateBasketAfterLogin"/>
+		<security:logout invalidate-session="true" delete-cookies="JSESSIONID" />
+		<security:custom-filter after="FORM_LOGIN_FILTER" ref="authenticationFilterAdmin" />
+	</security:http>
+
+    <security:http pattern="/**"
+				   authentication-manager-ref="authenticationManagerCustomer"
+				   use-expressions='true'>
     	<security:intercept-url pattern="/" access="permitAll"/>
     	<security:intercept-url pattern="/product/**" access="permitAll"/>
     	<security:intercept-url pattern="/manufacturer/**" access="permitAll"/>
@@ -35,24 +50,37 @@
     	<security:intercept-url pattern="/shoppingCart/**" access="permitAll"/>
 		<security:intercept-url pattern="/specials*" access="permitAll"/>
 		<security:intercept-url pattern="/reviews*" access="permitAll"/>
-    	<security:intercept-url pattern="/**" access="fullyAuthenticated" />
+    	<security:intercept-url pattern="/**" access="hasRole('ROLE_CUSTOMER')" />
     	<security:form-login 
     		login-page='/login' 
     		authentication-failure-url="/login?login_error=1" 
             authentication-success-handler-ref="populateBasketAfterLogin"/>
     	<security:logout invalidate-session="true" delete-cookies="JSESSIONID" />
+		<security:custom-filter after="FORM_LOGIN_FILTER" ref="authenticationFilterCustomer" />
   	</security:http>
+
+	<security:authentication-manager alias="authenticationManagerAdmin">
+		<security:authentication-provider user-service-ref="adminService">
+			<security:password-encoder hash="md5"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
   	
-  	<security:authentication-manager alias="authenticationManager">
+  	<security:authentication-manager id="authenticationManagerCustomer">
     	<security:authentication-provider user-service-ref="customerService">
     		<security:password-encoder hash="md5"/>
     	</security:authentication-provider>
   	</security:authentication-manager>
   	
-  	<bean id="authenticationFilter"
+  	<bean id="authenticationFilterCustomer"
 		  class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
-  		<property name="authenticationManager" ref="authenticationManager"/>
+  		<property name="authenticationManager" ref="authenticationManagerCustomer"/>
   		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
+	</bean>
+
+	<bean id="authenticationFilterAdmin"
+		  class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManagerAdmin"/>
+		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
 	</bean>
 
 </beans>

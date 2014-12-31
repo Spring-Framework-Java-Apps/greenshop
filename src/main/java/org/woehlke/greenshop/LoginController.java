@@ -15,8 +15,14 @@ public class LoginController extends AbstractController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String showLoginForm(Model model){
+	 public String showLoginForm(Model model){
 		super.getDefaultBoxContent(model);
 		return "login";
+	}
+
+	@RequestMapping(value = "/admin/login", method = RequestMethod.GET)
+	public String showAdminLoginForm(Model model){
+		super.getDefaultBoxContent(model);
+		return "admin/login";
 	}
 }

@@ -22,6 +22,7 @@
 	    <list>
 	      <value>/WEB-INF/layout/tiles.xml</value>
 	      <value>/WEB-INF/jsp/catalog-tiles.xml</value>
+		  <value>/WEB-INF/jsp/admin/admin-tiles.xml</value>
 	    </list>
 	  </property>
 	  <!-- resolving preparer names as Spring bean definition names -->
