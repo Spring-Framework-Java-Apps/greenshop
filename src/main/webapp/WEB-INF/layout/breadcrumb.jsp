@@ -7,5 +7,6 @@
         <c:if test="${! empty reviews}"> &raquo; <a href='<c:url value="/reviews"/>' class='headerNavigation'>Reviews</a></c:if>
         <c:if test="${! empty reviewDescription}"> &raquo; <a href='<c:url value="/product/reviews/${reviewDescription.review.product.id}"/>' class='headerNavigation'>Reviews</a></c:if>
         <c:if test="${! empty reviewDescriptions}"> &raquo; <a href='<c:url value="/product/reviews/${product.productDescription.product.id}"/>' class='headerNavigation'>Reviews</a></c:if>
+        <c:if test="${! empty shoppingCartView}"> &raquo; <a href='<c:url value="/shoppingCart"/>' class='headerNavigation'>Shopping Cart</a></c:if>
     </div>
 </div>

@@ -40,6 +40,7 @@ public class CartController extends AbstractController {
 			@ModelAttribute("transientBasket") TransientBasket transientBasket, 
 			Model model){
 		super.getDefaultBoxContent(model);
+		model.addAttribute("shoppingCartView", true);
 		return "shoppingCart";
 	}
 	
