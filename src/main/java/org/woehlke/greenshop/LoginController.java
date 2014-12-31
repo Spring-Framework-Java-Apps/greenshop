@@ -22,7 +22,6 @@ public class LoginController extends AbstractController {
 
 	@RequestMapping(value = "/admin/login", method = RequestMethod.GET)
 	public String showAdminLoginForm(Model model){
-		super.getDefaultBoxContent(model);
 		return "admin/login";
 	}
 }

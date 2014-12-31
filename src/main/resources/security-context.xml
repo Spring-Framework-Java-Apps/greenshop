@@ -31,10 +31,14 @@
 		<security:intercept-url pattern="/admin/login*" access="permitAll"/>
 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<security:form-login
-				login-page='/admin/login'
+				login-page="/admin/login"
 				authentication-failure-url="/admin/login?login_error=1"
-				authentication-success-handler-ref="populateBasketAfterLogin"/>
-		<security:logout invalidate-session="true" delete-cookies="JSESSIONID" />
+				default-target-url="/admin"/>
+		<security:logout
+				logout-url="/admin/j_spring_security_logout"
+				logout-success-url="/admin"
+				invalidate-session="true"
+				delete-cookies="JSESSIONID" />
 		<security:custom-filter after="FORM_LOGIN_FILTER" ref="authenticationFilterAdmin" />
 	</security:http>
 
@@ -52,10 +56,12 @@
 		<security:intercept-url pattern="/reviews*" access="permitAll"/>
     	<security:intercept-url pattern="/**" access="hasRole('ROLE_CUSTOMER')" />
     	<security:form-login 
-    		login-page='/login' 
+    		login-page="/login"
     		authentication-failure-url="/login?login_error=1" 
             authentication-success-handler-ref="populateBasketAfterLogin"/>
-    	<security:logout invalidate-session="true" delete-cookies="JSESSIONID" />
+    	<security:logout
+				logout-url="/j_spring_security_logout"
+				invalidate-session="true" delete-cookies="JSESSIONID" />
 		<security:custom-filter after="FORM_LOGIN_FILTER" ref="authenticationFilterCustomer" />
   	</security:http>
 
@@ -80,7 +86,7 @@
 	<bean id="authenticationFilterAdmin"
 		  class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
 		<property name="authenticationManager" ref="authenticationManagerAdmin"/>
-		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
+		<property name="filterProcessesUrl" value="/admin/j_spring_security_check"/>
 	</bean>
 
 </beans>

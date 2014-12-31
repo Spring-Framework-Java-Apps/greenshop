@@ -3,8 +3,15 @@
 
 <tiles-definitions>
 
-    <definition name="admin/login" extends="page">
+    <definition name="backend" templateExpression="/WEB-INF/jsp/admin/page.jsp">
+    </definition>
+
+    <definition name="admin/login" extends="backend">
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/login.jsp" />
+    </definition>
+
+    <definition name="admin/home" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/home.jsp" />
     </definition>
 
 </tiles-definitions>
