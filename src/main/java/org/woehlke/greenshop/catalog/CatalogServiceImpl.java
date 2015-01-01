@@ -43,7 +43,10 @@ public class CatalogServiceImpl implements CatalogService {
 	
 	@Inject
 	private ProductOptionValueRepository productOptionValueRepository;
-	
+
+	@Inject
+	private ProductImageRepository productImageRepository;
+
 	@Inject
 	private CategoryDescriptionRepository categoryDescriptionRepository;
 	
@@ -503,6 +506,17 @@ public class CatalogServiceImpl implements CatalogService {
 			reviews.add(review);
 		}
 		return reviews;
+	}
+
+	@Override
+	public List<ProductImage> findProductImages(Product product) {
+		return productImageRepository.findByProductOrderBySequenceAsc(product);
+	}
+
+	@Override
+	public int getNumberOfReviewsForProduct(Product product) {
+		List<Review> reviews = reviewRepository.findByProduct(product);
+		return reviews.size();
 	}
 
 

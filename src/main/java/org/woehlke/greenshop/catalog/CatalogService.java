@@ -58,4 +58,8 @@ public interface CatalogService {
 	List<SpecialProduct> getSpecialProducts(Language language);
 
 	List<ReviewProduct> getAllReviews(Language language);
+
+	List<ProductImage> findProductImages(Product product);
+
+	int getNumberOfReviewsForProduct(Product product);
 }

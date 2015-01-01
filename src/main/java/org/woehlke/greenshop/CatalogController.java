@@ -92,6 +92,10 @@ public class CatalogController extends AbstractController {
 		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId,language);
 		model.addAttribute("product", thisProduct);
 		logger.info(thisProduct.toString());
+		List<ProductImage> images = catalogService.findProductImages(thisProduct.getProductDescription().getProduct());
+		model.addAttribute("images", images);
+		int numberOfReviews = catalogService.getNumberOfReviewsForProduct(thisProduct.getProductDescription().getProduct());
+		model.addAttribute("numberOfReviews", numberOfReviews);
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
 		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
