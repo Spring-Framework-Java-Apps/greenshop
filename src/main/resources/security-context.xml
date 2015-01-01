@@ -54,6 +54,7 @@
     	<security:intercept-url pattern="/shoppingCart/**" access="permitAll"/>
 		<security:intercept-url pattern="/specials*" access="permitAll"/>
 		<security:intercept-url pattern="/reviews*" access="permitAll"/>
+		<security:intercept-url pattern="/newproducts*" access="permitAll"/>
     	<security:intercept-url pattern="/**" access="hasRole('ROLE_CUSTOMER')" />
     	<security:form-login 
     		login-page="/login"

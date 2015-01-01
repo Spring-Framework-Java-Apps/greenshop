@@ -133,5 +133,9 @@
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/specials.jsp" />
 	</definition>
 
+	<definition name="newproducts" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/newproducts.jsp" />
+	</definition>
+
 	
 </tiles-definitions>

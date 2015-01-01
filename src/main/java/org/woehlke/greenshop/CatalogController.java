@@ -356,4 +356,22 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("specialProducts", specialProducts);
 	  	return "specials";
 	}
+
+	@RequestMapping(value = "/newproducts", method = RequestMethod.GET)
+	public String newProducts(HttpServletRequest request,
+							  HttpServletResponse response,
+							  Model model){
+		Language language = catalogService.findLanguageByCode("en");
+		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		model.addAttribute("randomReview", randomReview);
+		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
+		Manufacturers manufacturers=catalogService.findManufacturers();
+		model.addAttribute("manufacturers", manufacturers);
+		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
+		model.addAttribute("categoryTree", categoryTree);
+		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
+		model.addAttribute("newProducts", newProducts);
+		return "newproducts";
+	}
 }
