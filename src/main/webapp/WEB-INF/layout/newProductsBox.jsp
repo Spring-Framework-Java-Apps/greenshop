@@ -4,14 +4,28 @@
         <a href="<c:url value="/newproducts"/>">What's New?</a>
     </div>
     <div class="ui-widget-content infoBoxContents" style="text-align: center;">
-        <a href="http://shadowfax/oscommerce2/product_info.php?products_id=23">
-            <img src="images/gt_interactive/wheel_of_time.gif"
-                 alt="The Wheel Of Time"
-                 title=" The Wheel Of Time "
+        <a href="<c:url value="/product/${randomNewProduct.productDescription.product.id}"/>">
+            <img src="images/${randomNewProduct.productDescription.product.image}"
+                 alt="${randomNewProduct.productDescription.name}"
+                 title=" ${randomNewProduct.productDescription.name} "
                  width="100" height="80" />
         </a>
         <br />
-        <a href="http://shadowfax/oscommerce2/product_info.php?products_id=23">The Wheel Of Time</a>
-        <br />$99.99
+        <a href="<c:url value="/product/${randomNewProduct.productDescription.product.id}"/>">
+            <c:out value="${randomNewProduct.productDescription.name}" />
+        </a>
+        <br />
+        <c:if test="${! randomNewProduct.specialProduct}">
+            $<fmt:formatNumber value="${randomNewProduct.productDescription.product.price}"
+                               minFractionDigits="2" maxFractionDigits="2" />
+        </c:if>
+        <c:if test="${randomNewProduct.specialProduct}">
+            <del>$<fmt:formatNumber value="${randomNewProduct.productDescription.product.price}"
+                                    minFractionDigits="2" maxFractionDigits="2" /></del>
+            <br />
+        <span class="productSpecialPrice">$<fmt:formatNumber
+                value="${randomNewProduct.special.newPrice}"
+                minFractionDigits="2" maxFractionDigits="2" /></span>
+        </c:if>
     </div>
 </div>

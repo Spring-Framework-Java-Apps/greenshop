@@ -43,6 +43,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("manufacturers", manufacturers);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(categoryId, language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		ProductsByCategory productsByCategory = catalogService.getProductsByCategory(categoryId, language);
 		model.addAttribute("productsByCategory", productsByCategory);
 		return "category";
@@ -74,6 +76,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("manufacturers", manufacturers);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(categoryId, language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		ProductsByCategory productsByCategory = catalogService.getProductsByCategoryAndManufacturer(categoryId, manufacturerId, language);
 		model.addAttribute("productsByCategory", productsByCategory);
 		return "category";
@@ -103,6 +107,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("productAttributes", productAttributes);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		ShareProductBean shareProductBean = getShareProductBean(request,thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
 		return "product";
@@ -129,10 +135,12 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("manufacturers", manufacturers);
 		Manufacturer manufacturer=catalogService.findManufacturerById(manufacturerId);
 		model.addAttribute("manufacturer", manufacturer);
-		ProductsByManufacturer products = catalogService.findProductsByManufacturer(manufacturer,language);
+		ProductsByManufacturer products = catalogService.findProductsByManufacturer(manufacturer, language);
 		model.addAttribute("products", products);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		return "manufacturer";
 	}
 	
@@ -169,6 +177,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("products", products);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		return "manufacturer";
 	}
 
@@ -183,6 +193,8 @@ public class CatalogController extends AbstractController {
 		ManufacturerInfo manufacturerInfo=catalogService.findManufacturerInfo(manufacturerId,language);
 		manufacturerInfo=catalogService.clickManufacturerUrl(manufacturerInfo);
 		model.addAttribute("manufacturer", manufacturerInfo);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		return "manufacturerRedirect";
 	}
 
@@ -207,6 +219,8 @@ public class CatalogController extends AbstractController {
 		CategoryTree categoryTree =
 				catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
 		Customer customer = super.getLoggedInCustomer();
@@ -241,6 +255,8 @@ public class CatalogController extends AbstractController {
 			CategoryTree categoryTree =
 					catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 			model.addAttribute("categoryTree", categoryTree);
+			SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+			model.addAttribute("randomNewProduct", randomNewProduct);
 			ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 			model.addAttribute("shareProductBean", shareProductBean);
 			model.addAttribute("customer", customer);
@@ -276,6 +292,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("productAttributes", productAttributes);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		ShareProductBean shareProductBean = getShareProductBean(request,thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
 		List<ReviewDescription> reviewDescriptions = catalogService.findReviewsForProduct(thisProduct.getProductDescription());
@@ -316,6 +334,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("productAttributes", productAttributes);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
 		return "showReview";
@@ -334,6 +354,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("manufacturers", manufacturers);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		List<ReviewProduct> reviews = catalogService.getAllReviews(language);
 		model.addAttribute("reviews", reviews);
 		return "reviews";
@@ -352,6 +374,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("manufacturers", manufacturers);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		List<SpecialProduct> specialProducts = catalogService.getSpecialProducts(language);
 		model.addAttribute("specialProducts", specialProducts);
 	  	return "specials";
@@ -370,6 +394,8 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("manufacturers", manufacturers);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		return "newproducts";

@@ -50,7 +50,7 @@ public class ProductDescriptionRepositoryTest {
 	public void findByLanguageOrderByProductDateAddedTest() throws Exception {
 		Language language=languageRepository.findByCode("en");
 		int limit = 9;
-		List<ProductDescription> page = productDescriptionRepositoryDao.findByLanguage(language,limit);
+		List<ProductDescription> page = productDescriptionRepositoryDao.findByLanguageOrderByDateAdded(language, limit);
 		logger.info("------------------------------------------------------");
 		for (ProductDescription p : page){
 			logger.info("# "+p.toString());

@@ -20,7 +20,7 @@ public class ProductDescriptionRepositoryDaoImpl implements ProductDescriptionRe
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<ProductDescription> findByLanguage(Language language, int limitation){
+	public List<ProductDescription> findByLanguageOrderByDateAdded(Language language, int limitation){
 		Query q = em.createQuery("select p from ProductDescription p where p.language=:language order by p.product.dateAdded desc");
 		q.setParameter("language", language);
 		q.setMaxResults(limitation);

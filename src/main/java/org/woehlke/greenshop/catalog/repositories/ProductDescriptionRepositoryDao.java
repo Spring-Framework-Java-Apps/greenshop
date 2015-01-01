@@ -8,7 +8,7 @@ import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 
 public interface ProductDescriptionRepositoryDao {
-	List<ProductDescription> findByLanguage(Language language, int limitation);
+	List<ProductDescription> findByLanguageOrderByDateAdded(Language language, int limitation);
 	List<ProductDescription> findByManufacturer(Manufacturer manufacturer, Language language);
 	ProductDescription findByProductIdAndLanguage(long productId,
 			Language language);

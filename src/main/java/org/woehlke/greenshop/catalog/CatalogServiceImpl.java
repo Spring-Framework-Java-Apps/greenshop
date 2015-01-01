@@ -73,7 +73,7 @@ public class CatalogServiceImpl implements CatalogService {
 		int limit = 9;
 		List<SpecialProduct> newProducts = new ArrayList<SpecialProduct>();
 		List<ProductDescription> productDescriptions =
-				productDescriptionRepositoryDao.findByLanguage(language,limit);
+				productDescriptionRepositoryDao.findByLanguageOrderByDateAdded(language, limit);
 		for(ProductDescription productDescription : productDescriptions){
 			SpecialProduct newProduct = new SpecialProduct();
 			newProduct.setProductDescription(productDescription);
@@ -527,6 +527,22 @@ public class CatalogServiceImpl implements CatalogService {
 	public int getNumberOfReviewsForProduct(Product product) {
 		List<Review> reviews = reviewRepository.findByProduct(product);
 		return reviews.size();
+	}
+
+	@Override
+	public SpecialProduct getRandomNewProduct(Language language) {
+		int limit = 100;
+		SpecialProduct newProduct = new SpecialProduct();
+		List<ProductDescription> productDescriptions =
+				productDescriptionRepositoryDao.findByLanguageOrderByDateAdded(language, limit);
+		int listLength = productDescriptions.size();
+		Random random = new Random();
+		int index = random.nextInt(listLength);
+		ProductDescription productDescription = productDescriptions.get(index);
+		newProduct.setProductDescription(productDescription);
+		Special special = specialRepository.findByProduct(productDescription.getProduct());
+		newProduct.setSpecial(special);
+		return newProduct;
 	}
 
 

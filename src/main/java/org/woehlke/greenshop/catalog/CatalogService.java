@@ -62,4 +62,6 @@ public interface CatalogService {
 	List<ProductImage> findProductImages(Product product);
 
 	int getNumberOfReviewsForProduct(Product product);
+
+	SpecialProduct getRandomNewProduct(Language language);
 }

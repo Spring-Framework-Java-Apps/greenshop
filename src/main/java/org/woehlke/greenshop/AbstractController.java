@@ -49,6 +49,8 @@ public abstract class AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
+		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		model.addAttribute("randomNewProduct", randomNewProduct);
 	}
 	
 	protected Customer getLoggedInCustomer(){
