@@ -39,7 +39,7 @@ public abstract class AbstractController {
 	
 	protected void getDefaultBoxContent(Model model){
 		Language language = catalogService.findLanguageByCode("en");
-		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);

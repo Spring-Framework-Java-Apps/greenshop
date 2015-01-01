@@ -69,9 +69,19 @@ public class CatalogServiceImpl implements CatalogService {
 	private SpecialRepository specialRepository;
 	
 	@Override
-	public List<ProductDescription> recommenderNewProducts(Language language) {
+	public List<SpecialProduct> recommenderNewProducts(Language language) {
 		int limit = 9;
-		return productDescriptionRepositoryDao.findByLanguage(language,limit);
+		List<SpecialProduct> newProducts = new ArrayList<SpecialProduct>();
+		List<ProductDescription> productDescriptions =
+				productDescriptionRepositoryDao.findByLanguage(language,limit);
+		for(ProductDescription productDescription : productDescriptions){
+			SpecialProduct newProduct = new SpecialProduct();
+			newProduct.setProductDescription(productDescription);
+			Special special = specialRepository.findByProduct(productDescription.getProduct());
+			newProduct.setSpecial(special);
+			newProducts.add(newProduct);
+		}
+		return newProducts;
 	}
 
 	@Override

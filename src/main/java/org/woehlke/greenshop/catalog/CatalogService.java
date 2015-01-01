@@ -12,7 +12,7 @@ public interface CatalogService {
 	
 	Language findLanguageByCode(String code);
 	
-	List<ProductDescription> recommenderNewProducts(Language language);
+	List<SpecialProduct> recommenderNewProducts(Language language);
 	
 	Manufacturers findManufacturers();
 	

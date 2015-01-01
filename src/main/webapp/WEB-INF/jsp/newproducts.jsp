@@ -8,28 +8,40 @@
             <c:forEach var="newProduct" items="${newProducts}" varStatus="status">
             <tr>
                 <td width="110" valign="top" class="main">
-                    <a href="<c:url value="/product/${newProduct.product.id}" />">
-                        <img src="images/${newProduct.product.image}"
-                             alt="${newProduct.name}"
-                             title="${newProduct.name}"
+                    <a href="<c:url value="/product/${newProduct.productDescription.product.id}" />">
+                        <img src="images/${newProduct.productDescription.product.image}"
+                             alt="${newProduct.productDescription.name}"
+                             title="${newProduct.productDescription.name}"
                              width="100" height="80" />
                     </a>
                 </td>
                 <td valign="top" class="main">
-                    <a href="<c:url value="/product/${newProduct.product.id}" />">
-                        <strong><u><c:out value="${newProduct.name}"/></u></strong>
+                    <a href="<c:url value="/product/${newProduct.productDescription.product.id}" />">
+                        <strong><u><c:out value="${newProduct.productDescription.name}"/></u></strong>
                     </a>
-                    <br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${newProduct.product.dateAdded}" />
-                    <br />Manufacturer: <c:out value="${newProduct.product.manufacturer.name}"/>
+                    <br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy"
+                                                      value="${newProduct.productDescription.product.dateAdded}" />
+                    <br />Manufacturer: <c:out value="${newProduct.productDescription.product.manufacturer.name}"/>
                     <br />
-                    <br />Price: $<fmt:formatNumber
-                        value="${newProduct.product.price}"
+                    <br />
+                    Price: <c:if test="${! newProduct.specialProduct}">
+                    $<fmt:formatNumber
+                        value="${newProduct.productDescription.product.price}"
                         minFractionDigits="2" maxFractionDigits="2" />
+                    </c:if>
+                    <c:if test="${newProduct.specialProduct}">
+                        <del>$<fmt:formatNumber
+                                value="${newProduct.productDescription.product.price}"
+                                minFractionDigits="2" maxFractionDigits="2" /></del>
+				        <span class="productSpecialPrice">$<fmt:formatNumber
+                            value="${newProduct.special.newPrice}"
+                            minFractionDigits="2" maxFractionDigits="2" /></span>
+                    </c:if>
                 </td>
                 <td align="right" valign="middle" class="smallText">
                     <span class="tdbLink">
                         <a id="tdb${status.index + 4}"
-                           href="<c:url value="/shoppingCart/add/${newProduct.product.id}" />">
+                           href="<c:url value="/shoppingCart/add/${newProduct.productDescription.product.id}" />">
                             Add to Cart
                         </a>
                     </span>

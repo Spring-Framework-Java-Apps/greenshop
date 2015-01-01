@@ -37,7 +37,7 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
@@ -68,7 +68,7 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
@@ -122,7 +122,7 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		manufacturers.setManufacturerId(manufacturerId);
@@ -157,7 +157,7 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();
 		manufacturers.setManufacturerId(manufacturerId);
@@ -370,7 +370,7 @@ public class CatalogController extends AbstractController {
 		model.addAttribute("manufacturers", manufacturers);
 		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
-		List<ProductDescription> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		return "newproducts";
 	}

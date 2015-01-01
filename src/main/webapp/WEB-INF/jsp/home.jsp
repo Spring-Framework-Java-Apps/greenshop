@@ -16,8 +16,28 @@
    	<table border="0" width="100%" cellspacing="0" cellpadding="2"><tr>
    	<c:forEach items="${newProducts}" var="newProduct" varStatus="status">
    		<td width="33%" align="center" valign="top">
-   			<a href='<c:url value="/product/${newProduct.product.id}" />'><img src='<c:url value="/resources/images/${newProduct.product.image}" />'/></a><br/>
-			<a href='<c:url value="/product/${newProduct.product.id}" />'><c:out value="${newProduct.name}"/></a><br/>$<c:out value="${newProduct.product.price}"/><br/>
+   			<a href='<c:url value="/product/${newProduct.productDescription.product.id}" />'>
+				<img src='<c:url value="/resources/images/${newProduct.productDescription.product.image}" />'/>
+			</a>
+			<br/>
+			<a href='<c:url value="/product/${newProduct.productDescription.product.id}" />'>
+				<c:out value="${newProduct.productDescription.name}"/>
+			</a>
+			<br/>
+			<c:if test="${! newProduct.specialProduct}">
+			$<fmt:formatNumber
+					value="${newProduct.productDescription.product.price}"
+					minFractionDigits="2" maxFractionDigits="2" />
+			</c:if>
+			<c:if test="${newProduct.specialProduct}">
+				<del>$<fmt:formatNumber
+						value="${product.productDescription.product.price}"
+						minFractionDigits="2" maxFractionDigits="2" /></del>
+				<span class="productSpecialPrice">$<fmt:formatNumber
+						value="${newProduct.special.newPrice}"
+						minFractionDigits="2" maxFractionDigits="2" /></span>
+			</c:if>
+			<br/>
    		</td>
    		<c:if test="${status.index % 3 == 2}">
    			</tr><tr>	
