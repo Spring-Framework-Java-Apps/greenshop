@@ -14,6 +14,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.woehlke.greenshop.catalog.entities.CategoryDescription;
 import org.woehlke.greenshop.catalog.entities.Language;
 
+import java.util.List;
+
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/servlet-context.xml")
@@ -32,26 +34,34 @@ public class CategoryDescriptionRepositoryTest {
 	
 	@Test
 	public void testGetAll() throws Exception {
-		for (CategoryDescription p : categoryDescriptionRepository.findAll()){
+		List<CategoryDescription> all=categoryDescriptionRepository.findAll();
+		logger.info("------------------------------------------------------");
+		for (CategoryDescription p : all){
 			logger.info(p.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 	@Test
 	public void findRootCategoriesTest() throws Exception {
 		Language language=languageRepository.findByCode("en");
-		for (CategoryDescription p : categoryDescriptionRepositoryDao.findRootCategories(language)){
+		List<CategoryDescription> all=categoryDescriptionRepositoryDao.findRootCategories(language);
+		logger.info("------------------------------------------------------");
+		for (CategoryDescription p : all){
 			Assert.assertEquals(0L, p.getCategory().getParentId());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 	@Test
 	public void findCategoriesByParentIdTest() throws Exception {
 		Language language=languageRepository.findByCode("en");
+		logger.info("------------------------------------------------------");
 		for (CategoryDescription p : categoryDescriptionRepositoryDao.findRootCategories(language)){
 			for (CategoryDescription p2 : categoryDescriptionRepositoryDao.findCategoriesByParentId(p.getCategory().getId(),language)){
 				Assert.assertEquals(p.getCategory().getId().longValue(), p2.getCategory().getParentId());
 			}	
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

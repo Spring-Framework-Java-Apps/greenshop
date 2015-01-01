@@ -26,9 +26,11 @@ public class ZoneRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<Zone> all = zoneRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(Zone a:all){
 			logger.info(a.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 }

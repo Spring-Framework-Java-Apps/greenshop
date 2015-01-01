@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.woehlke.greenshop.catalog.entities.Product;
 
+import java.util.List;
+
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/servlet-context.xml")
@@ -23,17 +25,23 @@ public class ProductRepositoryTest {
 	
 	@Test
 	public void testGetAll() throws Exception {
-		for (Product p : productRepository.findAll()){
+		List<Product> all = productRepository.findAll();
+		logger.info("------------------------------------------------------");
+		for (Product p : all){
 			logger.info(p.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 	@Test
 	public void findByMonthTest() throws Exception {
 		int month=12;
 		int year=2012;
-		for (Product p : productRepository.findByMonth(month,year)){
+		List<Product> list = productRepository.findByMonth(month,year);
+		logger.info("------------------------------------------------------");
+		for (Product p : list){
 			logger.info(p.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

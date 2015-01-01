@@ -27,9 +27,11 @@ public class ProductOptionValue2ProductOptionRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<ProductOptionValue2ProductOption> list = productOptionValue2ProductOptionRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(ProductOptionValue2ProductOption productOption:list){
 			logger.info("# "+productOption.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 }

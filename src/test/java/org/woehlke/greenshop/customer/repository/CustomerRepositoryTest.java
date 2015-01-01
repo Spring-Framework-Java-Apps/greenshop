@@ -26,8 +26,10 @@ public class CustomerRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<Customer> all = customerRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(Customer a:all){
 			logger.info(a.toString());
-		}	
+		}
+		logger.info("------------------------------------------------------");
 	}
 }

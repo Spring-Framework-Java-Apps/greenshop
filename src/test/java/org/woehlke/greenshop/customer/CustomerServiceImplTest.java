@@ -30,9 +30,11 @@ public class CustomerServiceImplTest {
 	@Test
 	public void findAllCountriesOrderByNameTest() throws Exception {
 		List<Country> all = customerService.findAllCountriesOrderByName();
+		logger.info("------------------------------------------------------");
 		for(Country one:all){
 			logger.info(one.getName());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 	@Test
@@ -62,8 +64,10 @@ public class CustomerServiceImplTest {
 		createNewCustomerFormBean.setCity("Berlin");
 		createNewCustomerFormBean.setSuburb("Moabit");
 		createNewCustomerFormBean.setCompany("Company GmbH");
+		logger.info("------------------------------------------------------");
 		customerService.createNewCustomer(createNewCustomerFormBean);
 		Customer c = customerService.findCustomerByEmail(email);
 		customerService.deleteCustomer(c);
+		logger.info("------------------------------------------------------");
 	}
 }

@@ -28,8 +28,10 @@ public class ProductNotificationRepositoryTest {
     @Test
     public void findAllTest() throws Exception {
         List<ProductNotification> all = productNotificationRepository.findAll();
+        logger.info("------------------------------------------------------");
         for(ProductNotification a:all){
             logger.info(a.toString());
         }
+        logger.info("------------------------------------------------------");
     }
 }

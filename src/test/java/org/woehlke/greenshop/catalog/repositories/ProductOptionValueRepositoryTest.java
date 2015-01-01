@@ -26,8 +26,10 @@ public class ProductOptionValueRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<ProductOptionValue> list = productOptionValueRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(ProductOptionValue productOption:list){
 			logger.info("# "+productOption.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

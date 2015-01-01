@@ -29,15 +29,18 @@ public class ProductAttributeRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<ProductAttribute> list = productAttributeRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(ProductAttribute productOption:list){
 			logger.info("# "+productOption.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 	@Test
 	public void findByProductTest() throws Exception {
 		List<ProductAttribute> list1 = productAttributeRepository.findAll();
-		List<Product> products = new ArrayList<Product>();	
+		List<Product> products = new ArrayList<Product>();
+		logger.info("------------------------------------------------------");
 		for(ProductAttribute productAttribute:list1){
 			Assert.assertTrue(list1.contains(productAttribute));
 			Product p = productAttribute.getProduct();
@@ -45,11 +48,13 @@ public class ProductAttributeRepositoryTest {
 				products.add(p);
 			}
 		}
+		logger.info("------------------------------------------------------");
 		for(Product product:products){
 			List<ProductAttribute> list2 =productAttributeRepository.findByProduct(product);
 			for(ProductAttribute pa :list2){
 				Assert.assertEquals(product.getId(), pa.getProduct().getId());
 			}
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

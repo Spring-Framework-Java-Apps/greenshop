@@ -26,8 +26,10 @@ public class CountryRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<Country> all = countryRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(Country a:all){
 			logger.info(a.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.woehlke.greenshop.catalog.entities.Special;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by tw on 27.12.14.
@@ -26,8 +27,11 @@ public class SpecialRepositoryTest {
 
     @Test
     public void testGetAll() throws Exception {
-        for (Special p : specialRepository.findAll()){
+        List<Special> all = specialRepository.findAll();
+        logger.info("------------------------------------------------------");
+        for (Special p : all){
             logger.info(p.toString());
         }
+        logger.info("------------------------------------------------------");
     }
 }

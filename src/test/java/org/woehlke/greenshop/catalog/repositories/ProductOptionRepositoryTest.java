@@ -27,8 +27,10 @@ public class ProductOptionRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<ProductOption> list = productOptionRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(ProductOption productOption:list){
 			logger.info("# "+productOption.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

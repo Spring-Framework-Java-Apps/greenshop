@@ -26,8 +26,10 @@ public class AddressFormatRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<AddressFormat> all = addressFormatRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(AddressFormat a:all){
 			logger.info(a.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

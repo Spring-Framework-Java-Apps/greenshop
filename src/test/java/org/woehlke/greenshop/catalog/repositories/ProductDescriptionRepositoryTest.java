@@ -38,9 +38,12 @@ public class ProductDescriptionRepositoryTest {
 	
 	@Test
 	public void testGetAll() throws Exception {
-		for (ProductDescription p : productDescriptionRepository.findAll()){
+		List<ProductDescription> all = productDescriptionRepository.findAll();
+		logger.info("------------------------------------------------------");
+		for (ProductDescription p : all){
 			logger.info("* "+p.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 	@Test
@@ -48,10 +51,12 @@ public class ProductDescriptionRepositoryTest {
 		Language language=languageRepository.findByCode("en");
 		int limit = 9;
 		List<ProductDescription> page = productDescriptionRepositoryDao.findByLanguage(language,limit);
+		logger.info("------------------------------------------------------");
 		for (ProductDescription p : page){
 			logger.info("# "+p.toString());
 			Assert.assertEquals(language.getId(), p.getLanguage().getId());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 	@Test
@@ -59,11 +64,13 @@ public class ProductDescriptionRepositoryTest {
 		Language language=languageRepository.findByCode("en");
 		Manufacturer manufacturer =  manufacturerRepository.findOne(4L);
 		List<ProductDescription> page = productDescriptionRepositoryDao.findByManufacturer(manufacturer, language);
+		logger.info("------------------------------------------------------");
 		for (ProductDescription p : page){
 			logger.info("@ "+p.toString());
 			Assert.assertEquals(manufacturer.getId(), p.getProduct().getManufacturer().getId());
 			Assert.assertEquals(language.getId(), p.getLanguage().getId());
 		}
+		logger.info("------------------------------------------------------");
 	}
 	
 }

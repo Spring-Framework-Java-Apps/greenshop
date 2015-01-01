@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 
+import java.util.List;
+
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/servlet-context.xml")
@@ -23,8 +25,11 @@ public class ManufacturerRepositoryTest {
 	
 	@Test
 	public void testGetAll() throws Exception {
-		for (Manufacturer p : manufacturerRepository.findAll()){
+		List<Manufacturer> all = manufacturerRepository.findAll();
+		logger.info("------------------------------------------------------");
+		for (Manufacturer p : all){
 			logger.info(p.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

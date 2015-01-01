@@ -28,8 +28,10 @@ public class CustomerInfoRepositoryTest {
     @Test
     public void findAllTest() throws Exception {
         List<CustomerInfo> all = customerInfoRepository.findAll();
+        logger.info("------------------------------------------------------");
         for(CustomerInfo a:all){
             logger.info(a.toString());
         }
+        logger.info("------------------------------------------------------");
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.woehlke.greenshop.catalog.entities.ProductImage;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by tw on 01.01.15.
@@ -26,8 +27,11 @@ public class ProductImageRepositoryTest {
 
     @Test
     public void testGetAll() throws Exception {
-        for (ProductImage p : productImageRepository.findAll()){
+        List<ProductImage> all = productImageRepository.findAll();
+        logger.info("------------------------------------------------------");
+        for (ProductImage p : all){
             logger.info(p.toString());
         }
+        logger.info("------------------------------------------------------");
     }
 }

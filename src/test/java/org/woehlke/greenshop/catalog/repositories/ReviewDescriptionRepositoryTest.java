@@ -10,6 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.woehlke.greenshop.catalog.entities.ReviewDescription;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by tw on 25.12.14.
@@ -26,9 +27,12 @@ public class ReviewDescriptionRepositoryTest {
 
     @Test
     public void testGetAll() throws Exception {
-        for (ReviewDescription p : reviewDescriptionRepository.findAll()){
+        List<ReviewDescription> all = reviewDescriptionRepository.findAll();
+        logger.info("------------------------------------------------------");
+        for (ReviewDescription p : all){
             logger.info(p.toString());
         }
+        logger.info("------------------------------------------------------");
     }
 
 }

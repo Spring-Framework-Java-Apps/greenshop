@@ -35,9 +35,11 @@ public class ProductNotificationDaoTest {
         for(Customer customer:all){
             List<ProductNotification> productNotificationList =
                     productNotificationDao.findAllProductNotificationsForCustomerId(customer.getId());
+            logger.info("------------------------------------------------------");
             for(ProductNotification productNotification :productNotificationList){
                 logger.info(productNotification.toString());
             }
+            logger.info("------------------------------------------------------");
         }
     }
 }

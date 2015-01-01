@@ -26,8 +26,10 @@ public class AddressBookRepositoryTest {
 	@Test
 	public void findAllTest() throws Exception {
 		List<AddressBook> all = addressBookRepository.findAll();
+		logger.info("------------------------------------------------------");
 		for(AddressBook a:all){
 			logger.info(a.toString());
 		}
+		logger.info("------------------------------------------------------");
 	}
 }

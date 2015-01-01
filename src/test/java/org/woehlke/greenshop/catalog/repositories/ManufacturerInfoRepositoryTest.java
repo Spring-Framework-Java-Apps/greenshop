@@ -10,6 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.woehlke.greenshop.catalog.entities.ManufacturerInfo;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by tw on 24.12.14.
@@ -26,8 +27,11 @@ public class ManufacturerInfoRepositoryTest {
 
     @Test
     public void testGetAll() throws Exception {
-        for (ManufacturerInfo p : manufacturerInfoRepository.findAll()){
+        List<ManufacturerInfo> all = manufacturerInfoRepository.findAll();
+        logger.info("------------------------------------------------------");
+        for (ManufacturerInfo p : all){
             logger.info(p.toString());
         }
+        logger.info("------------------------------------------------------");
     }
 }
