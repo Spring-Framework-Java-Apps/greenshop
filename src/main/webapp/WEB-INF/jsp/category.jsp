@@ -133,7 +133,7 @@
 			</c:if>
 			<c:if test="${newProduct.specialProduct}">
 				<del>$<fmt:formatNumber
-						value="${product.productDescription.product.price}"
+						value="${newProduct.productDescription.product.price}"
 						minFractionDigits="2" maxFractionDigits="2" /></del>
 				<span class="productSpecialPrice">$<fmt:formatNumber
 						value="${newProduct.special.newPrice}"
