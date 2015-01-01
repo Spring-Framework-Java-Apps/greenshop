@@ -5,7 +5,8 @@
         <form name="quick_find" action="http://shadowfax/oscommerce2/advanced_search_result.php" method="get">
             <input type="text" name="keywords" size="10" maxlength="30" style="width: 75%" />&nbsp;
             <input type="hidden" name="search_in_description" value="1" />
-            <input type="image" src="includes/languages/english/images/buttons/button_quick_find.gif" alt="Quick Find" title=" Quick Find " />
+            <input type="image" src="includes/languages/english/images/buttons/button_quick_find.gif"
+                   alt="Quick Find" title=" Quick Find " />
             <br />Use keywords to find the product you are looking for.
             <br />
             <a href="http://shadowfax/oscommerce2/advanced_search.php"><strong>Advanced Search</strong></a>
