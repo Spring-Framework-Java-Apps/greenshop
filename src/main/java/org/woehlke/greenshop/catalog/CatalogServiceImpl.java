@@ -545,5 +545,34 @@ public class CatalogServiceImpl implements CatalogService {
 		return newProduct;
 	}
 
+	@Override
+	public CategoriesBean getAllCategories(Language language) {
+		CategoriesBean categoriesBean = new CategoriesBean();
+		List<CategoryDescription> categories = new ArrayList<CategoryDescription>();
+		Map<CategoryDescription,Integer> category2level = new HashMap<CategoryDescription,Integer>();
+		List<CategoryDescription> rootCategories = categoryDescriptionRepositoryDao.findRootCategories(language);
+		for(CategoryDescription categoryDescription :rootCategories){
+			categories.add(categoryDescription);
+			category2level.put(categoryDescription,0);
+			addChildCategories(categoryDescription,1,categories,category2level);
+		}
+		categoriesBean.setCategories(categories);
+		categoriesBean.setCategory2level(category2level);
+		return categoriesBean;
+	}
+
+	private void addChildCategories(
+			CategoryDescription parent,
+			int level,
+			List<CategoryDescription> categories,
+			Map<CategoryDescription,Integer> category2level){
+		List<CategoryDescription> categoryDescriptions =
+				categoryDescriptionRepositoryDao.findCategoriesByParentId(parent.getCategory().getId(),parent.getLanguage());
+		for(CategoryDescription categoryDescription : categoryDescriptions){
+			categories.add(categoryDescription);
+			category2level.put(categoryDescription,level);
+			addChildCategories(categoryDescription,level+1,categories,category2level);
+		}
+	}
 
 }

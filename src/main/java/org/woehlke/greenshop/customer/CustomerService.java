@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Product;
+import org.woehlke.greenshop.catalog.model.CategoriesBean;
 import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
 import org.woehlke.greenshop.customer.model.ProductNotificationBean;
@@ -42,4 +43,5 @@ public interface CustomerService extends UserDetailsService {
 	void addProductNotification(Product product, Customer customer);
 
 	void updateProductNotifications(Customer customer, long[] productNotification);
+
 }

@@ -64,4 +64,6 @@ public interface CatalogService {
 	int getNumberOfReviewsForProduct(Product product);
 
 	SpecialProduct getRandomNewProduct(Language language);
+
+	CategoriesBean getAllCategories(Language language);
 }

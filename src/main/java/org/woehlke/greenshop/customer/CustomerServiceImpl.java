@@ -20,6 +20,7 @@ import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Product;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.entities.ProductDescriptionId;
+import org.woehlke.greenshop.catalog.model.CategoriesBean;
 import org.woehlke.greenshop.catalog.repositories.ProductDescriptionRepository;
 import org.woehlke.greenshop.catalog.repositories.ProductRepository;
 import org.woehlke.greenshop.customer.entities.*;
