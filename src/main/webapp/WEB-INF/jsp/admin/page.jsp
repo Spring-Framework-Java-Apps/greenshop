@@ -32,11 +32,15 @@
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
     <tr>
-        <td colspan="2"><a href="<c:url value="/admin/"/>"><img src="resources/images/oscommerce.png" border="0" alt="Greenshop" title="Greenshop" /></a></td>
+        <td colspan="2">
+            <a href="<c:url value="/admin/"/>"><img src="resources/images/oscommerce.png" border="0" alt="Greenshop" title="Greenshop" /></a>
+        </td>
     </tr>
     <tr class="headerBar">
         <td class="headerBarContent">&nbsp;&nbsp;<a href="<c:url value="/admin/"/>" class="headerLink">Administration</a> &nbsp;|&nbsp; <a href="<c:url value="/"/>" class="headerLink">Online Catalog</a> &nbsp;|&nbsp; <a href="https://github.com/phasenraum2010/greenshop" class="headerLink">Support Site</a></td>
+        <sec:authorize access="isAnonymous()">
         <td class="headerBarContent" align="right">&nbsp;&nbsp;</td>
+        </sec:authorize>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <td class="headerBarContent" align="right">Logged in as: admin (<a href='<c:url value="/admin/j_spring_security_logout"/>' class="headerLink">Logoff</a>)&nbsp;&nbsp;</td>
         </sec:authorize>
@@ -49,6 +53,9 @@
     }
 </style>
 
+<div>
+<tiles:insertAttribute name="adminAppMenu" />
+</div>
 
 <div id="contentText">
 <tiles:insertAttribute name="bodyContent" />
