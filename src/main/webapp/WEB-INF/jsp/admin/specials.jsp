@@ -22,6 +22,7 @@
                         <td class="dataTableHeadingContent" align="right">Status</td>
                         <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                     </tr>
+                    <!--
                     <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/specials.php?page=1&sID=2&action=edit&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
                         <td  class="dataTableContent">Blade Runner - Director's Cut</td>
                         <td  class="dataTableContent" align="right"><span class="oldPrice">$35.99</span> <span class="specialPrice">$30.00</span></td>
@@ -29,13 +30,20 @@
                             <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://shadowfax/oscommerce2/admin/specials.php?action=setflag&flag=0&id=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
                         <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
                     </tr>
+                    -->
+                    <c:forEach var="special" items="${specials}">
                     <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/specials.php?page=1&sID=4&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td  class="dataTableContent">Courage Under Fire</td>
-                        <td  class="dataTableContent" align="right"><span class="oldPrice">$38.99</span> <span class="specialPrice">$29.99</span></td>
+                        <td  class="dataTableContent">${special.productDescription.name}</td>
+                        <td  class="dataTableContent" align="right">
+                            <span class="oldPrice">$38.99</span>
+                            <span class="specialPrice">$29.99</span>
+                        </td>
                         <td  class="dataTableContent" align="right">
                             <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://shadowfax/oscommerce2/admin/specials.php?action=setflag&flag=0&id=4&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
                         <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/specials.php?page=1&sID=4&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                     </tr>
+                    </c:forEach>
+                    <!--
                     <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/specials.php?page=1&sID=5&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
                         <td  class="dataTableContent">Hewlett Packard LaserJet 1100Xi</td>
                         <td  class="dataTableContent" align="right"><span class="oldPrice">$499.99</span> <span class="specialPrice">$342.99</span></td>
@@ -57,6 +65,7 @@
                             <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://shadowfax/oscommerce2/admin/specials.php?action=setflag&flag=0&id=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
                         <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/specials.php?page=1&sID=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                     </tr>
+                    -->
                     <tr>
                         <td colspan="4">
                             <table border="0" width="100%" cellpadding="0" cellspacing="2">
