@@ -19,14 +19,42 @@
                         <td class="dataTableHeadingContent" align="center">Status</td>
                         <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                     </tr>
+                    <c:forEach var="review" items="${reviews}">
+                    <c:if test="${review.review.review.id == thisReview.review.review.id}">
                     <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=2&action=preview&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=2&action=preview&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;Samsung Galaxy Tab</td>
-                        <td class="dataTableContent" align="right"><img src="http://shadowfax/oscommerce2/images/stars_1.gif" border="0" alt="" /></td>
-                        <td class="dataTableContent" align="right">12/30/2014</td>
+                    </c:if>
+                    <c:if test="${review.review.review.id != thisReview.review.review.id}">
+                    <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
+                    </c:if>
+                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=2&action=preview&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;${review.product.name}</td>
+                        <td class="dataTableContent" align="right">
+                            <c:choose>
+                                <c:when test="${review.review.review.rating == 5}">
+                                    <img src="resources/images/stars_5.gif" border="0" alt="" />
+                                </c:when>
+                                <c:when test="${review.review.review.rating == 4}">
+                                    <img src="resources/images/stars_4.gif" border="0" alt="" />
+                                </c:when>
+                                <c:when test="${review.review.review.rating == 3}">
+                                    <img src="resources/images/stars_3.gif" border="0" alt="" />
+                                </c:when>
+                                <c:when test="${review.review.review.rating == 2}">
+                                    <img src="resources/images/stars_2.gif" border="0" alt="" />
+                                </c:when>
+                                <c:when test="${review.review.review.rating == 1}">
+                                    <img src="resources/images/stars_1.gif" border="0" alt="" />
+                                </c:when>
+                            </c:choose>
+                        </td>
+                        <td class="dataTableContent" align="right"><fmt:formatDate pattern="MM/dd/yyyy" value="${review.review.review.dateAdded}" /></td>
                         <td class="dataTableContent" align="center">
                             <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://shadowfax/oscommerce2/admin/reviews.php?action=setflag&flag=0&rID=2&page=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
-                        <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
+                        <td class="dataTableContent" align="right">
+                        <c:if test="${review.review.review.id == thisReview.review.review.id}"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" /></c:if>
+                        <c:if test="${review.review.review.id != thisReview.review.review.id}"><a href="http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a></c:if>&nbsp;</td>
                     </tr>
+                    </c:forEach>
+                    <!--
                     <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
                         <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=1&action=preview&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;There's Something About Mary</td>
                         <td class="dataTableContent" align="right"><img src="http://shadowfax/oscommerce2/images/stars_5.gif" border="0" alt="" /></td>
@@ -35,6 +63,7 @@
                             <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://shadowfax/oscommerce2/admin/reviews.php?action=setflag&flag=0&rID=1&page=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
                         <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                     </tr>
+                    -->
                     <tr>
                         <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                             <tr>
