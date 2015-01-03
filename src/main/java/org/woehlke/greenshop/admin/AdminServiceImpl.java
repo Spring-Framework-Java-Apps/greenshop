@@ -8,9 +8,8 @@ import org.woehlke.greenshop.admin.entities.Administrator;
 import org.woehlke.greenshop.admin.model.AdministratorBean;
 import org.woehlke.greenshop.admin.repository.AdministratorRepository;
 import org.woehlke.greenshop.catalog.entities.*;
-import org.woehlke.greenshop.catalog.repositories.ManufacturerRepository;
-import org.woehlke.greenshop.catalog.repositories.ProductRepository;
-import org.woehlke.greenshop.catalog.repositories.SpecialRepository;
+import org.woehlke.greenshop.catalog.model.ReviewProduct;
+import org.woehlke.greenshop.catalog.repositories.*;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -34,6 +33,15 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private SpecialRepository specialRepository;
+
+    @Inject
+    private ReviewRepository reviewRepository;
+
+    @Inject
+    private ProductDescriptionRepository productDescriptionRepository;
+
+    @Inject
+    private ReviewDescriptionRepository reviewDescriptionRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -62,5 +70,22 @@ public class AdminServiceImpl implements AdminService {
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void updateSpecial(Special special) {
         specialRepository.save(special);
+    }
+
+    @Override
+    public ReviewProduct getReviewById(long reviewId, Language language) {
+        Review review = reviewRepository.findOne(reviewId);
+        ReviewDescriptionId reviewDescriptionId = new ReviewDescriptionId();
+        reviewDescriptionId.setLanguage(language);
+        reviewDescriptionId.setReview(review);
+        ReviewDescription reviewDescription = reviewDescriptionRepository.findOne(reviewDescriptionId);
+        ProductDescriptionId id = new ProductDescriptionId();
+        id.setLanguage(language);
+        id.setProduct(review.getProduct());
+        ProductDescription productDescription=productDescriptionRepository.findOne(id);
+        ReviewProduct reviewProduct = new ReviewProduct();
+        reviewProduct.setProduct(productDescription);
+        reviewProduct.setReview(reviewDescription);
+        return reviewProduct;
     }
 }

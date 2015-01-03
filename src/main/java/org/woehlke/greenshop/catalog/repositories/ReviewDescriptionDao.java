@@ -10,6 +10,7 @@ import java.util.List;
  * Created by tw on 25.12.14.
  */
 public interface ReviewDescriptionDao {
+
     ReviewDescription create(ReviewDescription reviewDescription);
 
     List<ReviewDescription> findReviewsForProductAndLanguage(Product product, Language language);

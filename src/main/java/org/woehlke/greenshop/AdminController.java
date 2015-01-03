@@ -80,6 +80,23 @@ public class AdminController {
             thisReview = reviews.iterator().next();
         }
         model.addAttribute("thisReview",thisReview);
+        int averageRating = thisReview.getReview().getReview().getRating();
+        model.addAttribute("averageRating",averageRating);
+        return "admin/reviews";
+    }
+
+    @RequestMapping(value = "/admin/reviews/{reviewId}", method = RequestMethod.GET)
+    public String reviewsId(@PathVariable long reviewId,Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        List<ReviewProduct> reviews = catalogService.getAllReviews(language);
+        model.addAttribute("reviews",reviews);
+        ReviewProduct thisReview = null;
+        if(reviews.size()>0){
+            thisReview = adminService.getReviewById(reviewId,language);
+        }
+        model.addAttribute("thisReview",thisReview);
+        int averageRating = thisReview.getReview().getReview().getRating();
+        model.addAttribute("averageRating",averageRating);
         return "admin/reviews";
     }
 

@@ -21,10 +21,10 @@
                     </tr>
                     <c:forEach var="review" items="${reviews}">
                     <c:if test="${review.review.review.id == thisReview.review.review.id}">
-                    <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=2&action=preview&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
+                    <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/reviews/${review.review.review.id}"/>'">
                     </c:if>
                     <c:if test="${review.review.review.id != thisReview.review.review.id}">
-                    <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
+                    <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/reviews/${review.review.review.id}"/>'">
                     </c:if>
                         <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=2&action=preview&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;${review.product.name}</td>
                         <td class="dataTableContent" align="right">
@@ -51,7 +51,7 @@
                             <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://shadowfax/oscommerce2/admin/reviews.php?action=setflag&flag=0&rID=2&page=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
                         <td class="dataTableContent" align="right">
                         <c:if test="${review.review.review.id == thisReview.review.review.id}"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" /></c:if>
-                        <c:if test="${review.review.review.id != thisReview.review.review.id}"><a href="http://shadowfax/oscommerce2/admin/reviews.php?page=1&rID=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a></c:if>&nbsp;</td>
+                        <c:if test="${review.review.review.id != thisReview.review.review.id}"><a href="<c:url value="/admin/reviews/${review.review.review.id}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a></c:if>&nbsp;</td>
                     </tr>
                     </c:forEach>
                     <!--
@@ -76,7 +76,7 @@
                 <td width="25%" valign="top">
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr class="infoBoxHeading">
-                            <td class="infoBoxHeading"><strong>Samsung Galaxy Tab</strong></td>
+                            <td class="infoBoxHeading"><strong>${thisReview.product.name}</strong></td>
                         </tr>
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -87,22 +87,46 @@
                             <td class="infoBoxContent"><br />Date Added: 12/30/2014</td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br /><img src="resources/images/samsung/galaxy_tab.gif" border="0" alt="Samsung Galaxy Tab" title="Samsung Galaxy Tab" width="100" height="80" /></td>
+                            <td class="infoBoxContent"><br /><img src="resources/images/${thisReview.product.product.image}" border="0" alt="${thisReview.product.name}" title="${thisReview.product.name}" width="100" height="80" /></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Author: Java Test</td>
+                            <td class="infoBoxContent"><br />Author: ${thisReview.review.review.customersName}</td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent">Rating: <img src="resources/images/stars_1.gif" border="0" alt="" /></td>
+                            <td class="infoBoxContent">Rating:
+                                <c:choose>
+                                    <c:when test="${thisReview.review.review.rating == 5}">
+                                        <img src="resources/images/stars_5.gif" border="0" alt="" />
+                                    </c:when>
+                                    <c:when test="${thisReview.review.review.rating == 4}">
+                                        <img src="resources/images/stars_4.gif" border="0" alt="" />
+                                    </c:when>
+                                    <c:when test="${thisReview.review.review.rating == 3}">
+                                        <img src="resources/images/stars_3.gif" border="0" alt="" />
+                                    </c:when>
+                                    <c:when test="${thisReview.review.review.rating == 2}">
+                                        <img src="resources/images/stars_2.gif" border="0" alt="" />
+                                    </c:when>
+                                    <c:when test="${thisReview.review.review.rating == 1}">
+                                        <img src="resources/images/stars_1.gif" border="0" alt="" />
+                                    </c:when>
+                                </c:choose>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent">Read: 18</td>
+                            <td class="infoBoxContent">Read: ${thisReview.review.review.reviewsRead}</td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Size: 100 bytes</td>
+                            <td class="infoBoxContent"><br />Size: ${thisReview.review.reviewText.length()} bytes</td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Average Rating: 20.00%</td>
+                            <td class="infoBoxContent"><br />Average Rating: <c:choose>
+                                <c:when test="${averageRating == 5}">100</c:when>
+                                <c:when test="${averageRating == 4}">80</c:when>
+                                <c:when test="${averageRating == 3}">60</c:when>
+                                <c:when test="${averageRating == 2}">40</c:when>
+                                <c:when test="${averageRating == 1}">20</c:when>
+                            </c:choose>%</td>
                         </tr>
                     </table>
                 </td>
