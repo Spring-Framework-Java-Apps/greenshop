@@ -9,6 +9,7 @@ import org.woehlke.greenshop.admin.AdminService;
 import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
+import org.woehlke.greenshop.catalog.entities.Review;
 import org.woehlke.greenshop.catalog.entities.Special;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.catalog.model.SpecialProduct;
@@ -92,9 +93,41 @@ public class AdminController {
         model.addAttribute("reviews",reviews);
         ReviewProduct thisReview = null;
         if(reviews.size()>0){
-            thisReview = adminService.getReviewById(reviewId,language);
+            thisReview = adminService.getReviewById(reviewId, language);
         }
         model.addAttribute("thisReview",thisReview);
+        int averageRating = thisReview.getReview().getReview().getRating();
+        model.addAttribute("averageRating",averageRating);
+        return "admin/reviews";
+    }
+
+    @RequestMapping(value = "/admin/reviews/setInactive/{reviewId}", method = RequestMethod.GET)
+    public String reviewsSetInactive(@PathVariable long reviewId,Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        ReviewProduct thisReview = adminService.getReviewById(reviewId, language);
+        Review review = thisReview.getReview().getReview();
+        review.setStatus(0);
+        catalogService.update(review);
+        thisReview = adminService.getReviewById(reviewId, language);
+        model.addAttribute("thisReview",thisReview);
+        List<ReviewProduct> reviews = catalogService.getAllReviews(language);
+        model.addAttribute("reviews",reviews);
+        int averageRating = thisReview.getReview().getReview().getRating();
+        model.addAttribute("averageRating",averageRating);
+        return "admin/reviews";
+    }
+
+    @RequestMapping(value = "/admin/reviews/setActive/{reviewId}", method = RequestMethod.GET)
+    public String reviewsSetActive(@PathVariable long reviewId,Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        ReviewProduct thisReview = adminService.getReviewById(reviewId, language);
+        Review review = thisReview.getReview().getReview();
+        review.setStatus(1);
+        catalogService.update(review);
+        thisReview = adminService.getReviewById(reviewId, language);
+        model.addAttribute("thisReview",thisReview);
+        List<ReviewProduct> reviews = catalogService.getAllReviews(language);
+        model.addAttribute("reviews",reviews);
         int averageRating = thisReview.getReview().getReview().getRating();
         model.addAttribute("averageRating",averageRating);
         return "admin/reviews";
@@ -120,7 +153,7 @@ public class AdminController {
         model.addAttribute("specials",specials);
         SpecialProduct thisSpecial = null;
         if(specials.size()>0){
-            thisSpecial = catalogService.findSpecialProductById(productId,language);
+            thisSpecial = catalogService.findSpecialProductById(productId, language);
         }
         model.addAttribute("thisSpecial",thisSpecial);
         return "admin/specials";
