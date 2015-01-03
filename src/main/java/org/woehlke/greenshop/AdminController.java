@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.admin.AdminService;
+import org.woehlke.greenshop.catalog.CatalogService;
+import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
+import org.woehlke.greenshop.catalog.model.ReviewProduct;
+import org.woehlke.greenshop.catalog.model.SpecialProduct;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -19,6 +23,9 @@ public class AdminController {
 
     @Inject
     private AdminService adminService;
+
+    @Inject
+    private CatalogService catalogService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
      public String home(Model model){
@@ -63,11 +70,27 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/reviews", method = RequestMethod.GET)
     public String reviews(Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        List<ReviewProduct> reviews = catalogService.getAllReviews(language);
+        model.addAttribute("reviews",reviews);
+        ReviewProduct thisReview = null;
+        if(reviews.size()>0){
+            thisReview = reviews.iterator().next();
+        }
+        model.addAttribute("thisReview",thisReview);
         return "admin/reviews";
     }
 
     @RequestMapping(value = "/admin/specials", method = RequestMethod.GET)
     public String specials(Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
+        model.addAttribute("specials",specials);
+        SpecialProduct thisSpecial = null;
+        if(specials.size()>0){
+            thisSpecial = specials.iterator().next();
+        }
+        model.addAttribute("thisSpecial",thisSpecial);
         return "admin/specials";
     }
 }

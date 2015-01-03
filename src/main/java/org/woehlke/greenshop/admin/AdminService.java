@@ -15,4 +15,5 @@ public interface AdminService extends UserDetailsService {
     int countProductsOfThisManufacturer(Manufacturer thisManufacturer);
 
     Manufacturer getManufacturerById(long manufacturerId);
+
 }

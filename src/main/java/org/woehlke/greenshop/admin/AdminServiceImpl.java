@@ -7,13 +7,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.admin.entities.Administrator;
 import org.woehlke.greenshop.admin.model.AdministratorBean;
 import org.woehlke.greenshop.admin.repository.AdministratorRepository;
-import org.woehlke.greenshop.catalog.entities.Manufacturer;
-import org.woehlke.greenshop.catalog.entities.Product;
+import org.woehlke.greenshop.catalog.entities.*;
+import org.woehlke.greenshop.catalog.model.SpecialProduct;
 import org.woehlke.greenshop.catalog.repositories.ManufacturerRepository;
+import org.woehlke.greenshop.catalog.repositories.ProductDescriptionRepositoryDao;
 import org.woehlke.greenshop.catalog.repositories.ProductRepository;
+import org.woehlke.greenshop.catalog.repositories.SpecialRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
