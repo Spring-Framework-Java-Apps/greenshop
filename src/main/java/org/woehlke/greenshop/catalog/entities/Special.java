@@ -110,12 +110,12 @@ public class Special {
         this.statusChanged = statusChanged;
     }
 
-    public int getStatus() {
-        return status;
+    public boolean getStatus() {
+        return status==1;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatus(boolean status) {
+        this.status=status?1:0;
     }
 
     @Override

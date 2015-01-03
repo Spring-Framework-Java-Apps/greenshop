@@ -15,6 +15,13 @@ public class SpecialProduct {
         return special != null;
     }
 
+    public long getPercentage(){
+        double oldPrice=productDescription.getProduct().getPrice();
+        double newPrice=special.getNewPrice();
+        double percentage = 100.0d*newPrice/oldPrice;
+        return 100L-Math.round(percentage);
+    }
+
     public Special getSpecial() {
         return special;
     }

@@ -9,10 +9,12 @@ import org.woehlke.greenshop.admin.AdminService;
 import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
+import org.woehlke.greenshop.catalog.entities.Special;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.catalog.model.SpecialProduct;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -91,6 +93,49 @@ public class AdminController {
             thisSpecial = specials.iterator().next();
         }
         model.addAttribute("thisSpecial",thisSpecial);
+        return "admin/specials";
+    }
+
+    @RequestMapping(value = "/admin/specials/{productId}", method = RequestMethod.GET)
+    public String specialsId(@PathVariable long productId,Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
+        model.addAttribute("specials",specials);
+        SpecialProduct thisSpecial = null;
+        if(specials.size()>0){
+            thisSpecial = catalogService.findSpecialProductById(productId,language);
+        }
+        model.addAttribute("thisSpecial",thisSpecial);
+        return "admin/specials";
+    }
+
+    @RequestMapping(value = "/admin/specials/setInactive/{productId}", method = RequestMethod.GET)
+    public String specialSetInactive(@PathVariable long productId,Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        SpecialProduct thisSpecial = catalogService.findSpecialProductById(productId, language);
+        Special special=thisSpecial.getSpecial();
+        special.setStatus(false);
+        special.setStatusChanged(new Date());
+        adminService.updateSpecial(special);
+        thisSpecial = catalogService.findSpecialProductById(productId,language);
+        model.addAttribute("thisSpecial",thisSpecial);
+        List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
+        model.addAttribute("specials",specials);
+        return "admin/specials";
+    }
+
+    @RequestMapping(value = "/admin/specials/setActive/{productId}", method = RequestMethod.GET)
+    public String specialSetActive(@PathVariable long productId,Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        SpecialProduct thisSpecial = catalogService.findSpecialProductById(productId,language);
+        Special special=thisSpecial.getSpecial();
+        special.setStatus(true);
+        special.setStatusChanged(new Date());
+        adminService.updateSpecial(special);
+        thisSpecial = catalogService.findSpecialProductById(productId,language);
+        model.addAttribute("thisSpecial",thisSpecial);
+        List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
+        model.addAttribute("specials",specials);
         return "admin/specials";
     }
 }

@@ -8,15 +8,12 @@ import org.woehlke.greenshop.admin.entities.Administrator;
 import org.woehlke.greenshop.admin.model.AdministratorBean;
 import org.woehlke.greenshop.admin.repository.AdministratorRepository;
 import org.woehlke.greenshop.catalog.entities.*;
-import org.woehlke.greenshop.catalog.model.SpecialProduct;
 import org.woehlke.greenshop.catalog.repositories.ManufacturerRepository;
-import org.woehlke.greenshop.catalog.repositories.ProductDescriptionRepositoryDao;
 import org.woehlke.greenshop.catalog.repositories.ProductRepository;
 import org.woehlke.greenshop.catalog.repositories.SpecialRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +31,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private ProductRepository productRepository;
+
+    @Inject
+    private SpecialRepository specialRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -56,5 +56,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Manufacturer getManufacturerById(long manufacturerId) {
         return manufacturerRepository.findOne(manufacturerId);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void updateSpecial(Special special) {
+        specialRepository.save(special);
     }
 }
