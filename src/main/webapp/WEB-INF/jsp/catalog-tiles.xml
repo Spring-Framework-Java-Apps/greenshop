@@ -54,7 +54,7 @@
 	<definition name="addressBookEdit" extends="page">
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/addressBookEdit.jsp" />
 	</definition>
-	
+
 	<definition name="addressBookAdd" extends="page">
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/addressBookAdd.jsp" />
 	</definition>
@@ -141,5 +141,8 @@
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/advancedSearch.jsp" />
 	</definition>
 
-	
+	<definition name="searchResult" extends="page">
+		<put-attribute name="bodyContent" value="/WEB-INF/jsp/searchResult.jsp" />
+	</definition>
+
 </tiles-definitions>

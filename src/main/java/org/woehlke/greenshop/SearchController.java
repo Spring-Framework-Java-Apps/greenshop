@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.model.AdvancedSearchBean;
 import org.woehlke.greenshop.catalog.model.CategoriesBean;
@@ -42,5 +40,14 @@ public class SearchController extends AbstractController {
         super.getDefaultBoxContent(model);
         logger.info(advancedSearchBean.toString());
         return "advancedSearch";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String showAdvancedSearchForm(
+            @RequestParam String keywords, Model model){
+        Language language = catalogService.findLanguageByCode("en");
+        super.getDefaultBoxContent(model);
+        logger.info(keywords);
+        return "searchResult";
     }
 }
