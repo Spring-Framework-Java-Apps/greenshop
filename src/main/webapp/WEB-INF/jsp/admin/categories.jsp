@@ -5,7 +5,7 @@
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
                 <td class="pageHeading">Categories / Products</td>
-                <td class="pageHeading" align="right"><img src="images/pixel_trans.gif" border="0" alt="" width="1" height="40" /></td>
+                <td class="pageHeading" align="right"><img src="resources/admin/images/pixel_trans.gif" border="0" alt="" width="1" height="40" /></td>
                 <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="smallText" align="right">
@@ -29,24 +29,24 @@
                         <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                     </tr>
                     <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/categories.php?cPath=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Hardware</strong></td>
+                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Hardware</strong></td>
                         <td class="dataTableContent" align="center">&nbsp;</td>
-                        <td class="dataTableContent" align="right"><img src="images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
+                        <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
                     </tr>
                     <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Software</strong></td>
+                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Software</strong></td>
                         <td class="dataTableContent" align="center">&nbsp;</td>
-                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                     </tr>
                     <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>DVD Movies</strong></td>
+                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>DVD Movies</strong></td>
                         <td class="dataTableContent" align="center">&nbsp;</td>
-                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                     </tr>
                     <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=21&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=21&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Gadgets</strong></td>
+                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=21&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Gadgets</strong></td>
                         <td class="dataTableContent" align="center">&nbsp;</td>
-                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=21&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=21&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                     </tr>
                     <tr>
                         <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -71,7 +71,7 @@
                             <td class="infoBoxContent"><br />Date Added: 12/27/2014</td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br /><img src="/oscommerce2/images/category_hardware.gif" border="0" alt="Hardware" title="Hardware" width="57" height="40" /><br />category_hardware.gif</td>
+                            <td class="infoBoxContent"><br /><img src="resources/images/category_hardware.gif" border="0" alt="Hardware" title="Hardware" width="57" height="40" /><br />category_hardware.gif</td>
                         </tr>
                         <tr>
                             <td class="infoBoxContent"><br />Subcategories: 8<br />Products: 6</td>
