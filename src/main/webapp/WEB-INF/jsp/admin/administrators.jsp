@@ -9,6 +9,7 @@
             </tr>
         </table></td>
     </tr>
+    <!--
     <tr>
         <td>
             <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -18,6 +19,7 @@
             </table>
         </td>
     </tr>
+    -->
     <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
@@ -27,16 +29,22 @@
                         <td class="dataTableHeadingContent" align="center">Secured by htpasswd</td>
                         <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                     </tr>
-                    <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/administrators.php?aID=2&action=edit'">
-                        <td class="dataTableContent">admin</td>
-                        <td class="dataTableContent" align="center"><img src="resources/admin/images/icon_status_red.gif" border="0" alt="Not Secured" title="Not Secured" width="10" height="10" /></td>
-                        <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
-                    </tr>
-                    <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/administrators.php?aID=1'">
-                        <td class="dataTableContent">tw</td>
-                        <td class="dataTableContent" align="center"><img src="resources/admin/images/icon_status_red.gif" border="0" alt="Not Secured" title="Not Secured" width="10" height="10" /></td>
-                        <td class="dataTableContent" align="right"><a href="http://localhost/oscommerce2/admin/administrators.php?aID=1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
-                    </tr>
+                    <c:forEach var="administrator" items="${administrators}">
+                        <c:if test="${administrator.id == thisAdministrator.id}">
+                        <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/administrators/${administrator.id}"/>'">
+                            <td class="dataTableContent">${administrator.userName}</td>
+                            <td class="dataTableContent" align="center"><img src="resources/admin/images/icon_status_red.gif" border="0" alt="Not Secured" title="Not Secured" width="10" height="10" /></td>
+                            <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
+                        </tr>
+                        </c:if>
+                        <c:if test="${administrator.id != thisAdministrator.id}">
+                        <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/administrators/${administrator.id}"/>'">
+                            <td class="dataTableContent">${administrator.userName}</td>
+                            <td class="dataTableContent" align="center"><img src="resources/admin/images/icon_status_red.gif" border="0" alt="Not Secured" title="Not Secured" width="10" height="10" /></td>
+                            <td class="dataTableContent" align="right"><a href="<c:url value="/admin/administrators/${administrator.id}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                        </tr>
+                        </c:if>
+                    </c:forEach>
                     <tr>
                         <td class="smallText" colspan="3" align="right"><span class="tdbLink"><a id="tdb1" href="http://localhost/oscommerce2/admin/administrators.php?action=new">Insert</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                     </tr>
@@ -44,7 +52,7 @@
                 <td width="25%" valign="top">
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr class="infoBoxHeading">
-                            <td class="infoBoxHeading"><strong>admin</strong></td>
+                            <td class="infoBoxHeading"><strong>${thisAdministrator.userName}</strong></td>
                         </tr>
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">

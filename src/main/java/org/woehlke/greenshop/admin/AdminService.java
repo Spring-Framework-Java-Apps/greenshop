@@ -1,6 +1,7 @@
 package org.woehlke.greenshop.admin;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.woehlke.greenshop.admin.entities.Administrator;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.Special;
@@ -22,4 +23,8 @@ public interface AdminService extends UserDetailsService {
     void updateSpecial(Special special);
 
     ReviewProduct getReviewById(long reviewId, Language language);
+
+    List<Administrator> findAllAdministrators();
+
+    Administrator findAdministratorById(long administratorId);
 }

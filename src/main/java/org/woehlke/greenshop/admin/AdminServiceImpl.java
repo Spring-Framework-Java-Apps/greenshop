@@ -88,4 +88,14 @@ public class AdminServiceImpl implements AdminService {
         reviewProduct.setReview(reviewDescription);
         return reviewProduct;
     }
+
+    @Override
+    public List<Administrator> findAllAdministrators() {
+        return administratorRepository.findAll();
+    }
+
+    @Override
+    public Administrator findAdministratorById(long administratorId) {
+        return administratorRepository.findOne(administratorId);
+    }
 }
