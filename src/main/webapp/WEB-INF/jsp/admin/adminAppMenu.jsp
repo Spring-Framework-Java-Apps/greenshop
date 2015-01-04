@@ -4,7 +4,7 @@
     <h3><a href="#">Configuration</a></h3>
     <div>
     <ul>
-        <li><a href="http://shadowfax/oscommerce2/admin/administrators.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Administrators</a></li>
+        <li><a href="<c:url value="/admin/administrators"/>">Administrators</a></li>
         <li><a href="http://shadowfax/oscommerce2/admin/store_logo.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Store Logo</a></li>
         <li><a href="http://shadowfax/oscommerce2/admin/configuration.php?gID=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">My Store</a></li>
         <li><a href="http://shadowfax/oscommerce2/admin/configuration.php?gID=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Minimum Values</a></li>
@@ -49,34 +49,34 @@
     <h3><a href="#">Customers</a></h3>
     <div>
         <ul>
-            <li><a href="http://shadowfax/oscommerce2/admin/customers.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Customers</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/orders.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Orders</a></li>
+            <li><a href="<c:url value="/admin/customers"/>">Customers</a></li>
+            <li><a href="<c:url value="/admin/orders"/>">Orders</a></li>
         </ul>
     </div>
     <h3><a href="#">Locations / Taxes</a></h3>
     <div>
         <ul>
-            <li><a href="http://shadowfax/oscommerce2/admin/countries.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Countries</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/zones.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Zones</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/geo_zones.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Tax Zones</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/tax_classes.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Tax Classes</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/tax_rates.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Tax Rates</a></li>
+            <li><a href="<c:url value="/admin/countries"/>">Countries</a></li>
+            <li><a href="<c:url value="/admin/zones"/>">Zones</a></li>
+            <li><a href="<c:url value="/admin/taxZones"/>">Tax Zones</a></li>
+            <li><a href="<c:url value="/admin/taxClasses"/>">Tax Classes</a></li>
+            <li><a href="<c:url value="/admin/taxRates"/>">Tax Rates</a></li>
         </ul>
     </div>
     <h3><a href="#">Localization</a></h3>
     <div>
         <ul>
-            <li><a href="http://shadowfax/oscommerce2/admin/currencies.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Currencies</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/languages.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Languages</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/orders_status.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Orders Status</a></li>
+            <li><a href="<c:url value="/admin/currencies"/>">Currencies</a></li>
+            <li><a href="<c:url value="/admin/languages"/>">Languages</a></li>
+            <li><a href="<c:url value="/admin/ordersStatus"/>">Orders Status</a></li>
         </ul>
     </div>
     <h3><a href="#">Reports</a></h3>
     <div>
         <ul>
-            <li><a href="http://shadowfax/oscommerce2/admin/stats_products_viewed.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Products Viewed</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/stats_products_purchased.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Products Purchased</a></li>
-            <li><a href="http://shadowfax/oscommerce2/admin/stats_customers.php?osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Customer Orders-Total</a></li>
+            <li><a href="<c:url value="/admin/productsViewed"/>">Products Viewed</a></li>
+            <li><a href="<c:url value="/admin/productsPurchased"/>">Products Purchased</a></li>
+            <li><a href="<c:url value="/admin/customerOrdersTotal"/>">Customer Orders-Total</a></li>
         </ul>
     </div>
     <h3><a href="#">Tools</a></h3>

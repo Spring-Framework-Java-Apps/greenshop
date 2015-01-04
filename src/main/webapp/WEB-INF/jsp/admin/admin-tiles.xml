@@ -4,6 +4,7 @@
 <tiles-definitions>
 
     <definition name="backend" templateExpression="/WEB-INF/jsp/admin/page.jsp">
+        <put-attribute name="adminAppMenu" value="/WEB-INF/jsp/admin/adminAppMenu.jsp" />
     </definition>
 
     <definition name="admin/login" extends="backend">
@@ -12,29 +13,85 @@
     </definition>
 
     <definition name="admin/home" extends="backend">
-        <put-attribute name="adminAppMenu" value="/WEB-INF/jsp/admin/adminAppMenu.jsp" />
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/home.jsp" />
     </definition>
 
     <definition name="admin/categories" extends="backend">
-        <put-attribute name="adminAppMenu" value="/WEB-INF/jsp/admin/adminAppMenu.jsp" />
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/categories.jsp" />
     </definition>
 
     <definition name="admin/manufacturers" extends="backend">
-        <put-attribute name="adminAppMenu" value="/WEB-INF/jsp/admin/adminAppMenu.jsp" />
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/manufacturers.jsp" />
     </definition>
 
     <definition name="admin/reviews" extends="backend">
-        <put-attribute name="adminAppMenu" value="/WEB-INF/jsp/admin/adminAppMenu.jsp" />
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/reviews.jsp" />
     </definition>
 
     <definition name="admin/specials" extends="backend">
-        <put-attribute name="adminAppMenu" value="/WEB-INF/jsp/admin/adminAppMenu.jsp" />
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/specials.jsp" />
     </definition>
+
+    <definition name="admin/customers" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/customers.jsp" />
+    </definition>
+
+    <definition name="admin/orders" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/orders.jsp" />
+    </definition>
+
+
+    <definition name="admin/administrators" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/administrators.jsp" />
+    </definition>
+
+
+    <definition name="admin/currencies" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/currencies.jsp" />
+    </definition>
+
+    <definition name="admin/languages" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/languages.jsp" />
+    </definition>
+
+    <definition name="admin/ordersStatus" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/ordersStatus.jsp" />
+    </definition>
+
+
+    <definition name="admin/countries" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countries.jsp" />
+    </definition>
+
+    <definition name="admin/zones" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/zones.jsp" />
+    </definition>
+
+    <definition name="admin/taxZones" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZones.jsp" />
+    </definition>
+
+    <definition name="admin/taxClasses" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxClasses.jsp" />
+    </definition>
+
+    <definition name="admin/taxRates" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxRates.jsp" />
+    </definition>
+
+
+    <definition name="admin/productsViewed" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/productsViewed.jsp" />
+    </definition>
+
+    <definition name="admin/productsPurchased" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/productsPurchased.jsp" />
+    </definition>
+
+    <definition name="admin/customerOrdersTotal" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/customerOrdersTotal.jsp" />
+    </definition>
+
 
 
 </tiles-definitions>

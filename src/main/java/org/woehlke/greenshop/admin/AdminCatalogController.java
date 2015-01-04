@@ -1,12 +1,10 @@
-package org.woehlke.greenshop;
+package org.woehlke.greenshop.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.woehlke.greenshop.admin.AdminMenuCategory;
-import org.woehlke.greenshop.admin.AdminService;
 import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
@@ -23,20 +21,13 @@ import java.util.List;
  * Created by tw on 31.12.14.
  */
 @Controller
-public class AdminController {
+public class AdminCatalogController {
 
     @Inject
     private AdminService adminService;
 
     @Inject
     private CatalogService catalogService;
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-     public String home(Model model){
-        int menuCategory = AdminMenuCategory.CONFIGURATION.ordinal();
-        model.addAttribute("menuCategory",menuCategory);
-        return "admin/home";
-    }
 
     @RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
     public String rootCategories(Model model){
