@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.woehlke.greenshop.admin.AdminMenuCategory;
 import org.woehlke.greenshop.admin.AdminService;
 import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
@@ -32,16 +33,22 @@ public class AdminController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
      public String home(Model model){
+        int menuCategory = AdminMenuCategory.CONFIGURATION.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         return "admin/home";
     }
 
     @RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
     public String rootCategories(Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         return "admin/categories";
     }
 
     @RequestMapping(value = "/admin/manufacturers", method = RequestMethod.GET)
     public String manufacturers(Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         List<Manufacturer> manufacturers = adminService.getAllManufacturers();
         model.addAttribute("manufacturers",manufacturers);
         int productsOfThisManufacturer = 0;
@@ -58,6 +65,8 @@ public class AdminController {
     @RequestMapping(value = "/admin/manufacturers/{manufacturerId}", method = RequestMethod.GET)
     public String manufacturersId(
             @PathVariable long manufacturerId , Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         List<Manufacturer> manufacturers = adminService.getAllManufacturers();
         model.addAttribute("manufacturers",manufacturers);
         int productsOfThisManufacturer = 0;
@@ -73,6 +82,8 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/reviews", method = RequestMethod.GET)
     public String reviews(Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         List<ReviewProduct> reviews = catalogService.getAllReviews(language);
         model.addAttribute("reviews",reviews);
@@ -88,6 +99,8 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/reviews/{reviewId}", method = RequestMethod.GET)
     public String reviewsId(@PathVariable long reviewId,Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         List<ReviewProduct> reviews = catalogService.getAllReviews(language);
         model.addAttribute("reviews",reviews);
@@ -103,6 +116,8 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/reviews/setInactive/{reviewId}", method = RequestMethod.GET)
     public String reviewsSetInactive(@PathVariable long reviewId,Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         ReviewProduct thisReview = adminService.getReviewById(reviewId, language);
         Review review = thisReview.getReview().getReview();
@@ -119,6 +134,8 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/reviews/setActive/{reviewId}", method = RequestMethod.GET)
     public String reviewsSetActive(@PathVariable long reviewId,Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         ReviewProduct thisReview = adminService.getReviewById(reviewId, language);
         Review review = thisReview.getReview().getReview();
@@ -135,6 +152,8 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/specials", method = RequestMethod.GET)
     public String specials(Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
         model.addAttribute("specials",specials);
@@ -148,6 +167,8 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/specials/{productId}", method = RequestMethod.GET)
     public String specialsId(@PathVariable long productId,Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
         model.addAttribute("specials",specials);
@@ -161,6 +182,8 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/specials/setInactive/{productId}", method = RequestMethod.GET)
     public String specialSetInactive(@PathVariable long productId,Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         SpecialProduct thisSpecial = catalogService.findSpecialProductById(productId, language);
         Special special=thisSpecial.getSpecial();
@@ -176,6 +199,8 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/specials/setActive/{productId}", method = RequestMethod.GET)
     public String specialSetActive(@PathVariable long productId,Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         SpecialProduct thisSpecial = catalogService.findSpecialProductById(productId,language);
         Special special=thisSpecial.getSpecial();

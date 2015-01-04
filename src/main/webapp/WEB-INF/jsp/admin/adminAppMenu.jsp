@@ -105,7 +105,6 @@
             'header': 'ui-icon-plus',
             'headerSelected': 'ui-icon-minus'
         }
-
-
+        ,active: <c:out value="${menuCategory}"/>
     });
 </script>
