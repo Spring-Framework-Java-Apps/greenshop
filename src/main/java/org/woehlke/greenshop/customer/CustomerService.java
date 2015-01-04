@@ -44,4 +44,7 @@ public interface CustomerService extends UserDetailsService {
 
 	void updateProductNotifications(Customer customer, long[] productNotification);
 
+	List<Zone> findAllZones();
+
+	Zone findZoneById(long zoneId);
 }

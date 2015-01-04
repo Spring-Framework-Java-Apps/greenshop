@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.*;
 import org.woehlke.greenshop.catalog.repositories.*;
+import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Customer;
 
 @Named
@@ -340,7 +341,7 @@ public class CatalogServiceImpl implements CatalogService {
 		ProductsByCategory productsByCategory = new ProductsByCategory();
 		Category category = categoryRepository.findOne(categoryId);
 		List<SpecialProduct> products = new ArrayList<SpecialProduct>();
-		List<ProductDescription> productDescriptions=productDescriptionRepositoryDao.findByCategory(category,language);
+		List<ProductDescription> productDescriptions=productDescriptionRepositoryDao.findByCategory(category, language);
 		for(ProductDescription productDescription:productDescriptions){
 			SpecialProduct specialProduct = new SpecialProduct();
 			specialProduct.setProductDescription(productDescription);
@@ -445,7 +446,7 @@ public class CatalogServiceImpl implements CatalogService {
 	@Override
 	public List<ReviewDescription> findReviewsForProduct(ProductDescription productDescription) {
 		return reviewDescriptionDao.findReviewsForProductAndLanguage(
-				productDescription.getProduct(),productDescription.getLanguage());
+				productDescription.getProduct(), productDescription.getLanguage());
 	}
 
 	@Override

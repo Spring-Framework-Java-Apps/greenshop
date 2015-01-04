@@ -9,11 +9,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/*
-zone_country_id	int(11)	NO	MUL		
-zone_id	int(11)	NO	PRI		auto_increment
-zone_name	varchar(255)	NO			
-zone_code	varchar(32)	NO
+/**
+ mysql> desc zones;
+ +-----------------+--------------+------+-----+---------+----------------+
+ | Field           | Type         | Null | Key | Default | Extra          |
+ +-----------------+--------------+------+-----+---------+----------------+
+ | zone_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+ | zone_country_id | int(11)      | NO   | MUL | NULL    |                |
+ | zone_code       | varchar(32)  | NO   |     | NULL    |                |
+ | zone_name       | varchar(255) | NO   |     | NULL    |                |
+ +-----------------+--------------+------+-----+---------+----------------+
  */
 @Entity
 @Table(name="zones")

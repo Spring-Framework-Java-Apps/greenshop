@@ -247,4 +247,14 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 		}
 	}
+
+	@Override
+	public List<Zone> findAllZones() {
+		return zoneRepository.findAll();
+	}
+
+	@Override
+	public Zone findZoneById(long zoneId) {
+		return zoneRepository.findOne(zoneId);
+	}
 }

@@ -12,12 +12,17 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-/*
-countries_id	int(11)	NO	PRI		auto_increment
-countries_name	varchar(255)	NO	MUL		
-countries_iso_code_2	char(2)	NO			
-countries_iso_code_3	char(3)	NO			
-address_format_id	int(11)	NO
+/**
+ mysql> desc countries;
+ +----------------------+--------------+------+-----+---------+----------------+
+ | Field                | Type         | Null | Key | Default | Extra          |
+ +----------------------+--------------+------+-----+---------+----------------+
+ | countries_id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+ | countries_name       | varchar(255) | NO   | MUL | NULL    |                |
+ | countries_iso_code_2 | char(2)      | NO   |     | NULL    |                |
+ | countries_iso_code_3 | char(3)      | NO   |     | NULL    |                |
+ | address_format_id    | int(11)      | NO   |     | NULL    |                |
+ +----------------------+--------------+------+-----+---------+----------------+
  */
 @Entity
 @Table(name="countries")
