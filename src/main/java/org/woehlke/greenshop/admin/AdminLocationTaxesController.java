@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.woehlke.greenshop.admin.entities.TaxClass;
+import org.woehlke.greenshop.admin.entities.TaxRate;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Zone;
@@ -20,6 +22,9 @@ public class AdminLocationTaxesController {
 
     @Inject
     private CustomerService customerService;
+
+    @Inject
+    private AdminService adminService;
 
     @RequestMapping(value = "/admin/countries", method = RequestMethod.GET)
     public String countries(Model model){
@@ -82,6 +87,27 @@ public class AdminLocationTaxesController {
     public String taxClasses(Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
+        List<TaxClass> taxClasses = adminService.findAllTaxClasses();
+        model.addAttribute("taxClasses",taxClasses);
+        TaxClass thisTaxClass = null;
+        if(taxClasses.size()>0){
+            thisTaxClass =  taxClasses.iterator().next();
+        }
+        model.addAttribute("thisTaxClass",thisTaxClass);
+        return "admin/taxClasses";
+    }
+
+    @RequestMapping(value = "/admin/taxClasses/{taxClassId}", method = RequestMethod.GET)
+    public String taxClassId(@PathVariable long taxClassId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxClass> taxClasses = adminService.findAllTaxClasses();
+        model.addAttribute("taxClasses",taxClasses);
+        TaxClass thisTaxClass = null;
+        if(taxClasses.size()>0){
+            thisTaxClass =  adminService.findTaxClassById(taxClassId);
+        }
+        model.addAttribute("thisTaxClass",thisTaxClass);
         return "admin/taxClasses";
     }
 
@@ -89,6 +115,27 @@ public class AdminLocationTaxesController {
     public String taxRates(Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
+        List<TaxRate> taxRates = adminService.findAllTaxRates();
+        model.addAttribute("taxClasses",taxRates);
+        TaxRate thisTaxRate = null;
+        if(taxRates.size()>0){
+            thisTaxRate =  taxRates.iterator().next();
+        }
+        model.addAttribute("thisTaxRate",thisTaxRate);
+        return "admin/taxRates";
+    }
+
+    @RequestMapping(value = "/admin/taxRates/{taxRateId}", method = RequestMethod.GET)
+    public String taxRateId(@PathVariable long taxRateId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxRate> taxRates = adminService.findAllTaxRates();
+        model.addAttribute("taxClasses",taxRates);
+        TaxRate thisTaxRate = null;
+        if(taxRates.size()>0){
+            thisTaxRate =  adminService.findTaxRateById(taxRateId);
+        }
+        model.addAttribute("thisTaxRate",thisTaxRate);
         return "admin/taxRates";
     }
 }

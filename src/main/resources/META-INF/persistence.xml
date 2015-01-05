@@ -37,6 +37,9 @@
         <class>org.woehlke.greenshop.checkout.entities.OrderTotal</class>
         <class>org.woehlke.greenshop.checkout.entities.OrderStatusHistory</class>
         <class>org.woehlke.greenshop.admin.entities.Administrator</class>
+        <class>org.woehlke.greenshop.admin.entities.TaxClass</class>
+        <class>org.woehlke.greenshop.admin.entities.TaxRate</class>
+        <class>org.woehlke.greenshop.admin.entities.TaxZone</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
 

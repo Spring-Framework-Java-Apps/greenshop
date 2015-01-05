@@ -5,8 +5,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.admin.entities.Administrator;
+import org.woehlke.greenshop.admin.entities.TaxClass;
+import org.woehlke.greenshop.admin.entities.TaxRate;
 import org.woehlke.greenshop.admin.model.AdministratorBean;
 import org.woehlke.greenshop.admin.repository.AdministratorRepository;
+import org.woehlke.greenshop.admin.repository.TaxClassRepository;
+import org.woehlke.greenshop.admin.repository.TaxRateRepository;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.catalog.repositories.*;
@@ -42,6 +46,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private ReviewDescriptionRepository reviewDescriptionRepository;
+
+    @Inject
+    private TaxClassRepository taxClassRepository;
+
+    @Inject
+    private TaxRateRepository taxRateRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -97,5 +107,25 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Administrator findAdministratorById(long administratorId) {
         return administratorRepository.findOne(administratorId);
+    }
+
+    @Override
+    public List<TaxClass> findAllTaxClasses() {
+        return taxClassRepository.findAll();
+    }
+
+    @Override
+    public TaxClass findTaxClassById(long taxClassId) {
+        return taxClassRepository.findOne(taxClassId);
+    }
+
+    @Override
+    public List<TaxRate> findAllTaxRates() {
+        return taxRateRepository.findAll();
+    }
+
+    @Override
+    public TaxRate findTaxRateById(long taxRateId) {
+        return taxRateRepository.findOne(taxRateId);
     }
 }
