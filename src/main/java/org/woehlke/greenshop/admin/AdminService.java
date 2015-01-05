@@ -4,6 +4,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.woehlke.greenshop.admin.entities.Administrator;
 import org.woehlke.greenshop.admin.entities.TaxClass;
 import org.woehlke.greenshop.admin.entities.TaxRate;
+import org.woehlke.greenshop.admin.entities.TaxZone;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.Special;
@@ -37,4 +38,8 @@ public interface AdminService extends UserDetailsService {
     List<TaxRate> findAllTaxRates();
 
     TaxRate findTaxRateById(long taxRateId);
+
+    List<TaxZone> findAllTaxZones();
+
+    TaxZone findTaxZoneById(long taxZoneId);
 }

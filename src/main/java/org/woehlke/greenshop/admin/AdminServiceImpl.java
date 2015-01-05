@@ -7,10 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.admin.entities.Administrator;
 import org.woehlke.greenshop.admin.entities.TaxClass;
 import org.woehlke.greenshop.admin.entities.TaxRate;
+import org.woehlke.greenshop.admin.entities.TaxZone;
 import org.woehlke.greenshop.admin.model.AdministratorBean;
 import org.woehlke.greenshop.admin.repository.AdministratorRepository;
 import org.woehlke.greenshop.admin.repository.TaxClassRepository;
 import org.woehlke.greenshop.admin.repository.TaxRateRepository;
+import org.woehlke.greenshop.admin.repository.TaxZoneRepository;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.catalog.repositories.*;
@@ -52,6 +54,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private TaxRateRepository taxRateRepository;
+
+    @Inject
+    private TaxZoneRepository taxZoneRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -127,5 +132,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public TaxRate findTaxRateById(long taxRateId) {
         return taxRateRepository.findOne(taxRateId);
+    }
+
+    @Override
+    public List<TaxZone> findAllTaxZones() {
+        return taxZoneRepository.findAll();
+    }
+
+    @Override
+    public TaxZone findTaxZoneById(long taxZoneId) {
+        return taxZoneRepository.findOne(taxZoneId);
     }
 }

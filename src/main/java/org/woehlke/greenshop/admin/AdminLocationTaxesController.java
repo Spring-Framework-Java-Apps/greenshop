@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.admin.entities.TaxClass;
 import org.woehlke.greenshop.admin.entities.TaxRate;
+import org.woehlke.greenshop.admin.entities.TaxZone;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Zone;
@@ -80,6 +81,24 @@ public class AdminLocationTaxesController {
     public String taxZones(Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
+        List<TaxZone> taxZones = adminService.findAllTaxZones();
+        model.addAttribute("taxZones",taxZones);
+        TaxZone thisTaxZone = null;
+        if(taxZones.size()>0){
+            thisTaxZone = taxZones.iterator().next();
+        }
+        model.addAttribute("thisTaxZone",thisTaxZone);
+        return "admin/taxZones";
+    }
+
+    @RequestMapping(value = "/admin/taxZones/{taxZoneId}", method = RequestMethod.GET)
+    public String taxZoneId(@PathVariable long taxZoneId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxZone> taxZones = adminService.findAllTaxZones();
+        model.addAttribute("taxZones",taxZones);
+        TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        model.addAttribute("thisTaxZone",thisTaxZone);
         return "admin/taxZones";
     }
 
@@ -116,7 +135,7 @@ public class AdminLocationTaxesController {
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         List<TaxRate> taxRates = adminService.findAllTaxRates();
-        model.addAttribute("taxClasses",taxRates);
+        model.addAttribute("taxRates",taxRates);
         TaxRate thisTaxRate = null;
         if(taxRates.size()>0){
             thisTaxRate =  taxRates.iterator().next();
@@ -130,7 +149,7 @@ public class AdminLocationTaxesController {
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         List<TaxRate> taxRates = adminService.findAllTaxRates();
-        model.addAttribute("taxClasses",taxRates);
+        model.addAttribute("taxRates",taxRates);
         TaxRate thisTaxRate = null;
         if(taxRates.size()>0){
             thisTaxRate =  adminService.findTaxRateById(taxRateId);
