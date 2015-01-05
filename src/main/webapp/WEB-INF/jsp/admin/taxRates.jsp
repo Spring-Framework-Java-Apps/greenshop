@@ -59,7 +59,7 @@
                 <td width="25%" valign="top">
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr class="infoBoxHeading">
-                            <td class="infoBoxHeading"><strong>Taxable Goods</strong></td>
+                            <td class="infoBoxHeading"><strong>${thisTaxRate.taxClass.title}</strong></td>
                         </tr>
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -67,13 +67,13 @@
                             <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb2" href="http://localhost/oscommerce2/admin/tax_rates.php?page=1&tID=1&action=edit">Edit</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="http://localhost/oscommerce2/admin/tax_rates.php?page=1&tID=1&action=delete">Delete</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Date Added: 12/15/2014</td>
+                            <td class="infoBoxContent"><br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisTaxRate.dateAdded}" /></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent">Last Modified: 12/15/2014</td>
+                            <td class="infoBoxContent">Last Modified: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisTaxRate.lastModified}" /></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Description:<br />FL TAX 7.0%</td>
+                            <td class="infoBoxContent"><br />Description:<br />${thisTaxRate.taxClass.description} ${thisTaxRate.taxRate}%</td>
                         </tr>
                     </table>
                 </td>

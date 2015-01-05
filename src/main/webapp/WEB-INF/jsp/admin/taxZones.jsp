@@ -48,7 +48,7 @@
                 <td width="25%" valign="top">
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr class="infoBoxHeading">
-                            <td class="infoBoxHeading"><strong>Germany</strong></td>
+                            <td class="infoBoxHeading"><strong>${thisTaxZone.name}</strong></td>
                         </tr>
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -59,13 +59,13 @@
                             <td class="infoBoxContent"><br />Number of Zones: 1</td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Date Added: 01/05/2015</td>
+                            <td class="infoBoxContent"><br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisTaxZone.dateAdded}" /></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent">Last Modified: 01/05/2015</td>
+                            <td class="infoBoxContent">Last Modified: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisTaxZone.lastModified}" /></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Description:<br />MWST Deutschland</td>
+                            <td class="infoBoxContent"><br />Description:<br />${thisTaxZone.description}</td>
                         </tr>
                     </table>
                 </td>
