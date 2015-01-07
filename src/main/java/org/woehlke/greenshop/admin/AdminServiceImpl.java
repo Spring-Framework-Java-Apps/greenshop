@@ -19,9 +19,15 @@ import org.woehlke.greenshop.catalog.repositories.*;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
 import org.woehlke.greenshop.checkout.repository.OrderStatusRepository;
+import org.woehlke.greenshop.customer.entities.Customer;
+import org.woehlke.greenshop.customer.entities.CustomerInfo;
+import org.woehlke.greenshop.customer.model.CustomerBean;
+import org.woehlke.greenshop.customer.repository.CustomerInfoRepository;
+import org.woehlke.greenshop.customer.repository.CustomerRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,6 +72,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private OrderStatusRepository orderStatusRepository;
+
+    @Inject
+    private CustomerRepository customerRepository;
+
+    @Inject
+    private CustomerInfoRepository customerInfoRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -171,5 +183,34 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public OrderStatus findOrderStatusById(OrderStatusId ordersStatusId) {
         return orderStatusRepository.findOne(ordersStatusId);
+    }
+
+    @Override
+    public List<CustomerBean> findAllCustomers() {
+        List<CustomerBean> customerBeans = new ArrayList<>();
+        List<Customer> customers = customerRepository.findAll();
+        for(Customer customer:customers){
+            CustomerBean customerBean = new CustomerBean();
+            customerBean.setCustomer(customer);
+            CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+            customerBean.setCustomerInfo(info);
+            customerBeans.add(customerBean);
+        }
+        return customerBeans;
+    }
+
+    @Override
+    public int getNumberOfReviewsForCustomer(Customer customer) {
+        return reviewRepository.findByCustomersId(customer.getId()).size();
+    }
+
+    @Override
+    public CustomerBean getCustomerById(long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        CustomerBean customerBean = new CustomerBean();
+        customerBean.setCustomer(customer);
+        CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+        customerBean.setCustomerInfo(info);
+        return customerBean;
     }
 }

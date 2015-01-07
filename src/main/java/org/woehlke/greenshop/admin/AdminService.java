@@ -11,6 +11,8 @@ import org.woehlke.greenshop.catalog.entities.Special;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
+import org.woehlke.greenshop.customer.entities.Customer;
+import org.woehlke.greenshop.customer.model.CustomerBean;
 
 import java.util.List;
 
@@ -52,4 +54,10 @@ public interface AdminService extends UserDetailsService {
     List<OrderStatus> findAllOrderStatuses(Language language);
 
     OrderStatus findOrderStatusById(OrderStatusId ordersStatusId);
+
+    List<CustomerBean> findAllCustomers();
+
+    int getNumberOfReviewsForCustomer(Customer customer);
+
+    CustomerBean getCustomerById(long customerId);
 }
