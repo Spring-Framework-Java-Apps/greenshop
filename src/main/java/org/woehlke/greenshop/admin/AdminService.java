@@ -9,6 +9,8 @@ import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.Special;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
+import org.woehlke.greenshop.checkout.entities.OrderStatus;
+import org.woehlke.greenshop.checkout.entities.OrderStatusId;
 
 import java.util.List;
 
@@ -42,4 +44,12 @@ public interface AdminService extends UserDetailsService {
     List<TaxZone> findAllTaxZones();
 
     TaxZone findTaxZoneById(long taxZoneId);
+
+    List<Language> findAllLanguages();
+
+    Language findLanguageById(long languageId);
+
+    List<OrderStatus> findAllOrderStatuses(Language language);
+
+    OrderStatus findOrderStatusById(OrderStatusId ordersStatusId);
 }

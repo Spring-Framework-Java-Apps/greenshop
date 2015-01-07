@@ -16,6 +16,9 @@ import org.woehlke.greenshop.admin.repository.TaxZoneRepository;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.catalog.repositories.*;
+import org.woehlke.greenshop.checkout.entities.OrderStatus;
+import org.woehlke.greenshop.checkout.entities.OrderStatusId;
+import org.woehlke.greenshop.checkout.repository.OrderStatusRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -57,6 +60,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private TaxZoneRepository taxZoneRepository;
+
+    @Inject
+    private LanguageRepository languageRepository;
+
+    @Inject
+    private OrderStatusRepository orderStatusRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -142,5 +151,25 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public TaxZone findTaxZoneById(long taxZoneId) {
         return taxZoneRepository.findOne(taxZoneId);
+    }
+
+    @Override
+    public List<Language> findAllLanguages() {
+        return languageRepository.findAll();
+    }
+
+    @Override
+    public Language findLanguageById(long languageId) {
+        return languageRepository.findOne(languageId);
+    }
+
+    @Override
+    public List<OrderStatus> findAllOrderStatuses(Language language) {
+        return orderStatusRepository.findByLanguage(language);
+    }
+
+    @Override
+    public OrderStatus findOrderStatusById(OrderStatusId ordersStatusId) {
+        return orderStatusRepository.findOne(ordersStatusId);
     }
 }
