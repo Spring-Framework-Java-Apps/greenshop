@@ -123,35 +123,14 @@ public class CustomerInfo {
 
         CustomerInfo that = (CustomerInfo) o;
 
-        if (accountCreated != null ? !accountCreated.equals(that.accountCreated) : that.accountCreated != null)
-            return false;
-        if (accountLastModified != null ? !accountLastModified.equals(that.accountLastModified) : that.accountLastModified != null)
-            return false;
-        if (globalProductNotifications != null ? !globalProductNotifications.equals(that.globalProductNotifications) : that.globalProductNotifications != null)
-            return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (lastLogin != null ? !lastLogin.equals(that.lastLogin) : that.lastLogin != null) return false;
-        if (numberOfLogons != null ? !numberOfLogons.equals(that.numberOfLogons) : that.numberOfLogons != null)
-            return false;
-        if (passwordResetDate != null ? !passwordResetDate.equals(that.passwordResetDate) : that.passwordResetDate != null)
-            return false;
-        if (passwordResetKey != null ? !passwordResetKey.equals(that.passwordResetKey) : that.passwordResetKey != null)
-            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (lastLogin != null ? lastLogin.hashCode() : 0);
-        result = 31 * result + (numberOfLogons != null ? numberOfLogons.hashCode() : 0);
-        result = 31 * result + (accountCreated != null ? accountCreated.hashCode() : 0);
-        result = 31 * result + (accountLastModified != null ? accountLastModified.hashCode() : 0);
-        result = 31 * result + (globalProductNotifications != null ? globalProductNotifications.hashCode() : 0);
-        result = 31 * result + (passwordResetKey != null ? passwordResetKey.hashCode() : 0);
-        result = 31 * result + (passwordResetDate != null ? passwordResetDate.hashCode() : 0);
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
@@ -166,5 +145,13 @@ public class CustomerInfo {
                 ", passwordResetKey='" + passwordResetKey + '\'' +
                 ", passwordResetDate=" + passwordResetDate +
                 '}';
+    }
+
+    public void incNumberOfLogons() {
+        if(this.numberOfLogons==null){
+            numberOfLogons=1;
+        } else {
+            numberOfLogons++;
+        }
     }
 }

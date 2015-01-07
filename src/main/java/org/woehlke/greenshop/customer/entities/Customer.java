@@ -16,18 +16,23 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-/*
-customers_id	int(11)	NO	PRI		auto_increment
-customers_gender	char(1)	YES			
-customers_firstname	varchar(255)	NO			
-customers_lastname	varchar(255)	NO			
-customers_dob	datetime	NO		0000-00-00 00:00:00	
-customers_email_address	varchar(255)	NO	MUL		
-customers_default_address_id	int(11)	YES			
-customers_telephone	varchar(255)	NO			
-customers_fax	varchar(255)	YES			
-customers_password	varchar(60)	NO			
-customers_newsletter	char(1)	YES
+/**
+mysql> desc customers;
++------------------------------+--------------+------+-----+---------------------+----------------+
+| Field                        | Type         | Null | Key | Default             | Extra          |
++------------------------------+--------------+------+-----+---------------------+----------------+
+| customers_id                 | int(11)      | NO   | PRI | NULL                | auto_increment |
+| customers_gender             | char(1)      | YES  |     | NULL                |                |
+| customers_firstname          | varchar(255) | NO   |     | NULL                |                |
+| customers_lastname           | varchar(255) | NO   |     | NULL                |                |
+| customers_dob                | datetime     | NO   |     | 0000-00-00 00:00:00 |                |
+| customers_email_address      | varchar(255) | NO   | MUL | NULL                |                |
+| customers_default_address_id | int(11)      | YES  |     | NULL                |                |
+| customers_telephone          | varchar(255) | NO   |     | NULL                |                |
+| customers_fax                | varchar(255) | YES  |     | NULL                |                |
+| customers_password           | varchar(60)  | NO   |     | NULL                |                |
+| customers_newsletter         | char(1)      | YES  |     | NULL                |                |
++------------------------------+--------------+------+-----+---------------------+----------------+
  */
 @Entity
 @Table(name="customers")

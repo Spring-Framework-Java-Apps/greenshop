@@ -47,8 +47,6 @@ public class CreateAccountController extends AbstractController {
 			@Valid CreateNewCustomerFormBean createNewCustomerFormBean,
 			BindingResult result, Model model){
 		super.getDefaultBoxContent(model);
-		List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
-		model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 		if(customerService.findCustomerByEmail(createNewCustomerFormBean.getEmailAddress())!=null){
 			result.addError(new FieldError("createNewCustomerFormBean","emailAddress", "is already in use, choose another one"));
 		}
@@ -57,6 +55,8 @@ public class CreateAccountController extends AbstractController {
 			result.addError(new FieldError("createNewCustomerFormBean","confirmation","passwords doesn't match"));
 		}
 		if(result.hasErrors()){
+			List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+			model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 			for(ObjectError e :result.getAllErrors()){
 				logger.info(e.toString());
 			}

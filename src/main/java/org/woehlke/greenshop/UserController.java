@@ -155,6 +155,7 @@ public class UserController extends AbstractController {
 			persistentAddress.setStreetAddress(customersAddress.getStreetAddress());
 			persistentAddress.setSuburb(customersAddress.getSuburb());
 			customerService.updateAddressBook(persistentAddress);
+			customerService.updateCustomer(customer);
 			return "redirect:/addressBook";
 		}	
 	}
@@ -200,6 +201,7 @@ public class UserController extends AbstractController {
 			persistentAddress.setStreetAddress(customersAddress.getStreetAddress());
 			persistentAddress.setSuburb(customersAddress.getSuburb());
 			customerService.updateAddressBook(persistentAddress);
+			customerService.updateCustomer(customer);
 			return "redirect:/addressBook";
 		}
 	}
@@ -207,8 +209,12 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/addressBook/delete/{addressId}", method = RequestMethod.GET)
 	public String addressBookDelete(@PathVariable long addressId, Model model){
 		AddressBook customersAddress = customerService.findAddressById(addressId);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String customerEmail = auth.getName();
+		Customer customer = customerService.findCustomerByEmail(customerEmail);
 		if(!customersAddress.isPrimaryAddress()){
 			customerService.deleteAddress(customersAddress);
+			customerService.updateCustomer(customer);
 		}
 		return "redirect:/addressBook";
 	}
@@ -322,6 +328,7 @@ public class UserController extends AbstractController {
 			return "accountNotifications";
 		} else {
 			myCustomerInfo.setGlobalProductNotifications(customerInfo.getGlobalProductNotifications());
+			myCustomerInfo.setAccountLastModified(new Date());
 			customerService.updateCustomerInfo(myCustomerInfo);
 			customerService.updateProductNotifications(myCustomer,productNotification);
 			return "redirect:/account";

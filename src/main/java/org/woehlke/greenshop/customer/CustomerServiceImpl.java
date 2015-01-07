@@ -20,7 +20,6 @@ import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Product;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.entities.ProductDescriptionId;
-import org.woehlke.greenshop.catalog.model.CategoriesBean;
 import org.woehlke.greenshop.catalog.repositories.ProductDescriptionRepository;
 import org.woehlke.greenshop.catalog.repositories.ProductRepository;
 import org.woehlke.greenshop.customer.entities.*;
@@ -49,9 +48,6 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Inject
 	private ZoneRepository zoneRepository;
-	
-	@Inject
-	private AddressFormatRepository addressFormatRepository;
 
 	@Inject
 	private ProductNotificationRepository productNotificationRepository;
@@ -88,6 +84,8 @@ public class CustomerServiceImpl implements CustomerService {
 		CustomerInfo myCustomerInfo = new CustomerInfo();
 		myCustomerInfo.setId(customer.getId());
 		myCustomerInfo.setAccountCreated(new Date());
+		myCustomerInfo.incNumberOfLogons();
+		myCustomerInfo.setLastLogin(new Date());
 		customerInfoRepository.save(myCustomerInfo);
 	}
 	
@@ -136,21 +134,30 @@ public class CustomerServiceImpl implements CustomerService {
 		for(AddressBook a:addresses){
 			addressBookRepository.delete(a);
 		}
+		customerInfoRepository.delete(c.getId());
 		customerRepository.delete(c);
 	}
 
 	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		Customer customer = customerRepository.findByEmailAddress(username);
 		if(customer == null) throw new UsernameNotFoundException(username);
+		CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+		info.setLastLogin(new Date());
+		info.incNumberOfLogons();
+		customerInfoRepository.save(info);
 		return new UserDetailsBean(customer);
 	}
 
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void updateCustomer(Customer customer) {
-		customer=customerRepository.saveAndFlush(customer);
+		CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+		info.setAccountLastModified(new Date());
+		customerInfoRepository.save(info);
+		customer=customerRepository.save(customer);
 	}
 
 	@Override
@@ -228,11 +235,15 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		notification.setDateAdded(new Date());
 		productNotificationRepository.save(notification);
+		CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+		info.setAccountLastModified(new Date());
+		customerInfoRepository.save(info);
 	}
 
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void updateProductNotifications(Customer customer, long[] productNotification) {
+		boolean changed = false;
 		List<Long> choosenProducts = new ArrayList<Long>();
 		if(productNotification!=null && productNotification.length>0) {
 			for (long id : productNotification) {
@@ -244,7 +255,13 @@ public class CustomerServiceImpl implements CustomerService {
 		 	Long productId = notification.getId().getProductId();
 			if(!choosenProducts.contains(productId)){
 				productNotificationRepository.delete(notification);
+				changed = true;
 			}
+		}
+		if(changed){
+			CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+			info.setAccountLastModified(new Date());
+			customerInfoRepository.save(info);
 		}
 	}
 
