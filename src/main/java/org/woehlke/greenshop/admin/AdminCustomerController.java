@@ -5,6 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.woehlke.greenshop.admin.model.OrderAdminBean;
+import org.woehlke.greenshop.catalog.CatalogService;
+import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.customer.model.CustomerBean;
 
 import javax.inject.Inject;
@@ -18,6 +21,9 @@ public class AdminCustomerController {
 
     @Inject
     private AdminService adminService;
+
+    @Inject
+    private CatalogService catalogService;
 
     @RequestMapping(value = "/admin/customers", method = RequestMethod.GET)
     public String customers(Model model){
@@ -53,6 +59,26 @@ public class AdminCustomerController {
     public String orders(Model model){
         int menuCategory = AdminMenuCategory.CUSTOMERS.ordinal();
         model.addAttribute("menuCategory",menuCategory);
+        Language language = catalogService.findLanguageByCode("en");
+        List<OrderAdminBean> orders = adminService.getAllOrders(language);
+        model.addAttribute("orders",orders);
+        OrderAdminBean thisOrder = null;
+        if(orders.size()>0){
+            thisOrder = orders.iterator().next();
+        }
+        model.addAttribute("thisOrder",thisOrder);
+        return "admin/orders";
+    }
+
+    @RequestMapping(value = "/admin/orders/{orderId}", method = RequestMethod.GET)
+    public String orderId(@PathVariable long orderId, Model model){
+        int menuCategory = AdminMenuCategory.CUSTOMERS.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        Language language = catalogService.findLanguageByCode("en");
+        List<OrderAdminBean> orders = adminService.getAllOrders(language);
+        model.addAttribute("orders",orders);
+        OrderAdminBean thisOrder = adminService.findOrderById(orderId,language);
+        model.addAttribute("thisOrder",thisOrder);
         return "admin/orders";
     }
 }

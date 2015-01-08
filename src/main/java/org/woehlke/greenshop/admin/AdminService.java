@@ -5,6 +5,7 @@ import org.woehlke.greenshop.admin.entities.Administrator;
 import org.woehlke.greenshop.admin.entities.TaxClass;
 import org.woehlke.greenshop.admin.entities.TaxRate;
 import org.woehlke.greenshop.admin.entities.TaxZone;
+import org.woehlke.greenshop.admin.model.OrderAdminBean;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.Special;
@@ -60,4 +61,8 @@ public interface AdminService extends UserDetailsService {
     int getNumberOfReviewsForCustomer(Customer customer);
 
     CustomerBean getCustomerById(long customerId);
+
+    List<OrderAdminBean> getAllOrders(Language language);
+
+    OrderAdminBean findOrderById(long orderId, Language language);
 }

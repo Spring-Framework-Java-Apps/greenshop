@@ -9,6 +9,7 @@ import org.woehlke.greenshop.admin.entities.TaxClass;
 import org.woehlke.greenshop.admin.entities.TaxRate;
 import org.woehlke.greenshop.admin.entities.TaxZone;
 import org.woehlke.greenshop.admin.model.AdministratorBean;
+import org.woehlke.greenshop.admin.model.OrderAdminBean;
 import org.woehlke.greenshop.admin.repository.AdministratorRepository;
 import org.woehlke.greenshop.admin.repository.TaxClassRepository;
 import org.woehlke.greenshop.admin.repository.TaxRateRepository;
@@ -16,9 +17,13 @@ import org.woehlke.greenshop.admin.repository.TaxZoneRepository;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.catalog.repositories.*;
+import org.woehlke.greenshop.checkout.entities.Order;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
+import org.woehlke.greenshop.checkout.entities.OrderTotal;
+import org.woehlke.greenshop.checkout.repository.OrderRepository;
 import org.woehlke.greenshop.checkout.repository.OrderStatusRepository;
+import org.woehlke.greenshop.checkout.repository.OrderTotalRepository;
 import org.woehlke.greenshop.customer.entities.Customer;
 import org.woehlke.greenshop.customer.entities.CustomerInfo;
 import org.woehlke.greenshop.customer.model.CustomerBean;
@@ -78,6 +83,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private CustomerInfoRepository customerInfoRepository;
+
+    @Inject
+    private OrderRepository orderRepository;
+
+    @Inject
+    private OrderTotalRepository orderTotalRepository;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -212,5 +224,45 @@ public class AdminServiceImpl implements AdminService {
         CustomerInfo info = customerInfoRepository.findOne(customer.getId());
         customerBean.setCustomerInfo(info);
         return customerBean;
+    }
+
+    @Override
+    public List<OrderAdminBean> getAllOrders(Language language) {
+        List<OrderAdminBean> orders = new ArrayList<>();
+        List<Order> myOrders = orderRepository.findAll();
+        for(Order myOrder:myOrders){
+            OrderAdminBean bean = new OrderAdminBean();
+            bean.setOrderId(myOrder.getId());
+            bean.setCustomerName(myOrder.getCustomersName());
+            bean.setOrderPlaced(myOrder.getDatePurchased());
+            OrderTotal orderTotal = orderTotalRepository.findByOrderAndTotalClass(myOrder,"ot_total");
+            bean.setOrderTotal(orderTotal.getValue());
+            OrderStatusId orderStatusId = new OrderStatusId();
+            orderStatusId.setLanguage(language);
+            orderStatusId.setId(myOrder.getOrdersStatus());
+            OrderStatus orderStatus=orderStatusRepository.findOne(orderStatusId);
+            bean.setOrderStatus(orderStatus);
+            bean.setPaymentMethod(myOrder.getPaymentMethod());
+            orders.add(bean);
+        }
+        return orders;
+    }
+
+    @Override
+    public OrderAdminBean findOrderById(long orderId, Language language) {
+        Order myOrder = orderRepository.findOne(orderId);
+        OrderAdminBean bean = new OrderAdminBean();
+        bean.setOrderId(myOrder.getId());
+        bean.setCustomerName(myOrder.getCustomersName());
+        bean.setOrderPlaced(myOrder.getDatePurchased());
+        OrderTotal orderTotal = orderTotalRepository.findByOrderAndTotalClass(myOrder,"ot_total");
+        bean.setOrderTotal(orderTotal.getValue());
+        OrderStatusId orderStatusId = new OrderStatusId();
+        orderStatusId.setLanguage(language);
+        orderStatusId.setId(myOrder.getOrdersStatus());
+        OrderStatus orderStatus=orderStatusRepository.findOne(orderStatusId);
+        bean.setOrderStatus(orderStatus);
+        bean.setPaymentMethod(myOrder.getPaymentMethod());
+        return bean;
     }
 }
