@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.*;
 import org.woehlke.greenshop.catalog.repositories.*;
-import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Customer;
 
 @Named
@@ -20,6 +19,9 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Inject
 	private ProductDescriptionRepository productDescriptionRepository;
+
+	@Inject
+	private ProductDescriptionDao productDescriptionDao;
 	
 	@Inject
 	private ProductDescriptionRepositoryDao productDescriptionRepositoryDao;
@@ -560,6 +562,16 @@ public class CatalogServiceImpl implements CatalogService {
 		categoriesBean.setCategories(categories);
 		categoriesBean.setCategory2level(category2level);
 		return categoriesBean;
+	}
+
+	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+	public SpecialProduct viewProduct(SpecialProduct thisProduct) {
+		ProductDescription productDescription = thisProduct.getProductDescription();
+		productDescription.incViewed();
+		productDescription = productDescriptionDao.update(productDescription);
+		thisProduct.setProductDescription(productDescription);
+		return thisProduct;
 	}
 
 	private void addChildCategories(

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.catalog.entities.*;
@@ -94,8 +95,9 @@ public class CatalogController extends AbstractController {
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
 		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId,language);
-		model.addAttribute("product", thisProduct);
+		thisProduct = catalogService.viewProduct(thisProduct);
 		logger.info(thisProduct.toString());
+		model.addAttribute("product", thisProduct);
 		List<ProductImage> images = catalogService.findProductImages(thisProduct.getProductDescription().getProduct());
 		model.addAttribute("images", images);
 		int numberOfReviews = catalogService.getNumberOfReviewsForProduct(thisProduct.getProductDescription().getProduct());

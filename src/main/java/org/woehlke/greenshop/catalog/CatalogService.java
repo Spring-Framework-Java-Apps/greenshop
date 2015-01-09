@@ -68,4 +68,5 @@ public interface CatalogService {
 
 	CategoriesBean getAllCategories(Language language);
 
+	SpecialProduct viewProduct(SpecialProduct thisProduct);
 }

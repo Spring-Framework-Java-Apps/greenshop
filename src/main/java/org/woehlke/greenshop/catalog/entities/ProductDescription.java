@@ -7,8 +7,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Null;
+import java.beans.Transient;
 
 
 @Entity
@@ -28,13 +27,10 @@ public class ProductDescription {
 	
 	@Column(name="products_viewed")
 	private int viewed;
-	
-	@Null
+
 	@Column(name="products_description",columnDefinition="text")
 	private String description;
 
-	@Null
-	@Max(255)
 	@Column(name="products_url",columnDefinition="varchar(255)")
 	private String productsUrl;
 	
@@ -96,61 +92,29 @@ public class ProductDescription {
 				+ description + ", products_url=" + productsUrl + ", name="
 				+ name + "]";
 	}
-	
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result
-				+ ((language == null) ? 0 : language.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result
-				+ ((productsUrl == null) ? 0 : productsUrl.hashCode());
-		result = prime * result + viewed;
-		return result;
-	}
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ProductDescription)) return false;
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProductDescription other = (ProductDescription) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (language == null) {
-			if (other.language != null)
-				return false;
-		} else if (!language.equals(other.language))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (product == null) {
-			if (other.product != null)
-				return false;
-		} else if (!product.equals(other.product))
-			return false;
-		if (productsUrl == null) {
-			if (other.productsUrl != null)
-				return false;
-		} else if (!productsUrl.equals(other.productsUrl))
-			return false;
-		if (viewed != other.viewed)
-			return false;
+		ProductDescription that = (ProductDescription) o;
+
+		if (language != null ? !language.equals(that.language) : that.language != null) return false;
+		if (product != null ? !product.equals(that.product) : that.product != null) return false;
+
 		return true;
 	}
 
+	@Override
+	public int hashCode() {
+		int result = product != null ? product.hashCode() : 0;
+		result = 31 * result + (language != null ? language.hashCode() : 0);
+		return result;
+	}
+
+	@Transient
+	public void incViewed() {
+		viewed++;
+	}
 }
