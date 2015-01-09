@@ -1,5 +1,6 @@
 package org.woehlke.greenshop.admin;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
@@ -264,5 +265,11 @@ public class AdminServiceImpl implements AdminService {
         bean.setOrderStatus(orderStatus);
         bean.setPaymentMethod(myOrder.getPaymentMethod());
         return bean;
+    }
+
+    @Override
+    public List<ProductDescription> findProductsViewed(Language language) {
+        Sort sort = new Sort(Sort.Direction.DESC,"viewed");
+        return productDescriptionRepository.findAll(sort);
     }
 }

@@ -8,6 +8,7 @@ import org.woehlke.greenshop.admin.entities.TaxZone;
 import org.woehlke.greenshop.admin.model.OrderAdminBean;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
+import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.entities.Special;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
@@ -65,4 +66,6 @@ public interface AdminService extends UserDetailsService {
     List<OrderAdminBean> getAllOrders(Language language);
 
     OrderAdminBean findOrderById(long orderId, Language language);
+
+    List<ProductDescription> findProductsViewed(Language language);
 }

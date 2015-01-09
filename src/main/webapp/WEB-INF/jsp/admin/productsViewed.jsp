@@ -18,6 +18,14 @@
                         <td class="dataTableHeadingContent">Products</td>
                         <td class="dataTableHeadingContent" align="center">Viewed&nbsp;</td>
                     </tr>
+                    <c:forEach var="product" items="${productsViewed}" varStatus="status">
+                        <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/categories.php?action=new_product_preview&read=only&pID=28&origin=stats_products_viewed.php?page=1'">
+                            <td class="dataTableContent">${status.index}.</td>
+                            <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?action=new_product_preview&read=only&pID=28&origin=stats_products_viewed.php?page=1">${product.name}</a> (${product.language.name})</td>
+                            <td class="dataTableContent" align="center">${product.viewed}&nbsp;</td>
+                        </tr>
+                    </c:forEach>
+                    <!--
                     <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/categories.php?action=new_product_preview&read=only&pID=28&origin=stats_products_viewed.php?page=1'">
                         <td class="dataTableContent">01.</td>
                         <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?action=new_product_preview&read=only&pID=28&origin=stats_products_viewed.php?page=1">Samsung Galaxy Tab</a> (English)</td>
@@ -118,6 +126,7 @@
                         <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?action=new_product_preview&read=only&pID=24&origin=stats_products_viewed.php?page=1">Disciples: Sacred Lands</a> (English)</td>
                         <td class="dataTableContent" align="center">0&nbsp;</td>
                     </tr>
+                    -->
                 </table></td>
             </tr>
             <tr>
