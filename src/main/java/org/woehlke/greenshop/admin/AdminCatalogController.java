@@ -1,17 +1,15 @@
 package org.woehlke.greenshop.admin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.catalog.CatalogService;
-import org.woehlke.greenshop.catalog.entities.Language;
-import org.woehlke.greenshop.catalog.entities.Manufacturer;
-import org.woehlke.greenshop.catalog.entities.Review;
-import org.woehlke.greenshop.catalog.entities.Special;
-import org.woehlke.greenshop.catalog.model.ReviewProduct;
-import org.woehlke.greenshop.catalog.model.SpecialProduct;
+import org.woehlke.greenshop.catalog.entities.*;
+import org.woehlke.greenshop.catalog.model.*;
 
 import javax.inject.Inject;
 import java.util.Date;
@@ -23,6 +21,8 @@ import java.util.List;
 @Controller
 public class AdminCatalogController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AdminCatalogController.class);
+
     @Inject
     private AdminService adminService;
 
@@ -30,9 +30,50 @@ public class AdminCatalogController {
     private CatalogService catalogService;
 
     @RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
-    public String rootCategories(Model model){
+     public String rootCategories(Model model){
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
+        Language language = catalogService.findLanguageByCode("en");
+        CategoryTree rootCategories =  catalogService.getCategoriesTree(0L, language);
+        model.addAttribute("rootCategories",rootCategories);
+        CategoryTreeNode thisCategory = null;
+        if(rootCategories.getChildren().size()>0){
+            thisCategory = rootCategories.getChildren().iterator().next();
+            logger.info(thisCategory.toString());
+        } else {
+            logger.info("thisCategory: null");
+        }
+        model.addAttribute("thisCategory",thisCategory);
+        logger.info("################################################");
+        logger.info(rootCategories.toString());
+        logger.info("################################################");
+        return "admin/categories";
+    }
+
+    @RequestMapping(value = "/admin/categories/{categoryId}/parent/{parentId}", method = RequestMethod.GET)
+    public String rootCategoryId(
+            @PathVariable long categoryId,
+            @PathVariable long parentId, Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        Language language = catalogService.findLanguageByCode("en");
+        CategoryTree rootCategories =  catalogService.getCategoriesTree(parentId, language);
+        model.addAttribute("rootCategories",rootCategories);
+        CategoryTreeNode thisCategory = null;
+        if(categoryId != 0){
+            thisCategory = catalogService.findCategoryById(categoryId, language);
+        } else {
+            if(rootCategories.getChildren().size()>0) {
+                thisCategory = rootCategories.getChildren().iterator().next();
+            } else {
+                logger.info("################################################");
+                logger.info("children.size: 0");
+            }
+        }
+        model.addAttribute("thisCategory",thisCategory);
+        logger.info("################################################");
+        logger.info(rootCategories.toString());
+        logger.info("################################################");
         return "admin/categories";
     }
 

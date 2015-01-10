@@ -65,7 +65,7 @@ public class CatalogServiceImplTest {
 		long rootCategoryId[] = {21L,11L,9L,1L,2L,3L,0L};
 		for(long categoryId:rootCategoryId){
 			CategoryTree categoryTree = catalogService.getCategoriesTree(categoryId, language);
-			Assert.assertEquals(categoryId, categoryTree.getCategoryId());
+			Assert.assertEquals(categoryId, categoryTree.getThisCategoryId());
 			logger.info("#---------------------------------------");
 			for(CategoryTreeNode node:categoryTree.getCategoriesMenuList()){
 				String level="";
@@ -85,6 +85,40 @@ public class CatalogServiceImplTest {
 				logger.info(info.toString());
 			}
 			logger.info("#---------------------------------------");
+			for(CategoryTreeNode node:categoryTree.getThisLevelCategories()){
+				String level="";
+				for(int i=0;i<node.getLevel();i++){
+					level+=" ";
+				}
+				StringBuilder info = new StringBuilder();
+				info.append("#");
+				info.append(level);
+				info.append(node.getCategoryDescription().getName());
+				if(node.isHasChildCategories()){
+					info.append("-> ");
+				}
+				info.append("(");
+				info.append(node.getNumberOfProducts());
+				info.append(")");
+				logger.info(info.toString());
+			}
+			for(CategoryTreeNode node:categoryTree.getChildren()){
+				String level="";
+				for(int i=0;i<node.getLevel();i++){
+					level+=" ";
+				}
+				StringBuilder info = new StringBuilder();
+				info.append("#");
+				info.append(level);
+				info.append(node.getCategoryDescription().getName());
+				if(node.isHasChildCategories()){
+					info.append("-> ");
+				}
+				info.append("(");
+				info.append(node.getNumberOfProducts());
+				info.append(")");
+				logger.info(info.toString());
+			}
 		}
 	}
 	

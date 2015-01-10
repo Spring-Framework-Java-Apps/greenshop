@@ -224,9 +224,10 @@ public class CatalogServiceImpl implements CatalogService {
 
 	public CategoryTree getCategoriesTree(long categoryId,Language language){
 		CategoryTree categoryTree = new CategoryTree();
-		categoryTree.setCategoryId(categoryId);
 		categoryTree = getNumberOfProductsPerCategory(categoryTree);
+		categoryTree.setThisCategoryId(categoryId);
 		if(categoryId==0L){
+			categoryTree.setThisCategory(null);
 			List<CategoryTreeNode> categoriesMenuList = new ArrayList<CategoryTreeNode>();
 			List<CategoryDescription> thisLevelCategories = categoryDescriptionRepositoryDao.findCategoriesByParentId(0L, language);
 			for(CategoryDescription oneCategory:thisLevelCategories){
@@ -238,6 +239,7 @@ public class CatalogServiceImpl implements CatalogService {
 			categoryTree.setCategoriesMenuList(categoriesMenuList);
 		} else {
 			CategoryDescription thisCategory = categoryDescriptionRepositoryDao.findByCategoryId(categoryId, language);
+			categoryTree.setThisCategory(thisCategory);
 			Stack<CategoryDescription> stack = new Stack<CategoryDescription>();
 			Stack<CategoryDescription> stackBreadcrumb = new Stack<CategoryDescription>();
 			stack.push(thisCategory);
@@ -290,6 +292,7 @@ public class CatalogServiceImpl implements CatalogService {
 							CategoryTreeNode subnode = new CategoryTreeNode();
 							subnode.setLevel(level+1);
 							subnode.setCategoryDescription(oneSubCategory);
+							subnode.setNumberOfChildCategories(subLevelCategories.size());
 							result.add(subnode);
 						}
 					}
@@ -586,6 +589,24 @@ public class CatalogServiceImpl implements CatalogService {
 			category2level.put(categoryDescription,level);
 			addChildCategories(categoryDescription,level+1,categories,category2level);
 		}
+	}
+
+	@Override
+	public CategoryTreeNode findCategoryById(long categoryId, Language language) {
+		CategoryDescription thisCategory = categoryDescriptionRepositoryDao.findByCategoryId(categoryId, language);
+		CategoryTreeNode categoryTreeNode = new CategoryTreeNode();
+		categoryTreeNode.setCategoryDescription(thisCategory);
+		List<CategoryDescription> thisLevelCategories = categoryDescriptionRepositoryDao.findCategoriesByParentId(categoryId, language);
+		categoryTreeNode.setHasChildCategories(!thisLevelCategories.isEmpty());
+		categoryTreeNode.setNumberOfChildCategories(thisLevelCategories.size());
+		int level = 0;
+		CategoryDescription oneCategory = thisCategory;
+		while(oneCategory.getCategory().getParentId()!=0L){
+			oneCategory = categoryDescriptionRepositoryDao.findByCategoryId(oneCategory.getCategory().getParentId(), language);
+			level++;
+		}
+		categoryTreeNode.setLevel(level);
+		return categoryTreeNode;
 	}
 
 }

@@ -284,13 +284,21 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", quantity=" + quantity + ", model="
-				+ model + ", image=" + image + ", price=" + price
-				+ ", dateAdded=" + dateAdded + ", lastModified=" + lastModified
-				+ ", dateAvailable=" + dateAvailable + ", weight=" + weight
-				+ ", status=" + status + ", taxClassId=" + taxClassId
-				+ ", manufacturer=" + manufacturer + ", ordered=" + ordered
-				+ ", categories=" + categories + "]";
+		return "Product{" +
+				"id=" + id +
+				", quantity=" + quantity +
+				", model='" + model + '\'' +
+				", image='" + image + '\'' +
+				", price=" + price +
+				", dateAdded=" + dateAdded +
+				", lastModified=" + lastModified +
+				", dateAvailable=" + dateAvailable +
+				", weight=" + weight +
+				", status=" + status +
+				", taxClassId=" + taxClassId +
+				", manufacturer=" + manufacturer +
+				", ordered=" + ordered +
+				", categories=" + categories +
+				'}';
 	}
-	
 }

@@ -69,4 +69,6 @@ public interface CatalogService {
 	CategoriesBean getAllCategories(Language language);
 
 	SpecialProduct viewProduct(SpecialProduct thisProduct);
+
+	CategoryTreeNode findCategoryById(long categoryId, Language language);
 }

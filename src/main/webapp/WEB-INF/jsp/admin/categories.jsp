@@ -28,31 +28,32 @@
                         <td class="dataTableHeadingContent" align="center">Status</td>
                         <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                     </tr>
-                    <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/categories.php?cPath=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=1&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Hardware</strong></td>
-                        <td class="dataTableContent" align="center">&nbsp;</td>
-                        <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
-                    </tr>
-                    <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Software</strong></td>
-                        <td class="dataTableContent" align="center">&nbsp;</td>
-                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=2&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
-                    </tr>
-                    <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>DVD Movies</strong></td>
-                        <td class="dataTableContent" align="center">&nbsp;</td>
-                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=3&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
-                    </tr>
-                    <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=21&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1'">
-                        <td class="dataTableContent"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=21&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>Gadgets</strong></td>
-                        <td class="dataTableContent" align="center">&nbsp;</td>
-                        <td class="dataTableContent" align="right"><a href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=21&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
-                    </tr>
+                    <c:forEach var="category" items="${rootCategories.children}">
+                    <c:if test="${category.categoryDescription.category.id == thisCategory.categoryDescription.category.id}">
+                        <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}"/>'">
+                            <td class="dataTableContent"><a href="<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}"/>"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>${category.categoryDescription.name}</strong></td>
+                            <td class="dataTableContent" align="center">&nbsp;</td>
+                            <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${category.categoryDescription.category.id != thisCategory.categoryDescription.category.id}">
+                        <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/categories/${category.categoryDescription.category.id}/parent/${category.categoryDescription.category.parentId}"/>'">
+                            <td class="dataTableContent"><a href="<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}"/>"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>${category.categoryDescription.name}</strong></td>
+                            <td class="dataTableContent" align="center">&nbsp;</td>
+                            <td class="dataTableContent" align="right"><a href="<c:url value="/admin/categories/${category.categoryDescription.category.id}/parent/${category.categoryDescription.category.parentId}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                        </tr>
+                    </c:if>
+                    </c:forEach>
                     <tr>
                         <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                             <tr>
                                 <td class="smallText">Categories:&nbsp;4<br />Products:&nbsp;0</td>
+                                <c:if test="${rootCategories.thisCategoryId == 0}">
                                 <td align="right" class="smallText"><span class="tdbLink"><a id="tdb1" href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&action=new_category&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">New Category</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb2" href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&action=new_product&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">New Product</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>&nbsp;</td>
+                                </c:if>
+                                <c:if test="${rootCategories.thisCategoryId != 0}">
+                                    <td align="right" class="smallText"><span class="tdbLink"><a id="tdb1" href="<c:url value="/admin/categories/0/parent/${rootCategories.thisCategory.category.parentId}"/>">Back</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-triangle-1-w"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb2" href="http://localhost/oscommerce2/admin/categories.php?cPath=21&action=new_category">New Category</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="http://localhost/oscommerce2/admin/categories.php?cPath=21&action=new_product">New Product</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>&nbsp;</td>
+                                </c:if>
                             </tr>
                         </table></td>
                     </tr>
@@ -60,21 +61,26 @@
                 <td width="25%" valign="top">
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr class="infoBoxHeading">
-                            <td class="infoBoxHeading"><strong>Hardware</strong></td>
+                            <td class="infoBoxHeading"><strong>${thisCategory.categoryDescription.name}</strong></td>
                         </tr>
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr>
+                            <c:if test="${rootCategories.thisCategoryId == 0}">
                             <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb3" href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=1&action=edit_category&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Edit</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb4" href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=1&action=delete_category&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Delete</a></span><script type="text/javascript">$("#tdb4").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb5" href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&cID=1&action=move_category&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">Move</a></span><script type="text/javascript">$("#tdb5").button({icons:{primary:"ui-icon-arrow-4"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                            </c:if>
+                            <c:if test="${rootCategories.thisCategoryId != 0}">
+                                <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb4" href="http://localhost/oscommerce2/admin/categories.php?cPath=3&cID=10&action=edit_category">Edit</a></span><script type="text/javascript">$("#tdb4").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb5" href="http://localhost/oscommerce2/admin/categories.php?cPath=3&cID=10&action=delete_category">Delete</a></span><script type="text/javascript">$("#tdb5").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb6" href="http://localhost/oscommerce2/admin/categories.php?cPath=3&cID=10&action=move_category">Move</a></span><script type="text/javascript">$("#tdb6").button({icons:{primary:"ui-icon-arrow-4"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                            </c:if>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Date Added: 12/27/2014</td>
+                            <td class="infoBoxContent"><br />Date Added: ${thisCategory.categoryDescription.category.dateAdded}</td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br /><img src="resources/images/category_hardware.gif" border="0" alt="Hardware" title="Hardware" width="57" height="40" /><br />category_hardware.gif</td>
+                            <td class="infoBoxContent"><br /><img src="resources/images/${thisCategory.categoryDescription.category.image}" border="0" alt="${thisCategory.categoryDescription.name}" title="${thisCategory.categoryDescription.name}" width="57" height="40" /><br />${thisCategory.categoryDescription.category.image}</td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Subcategories: 8<br />Products: 6</td>
+                            <td class="infoBoxContent"><br />Subcategories: ${thisCategory.numberOfChildCategories}<br />Products: ${thisCategory.numberOfProducts}</td>
                         </tr>
                     </table>
                 </td>

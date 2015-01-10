@@ -152,9 +152,13 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", image=" + image + ", parentId="
-				+ parentId + ", sortOrder=" + sortOrder + ", dateAdded="
-				+ dateAdded + ", lastModified=" + lastModified + "]";
+		return "Category{" +
+				"id=" + id +
+				", image='" + image + '\'' +
+				", parentId=" + parentId +
+				", sortOrder=" + sortOrder +
+				", dateAdded=" + dateAdded +
+				", lastModified=" + lastModified +
+				'}';
 	}
-	
 }

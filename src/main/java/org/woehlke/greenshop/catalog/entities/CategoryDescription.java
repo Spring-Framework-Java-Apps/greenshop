@@ -91,8 +91,10 @@ public class CategoryDescription {
 
 	@Override
 	public String toString() {
-		return "CategoryDescription [category=" + category + ", language="
-				+ language + ", name=" + name + "]";
+		return "CategoryDescription{" +
+				"category=" + category +
+				", language=" + language +
+				", name='" + name + '\'' +
+				'}';
 	}
-	
 }
