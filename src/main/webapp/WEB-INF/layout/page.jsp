@@ -32,6 +32,7 @@
 <tiles:insertAttribute name="quickFindBox" />
 <tiles:insertAttribute name="newProductsBox" />
 <tiles:insertAttribute name="informationPagesBox" />
+<tiles:insertAttribute name="paymentProviderBox" />
 </div>
 <div id="columnRight" class="grid_4">
 <tiles:insertAttribute name="shoppingCartBox" />
