@@ -44,6 +44,14 @@
                         </tr>
                     </c:if>
                     </c:forEach>
+                    <c:forEach var="product" items="${rootCategories.thisCategoryProducts}">
+                        <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10'">
+                            <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10&action=new_product_preview"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;${product.name}</td>
+                            <td class="dataTableContent" align="center">
+                                <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://localhost/oscommerce2/admin/categories.php?action=setflag&flag=0&pID=10&cPath=3_10"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
+                            <td class="dataTableContent" align="right"><a href="http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                        </tr>
+                    </c:forEach>
                     <tr>
                         <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                             <tr>
