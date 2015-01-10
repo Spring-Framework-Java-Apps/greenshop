@@ -15,11 +15,14 @@
 		<put-attribute name="informationPagesBox" value="/WEB-INF/layout/informationPagesBox.jsp" />
 		<!-- columns right -->
 		<put-attribute name="shoppingCartBox" value="/WEB-INF/layout/shoppingCartBox.jsp" />
-		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/bestsellersBox.jsp" />
 		<put-attribute name="specialsBox" value="/WEB-INF/layout/specialsBox.jsp" />
 		<put-attribute name="reviewsBox" value="/WEB-INF/layout/reviewsBox.jsp" />
-		<put-attribute name="currenciesBox" value="/WEB-INF/layout/currenciesBox.jsp" />
 		<put-attribute name="shareProductBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="manufacturerInfoBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="setNotificationBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="writeReviewBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="languagesBox" value="/WEB-INF/layout/languagesBox.jsp" />
+		<put-attribute name="currenciesBox" value="/WEB-INF/layout/currenciesBox.jsp" />
 		<!-- footer -->
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 		<put-attribute name="banner" value="/WEB-INF/layout/banner.jsp" />

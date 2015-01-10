@@ -35,10 +35,16 @@
 </div>
 <div id="columnRight" class="grid_4">
 <tiles:insertAttribute name="shoppingCartBox" />
-<tiles:insertAttribute name="bestsellersBox" />
+
 <tiles:insertAttribute name="specialsBox" />
-<tiles:insertAttribute name="shareProductBox" />
 <tiles:insertAttribute name="reviewsBox" />
+
+<tiles:insertAttribute name="manufacturerInfoBox" />
+<tiles:insertAttribute name="setNotificationBox" />
+<tiles:insertAttribute name="shareProductBox" />
+<tiles:insertAttribute name="writeReviewBox" />
+
+<tiles:insertAttribute name="languagesBox" />
 <tiles:insertAttribute name="currenciesBox" />
 </div>
 

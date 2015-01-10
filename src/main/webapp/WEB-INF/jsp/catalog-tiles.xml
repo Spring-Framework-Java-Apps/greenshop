@@ -13,10 +13,12 @@
 
 	<definition name="product" extends="page">
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/product.jsp" />
-		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
-		<put-attribute name="specialsBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
+		<put-attribute name="specialsBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="reviewsBox" value="/WEB-INF/layout/emptyBox.jsp" />
 		<put-attribute name="shareProductBox" value="/WEB-INF/layout/shareProductBox.jsp" />
-		<put-attribute name="reviewsBox" value="/WEB-INF/layout/writeReviewBox.jsp" />
+		<put-attribute name="manufacturerInfoBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
+		<put-attribute name="setNotificationBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
+		<put-attribute name="writeReviewBox" value="/WEB-INF/layout/writeReviewBox.jsp" />
 	</definition>
 
 	<definition name="category" extends="page">
@@ -105,23 +107,29 @@
 
 	<definition name="writeReviewForProduct" extends="page">
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/writeReviewForProduct.jsp" />
-		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
-		<put-attribute name="specialsBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
+		<put-attribute name="specialsBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="reviewsBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="manufacturerInfoBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
+		<put-attribute name="setNotificationBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
 		<put-attribute name="shareProductBox" value="/WEB-INF/layout/shareProductBox.jsp" />
-		<put-attribute name="reviewsBox" value="/WEB-INF/layout/writeReviewBox.jsp" />
+		<put-attribute name="writeReviewBox" value="/WEB-INF/layout/writeReviewBox.jsp" />
 	</definition>
 
 	<definition name="showReviews" extends="page">
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/showReviews.jsp" />
-		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
-		<put-attribute name="specialsBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
+		<put-attribute name="specialsBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="reviewsBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="manufacturerInfoBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
+		<put-attribute name="setNotificationBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
 		<put-attribute name="shareProductBox" value="/WEB-INF/layout/shareProductBox.jsp" />
 	</definition>
 
 	<definition name="showReview" extends="page">
 		<put-attribute name="bodyContent" value="/WEB-INF/jsp/showReview.jsp" />
-		<put-attribute name="bestsellersBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
-		<put-attribute name="specialsBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
+		<put-attribute name="specialsBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="reviewsBox" value="/WEB-INF/layout/emptyBox.jsp" />
+		<put-attribute name="manufacturerInfoBox" value="/WEB-INF/layout/manufacturerInfoBox.jsp" />
+		<put-attribute name="setNotificationBox" value="/WEB-INF/layout/setNotificationBox.jsp" />
 		<put-attribute name="shareProductBox" value="/WEB-INF/layout/shareProductBox.jsp" />
 	</definition>
 
