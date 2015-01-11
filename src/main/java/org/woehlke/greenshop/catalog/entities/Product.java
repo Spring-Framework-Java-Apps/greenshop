@@ -1,5 +1,6 @@
 package org.woehlke.greenshop.catalog.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class Product {
 	@JoinTable(name = "products_to_categories",
 		joinColumns = @JoinColumn(name = "products_id"),
 		inverseJoinColumns = @JoinColumn(name = "categories_id"))
-	private List<Category> categories;
+	private List<Category> categories = new ArrayList<>();
 	
 	public Long getId() {
 		return id;

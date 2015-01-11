@@ -68,4 +68,6 @@ public interface AdminService extends UserDetailsService {
     OrderAdminBean findOrderById(long orderId, Language language);
 
     List<ProductDescription> findProductsViewed(Language language);
+
+    List<ProductDescription> findProductsByCategoryId(long categoryId, Language language);
 }

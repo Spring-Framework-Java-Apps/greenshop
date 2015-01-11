@@ -44,7 +44,7 @@
                         </tr>
                     </c:if>
                     </c:forEach>
-                    <c:forEach var="product" items="${rootCategories.thisCategoryProducts}">
+                    <c:forEach var="product" items="${thisCategoryProducts}">
                         <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10'">
                             <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10&action=new_product_preview"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;${product.name}</td>
                             <td class="dataTableContent" align="center">

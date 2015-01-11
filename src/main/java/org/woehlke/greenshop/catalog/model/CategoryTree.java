@@ -15,7 +15,6 @@ public class CategoryTree {
 	private Map<Long,Long> categoryIdToNumberOfProducts;
 	private Map<Long,Boolean> hasChildrenMap;
 	private List<CategoryDescription> breadcrumb;
-	private List<ProductDescription> thisCategoryProducts;
 
 	public List<CategoryTreeNode> getThisLevelCategories(){
 		if(thisCategoryId==0){
@@ -104,14 +103,6 @@ public class CategoryTree {
 		this.breadcrumb = breadcrumb;
 	}
 
-	public List<ProductDescription> getThisCategoryProducts() {
-		return thisCategoryProducts;
-	}
-
-	public void setThisCategoryProducts(List<ProductDescription> thisCategoryProducts) {
-		this.thisCategoryProducts = thisCategoryProducts;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -128,8 +119,6 @@ public class CategoryTree {
 		if (hasChildrenMap != null ? !hasChildrenMap.equals(that.hasChildrenMap) : that.hasChildrenMap != null)
 			return false;
 		if (thisCategory != null ? !thisCategory.equals(that.thisCategory) : that.thisCategory != null) return false;
-		if (thisCategoryProducts != null ? !thisCategoryProducts.equals(that.thisCategoryProducts) : that.thisCategoryProducts != null)
-			return false;
 
 		return true;
 	}
@@ -142,7 +131,6 @@ public class CategoryTree {
 		result = 31 * result + (categoryIdToNumberOfProducts != null ? categoryIdToNumberOfProducts.hashCode() : 0);
 		result = 31 * result + (hasChildrenMap != null ? hasChildrenMap.hashCode() : 0);
 		result = 31 * result + (breadcrumb != null ? breadcrumb.hashCode() : 0);
-		result = 31 * result + (thisCategoryProducts != null ? thisCategoryProducts.hashCode() : 0);
 		return result;
 	}
 
@@ -155,7 +143,6 @@ public class CategoryTree {
 				", categoryIdToNumberOfProducts=" + categoryIdToNumberOfProducts +
 				", hasChildrenMap=" + hasChildrenMap +
 				", breadcrumb=" + breadcrumb +
-				", thisCategoryProducts=" + thisCategoryProducts +
 				'}';
 	}
 }

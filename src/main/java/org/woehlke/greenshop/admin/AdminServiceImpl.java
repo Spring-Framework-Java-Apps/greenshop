@@ -53,6 +53,12 @@ public class AdminServiceImpl implements AdminService {
     private ProductRepository productRepository;
 
     @Inject
+    private ProductRepositoryDao productRepositoryDao;
+
+    @Inject
+    private CategoryRepository categoryRepository;
+
+    @Inject
     private SpecialRepository specialRepository;
 
     @Inject
@@ -271,5 +277,19 @@ public class AdminServiceImpl implements AdminService {
     public List<ProductDescription> findProductsViewed(Language language) {
         Sort sort = new Sort(Sort.Direction.DESC,"viewed");
         return productDescriptionRepository.findAll(sort);
+    }
+
+    @Override
+    public List<ProductDescription> findProductsByCategoryId(long categoryId, Language language) {
+        List<ProductDescription> productsByCategoryId = new ArrayList<>();
+        List<Product> products = productRepositoryDao.findByCategoryId(categoryId);
+        for(Product product :products){
+            ProductDescriptionId id = new ProductDescriptionId();
+            id.setProduct(product);
+            id.setLanguage(language);
+            ProductDescription productDescription = productDescriptionRepository.findOne(id);
+            productsByCategoryId.add(productDescription);
+        }
+        return productsByCategoryId;
     }
 }

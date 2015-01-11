@@ -72,4 +72,12 @@ public class Administrator {
         result = 31 * result + (userPassword != null ? userPassword.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Administrator{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

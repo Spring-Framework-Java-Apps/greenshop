@@ -44,6 +44,8 @@ public class AdminCatalogController {
             logger.info("thisCategory: null");
         }
         model.addAttribute("thisCategory",thisCategory);
+        List<ProductDescription> thisCategoryProducts = adminService.findProductsByCategoryId(0L, language);
+        model.addAttribute("thisCategoryProducts",thisCategoryProducts);
         logger.info("################################################");
         logger.info(rootCategories.toString());
         logger.info("################################################");
@@ -71,6 +73,8 @@ public class AdminCatalogController {
             }
         }
         model.addAttribute("thisCategory",thisCategory);
+        List<ProductDescription> thisCategoryProducts = adminService.findProductsByCategoryId(parentId, language);
+        model.addAttribute("thisCategoryProducts",thisCategoryProducts);
         logger.info("################################################");
         logger.info(rootCategories.toString());
         logger.info("################################################");

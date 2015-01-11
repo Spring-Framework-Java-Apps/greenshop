@@ -237,12 +237,8 @@ public class CatalogServiceImpl implements CatalogService {
 				categoriesMenuList.add(node);
 			}
 			categoryTree.setCategoriesMenuList(categoriesMenuList);
-			List<ProductDescription> thisCategoryProducts =  productDescriptionRepositoryDao.findByCategory(null, language);
-			categoryTree.setThisCategoryProducts(thisCategoryProducts);
 		} else {
 			CategoryDescription thisCategory = categoryDescriptionRepositoryDao.findByCategoryId(categoryId, language);
-			List<ProductDescription> thisCategoryProducts =  productDescriptionRepositoryDao.findByCategory(thisCategory.getCategory(), language);
-			categoryTree.setThisCategoryProducts(thisCategoryProducts);
 			categoryTree.setThisCategory(thisCategory);
 			Stack<CategoryDescription> stack = new Stack<CategoryDescription>();
 			Stack<CategoryDescription> stackBreadcrumb = new Stack<CategoryDescription>();
