@@ -46,21 +46,33 @@ public class AdminCatalogController {
         model.addAttribute("thisCategory",thisCategory);
         List<ProductDescription> thisCategoryProducts = adminService.findProductsByCategoryId(0L, language);
         model.addAttribute("thisCategoryProducts",thisCategoryProducts);
+        if(thisCategoryProducts.isEmpty()){
+            model.addAttribute("thisProductId",0L);
+            model.addAttribute("thisProduct",null);
+        } else {
+            ProductDescription pd = thisCategoryProducts.iterator().next();
+            model.addAttribute("thisProduct",pd);
+            model.addAttribute("thisProductId",pd.getProduct().getId());
+        }
         logger.info("################################################");
         logger.info(rootCategories.toString());
         logger.info("################################################");
         return "admin/categories";
     }
 
-    @RequestMapping(value = "/admin/categories/{categoryId}/parent/{parentId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/categories/{categoryId}/parent/{parentId}/product/{productId}", method = RequestMethod.GET)
     public String rootCategoryId(
             @PathVariable long categoryId,
-            @PathVariable long parentId, Model model){
+            @PathVariable long parentId,
+            @PathVariable long productId,
+            Model model){
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         Language language = catalogService.findLanguageByCode("en");
         CategoryTree rootCategories =  catalogService.getCategoriesTree(parentId, language);
         model.addAttribute("rootCategories",rootCategories);
+        model.addAttribute("categoryId",categoryId);
+        model.addAttribute("parentId",parentId);
         CategoryTreeNode thisCategory = null;
         if(categoryId != 0){
             thisCategory = catalogService.findCategoryById(categoryId, language);
@@ -75,6 +87,18 @@ public class AdminCatalogController {
         model.addAttribute("thisCategory",thisCategory);
         List<ProductDescription> thisCategoryProducts = adminService.findProductsByCategoryId(parentId, language);
         model.addAttribute("thisCategoryProducts",thisCategoryProducts);
+        ProductDescription pd = null;
+        if(productId==0L){
+            if (!thisCategoryProducts.isEmpty()) {
+                pd = thisCategoryProducts.iterator().next();
+                productId = pd.getProduct().getId();
+            }
+        } else {
+            pd = catalogService.findProductById(productId,language);
+            model.addAttribute("thisProduct",pd);
+        }
+        model.addAttribute("thisProduct",pd);
+        model.addAttribute("thisProductId",productId);
         logger.info("################################################");
         logger.info(rootCategories.toString());
         logger.info("################################################");

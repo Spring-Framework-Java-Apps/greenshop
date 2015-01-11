@@ -30,27 +30,37 @@
                     </tr>
                     <c:forEach var="category" items="${rootCategories.children}">
                     <c:if test="${category.categoryDescription.category.id == thisCategory.categoryDescription.category.id}">
-                        <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}"/>'">
-                            <td class="dataTableContent"><a href="<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}"/>"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>${category.categoryDescription.name}</strong></td>
+                        <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}/product/0"/>'">
+                            <td class="dataTableContent"><a href="<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}/product/0"/>"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>${category.categoryDescription.name}</strong></td>
                             <td class="dataTableContent" align="center">&nbsp;</td>
                             <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
                         </tr>
                     </c:if>
                     <c:if test="${category.categoryDescription.category.id != thisCategory.categoryDescription.category.id}">
-                        <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/categories/${category.categoryDescription.category.id}/parent/${category.categoryDescription.category.parentId}"/>'">
-                            <td class="dataTableContent"><a href="<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}"/>"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>${category.categoryDescription.name}</strong></td>
+                        <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/categories/${category.categoryDescription.category.id}/parent/${category.categoryDescription.category.parentId}/product/0"/>'">
+                            <td class="dataTableContent"><a href="<c:url value="/admin/categories/0/parent/${category.categoryDescription.category.id}/product/0"/>"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;<strong>${category.categoryDescription.name}</strong></td>
                             <td class="dataTableContent" align="center">&nbsp;</td>
-                            <td class="dataTableContent" align="right"><a href="<c:url value="/admin/categories/${category.categoryDescription.category.id}/parent/${category.categoryDescription.category.parentId}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                            <td class="dataTableContent" align="right"><a href="<c:url value="/admin/categories/${category.categoryDescription.category.id}/parent/${category.categoryDescription.category.parentId}/product/0"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                         </tr>
                     </c:if>
                     </c:forEach>
                     <c:forEach var="product" items="${thisCategoryProducts}">
-                        <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10'">
+                        <c:if test="${product.product.id == thisProductId}">
+                            <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/categories.php?cPath=3_12&pID=19&action=new_product_preview'">
+                                <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?cPath=3_12&pID=19&action=new_product_preview"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;${product.name}</td>
+                                <td class="dataTableContent" align="center">
+                                    <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://localhost/oscommerce2/admin/categories.php?action=setflag&flag=0&pID=19&cPath=3_12"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
+                                <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
+                            </tr>
+                        </c:if>
+                        <c:if test="${product.product.id != thisProductId}">
+                        <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/categories/${categoryId}/parent/${parentId}/product/${product.product.id}"/>'">
                             <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10&action=new_product_preview"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;${product.name}</td>
                             <td class="dataTableContent" align="center">
                                 <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://localhost/oscommerce2/admin/categories.php?action=setflag&flag=0&pID=10&cPath=3_10"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
-                            <td class="dataTableContent" align="right"><a href="http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                            <td class="dataTableContent" align="right"><a href="<c:url value="/admin/categories/${categoryId}/parent/${parentId}/product/${product.product.id}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                         </tr>
+                        </c:if>
                     </c:forEach>
                     <tr>
                         <td colspan="3"><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -60,7 +70,7 @@
                                 <td align="right" class="smallText"><span class="tdbLink"><a id="tdb1" href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&action=new_category&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">New Category</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb2" href="http://shadowfax/oscommerce2/admin/categories.php?cPath=&action=new_product&osCAdminID=i3qmbf2bulfaigi6pvm3i2urp1">New Product</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>&nbsp;</td>
                                 </c:if>
                                 <c:if test="${rootCategories.thisCategoryId != 0}">
-                                    <td align="right" class="smallText"><span class="tdbLink"><a id="tdb1" href="<c:url value="/admin/categories/0/parent/${rootCategories.thisCategory.category.parentId}"/>">Back</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-triangle-1-w"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb2" href="http://localhost/oscommerce2/admin/categories.php?cPath=21&action=new_category">New Category</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="http://localhost/oscommerce2/admin/categories.php?cPath=21&action=new_product">New Product</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>&nbsp;</td>
+                                    <td align="right" class="smallText"><span class="tdbLink"><a id="tdb1" href="<c:url value="/admin/categories/0/parent/${rootCategories.thisCategory.category.parentId}/product/${thisProductId}"/>">Back</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-triangle-1-w"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb2" href="http://localhost/oscommerce2/admin/categories.php?cPath=21&action=new_category">New Category</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="http://localhost/oscommerce2/admin/categories.php?cPath=21&action=new_product">New Product</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>&nbsp;</td>
                                 </c:if>
                             </tr>
                         </table></td>
