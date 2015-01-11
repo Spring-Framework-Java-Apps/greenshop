@@ -77,6 +77,7 @@
                     </tr>
                 </table></td>
                 <td width="25%" valign="top">
+                    <c:if test="${thisProductId == 0}">
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr class="infoBoxHeading">
                             <td class="infoBoxHeading"><strong>${thisCategory.categoryDescription.name}</strong></td>
@@ -92,7 +93,7 @@
                             </c:if>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Date Added: ${thisCategory.categoryDescription.category.dateAdded}</td>
+                            <td class="infoBoxContent"><br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisCategory.categoryDescription.category.dateAdded}"/></td>
                         </tr>
                         <tr>
                             <td class="infoBoxContent"><br /><img src="resources/images/${thisCategory.categoryDescription.category.image}" border="0" alt="${thisCategory.categoryDescription.name}" title="${thisCategory.categoryDescription.name}" width="57" height="40" /><br />${thisCategory.categoryDescription.category.image}</td>
@@ -101,6 +102,31 @@
                             <td class="infoBoxContent"><br />Subcategories: ${thisCategory.numberOfChildCategories}<br />Products: ${thisCategory.numberOfProducts}</td>
                         </tr>
                     </table>
+                    </c:if>
+                    <c:if test="${thisProductId != 0}">
+                    <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                        <tr class="infoBoxHeading">
+                            <td class="infoBoxHeading"><strong>${thisProduct.name}</strong></td>
+                        </tr>
+                    </table>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                        <tr>
+                            <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb4" href="http://localhost/oscommerce2/admin/categories.php?cPath=3_12&pID=19&action=new_product">Edit</a></span><script type="text/javascript">$("#tdb4").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb5" href="http://localhost/oscommerce2/admin/categories.php?cPath=3_12&pID=19&action=delete_product">Delete</a></span><script type="text/javascript">$("#tdb5").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb6" href="http://localhost/oscommerce2/admin/categories.php?cPath=3_12&pID=19&action=move_product">Move</a></span><script type="text/javascript">$("#tdb6").button({icons:{primary:"ui-icon-arrow-4"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb7" href="http://localhost/oscommerce2/admin/categories.php?cPath=3_12&pID=19&action=copy_to">Copy To</a></span><script type="text/javascript">$("#tdb7").button({icons:{primary:"ui-icon-copy"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                        </tr>
+                        <tr>
+                            <td class="infoBoxContent"><br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisProduct.product.dateAdded}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="infoBoxContent"><br /><img src="http://localhost/oscommerce2/images/${thisProduct.product.image}" border="0" alt="${thisProduct.name}" title="${thisProduct.name}" width="100" height="80" /><br />dvd/theres_something_about_mary.gif</td>
+                        </tr>
+                        <tr>
+                            <td class="infoBoxContent"><br />Price: $${thisProduct.product.price}<br />Quantity: ${thisProduct.product.quantity}</td>
+                        </tr>
+                        <tr>
+                            <td class="infoBoxContent"><br />Average Rating: 100.00%</td> <!-- TODO: Rating -->
+                        </tr>
+                    </table>
+                    </c:if>
                 </td>
             </tr>
         </table></td>
