@@ -292,4 +292,20 @@ public class AdminServiceImpl implements AdminService {
         }
         return productsByCategoryId;
     }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void setProductActive(long productId) {
+        Product product = productRepository.findOne(productId);
+        product.setStatus(true);
+        productRepository.save(product);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void setProductInactive(long productId) {
+        Product product = productRepository.findOne(productId);
+        product.setStatus(false);
+        productRepository.save(product);
+    }
 }

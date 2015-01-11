@@ -70,4 +70,8 @@ public interface AdminService extends UserDetailsService {
     List<ProductDescription> findProductsViewed(Language language);
 
     List<ProductDescription> findProductsByCategoryId(long categoryId, Language language);
+
+    void setProductActive(long productId);
+
+    void setProductInactive(long productId);
 }

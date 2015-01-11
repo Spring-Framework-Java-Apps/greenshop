@@ -68,6 +68,40 @@ public class AdminCatalogController {
             Model model){
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
+        performCategoryAndProduct(categoryId, parentId, productId, model);
+        return "admin/categories";
+    }
+
+    @RequestMapping(value = "/admin/categories/{categoryId}/parent/{parentId}/product/{productId}/setActive", method = RequestMethod.GET)
+    public String rootCategoryIdSetActive(
+            @PathVariable long categoryId,
+            @PathVariable long parentId,
+            @PathVariable long productId,
+            Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        adminService.setProductActive(productId);
+        performCategoryAndProduct(categoryId, parentId, productId,model);
+        return "admin/categories";
+    }
+
+    @RequestMapping(value = "/admin/categories/{categoryId}/parent/{parentId}/product/{productId}/setInactive", method = RequestMethod.GET)
+    public String rootCategoryIdSetInactive(
+            @PathVariable long categoryId,
+            @PathVariable long parentId,
+            @PathVariable long productId,
+            Model model){
+        int menuCategory = AdminMenuCategory.CATALOG.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        adminService.setProductInactive(productId);
+        performCategoryAndProduct(categoryId,parentId,productId,model);
+        return "admin/categories";
+    }
+
+    private void performCategoryAndProduct(
+            long categoryId,
+            long parentId,
+            long productId,Model model){
         Language language = catalogService.findLanguageByCode("en");
         CategoryTree rootCategories =  catalogService.getCategoriesTree(parentId, language);
         model.addAttribute("rootCategories",rootCategories);
@@ -102,7 +136,6 @@ public class AdminCatalogController {
         logger.info("################################################");
         logger.info(rootCategories.toString());
         logger.info("################################################");
-        return "admin/categories";
     }
 
     @RequestMapping(value = "/admin/manufacturers", method = RequestMethod.GET)

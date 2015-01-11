@@ -49,7 +49,13 @@
                             <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/categories.php?cPath=3_12&pID=19&action=new_product_preview'">
                                 <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?cPath=3_12&pID=19&action=new_product_preview"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;${product.name}</td>
                                 <td class="dataTableContent" align="center">
-                                    <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://localhost/oscommerce2/admin/categories.php?action=setflag&flag=0&pID=19&cPath=3_12"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
+                                    <c:if test="${product.product.status}">
+                                        <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="<c:url value="/admin/categories/${categoryId}/parent/${parentId}/product/${product.product.id}/setInactive"/>"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a>
+                                    </c:if>
+                                    <c:if test="${!product.product.status}">
+                                        <a href="<c:url value="/admin/categories/${categoryId}/parent/${parentId}/product/${product.product.id}/setActive"/>"><img src="resources/admin/images/icon_status_green_light.gif" border="0" alt="Set Active" title="Set Active" width="10" height="10" /></a>&nbsp;&nbsp;<img src="resources/admin/images/icon_status_red.gif" border="0" alt="Inactive" title="Inactive" width="10" height="10" />
+                                    </c:if>
+                                </td>
                                 <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
                             </tr>
                         </c:if>
@@ -57,7 +63,13 @@
                         <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/categories/${categoryId}/parent/${parentId}/product/${product.product.id}"/>'">
                             <td class="dataTableContent"><a href="http://localhost/oscommerce2/admin/categories.php?cPath=3_10&pID=10&action=new_product_preview"><img src="resources/admin/images/icons/preview.gif" border="0" alt="Preview" title="Preview" /></a>&nbsp;${product.name}</td>
                             <td class="dataTableContent" align="center">
-                                <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="http://localhost/oscommerce2/admin/categories.php?action=setflag&flag=0&pID=10&cPath=3_10"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a></td>
+                            <c:if test="${product.product.status}">
+                                <img src="resources/admin/images/icon_status_green.gif" border="0" alt="Active" title="Active" width="10" height="10" />&nbsp;&nbsp;<a href="<c:url value="/admin/categories/${categoryId}/parent/${parentId}/product/${product.product.id}/setInactive"/>"><img src="resources/admin/images/icon_status_red_light.gif" border="0" alt="Set Inactive" title="Set Inactive" width="10" height="10" /></a>
+                            </c:if>
+                            <c:if test="${!product.product.status}">
+                                <a href="<c:url value="/admin/categories/${categoryId}/parent/${parentId}/product/${product.product.id}/setActive"/>"><img src="resources/admin/images/icon_status_green_light.gif" border="0" alt="Set Active" title="Set Active" width="10" height="10" /></a>&nbsp;&nbsp;<img src="resources/admin/images/icon_status_red.gif" border="0" alt="Inactive" title="Inactive" width="10" height="10" />
+                            </c:if>
+                            </td>
                             <td class="dataTableContent" align="right"><a href="<c:url value="/admin/categories/${categoryId}/parent/${parentId}/product/${product.product.id}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                         </tr>
                         </c:if>
