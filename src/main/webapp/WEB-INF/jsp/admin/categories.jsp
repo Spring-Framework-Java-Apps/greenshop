@@ -117,7 +117,7 @@
                             <td class="infoBoxContent"><br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisProduct.product.dateAdded}"/></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br /><img src="http://localhost/oscommerce2/images/${thisProduct.product.image}" border="0" alt="${thisProduct.name}" title="${thisProduct.name}" width="100" height="80" /><br />dvd/theres_something_about_mary.gif</td>
+                            <td class="infoBoxContent"><br /><img src="http://localhost/oscommerce2/images/${thisProduct.product.image}" border="0" alt="${thisProduct.name}" title="${thisProduct.name}" width="100" height="80" /><br />${thisProduct.product.image}</td>
                         </tr>
                         <tr>
                             <td class="infoBoxContent"><br />Price: $${thisProduct.product.price}<br />Quantity: ${thisProduct.product.quantity}</td>
