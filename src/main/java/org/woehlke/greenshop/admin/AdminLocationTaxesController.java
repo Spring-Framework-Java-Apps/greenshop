@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.admin.entities.TaxClass;
 import org.woehlke.greenshop.admin.entities.TaxRate;
 import org.woehlke.greenshop.admin.entities.TaxZone;
+import org.woehlke.greenshop.admin.entities.TaxZone2Zone;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Zone;
@@ -100,6 +101,35 @@ public class AdminLocationTaxesController {
         TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
         model.addAttribute("thisTaxZone",thisTaxZone);
         return "admin/taxZones";
+    }
+
+    @RequestMapping(value = "/admin/taxZone/{taxZoneId}", method = RequestMethod.GET)
+    public String taxZone(@PathVariable long taxZoneId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        model.addAttribute("thisTaxZone",thisTaxZone);
+        List<TaxZone2Zone> zones = adminService.findZonesByTaxZone(thisTaxZone);
+        model.addAttribute("zones",zones);
+        TaxZone2Zone thisZone = null;
+        if(zones.size()>0){
+            thisZone = zones.iterator().next();
+        }
+        model.addAttribute("thisZone",thisZone);
+        return "admin/taxZone";
+    }
+
+    @RequestMapping(value = "/admin/taxZone/{taxZoneId}/zone/{zoneId}", method = RequestMethod.GET)
+    public String taxZoneWithZoneId(@PathVariable long taxZoneId, @PathVariable long zoneId,Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        model.addAttribute("thisTaxZone",thisTaxZone);
+        List<TaxZone2Zone> zones = adminService.findZonesByTaxZone(thisTaxZone);
+        model.addAttribute("zones",zones);
+        TaxZone2Zone thisZone = adminService.findTaxZone2ZoneById(zoneId);
+        model.addAttribute("thisZone",thisZone);
+        return "admin/taxZone";
     }
 
     @RequestMapping(value = "/admin/taxClasses", method = RequestMethod.GET)

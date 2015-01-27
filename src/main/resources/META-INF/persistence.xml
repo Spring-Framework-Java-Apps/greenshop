@@ -40,6 +40,7 @@
         <class>org.woehlke.greenshop.admin.entities.TaxClass</class>
         <class>org.woehlke.greenshop.admin.entities.TaxRate</class>
         <class>org.woehlke.greenshop.admin.entities.TaxZone</class>
+        <class>org.woehlke.greenshop.admin.entities.TaxZone2Zone</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
 

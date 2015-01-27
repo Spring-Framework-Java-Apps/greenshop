@@ -5,16 +5,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.woehlke.greenshop.admin.entities.Administrator;
-import org.woehlke.greenshop.admin.entities.TaxClass;
-import org.woehlke.greenshop.admin.entities.TaxRate;
-import org.woehlke.greenshop.admin.entities.TaxZone;
+import org.woehlke.greenshop.admin.entities.*;
 import org.woehlke.greenshop.admin.model.AdministratorBean;
 import org.woehlke.greenshop.admin.model.OrderAdminBean;
-import org.woehlke.greenshop.admin.repository.AdministratorRepository;
-import org.woehlke.greenshop.admin.repository.TaxClassRepository;
-import org.woehlke.greenshop.admin.repository.TaxRateRepository;
-import org.woehlke.greenshop.admin.repository.TaxZoneRepository;
+import org.woehlke.greenshop.admin.repository.*;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.catalog.repositories.*;
@@ -27,9 +21,11 @@ import org.woehlke.greenshop.checkout.repository.OrderStatusRepository;
 import org.woehlke.greenshop.checkout.repository.OrderTotalRepository;
 import org.woehlke.greenshop.customer.entities.Customer;
 import org.woehlke.greenshop.customer.entities.CustomerInfo;
+import org.woehlke.greenshop.customer.entities.Zone;
 import org.woehlke.greenshop.customer.model.CustomerBean;
 import org.woehlke.greenshop.customer.repository.CustomerInfoRepository;
 import org.woehlke.greenshop.customer.repository.CustomerRepository;
+import org.woehlke.greenshop.customer.repository.ZoneRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -78,6 +74,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private TaxZoneRepository taxZoneRepository;
+
+    @Inject
+    private ZoneRepository zoneRepository;
+
+    @Inject
+    private TaxZone2ZoneRepository taxZone2ZoneRepository;
 
     @Inject
     private LanguageRepository languageRepository;
@@ -307,5 +309,15 @@ public class AdminServiceImpl implements AdminService {
         Product product = productRepository.findOne(productId);
         product.setStatus(false);
         productRepository.save(product);
+    }
+
+    @Override
+    public List<TaxZone2Zone> findZonesByTaxZone(TaxZone thisTaxZone) {
+        return taxZone2ZoneRepository.findByTaxZone(thisTaxZone);
+    }
+
+    @Override
+    public TaxZone2Zone findTaxZone2ZoneById(long zoneId) {
+        return taxZone2ZoneRepository.findOne(zoneId);
     }
 }

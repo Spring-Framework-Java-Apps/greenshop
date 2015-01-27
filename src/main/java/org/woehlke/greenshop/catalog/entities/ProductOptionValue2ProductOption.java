@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 public class ProductOptionValue2ProductOption {
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="products_options_values_to_products_options_id",columnDefinition = "INT(11)")
 	private Long id;

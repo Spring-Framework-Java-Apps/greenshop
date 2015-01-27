@@ -1,10 +1,7 @@
 package org.woehlke.greenshop.admin;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.woehlke.greenshop.admin.entities.Administrator;
-import org.woehlke.greenshop.admin.entities.TaxClass;
-import org.woehlke.greenshop.admin.entities.TaxRate;
-import org.woehlke.greenshop.admin.entities.TaxZone;
+import org.woehlke.greenshop.admin.entities.*;
 import org.woehlke.greenshop.admin.model.OrderAdminBean;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
@@ -14,6 +11,7 @@ import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
 import org.woehlke.greenshop.customer.entities.Customer;
+import org.woehlke.greenshop.customer.entities.Zone;
 import org.woehlke.greenshop.customer.model.CustomerBean;
 
 import java.util.List;
@@ -74,4 +72,8 @@ public interface AdminService extends UserDetailsService {
     void setProductActive(long productId);
 
     void setProductInactive(long productId);
+
+    List<TaxZone2Zone> findZonesByTaxZone(TaxZone thisTaxZone);
+
+    TaxZone2Zone findTaxZone2ZoneById(long zoneId);
 }

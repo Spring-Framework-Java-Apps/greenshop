@@ -71,6 +71,10 @@
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZones.jsp" />
     </definition>
 
+    <definition name="admin/taxZone" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZone.jsp" />
+    </definition>
+
     <definition name="admin/taxClasses" extends="backend">
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxClasses.jsp" />
     </definition>
