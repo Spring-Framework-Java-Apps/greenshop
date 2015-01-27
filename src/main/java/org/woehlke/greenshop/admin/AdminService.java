@@ -76,4 +76,6 @@ public interface AdminService extends UserDetailsService {
     List<TaxZone2Zone> findZonesByTaxZone(TaxZone thisTaxZone);
 
     TaxZone2Zone findTaxZone2ZoneById(long zoneId);
+
+    int getNumberOfZonesForTaxZone(TaxZone thisTaxZone);
 }

@@ -85,10 +85,13 @@ public class AdminLocationTaxesController {
         List<TaxZone> taxZones = adminService.findAllTaxZones();
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = null;
+        int numberOfZones = 0;
         if(taxZones.size()>0){
             thisTaxZone = taxZones.iterator().next();
+            numberOfZones = adminService.getNumberOfZonesForTaxZone(thisTaxZone);
         }
         model.addAttribute("thisTaxZone",thisTaxZone);
+        model.addAttribute("numberOfZones",numberOfZones);
         return "admin/taxZones";
     }
 
@@ -99,6 +102,8 @@ public class AdminLocationTaxesController {
         List<TaxZone> taxZones = adminService.findAllTaxZones();
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        int numberOfZones = adminService.getNumberOfZonesForTaxZone(thisTaxZone);
+        model.addAttribute("numberOfZones",numberOfZones);
         model.addAttribute("thisTaxZone",thisTaxZone);
         return "admin/taxZones";
     }

@@ -320,4 +320,9 @@ public class AdminServiceImpl implements AdminService {
     public TaxZone2Zone findTaxZone2ZoneById(long zoneId) {
         return taxZone2ZoneRepository.findOne(zoneId);
     }
+
+    @Override
+    public int getNumberOfZonesForTaxZone(TaxZone thisTaxZone) {
+        return taxZone2ZoneRepository.findByTaxZone(thisTaxZone).size();
+    }
 }

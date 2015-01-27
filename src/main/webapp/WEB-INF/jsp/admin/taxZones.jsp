@@ -56,7 +56,7 @@
                             <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb2" href="http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=edit_zone">Edit</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=delete_zone">Delete</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb4" href="http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=list">Details</a></span><script type="text/javascript">$("#tdb4").button({icons:{primary:"ui-icon-info"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br />Number of Zones: 1</td>
+                            <td class="infoBoxContent"><br />Number of Zones: ${numberOfZones}</td>
                         </tr>
                         <tr>
                             <td class="infoBoxContent"><br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisTaxZone.dateAdded}" /></td>
