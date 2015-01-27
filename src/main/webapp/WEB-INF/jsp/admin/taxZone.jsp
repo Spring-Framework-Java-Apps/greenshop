@@ -47,6 +47,7 @@
                         </tr>
                     </table>
                 </td>
+                <c:if test="${zones.size() > 0}">
                 <td width="25%" valign="top">
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr class="infoBoxHeading">
@@ -62,6 +63,7 @@
                         </tr>
                     </table>
                 </td>
+                </c:if>
             </tr>
         </table></td>
     </tr>

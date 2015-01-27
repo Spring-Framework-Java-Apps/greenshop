@@ -29,15 +29,15 @@ public class TaxZone2Zone {
     @Column(name = "association_id", columnDefinition = "INT(11)")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "zone_country_id", columnDefinition = "INT(11)")
     private Country zoneCountry;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "zone_id", columnDefinition = "INT(11)")
     private Zone zone;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "geo_zone_id", columnDefinition = "INT(11)")
     private TaxZone taxZone;
 

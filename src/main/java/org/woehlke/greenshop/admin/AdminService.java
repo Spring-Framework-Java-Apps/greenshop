@@ -11,7 +11,6 @@ import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
 import org.woehlke.greenshop.customer.entities.Customer;
-import org.woehlke.greenshop.customer.entities.Zone;
 import org.woehlke.greenshop.customer.model.CustomerBean;
 
 import java.util.List;
@@ -78,4 +77,8 @@ public interface AdminService extends UserDetailsService {
     TaxZone2Zone findTaxZone2ZoneById(long zoneId);
 
     int getNumberOfZonesForTaxZone(TaxZone thisTaxZone);
+
+    TaxZone createTaxZone(TaxZone thisTaxZone);
+
+    void deleteTaxZones(TaxZone thisTaxZone);
 }

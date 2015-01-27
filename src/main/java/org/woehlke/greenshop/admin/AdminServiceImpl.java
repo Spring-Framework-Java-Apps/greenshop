@@ -21,7 +21,6 @@ import org.woehlke.greenshop.checkout.repository.OrderStatusRepository;
 import org.woehlke.greenshop.checkout.repository.OrderTotalRepository;
 import org.woehlke.greenshop.customer.entities.Customer;
 import org.woehlke.greenshop.customer.entities.CustomerInfo;
-import org.woehlke.greenshop.customer.entities.Zone;
 import org.woehlke.greenshop.customer.model.CustomerBean;
 import org.woehlke.greenshop.customer.repository.CustomerInfoRepository;
 import org.woehlke.greenshop.customer.repository.CustomerRepository;
@@ -324,5 +323,20 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int getNumberOfZonesForTaxZone(TaxZone thisTaxZone) {
         return taxZone2ZoneRepository.findByTaxZone(thisTaxZone).size();
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public TaxZone createTaxZone(TaxZone thisTaxZone) {
+        return taxZoneRepository.save(thisTaxZone);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void deleteTaxZones(TaxZone thisTaxZone) {
+        TaxZone tz =taxZoneRepository.findOne(thisTaxZone.getId());
+        List<TaxZone2Zone> list = taxZone2ZoneRepository.findByTaxZone(tz);
+        taxZone2ZoneRepository.delete(list);
+        taxZoneRepository.delete(tz);
     }
 }

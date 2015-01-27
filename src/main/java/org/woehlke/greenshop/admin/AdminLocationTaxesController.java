@@ -1,7 +1,10 @@
 package org.woehlke.greenshop.admin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +17,8 @@ import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Zone;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +26,8 @@ import java.util.List;
  */
 @Controller
 public class AdminLocationTaxesController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminLocationTaxesController.class);
 
     @Inject
     private CustomerService customerService;
@@ -106,6 +113,65 @@ public class AdminLocationTaxesController {
         model.addAttribute("numberOfZones",numberOfZones);
         model.addAttribute("thisTaxZone",thisTaxZone);
         return "admin/taxZones";
+    }
+
+    @RequestMapping(value = "/admin/taxZones/insert", method = RequestMethod.GET)
+    public String taxZonesInsertForm(Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxZone> taxZones = adminService.findAllTaxZones();
+        model.addAttribute("taxZones",taxZones);
+        TaxZone thisTaxZone = new TaxZone();
+        model.addAttribute("thisTaxZone",thisTaxZone);
+        return "admin/taxZonesInsertForm";
+    }
+
+    @RequestMapping(value = "/admin/taxZones/insert", method = RequestMethod.POST)
+    public String taxZonesInsertSave(@Valid TaxZone thisTaxZone, BindingResult result, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxZone> taxZones = adminService.findAllTaxZones();
+        model.addAttribute("taxZones",taxZones);
+        if(result.hasErrors()){
+            logger.info(result.toString());
+            logger.info(thisTaxZone.toString());
+            model.addAttribute("thisTaxZone",thisTaxZone);
+            return "admin/taxZonesInsertForm";
+        } else {
+            thisTaxZone.setDateAdded(new Date());
+            thisTaxZone = adminService.createTaxZone(thisTaxZone);
+            model.addAttribute("thisTaxZone",thisTaxZone);
+            return "redirect:/admin/taxZones/"+thisTaxZone.getId();
+        }
+    }
+
+    @RequestMapping(value = "/admin/taxZones/delete/{taxZoneId}", method = RequestMethod.GET)
+    public String taxZoneDeleteForm(@PathVariable long taxZoneId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxZone> taxZones = adminService.findAllTaxZones();
+        model.addAttribute("taxZones",taxZones);
+        TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        int numberOfZones = adminService.getNumberOfZonesForTaxZone(thisTaxZone);
+        model.addAttribute("numberOfZones",numberOfZones);
+        model.addAttribute("thisTaxZone",thisTaxZone);
+        return "admin/taxZonesDeleteForm";
+    }
+
+    @RequestMapping(value = "/admin/taxZones/delete/{taxZoneId}", method = RequestMethod.POST)
+    public String taxZoneDeletePerform(@PathVariable long taxZoneId,
+                                       @Valid TaxZone thisTaxZone,
+                                       BindingResult result,
+                                       Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxZone> taxZones = adminService.findAllTaxZones();
+        model.addAttribute("taxZones",taxZones);
+        thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        if(thisTaxZone != null) {
+            adminService.deleteTaxZones(thisTaxZone);
+        }
+        return "redirect:/admin/taxZones";
     }
 
     @RequestMapping(value = "/admin/taxZone/{taxZoneId}", method = RequestMethod.GET)

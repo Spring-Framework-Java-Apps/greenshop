@@ -41,7 +41,7 @@
                             </table></td>
                         </tr>
                         <tr>
-                            <td class="smallText" align="right" colspan="2"><span class="tdbLink"><a id="tdb1" href="http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=new_zone">Insert</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                            <td class="smallText" align="right" colspan="2"><span class="tdbLink"><a id="tdb1" href="<c:url value="/admin/taxZones/insert"/>">Insert</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                         </tr>
                     </table>
                 </td>
@@ -53,7 +53,7 @@
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr>
-                            <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb2" href="http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=edit_zone">Edit</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=delete_zone">Delete</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb4" href="http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=list">Details</a></span><script type="text/javascript">$("#tdb4").button({icons:{primary:"ui-icon-info"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                            <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb2" href="<c:url value="/admin/taxZones/edit/${thisTaxZone.id}"/>">Edit</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="<c:url value="/admin/taxZones/delete/${thisTaxZone.id}"/>">Delete</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb4" href="<c:url value="/admin/taxZone/${thisTaxZone.id}"/>">Details</a></span><script type="text/javascript">$("#tdb4").button({icons:{primary:"ui-icon-info"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                         </tr>
                         <tr>
                             <td class="infoBoxContent"><br />Number of Zones: ${numberOfZones}</td>
