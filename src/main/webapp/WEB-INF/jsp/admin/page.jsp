@@ -47,16 +47,7 @@
     </tr>
 </table>
 
-<style>
-    #contentText {
-        margin-left: 0;
-    }
-</style>
-
-<div>
 <tiles:insertAttribute name="adminAppMenu" />
-</div>
-
 <div id="contentText">
 <tiles:insertAttribute name="bodyContent" />
 </div>
