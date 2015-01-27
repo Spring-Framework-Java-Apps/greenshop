@@ -81,4 +81,6 @@ public interface AdminService extends UserDetailsService {
     TaxZone createTaxZone(TaxZone thisTaxZone);
 
     void deleteTaxZones(TaxZone thisTaxZone);
+
+    void updateTaxZone(TaxZone thisTaxZone);
 }

@@ -29,6 +29,7 @@ import org.woehlke.greenshop.customer.repository.ZoneRepository;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -338,5 +339,15 @@ public class AdminServiceImpl implements AdminService {
         List<TaxZone2Zone> list = taxZone2ZoneRepository.findByTaxZone(tz);
         taxZone2ZoneRepository.delete(list);
         taxZoneRepository.delete(tz);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void updateTaxZone(TaxZone thisTaxZone) {
+        TaxZone tz =taxZoneRepository.findOne(thisTaxZone.getId());
+        tz.setLastModified(new Date());
+        tz.setName(thisTaxZone.getName());
+        tz.setDescription(thisTaxZone.getDescription());
+        taxZoneRepository.save(tz);
     }
 }

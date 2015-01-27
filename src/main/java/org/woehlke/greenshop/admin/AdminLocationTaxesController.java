@@ -174,6 +174,37 @@ public class AdminLocationTaxesController {
         return "redirect:/admin/taxZones";
     }
 
+    @RequestMapping(value = "/admin/taxZones/edit/{taxZoneId}", method = RequestMethod.GET)
+    public String taxZoneEditForm(@PathVariable long taxZoneId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxZone> taxZones = adminService.findAllTaxZones();
+        model.addAttribute("taxZones",taxZones);
+        TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        int numberOfZones = adminService.getNumberOfZonesForTaxZone(thisTaxZone);
+        model.addAttribute("numberOfZones",numberOfZones);
+        model.addAttribute("thisTaxZone",thisTaxZone);
+        return "admin/taxZonesEditForm";
+    }
+
+    @RequestMapping(value = "/admin/taxZones/edit/{taxZoneId}", method = RequestMethod.POST)
+    public String taxZoneEditPerform(@PathVariable long taxZoneId,
+                                       @Valid TaxZone thisTaxZone,
+                                       BindingResult result,
+                                       Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<TaxZone> taxZones = adminService.findAllTaxZones();
+        model.addAttribute("taxZones",taxZones);
+        if(result.hasErrors()) {
+            model.addAttribute("thisTaxZone",thisTaxZone);
+            return "admin/taxZonesEditForm";
+        } else {
+            adminService.updateTaxZone(thisTaxZone);
+            return "redirect:/admin/taxZones/"+taxZoneId;
+        }
+    }
+
     @RequestMapping(value = "/admin/taxZone/{taxZoneId}", method = RequestMethod.GET)
     public String taxZone(@PathVariable long taxZoneId, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();

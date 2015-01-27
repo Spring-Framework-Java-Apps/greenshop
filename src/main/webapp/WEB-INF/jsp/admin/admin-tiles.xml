@@ -71,6 +71,10 @@
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZones.jsp" />
     </definition>
 
+    <definition name="admin/taxZonesEditForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZonesEditForm.jsp" />
+    </definition>
+
     <definition name="admin/taxZonesDeleteForm" extends="backend">
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZonesDeleteForm.jsp" />
     </definition>
