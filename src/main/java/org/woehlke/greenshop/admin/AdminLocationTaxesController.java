@@ -218,6 +218,8 @@ public class AdminLocationTaxesController {
             thisZone = zones.iterator().next();
         }
         model.addAttribute("thisZone",thisZone);
+        logger.info("zones: "+zones.toString());
+        logger.info("thisZone: "+thisZone.toString());
         return "admin/taxZone";
     }
 
@@ -232,6 +234,22 @@ public class AdminLocationTaxesController {
         TaxZone2Zone thisZone = adminService.findTaxZone2ZoneById(zoneId);
         model.addAttribute("thisZone",thisZone);
         return "admin/taxZone";
+    }
+
+    @RequestMapping(value = "/admin/taxZone/{taxZoneId}/insert", method = RequestMethod.GET)
+    public String taxZoneInsertForm(@PathVariable long taxZoneId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        model.addAttribute("thisTaxZone",thisTaxZone);
+        List<TaxZone2Zone> zones = adminService.findZonesByTaxZone(thisTaxZone);
+        model.addAttribute("zones",zones);
+        TaxZone2Zone thisZone = null;
+        if(zones.size()>0){
+            thisZone = zones.iterator().next();
+        }
+        model.addAttribute("thisZone",thisZone);
+        return "admin/taxZoneInsertForm";
     }
 
     @RequestMapping(value = "/admin/taxClasses", method = RequestMethod.GET)
