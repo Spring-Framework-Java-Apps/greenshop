@@ -356,4 +356,10 @@ public class AdminServiceImpl implements AdminService {
     public void createTaxZone2Zone(TaxZone2Zone newTaxZone2Zone) {
         taxZone2ZoneRepository.save(newTaxZone2Zone);
     }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void deleteTaxZone2Zone(TaxZone2Zone thisZone) {
+        taxZone2ZoneRepository.delete(thisZone);
+    }
 }
