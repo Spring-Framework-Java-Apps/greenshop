@@ -5,13 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.admin.entities.TaxClass;
 import org.woehlke.greenshop.admin.entities.TaxRate;
 import org.woehlke.greenshop.admin.entities.TaxZone;
 import org.woehlke.greenshop.admin.entities.TaxZone2Zone;
+import org.woehlke.greenshop.admin.model.NewSubZoneInfoBean;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Zone;
@@ -217,9 +216,7 @@ public class AdminLocationTaxesController {
         if(zones.size()>0){
             thisZone = zones.iterator().next();
         }
-        model.addAttribute("thisZone",thisZone);
-        logger.info("zones: "+zones.toString());
-        logger.info("thisZone: "+thisZone.toString());
+        model.addAttribute("thisZone", thisZone);
         return "admin/taxZone";
     }
 
@@ -250,6 +247,42 @@ public class AdminLocationTaxesController {
         }
         model.addAttribute("thisZone",thisZone);
         return "admin/taxZoneInsertForm";
+    }
+
+    @RequestMapping(value = "/admin/taxZone/{taxZoneId}/insert", method = RequestMethod.POST)
+    public String taxZoneInsertSave(@PathVariable long taxZoneId,
+                                    @ModelAttribute NewSubZoneInfoBean newSubZoneInfoBean,
+                                    BindingResult result,
+                                    Model model){
+        logger.info("zone_country_id "+newSubZoneInfoBean.getZone_country_id());
+        logger.info("zone_id         "+newSubZoneInfoBean.getZone_id());
+        TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        if(result.hasErrors()||newSubZoneInfoBean.getZone_country_id()==null) {
+            int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+            model.addAttribute("menuCategory",menuCategory);
+            model.addAttribute("thisTaxZone",thisTaxZone);
+            List<TaxZone2Zone> zones = adminService.findZonesByTaxZone(thisTaxZone);
+            model.addAttribute("zones",zones);
+            TaxZone2Zone thisZone = null;
+            if(zones.size()>0){
+                thisZone = zones.iterator().next();
+            }
+            model.addAttribute("thisZone",thisZone);
+            return "admin/taxZoneInsertForm";
+        } else {
+            Country country = customerService.findCountryById(newSubZoneInfoBean.getZone_country_id());
+            Zone subZone = null;
+            if(newSubZoneInfoBean.getZone_id()!=null){
+                subZone = customerService.findZoneById(newSubZoneInfoBean.getZone_id());
+            }
+            TaxZone2Zone newTaxZone2Zone = new TaxZone2Zone();
+            newTaxZone2Zone.setDateAdded(new Date());
+            newTaxZone2Zone.setTaxZone(thisTaxZone);
+            newTaxZone2Zone.setZone(subZone);
+            newTaxZone2Zone.setZoneCountry(country);
+            adminService.createTaxZone2Zone(newTaxZone2Zone);
+            return "redirect:/admin/taxZone/"+taxZoneId;
+        }
     }
 
     @RequestMapping(value = "/admin/taxClasses", method = RequestMethod.GET)

@@ -19,7 +19,7 @@
                             <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                         </tr>
                         <c:forEach items="${zones}" var="zone">
-                            <c:if test="${zone.zone.id == thisZone.zone.id}">
+                            <c:if test="${zone.id == thisZone.id}">
                                 <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/taxZone/${thisTaxZone.id}/zone/${zone.id}"/>'">
                                     <td class="dataTableContent">${zone.zoneCountry.name}</td>
                                     <c:choose>
@@ -27,13 +27,13 @@
                                             <td class="dataTableContent">All Zones</td>
                                         </c:when>
                                         <c:otherwise>
-                                            <td class="dataTableContent"><:out value="${zone.zone.name}"/></td>
+                                            <td class="dataTableContent"><c:out value="${zone.zone.name}"/></td>
                                         </c:otherwise>
                                     </c:choose>
                                     <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
                                 </tr>
                             </c:if>
-                            <c:if test="${zone.zone.id != thisZone.zone.id}">
+                            <c:if test="${zone.id != thisZone.id}">
                                 <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/taxZone/${thisTaxZone.id}/zone/${zone.id}"/>'">
                                     <td class="dataTableContent">${zone.zoneCountry.name}</td>
                                     <c:choose>
@@ -41,10 +41,10 @@
                                             <td class="dataTableContent">All Zones</td>
                                         </c:when>
                                         <c:otherwise>
-                                            <td class="dataTableContent"><:out value="${zone.zone.name}"/></td>
+                                            <td class="dataTableContent"><c:out value="${zone.zone.name}"/></td>
                                         </c:otherwise>
                                     </c:choose>
-                                    <td class="dataTableContent" align="right"><a href="<c:url value="/admin/taxZone/${thisTaxZone.id}/zone/${zone.zone.id}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
+                                    <td class="dataTableContent" align="right"><a href="<c:url value="/admin/taxZone/${thisTaxZone.id}/zone/${zone.id}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
                                 </tr>
                             </c:if>
                         </c:forEach>
@@ -70,7 +70,7 @@
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr>
-                            <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb3" href="http://shadowfax/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=list&spage=1&sID=2&saction=edit&osCAdminID=r9ji9b4276mi3itiavgakf9lb5">Edit</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb4" href="http://shadowfax/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=list&spage=1&sID=2&saction=delete&osCAdminID=r9ji9b4276mi3itiavgakf9lb5">Delete</a></span><script type="text/javascript">$("#tdb4").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                            <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb3" href="<c:url value="/admin/taxZone/${thisTaxZone.id}/zone/${thisZone.id}/edit"/>">Edit</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb4" href="<c:url value="/admin/taxZone/${thisTaxZone.id}/zone/${thisZone.id}/delete"/>">Delete</a></span><script type="text/javascript">$("#tdb4").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                         </tr>
                         <tr>
                             <td class="infoBoxContent"><br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisZone.dateAdded}" /></td>
