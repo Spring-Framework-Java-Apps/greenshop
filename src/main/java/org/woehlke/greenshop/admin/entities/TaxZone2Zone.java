@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.admin.entities;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Zone;
 
@@ -35,6 +37,7 @@ public class TaxZone2Zone {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "zone_id", columnDefinition = "INT(11)")
+    @NotFound(action = NotFoundAction.IGNORE)
     private Zone zone;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
