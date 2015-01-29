@@ -21,6 +21,7 @@ import org.woehlke.greenshop.checkout.repository.OrderStatusRepository;
 import org.woehlke.greenshop.checkout.repository.OrderTotalRepository;
 import org.woehlke.greenshop.customer.entities.Customer;
 import org.woehlke.greenshop.customer.entities.CustomerInfo;
+import org.woehlke.greenshop.customer.entities.Zone;
 import org.woehlke.greenshop.customer.model.CustomerBean;
 import org.woehlke.greenshop.customer.repository.CustomerInfoRepository;
 import org.woehlke.greenshop.customer.repository.CustomerRepository;
@@ -28,9 +29,7 @@ import org.woehlke.greenshop.customer.repository.ZoneRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by tw on 31.12.14.
@@ -367,5 +366,24 @@ public class AdminServiceImpl implements AdminService {
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void updateTaxZone2Zone(TaxZone2Zone thisZone) {
         taxZone2ZoneRepository.save(thisZone);
+    }
+
+    @Override
+    public Map<Long, List<Zone>> getZoneMap() {
+        List<Zone> zones = zoneRepository.findAll();
+        Map<Long, List<Zone>> zoneMap = new LinkedHashMap<>();
+        List<Zone> subZoneList = new ArrayList<>();
+        long countryId = 0;
+        for(Zone zone: zones){
+            if(countryId != zone.getCountry().getId()){
+                if(subZoneList.size()>0){
+                    zoneMap.put(countryId,subZoneList);
+                    subZoneList = new ArrayList<>();
+                }
+                countryId = zone.getCountry().getId();
+            }
+            subZoneList.add(zone);
+        }
+        return zoneMap;
     }
 }

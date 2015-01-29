@@ -11,9 +11,11 @@ import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
 import org.woehlke.greenshop.customer.entities.Customer;
+import org.woehlke.greenshop.customer.entities.Zone;
 import org.woehlke.greenshop.customer.model.CustomerBean;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tw on 31.12.14.
@@ -89,4 +91,7 @@ public interface AdminService extends UserDetailsService {
     void deleteTaxZone2Zone(TaxZone2Zone thisZone);
 
     void updateTaxZone2Zone(TaxZone2Zone thisZone);
+
+    Map<Long, List<Zone>> getZoneMap();
+
 }

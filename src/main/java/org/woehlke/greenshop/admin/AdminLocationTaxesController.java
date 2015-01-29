@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tw on 04.01.15.
@@ -246,6 +247,10 @@ public class AdminLocationTaxesController {
             thisZone = zones.iterator().next();
         }
         model.addAttribute("thisZone",thisZone);
+        Map<Long,List<Zone>> zoneMap = adminService.getZoneMap();
+        model.addAttribute("zoneMap",zoneMap);
+        List<Country> countries = customerService.findAllCountriesOrderByName();
+        model.addAttribute("countries",countries);
         return "admin/taxZoneInsertForm";
     }
 
@@ -315,6 +320,10 @@ public class AdminLocationTaxesController {
         model.addAttribute("zones",zones);
         TaxZone2Zone thisZone = adminService.findTaxZone2ZoneById(zoneId);
         model.addAttribute("thisZone",thisZone);
+        Map<Long,List<Zone>> zoneMap = adminService.getZoneMap();
+        model.addAttribute("zoneMap",zoneMap);
+        List<Country> countries = customerService.findAllCountriesOrderByName();
+        model.addAttribute("countries",countries);
         return "admin/taxZoneEditForm";
     }
 
