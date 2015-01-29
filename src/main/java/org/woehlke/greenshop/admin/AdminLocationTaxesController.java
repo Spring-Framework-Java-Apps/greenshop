@@ -305,6 +305,48 @@ public class AdminLocationTaxesController {
         return "redirect:/admin/taxZone/"+taxZoneId;
     }
 
+    @RequestMapping(value = "/admin/taxZone/{taxZoneId}/zone/{zoneId}/edit", method = RequestMethod.GET)
+    public String taxZoneWithZoneIdEditForm(@PathVariable long taxZoneId, @PathVariable long zoneId,Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+        model.addAttribute("thisTaxZone",thisTaxZone);
+        List<TaxZone2Zone> zones = adminService.findZonesByTaxZone(thisTaxZone);
+        model.addAttribute("zones",zones);
+        TaxZone2Zone thisZone = adminService.findTaxZone2ZoneById(zoneId);
+        model.addAttribute("thisZone",thisZone);
+        return "admin/taxZoneEditForm";
+    }
+
+    @RequestMapping(value = "/admin/taxZone/{taxZoneId}/zone/{zoneId}/edit", method = RequestMethod.POST)
+    public String taxZoneWithZoneIdEditPerform(@PathVariable long taxZoneId,
+                                               @PathVariable long zoneId,
+                                               @ModelAttribute NewSubZoneInfoBean newSubZoneInfoBean,
+                                               BindingResult result,
+                                               Model model){
+        TaxZone2Zone thisZone = adminService.findTaxZone2ZoneById(zoneId);
+        if(result.hasErrors()||newSubZoneInfoBean.getZone_country_id()==null) {
+            int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+            model.addAttribute("menuCategory",menuCategory);
+            TaxZone thisTaxZone = adminService.findTaxZoneById(taxZoneId);
+            model.addAttribute("thisTaxZone",thisTaxZone);
+            List<TaxZone2Zone> zones = adminService.findZonesByTaxZone(thisTaxZone);
+            model.addAttribute("zones",zones);
+            model.addAttribute("thisZone",thisZone);
+            return "admin/taxZoneEditForm";
+        } else {
+            Country country = customerService.findCountryById(newSubZoneInfoBean.getZone_country_id());
+            Zone subZone = null;
+            if(newSubZoneInfoBean.getZone_id()!=null){
+                subZone = customerService.findZoneById(newSubZoneInfoBean.getZone_id());
+            }
+            thisZone.setZoneCountry(country);
+            thisZone.setZone(subZone);
+            adminService.updateTaxZone2Zone(thisZone);
+            return "redirect:/admin/taxZone/"+taxZoneId+"/zone/"+zoneId;
+        }
+    }
+
     @RequestMapping(value = "/admin/taxClasses", method = RequestMethod.GET)
     public String taxClasses(Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
