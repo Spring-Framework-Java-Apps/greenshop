@@ -259,8 +259,9 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/accountHistory", method = RequestMethod.GET)
 	public String accountHistory(Model model){
 		super.getDefaultBoxContent(model);
+        Language language = languageService.findLanguageByCode("en");
 		Customer customer = super.getLoggedInCustomer();
-		List<OrderHistoryBean> orderHistory = this.orderService.getOrderHistoryForCustomer(customer);
+		List<OrderHistoryBean> orderHistory = this.orderService.getOrderHistoryForCustomer(customer,language);
 		model.addAttribute("orders", orderHistory);
 		return "accountHistory";
 	}
@@ -268,7 +269,8 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/accountHistoryInfo/{orderId}", method = RequestMethod.GET)
 	public String accountHistoryInfo(@PathVariable long orderId, Model model){
 		super.getDefaultBoxContent(model);
-		OrderHistoryDetailsBean orderHistoryDetailsBean = this.orderService.findOrderDetailsById(orderId);
+        Language language = languageService.findLanguageByCode("en");
+		OrderHistoryDetailsBean orderHistoryDetailsBean = this.orderService.findOrderDetailsById(orderId,language);
 		model.addAttribute("orderHistoryDetailsBean",orderHistoryDetailsBean);
 		return "accountHistoryInfo";
 	}
@@ -302,7 +304,7 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/accountNotifications", method = RequestMethod.GET)
 	public String accountNotifications(Model model){
 		super.getDefaultBoxContent(model);
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String customerEmail = auth.getName();
 		Customer customer = customerService.findCustomerByEmail(customerEmail);
@@ -341,7 +343,7 @@ public class UserController extends AbstractController {
 	@RequestMapping(value = "/account/addProductNotification/{productId}", method = RequestMethod.GET)
 	public String addProductNotification(@PathVariable long productId, Model model) {
 		super.getDefaultBoxContent(model);
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String customerEmail = auth.getName();
 		Customer myCustomer = customerService.findCustomerByEmail(customerEmail);

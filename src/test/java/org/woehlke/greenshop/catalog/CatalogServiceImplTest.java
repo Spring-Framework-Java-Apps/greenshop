@@ -19,6 +19,7 @@ import org.woehlke.greenshop.catalog.entities.ProductOption;
 import org.woehlke.greenshop.catalog.model.*;
 import org.woehlke.greenshop.catalog.repositories.CategoryDescriptionRepositoryDao;
 import org.woehlke.greenshop.catalog.repositories.ProductRepository;
+import org.woehlke.greenshop.catalog.service.LanguageService;
 
 
 @WebAppConfiguration
@@ -33,13 +34,13 @@ public class CatalogServiceImplTest {
 	
 	@Inject
 	private ProductRepository productRepository;
-	
-	@Inject
-	private CategoryDescriptionRepositoryDao categoryDescriptionRepositoryDao;
+
+    @Inject
+    private LanguageService languageService;
 	
 	@Test
 	public void findProductOptionsByProductTest(){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		List<Product> listProduct = productRepository.findAll();
 		for(Product product:listProduct){
 			ProductDescription productDescription = catalogService.findProductById(product.getId(), language);
@@ -61,7 +62,7 @@ public class CatalogServiceImplTest {
 	@Test
 	public void getCategoriesTreeTest() throws Exception {
 		logger.info("#---------------------------------------");
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		long rootCategoryId[] = {21L,11L,9L,1L,2L,3L,0L};
 		for(long categoryId:rootCategoryId){
 			CategoryTree categoryTree = catalogService.getCategoriesTree(categoryId, language);
@@ -138,7 +139,7 @@ public class CatalogServiceImplTest {
 	
 	@Test
 	public void getProductsByCategoryTest() throws Exception {
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		long rootCategoryId[] = {24L,11L,9L,1L,2L,3L,0L};
 		for(long categoryId:rootCategoryId){
 			ProductsByCategory p = catalogService.getProductsByCategory(categoryId,language);

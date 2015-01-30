@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.woehlke.greenshop.cart.model.TransientBasket;
-import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
+import org.woehlke.greenshop.catalog.service.LanguageService;
 
 
 @Named("populateBasketAfterLogin") 
@@ -23,8 +23,8 @@ public class PopulateBasketAfterLogin extends
 	@Inject
 	private CartService cartService;
 
-	@Inject
-	private CatalogService catalogService;
+    @Inject
+    private LanguageService languageService;
 	
 	@Override
     public void onAuthenticationSuccess(
@@ -34,7 +34,7 @@ public class PopulateBasketAfterLogin extends
 		super.onAuthenticationSuccess(request, response, authentication);
 		HttpSession session = request.getSession();
 		TransientBasket transientBasket = (TransientBasket) session.getAttribute("transientBasket");
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		TransientBasket newTransientBasket = cartService.polulateByPersistentBasket(transientBasket,language,authentication);
 		session.setAttribute("transientBasket", newTransientBasket);
 	}

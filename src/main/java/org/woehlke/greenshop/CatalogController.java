@@ -12,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.*;
+import org.woehlke.greenshop.catalog.service.LanguageService;
 import org.woehlke.greenshop.customer.entities.Customer;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -24,7 +26,7 @@ import javax.validation.Valid;
 public class CatalogController extends AbstractController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CatalogController.class);
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model){
 		super.getDefaultBoxContent(model);
@@ -33,7 +35,7 @@ public class CatalogController extends AbstractController {
 	
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
 	public String category(@PathVariable long categoryId,Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -66,7 +68,7 @@ public class CatalogController extends AbstractController {
 	public String categoryFilteredByManufacturer(
 			@PathVariable long categoryId,
 			@PathVariable long manufacturerId, Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -89,7 +91,7 @@ public class CatalogController extends AbstractController {
 						  HttpServletRequest request,
 						  HttpServletResponse response,
 						  Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -125,7 +127,7 @@ public class CatalogController extends AbstractController {
 	@RequestMapping(value = "/manufacturer/{manufacturerId}", method = RequestMethod.GET)
 	public String manufacturer(@PathVariable long manufacturerId,Model model){
 		logger.info("manufacturers_id="+manufacturerId);
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -162,7 +164,7 @@ public class CatalogController extends AbstractController {
 			@PathVariable long manufacturerId,
 			@PathVariable long categoryId, Model model){
 		logger.info("manufacturers_id="+manufacturerId);
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -187,7 +189,7 @@ public class CatalogController extends AbstractController {
 	@RequestMapping(value = "/manufacturer/redirect/{manufacturerId}", method = RequestMethod.GET)
 	public String manufacturerRedirect(@PathVariable long manufacturerId,Model model) {
 		logger.info("manufacturers_id=" + manufacturerId);
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -205,7 +207,7 @@ public class CatalogController extends AbstractController {
 										HttpServletRequest request,
 										HttpServletResponse response,
 										Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -239,7 +241,7 @@ public class CatalogController extends AbstractController {
 											   HttpServletRequest request,
 											   HttpServletResponse response,
 											   Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -279,7 +281,7 @@ public class CatalogController extends AbstractController {
 							   HttpServletRequest request,
 							   HttpServletResponse response,
 							   Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -314,7 +316,7 @@ public class CatalogController extends AbstractController {
 							  HttpServletRequest request,
 							  HttpServletResponse response,
 							  Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -347,7 +349,7 @@ public class CatalogController extends AbstractController {
 	public String reviews(HttpServletRequest request,
 						   HttpServletResponse response,
 						   Model model) {
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -367,7 +369,7 @@ public class CatalogController extends AbstractController {
 	public String specials(HttpServletRequest request,
 							 HttpServletResponse response,
 							 Model model) {
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -387,7 +389,7 @@ public class CatalogController extends AbstractController {
 	public String newProducts(HttpServletRequest request,
 							  HttpServletResponse response,
 							  Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);

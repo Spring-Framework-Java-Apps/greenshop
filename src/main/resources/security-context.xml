@@ -69,7 +69,7 @@
   	</security:http>
 
 	<security:authentication-manager alias="authenticationManagerAdmin">
-		<security:authentication-provider user-service-ref="adminService">
+		<security:authentication-provider user-service-ref="administratorService">
 			<security:password-encoder hash="md5"/>
 		</security:authentication-provider>
 	</security:authentication-manager>

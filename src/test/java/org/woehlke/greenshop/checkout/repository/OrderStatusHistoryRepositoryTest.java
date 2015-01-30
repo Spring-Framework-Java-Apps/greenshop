@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
+import org.woehlke.greenshop.catalog.service.LanguageService;
 import org.woehlke.greenshop.checkout.entities.Order;
 import org.woehlke.greenshop.checkout.entities.OrderStatusHistory;
 import org.woehlke.greenshop.checkout.model.OrderStatusHistoryBean;
@@ -30,9 +30,9 @@ public class OrderStatusHistoryRepositoryTest {
 	
 	@Inject
 	private OrderRepository orderRepository;
-	
-	@Inject
-	protected CatalogService catalogService;
+
+    @Inject
+    private LanguageService languageService;
 	
 	@Test
 	public void getAllTest(){
@@ -46,7 +46,7 @@ public class OrderStatusHistoryRepositoryTest {
 	
 	@Test
 	public void findByOrderTest(){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		List<Order> all = orderRepository.findAll();
 		logger.info("------------------------------------------------------");
 		for(Order one:all){

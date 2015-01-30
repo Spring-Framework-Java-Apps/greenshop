@@ -1,11 +1,13 @@
-package org.woehlke.greenshop.admin;
+package org.woehlke.greenshop.admin.web.configuration;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.woehlke.greenshop.admin.AdminMenuCategory;
 import org.woehlke.greenshop.admin.entities.Administrator;
+import org.woehlke.greenshop.admin.service.AdministratorService;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -14,10 +16,10 @@ import java.util.List;
  * Created by tw on 04.01.15.
  */
 @Controller
-public class AdminConfigurationController {
+public class AdministratorController {
 
     @Inject
-    private AdminService adminService;
+    private AdministratorService administratorService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String home(Model model){
@@ -30,7 +32,7 @@ public class AdminConfigurationController {
     public String administrators(Model model){
         int menuCategory = AdminMenuCategory.CONFIGURATION.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<Administrator> administrators = adminService.findAllAdministrators();
+        List<Administrator> administrators = administratorService.findAllAdministrators();
         model.addAttribute("administrators",administrators);
         Administrator thisAdministrator = null;
         if(administrators.size()>0){
@@ -45,9 +47,9 @@ public class AdminConfigurationController {
             @PathVariable long administratorId, Model model){
         int menuCategory = AdminMenuCategory.CONFIGURATION.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Administrator thisAdministrator = adminService.findAdministratorById(administratorId);
+        Administrator thisAdministrator = administratorService.findAdministratorById(administratorId);
         model.addAttribute("thisAdministrator",thisAdministrator);
-        List<Administrator> administrators = adminService.findAllAdministrators();
+        List<Administrator> administrators = administratorService.findAllAdministrators();
         model.addAttribute("administrators",administrators);
         return "admin/administrators";
     }

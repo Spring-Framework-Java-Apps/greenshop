@@ -25,6 +25,7 @@ import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
 import org.woehlke.greenshop.catalog.model.ProductAttributes;
 import org.woehlke.greenshop.catalog.model.SpecialProduct;
+import org.woehlke.greenshop.catalog.service.LanguageService;
 
 @Controller
 @SessionAttributes({"transientBasket"})
@@ -34,6 +35,9 @@ public class CartController extends AbstractController {
 	
 	@Inject
 	private CartService cartService;
+
+    @Inject
+    private LanguageService languageService;
 	
 	@RequestMapping(value = "/shoppingCart", method = RequestMethod.GET)
 	public String shoppingCart(
@@ -50,7 +54,7 @@ public class CartController extends AbstractController {
 			HttpServletRequest request,  
             HttpServletResponse response,
 			@PathVariable long productId, Model model){	
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
@@ -77,7 +81,7 @@ public class CartController extends AbstractController {
 			HttpServletRequest request,  
             HttpServletResponse response,
 			@PathVariable long productId, Model model){	
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		ReviewDescription randomReview = catalogService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
 		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);

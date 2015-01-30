@@ -1,4 +1,4 @@
-package org.woehlke.greenshop.admin.web;
+package org.woehlke.greenshop.admin.web.taxes;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

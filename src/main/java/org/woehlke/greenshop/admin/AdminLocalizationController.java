@@ -5,8 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
+import org.woehlke.greenshop.catalog.service.LanguageService;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
 
@@ -23,7 +23,7 @@ public class AdminLocalizationController {
     private AdminService adminService;
 
     @Inject
-    private CatalogService catalogService;
+    private LanguageService languageService;
 
     @RequestMapping(value = "/admin/currencies", method = RequestMethod.GET)
     public String currencies(Model model){
@@ -59,7 +59,7 @@ public class AdminLocalizationController {
 
     @RequestMapping(value = "/admin/ordersStatus", method = RequestMethod.GET)
     public String ordersStatus(Model model){
-        Language language = catalogService.findLanguageByCode("en");
+        Language language = languageService.findLanguageByCode("en");
         int menuCategory = AdminMenuCategory.LOCALISATION.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         List<OrderStatus> orderStatuses = adminService.findAllOrderStatuses(language);
@@ -74,7 +74,7 @@ public class AdminLocalizationController {
 
     @RequestMapping(value = "/admin/ordersStatus/{ordersStatusId}", method = RequestMethod.GET)
     public String ordersStatusId(@PathVariable long ordersStatusId, Model model){
-        Language language = catalogService.findLanguageByCode("en");
+        Language language = languageService.findLanguageByCode("en");
         int menuCategory = AdminMenuCategory.LOCALISATION.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         List<OrderStatus> orderStatuses = adminService.findAllOrderStatuses(language);

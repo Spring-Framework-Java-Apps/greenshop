@@ -1,14 +1,8 @@
 package org.woehlke.greenshop.admin;
 
-import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.woehlke.greenshop.admin.entities.*;
-import org.woehlke.greenshop.admin.model.AdministratorBean;
 import org.woehlke.greenshop.admin.model.OrderAdminBean;
-import org.woehlke.greenshop.admin.repository.*;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.catalog.repositories.*;
@@ -35,21 +29,6 @@ import java.util.*;
 public class AdminServiceImpl implements AdminService {
 
     @Inject
-    private AdministratorRepository administratorRepository;
-
-    @Inject
-    private ManufacturerRepository manufacturerRepository;
-
-    @Inject
-    private ProductRepository productRepository;
-
-    @Inject
-    private ProductRepositoryDao productRepositoryDao;
-
-    @Inject
-    private CategoryRepository categoryRepository;
-
-    @Inject
     private SpecialRepository specialRepository;
 
     @Inject
@@ -60,10 +39,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private ReviewDescriptionRepository reviewDescriptionRepository;
-
-    @Inject
-    private TaxZoneRepository taxZoneRepository;
-
 
     @Inject
     private LanguageRepository languageRepository;
@@ -82,30 +57,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private OrderTotalRepository orderTotalRepository;
-
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Administrator administrator = administratorRepository.findByUserName(username);
-        if(administrator == null) throw new UsernameNotFoundException(username);
-        return new AdministratorBean(administrator);
-    }
-
-    @Override
-    public List<Manufacturer> getAllManufacturers() {
-        return manufacturerRepository.findAllOrderByName();
-    }
-
-    @Override
-    public int countProductsOfThisManufacturer(Manufacturer thisManufacturer) {
-        List<Product> list = productRepository.findByManufacturer(thisManufacturer);
-        return list.size();
-    }
-
-    @Override
-    public Manufacturer getManufacturerById(long manufacturerId) {
-        return manufacturerRepository.findOne(manufacturerId);
-    }
 
     @Override
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
@@ -128,16 +79,6 @@ public class AdminServiceImpl implements AdminService {
         reviewProduct.setProduct(productDescription);
         reviewProduct.setReview(reviewDescription);
         return reviewProduct;
-    }
-
-    @Override
-    public List<Administrator> findAllAdministrators() {
-        return administratorRepository.findAll();
-    }
-
-    @Override
-    public Administrator findAdministratorById(long administratorId) {
-        return administratorRepository.findOne(administratorId);
     }
 
     @Override
@@ -227,42 +168,6 @@ public class AdminServiceImpl implements AdminService {
         bean.setOrderStatus(orderStatus);
         bean.setPaymentMethod(myOrder.getPaymentMethod());
         return bean;
-    }
-
-    @Override
-    public List<ProductDescription> findProductsViewed(Language language) {
-        Sort sort = new Sort(Sort.Direction.DESC,"viewed");
-        return productDescriptionRepository.findAll(sort);
-    }
-
-    @Override
-    public List<ProductDescription> findProductsByCategoryId(long categoryId, Language language) {
-        List<ProductDescription> productsByCategoryId = new ArrayList<>();
-        List<Product> products = productRepositoryDao.findByCategoryId(categoryId);
-        for(Product product :products){
-            ProductDescriptionId id = new ProductDescriptionId();
-            id.setProduct(product);
-            id.setLanguage(language);
-            ProductDescription productDescription = productDescriptionRepository.findOne(id);
-            productsByCategoryId.add(productDescription);
-        }
-        return productsByCategoryId;
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void setProductActive(long productId) {
-        Product product = productRepository.findOne(productId);
-        product.setStatus(true);
-        productRepository.save(product);
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void setProductInactive(long productId) {
-        Product product = productRepository.findOne(productId);
-        product.setStatus(false);
-        productRepository.save(product);
     }
 
 

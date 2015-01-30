@@ -63,8 +63,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderHistoryDetailsBean findOrderDetailsById(long orderId) {
-		Language language = catalogService.findLanguageByCode("en");
+	public OrderHistoryDetailsBean findOrderDetailsById(long orderId, Language language) {
+		//Language language = catalogService.findLanguageByCode("en");
 		OrderHistoryDetailsBean o = new OrderHistoryDetailsBean();
 		Order order = orderRepository.findOne(orderId);
 		o.setOrder(order);
@@ -83,9 +83,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderHistoryBean> getOrderHistoryForCustomer(Customer customer) {
+	public List<OrderHistoryBean> getOrderHistoryForCustomer(Customer customer,Language language) {
 		List<OrderHistoryBean> orderHistory = new ArrayList<OrderHistoryBean>();
-		Language language = catalogService.findLanguageByCode("en");
+		//Language language = catalogService.findLanguageByCode("en");
 		List<Order> orders = orderRepository.findByCustomer(customer);
 		for(Order order:orders){
 			OrderTotal orderTotal = orderTotalRepository.findByOrderAndTotalClass(order,"ot_total");

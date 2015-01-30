@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.admin.model.OrderAdminBean;
 import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
+import org.woehlke.greenshop.catalog.service.LanguageService;
 import org.woehlke.greenshop.customer.model.CustomerBean;
 
 import javax.inject.Inject;
@@ -23,7 +24,7 @@ public class AdminCustomerController {
     private AdminService adminService;
 
     @Inject
-    private CatalogService catalogService;
+    private LanguageService languageService;
 
     @RequestMapping(value = "/admin/customers", method = RequestMethod.GET)
     public String customers(Model model){
@@ -59,7 +60,7 @@ public class AdminCustomerController {
     public String orders(Model model){
         int menuCategory = AdminMenuCategory.CUSTOMERS.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Language language = catalogService.findLanguageByCode("en");
+        Language language = languageService.findLanguageByCode("en");
         List<OrderAdminBean> orders = adminService.getAllOrders(language);
         model.addAttribute("orders",orders);
         OrderAdminBean thisOrder = null;
@@ -74,7 +75,7 @@ public class AdminCustomerController {
     public String orderId(@PathVariable long orderId, Model model){
         int menuCategory = AdminMenuCategory.CUSTOMERS.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Language language = catalogService.findLanguageByCode("en");
+        Language language = languageService.findLanguageByCode("en");
         List<OrderAdminBean> orders = adminService.getAllOrders(language);
         model.addAttribute("orders",orders);
         OrderAdminBean thisOrder = adminService.findOrderById(orderId,language);

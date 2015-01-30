@@ -10,8 +10,6 @@ import org.woehlke.greenshop.customer.entities.Customer;
 
 public interface CatalogService {
 	
-	Language findLanguageByCode(String code);
-	
 	List<SpecialProduct> recommenderNewProducts(Language language);
 	
 	Manufacturers findManufacturers();

@@ -21,6 +21,7 @@ import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
 import org.woehlke.greenshop.catalog.model.ShareProductBean;
 import org.woehlke.greenshop.catalog.model.SpecialProduct;
+import org.woehlke.greenshop.catalog.service.LanguageService;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Customer;
 
@@ -31,6 +32,9 @@ public abstract class AbstractController {
 	
 	@Inject
 	protected CustomerService customerService;
+
+    @Inject
+    protected LanguageService languageService;
 	
 	@ModelAttribute("transientBasket")
 	public TransientBasket createTransientBasket(){
@@ -38,7 +42,7 @@ public abstract class AbstractController {
 	}
 	
 	protected void getDefaultBoxContent(Model model){
-		Language language = catalogService.findLanguageByCode("en");
+		Language language = languageService.findLanguageByCode("en");
 		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		Manufacturers manufacturers=catalogService.findManufacturers();

@@ -1,4 +1,4 @@
-package org.woehlke.greenshop.admin.web;
+package org.woehlke.greenshop.admin.web.taxes;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -88,11 +88,6 @@ public class CatalogServiceImpl implements CatalogService {
 	}
 
 	@Override
-	public Language findLanguageByCode(String code) {
-		return languageRepository.findByCode(code);
-	}
-
-	@Override
 	public Manufacturers findManufacturers() {
 		Sort sort = new Sort(Sort.Direction.ASC,"name");
 		List<Manufacturer> manufacturers = manufacturerRepository.findAll(sort);

@@ -23,7 +23,7 @@ public class SearchController extends AbstractController {
 
     @RequestMapping(value = "/advancedSearch", method = RequestMethod.GET)
     public String showAdvancedSearchForm(Model model){
-        Language language = catalogService.findLanguageByCode("en");
+        Language language = languageService.findLanguageByCode("en");
         super.getDefaultBoxContent(model);
         AdvancedSearchBean advancedSearchBean = new AdvancedSearchBean();
         model.addAttribute("advancedSearchBean", advancedSearchBean);
@@ -45,7 +45,7 @@ public class SearchController extends AbstractController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String showAdvancedSearchForm(
             @RequestParam String keywords, Model model){
-        Language language = catalogService.findLanguageByCode("en");
+        Language language = languageService.findLanguageByCode("en");
         super.getDefaultBoxContent(model);
         logger.info(keywords);
         return "searchResult";
