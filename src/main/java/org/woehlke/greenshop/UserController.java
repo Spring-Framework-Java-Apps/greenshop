@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.woehlke.greenshop.customer.service.CountryService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.checkout.OrderService;
@@ -41,6 +42,8 @@ public class UserController extends AbstractController {
 	@Inject
 	private OrderService orderService;
 
+    @Inject
+    private CountryService countryService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -111,7 +114,7 @@ public class UserController extends AbstractController {
 		Customer customer = customerService.findCustomerByEmail(customerEmail);
 		model.addAttribute("customer",customer);
 		AddressBook customersAddress = customerService.findAddressById(addressId);
-		List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+		List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 		model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 		CustomerAddressBean addressBean = new CustomerAddressBean();
 		addressBean.setGender(customersAddress.getGender());
@@ -138,12 +141,12 @@ public class UserController extends AbstractController {
 		model.addAttribute("customer",customer);
 		if (result.hasErrors()){
 			super.getDefaultBoxContent(model);
-			List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+			List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 			model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 			return "addressBookEdit";
 		} else {
 			AddressBook persistentAddress = customerService.findAddressById(addressId);
-			Country country = customerService.findCountryById(customersAddress.getCountry());
+			Country country = countryService.findCountryById(customersAddress.getCountry());
 			persistentAddress.setCity(customersAddress.getCity());
 			persistentAddress.setCompany(customersAddress.getCompany());
 			persistentAddress.setCountry(country);
@@ -167,7 +170,7 @@ public class UserController extends AbstractController {
 		String customerEmail = auth.getName();
 		Customer customer = customerService.findCustomerByEmail(customerEmail);
 		model.addAttribute("customer",customer);
-		List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+		List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 		model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 		CustomerAddressBean addressBean = new CustomerAddressBean();
 		model.addAttribute("customersAddress",addressBean);
@@ -182,13 +185,13 @@ public class UserController extends AbstractController {
 		model.addAttribute("customer",customer);
 		if(result.hasErrors()){
 			super.getDefaultBoxContent(model);
-			List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+			List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 			model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 			model.addAttribute("customersAddress",customersAddress);
 			return "addressBookAdd";
 		} else {
 			AddressBook persistentAddress = new AddressBook();
-			Country country = customerService.findCountryById(customersAddress.getCountry());
+			Country country = countryService.findCountryById(customersAddress.getCountry());
 			persistentAddress.setCustomer(customer);
 			persistentAddress.setCity(customersAddress.getCity());
 			persistentAddress.setCompany(customersAddress.getCompany());

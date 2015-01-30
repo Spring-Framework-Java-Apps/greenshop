@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.woehlke.greenshop.customer.service.CountryService;
 import org.woehlke.greenshop.cart.model.TransientBasket;
 import org.woehlke.greenshop.checkout.CheckoutService;
 import org.woehlke.greenshop.checkout.model.AddressBean;
@@ -26,6 +27,9 @@ public class CheckoutController extends AbstractController {
 
 	@Inject
 	private CheckoutService checkoutService;
+
+    @Inject
+    private CountryService countryService;
 	
 	@ModelAttribute("checkout")
 	public CheckoutBean createCheckoutBean(){
@@ -107,7 +111,7 @@ public class CheckoutController extends AbstractController {
 			AddressBean newAddress = new AddressBean();
 			newAddress.setChoosenAddressId(customer.getDefaultAddress().getId());
 			model.addAttribute("newAddress", newAddress);
-			List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+			List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 			model.addAttribute("allCountriesOrderByName", allCountriesOrderByName);
 			return "checkoutShippingAddress";
 		}
@@ -131,11 +135,11 @@ public class CheckoutController extends AbstractController {
 			if(result.hasErrors()){
 				List<AddressBook> addressBook = super.customerService.findAddressBookForCustomer(customer);
 				model.addAttribute("addressBook", addressBook);
-				List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+				List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 				model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 				return "checkoutShippingAddress";
 			} else {
-				Country country = super.customerService.findCountryById(newAddress.getCountryId());
+				Country country = countryService.findCountryById(newAddress.getCountryId());
 				newAddress.setCountryName(country.getName());
 				AddressBook a = checkoutService.transformBeanToPersistentAddress(newAddress,country,customer);
 				super.customerService.addAddress(a);
@@ -159,7 +163,7 @@ public class CheckoutController extends AbstractController {
 			AddressBean newAddress = new AddressBean();
 			newAddress.setChoosenAddressId(customer.getDefaultAddress().getId());
 			model.addAttribute("newAddress", newAddress);
-			List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+			List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 			model.addAttribute("allCountriesOrderByName", allCountriesOrderByName);
 			return "checkoutPaymentAddress";
 		}
@@ -183,11 +187,11 @@ public class CheckoutController extends AbstractController {
 			if(result.hasErrors()){
 				List<AddressBook> addressBook = super.customerService.findAddressBookForCustomer(customer);
 				model.addAttribute("addressBook", addressBook);
-				List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+				List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 				model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 				return "checkoutShippingAddress";
 			} else {
-				Country country = super.customerService.findCountryById(newAddress.getCountryId());
+				Country country = countryService.findCountryById(newAddress.getCountryId());
 				newAddress.setCountryName(country.getName());
 				AddressBook a = checkoutService.transformBeanToPersistentAddress(newAddress, country, customer);
 				super.customerService.addAddress(a);

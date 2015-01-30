@@ -60,12 +60,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Inject
 	private ProductDescriptionRepository productDescriptionRepository;
-	
-	@Override
-	public List<Country> findAllCountriesOrderByName() {
-		Sort sort = new Sort("name");
-		return countryRepository.findAll(sort);
-	}
 
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
@@ -170,10 +164,6 @@ public class CustomerServiceImpl implements CustomerService {
 		return addressBookRepository.findOne(addressId);
 	}
 
-	@Override
-	public Country findCountryById(long countryId) {
-		return countryRepository.findOne(countryId);
-	}
 
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
@@ -263,15 +253,5 @@ public class CustomerServiceImpl implements CustomerService {
 			info.setAccountLastModified(new Date());
 			customerInfoRepository.save(info);
 		}
-	}
-
-	@Override
-	public List<Zone> findAllZones() {
-		return zoneRepository.findAll();
-	}
-
-	@Override
-	public Zone findZoneById(long zoneId) {
-		return zoneRepository.findOne(zoneId);
 	}
 }

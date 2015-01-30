@@ -1,7 +1,6 @@
 package org.woehlke.greenshop.customer;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Customer;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
 
@@ -26,16 +24,6 @@ public class CustomerServiceImplTest {
 	
 	@Inject
 	private CustomerService customerService;
-	
-	@Test
-	public void findAllCountriesOrderByNameTest() throws Exception {
-		List<Country> all = customerService.findAllCountriesOrderByName();
-		logger.info("------------------------------------------------------");
-		for(Country one:all){
-			logger.info(one.getName());
-		}
-		logger.info("------------------------------------------------------");
-	}
 	
 	@Test
 	public void dateMapperTest() throws Exception {

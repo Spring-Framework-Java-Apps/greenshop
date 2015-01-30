@@ -62,19 +62,8 @@ public class AdminServiceImpl implements AdminService {
     private ReviewDescriptionRepository reviewDescriptionRepository;
 
     @Inject
-    private TaxClassRepository taxClassRepository;
-
-    @Inject
-    private TaxRateRepository taxRateRepository;
-
-    @Inject
     private TaxZoneRepository taxZoneRepository;
 
-    @Inject
-    private ZoneRepository zoneRepository;
-
-    @Inject
-    private TaxZone2ZoneRepository taxZone2ZoneRepository;
 
     @Inject
     private LanguageRepository languageRepository;
@@ -93,12 +82,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private OrderTotalRepository orderTotalRepository;
-
-    @Inject
-    private CountryRepository countryRepository;
-
-    @Inject
-    private AddressFormatRepository addressFormatRepository;
 
 
     @Override
@@ -155,36 +138,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Administrator findAdministratorById(long administratorId) {
         return administratorRepository.findOne(administratorId);
-    }
-
-    @Override
-    public List<TaxClass> findAllTaxClasses() {
-        return taxClassRepository.findAll();
-    }
-
-    @Override
-    public TaxClass findTaxClassById(long taxClassId) {
-        return taxClassRepository.findOne(taxClassId);
-    }
-
-    @Override
-    public List<TaxRate> findAllTaxRates() {
-        return taxRateRepository.findAll();
-    }
-
-    @Override
-    public TaxRate findTaxRateById(long taxRateId) {
-        return taxRateRepository.findOne(taxRateId);
-    }
-
-    @Override
-    public List<TaxZone> findAllTaxZones() {
-        return taxZoneRepository.findAll();
-    }
-
-    @Override
-    public TaxZone findTaxZoneById(long taxZoneId) {
-        return taxZoneRepository.findOne(taxZoneId);
     }
 
     @Override
@@ -312,103 +265,5 @@ public class AdminServiceImpl implements AdminService {
         productRepository.save(product);
     }
 
-    @Override
-    public List<TaxZone2Zone> findZonesByTaxZone(TaxZone thisTaxZone) {
-        return taxZone2ZoneRepository.findByTaxZone(thisTaxZone);
-    }
 
-    @Override
-    public TaxZone2Zone findTaxZone2ZoneById(long zoneId) {
-        return taxZone2ZoneRepository.findOne(zoneId);
-    }
-
-    @Override
-    public int getNumberOfZonesForTaxZone(TaxZone thisTaxZone) {
-        return taxZone2ZoneRepository.findByTaxZone(thisTaxZone).size();
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public TaxZone createTaxZone(TaxZone thisTaxZone) {
-        return taxZoneRepository.save(thisTaxZone);
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void deleteTaxZones(TaxZone thisTaxZone) {
-        TaxZone tz =taxZoneRepository.findOne(thisTaxZone.getId());
-        List<TaxZone2Zone> list = taxZone2ZoneRepository.findByTaxZone(tz);
-        taxZone2ZoneRepository.delete(list);
-        taxZoneRepository.delete(tz);
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void updateTaxZone(TaxZone thisTaxZone) {
-        TaxZone tz =taxZoneRepository.findOne(thisTaxZone.getId());
-        tz.setLastModified(new Date());
-        tz.setName(thisTaxZone.getName());
-        tz.setDescription(thisTaxZone.getDescription());
-        taxZoneRepository.save(tz);
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void createTaxZone2Zone(TaxZone2Zone newTaxZone2Zone) {
-        taxZone2ZoneRepository.save(newTaxZone2Zone);
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void deleteTaxZone2Zone(TaxZone2Zone thisZone) {
-        taxZone2ZoneRepository.delete(thisZone);
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void updateTaxZone2Zone(TaxZone2Zone thisZone) {
-        taxZone2ZoneRepository.save(thisZone);
-    }
-
-    @Override
-    public Map<Long, List<Zone>> getZoneMap() {
-        List<Zone> zones = zoneRepository.findAll();
-        Map<Long, List<Zone>> zoneMap = new LinkedHashMap<>();
-        List<Zone> subZoneList = new ArrayList<>();
-        long countryId = 0;
-        for(Zone zone: zones){
-            if(countryId != zone.getCountry().getId()){
-                if(subZoneList.size()>0){
-                    zoneMap.put(countryId,subZoneList);
-                    subZoneList = new ArrayList<>();
-                }
-                countryId = zone.getCountry().getId();
-            }
-            subZoneList.add(zone);
-        }
-        return zoneMap;
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void createCountry(Country thisCountry) {
-        countryRepository.save(thisCountry);
-    }
-
-    @Override
-    public List<AddressFormat> findAllAddressFormat() {
-        return addressFormatRepository.findAll();
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void updateCountry(Country thisCountry) {
-        countryRepository.save(thisCountry);
-    }
-
-    @Override
-    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
-    public void deleteCountry(Country thisCountry) {
-        countryRepository.delete(thisCountry);
-    }
 }

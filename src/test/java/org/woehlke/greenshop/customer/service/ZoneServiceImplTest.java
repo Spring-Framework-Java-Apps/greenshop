@@ -1,4 +1,4 @@
-package org.woehlke.greenshop.admin;
+package org.woehlke.greenshop.customer.service;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,28 +15,28 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by tw on 29.01.15.
+ * Created by tw on 30.01.15.
  */
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/servlet-context.xml")
-public class AdminServiceImplTest {
+public class ZoneServiceImplTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminServiceImplTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ZoneServiceImplTest.class);
 
     @Inject
-    private AdminService adminService;
+    private ZoneService zoneService;
 
     @Test
     public void getZoneMapTest() throws Exception {
         logger.info("------------------------------------------------------");
-        Map<Long, List<Zone>> zoneMap = adminService.getZoneMap();
+        Map<Long, List<Zone>> zoneMap = zoneService.getZoneMap();
         logger.info("------------------------------------------------------");
         for(Long countryId:zoneMap.keySet()){
             logger.info("## CountryId: "+countryId+" ##");
             for(Zone zone: zoneMap.get(countryId)){
                 logger.info("#### Zone: "+zone.toString());
-                Assert.assertEquals(countryId,zone.getCountry().getId());
+                Assert.assertEquals(countryId, zone.getCountry().getId());
             }
         }
         logger.info("------------------------------------------------------");

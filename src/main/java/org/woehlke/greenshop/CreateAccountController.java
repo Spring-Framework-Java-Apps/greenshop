@@ -19,6 +19,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.woehlke.greenshop.customer.service.CountryService;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
@@ -31,13 +32,16 @@ public class CreateAccountController extends AbstractController {
 	
 	@Inject
 	private CustomerService customerService;
+
+    @Inject
+    private CountryService countryService;
 	
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createNewCustomerForm(Model model){
 		super.getDefaultBoxContent(model);
 		CreateNewCustomerFormBean createNewCustomerFormBean = new CreateNewCustomerFormBean();
 		model.addAttribute("createNewCustomerFormBean",createNewCustomerFormBean);
-		List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+		List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 		model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 		return "createAccount";
 	}
@@ -55,7 +59,7 @@ public class CreateAccountController extends AbstractController {
 			result.addError(new FieldError("createNewCustomerFormBean","confirmation","passwords doesn't match"));
 		}
 		if(result.hasErrors()){
-			List<Country> allCountriesOrderByName = customerService.findAllCountriesOrderByName();
+			List<Country> allCountriesOrderByName = countryService.findAllCountriesOrderByName();
 			model.addAttribute("allCountriesOrderByName",allCountriesOrderByName);
 			for(ObjectError e :result.getAllErrors()){
 				logger.info(e.toString());

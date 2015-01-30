@@ -38,18 +38,6 @@ public interface AdminService extends UserDetailsService {
 
     Administrator findAdministratorById(long administratorId);
 
-    List<TaxClass> findAllTaxClasses();
-
-    TaxClass findTaxClassById(long taxClassId);
-
-    List<TaxRate> findAllTaxRates();
-
-    TaxRate findTaxRateById(long taxRateId);
-
-    List<TaxZone> findAllTaxZones();
-
-    TaxZone findTaxZoneById(long taxZoneId);
-
     List<Language> findAllLanguages();
 
     Language findLanguageById(long languageId);
@@ -76,31 +64,4 @@ public interface AdminService extends UserDetailsService {
 
     void setProductInactive(long productId);
 
-    List<TaxZone2Zone> findZonesByTaxZone(TaxZone thisTaxZone);
-
-    TaxZone2Zone findTaxZone2ZoneById(long zoneId);
-
-    int getNumberOfZonesForTaxZone(TaxZone thisTaxZone);
-
-    TaxZone createTaxZone(TaxZone thisTaxZone);
-
-    void deleteTaxZones(TaxZone thisTaxZone);
-
-    void updateTaxZone(TaxZone thisTaxZone);
-
-    void createTaxZone2Zone(TaxZone2Zone newTaxZone2Zone);
-
-    void deleteTaxZone2Zone(TaxZone2Zone thisZone);
-
-    void updateTaxZone2Zone(TaxZone2Zone thisZone);
-
-    Map<Long, List<Zone>> getZoneMap();
-
-    void createCountry(Country thisCountry);
-
-    List<AddressFormat> findAllAddressFormat();
-
-    void updateCountry(Country thisCountry);
-
-    void deleteCountry(Country thisCountry);
 }
