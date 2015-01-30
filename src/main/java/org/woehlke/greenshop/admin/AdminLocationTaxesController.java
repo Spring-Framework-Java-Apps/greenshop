@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.admin.entities.TaxClass;
 import org.woehlke.greenshop.admin.entities.TaxRate;
@@ -12,6 +13,7 @@ import org.woehlke.greenshop.admin.entities.TaxZone;
 import org.woehlke.greenshop.admin.entities.TaxZone2Zone;
 import org.woehlke.greenshop.admin.model.NewSubZoneInfoBean;
 import org.woehlke.greenshop.customer.CustomerService;
+import org.woehlke.greenshop.customer.entities.AddressFormat;
 import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Zone;
 
@@ -58,6 +60,87 @@ public class AdminLocationTaxesController {
         List<Country> countries = customerService.findAllCountriesOrderByName();
         model.addAttribute("countries",countries);
         return "admin/countries";
+    }
+
+    @RequestMapping(value = "/admin/countries/insert", method = RequestMethod.GET)
+    public String countriesInsertForm(Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        List<Country> countries = customerService.findAllCountriesOrderByName();
+        model.addAttribute("countries",countries);
+        Country thisCountry = new Country();
+        model.addAttribute("thisCountry",thisCountry);
+        List<AddressFormat> addressFormats = adminService.findAllAddressFormat();
+        model.addAttribute("addressFormats",addressFormats);
+        return "admin/countriesInsertForm";
+    }
+
+    @RequestMapping(value = "/admin/countries/insert", method = RequestMethod.POST)
+    public String countriesInsertPerform(@Valid Country thisCountry, BindingResult result, Model model){
+        logger.info("Country: "+thisCountry.toString());
+        if(result.hasErrors()){
+            int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+            model.addAttribute("menuCategory",menuCategory);
+            List<Country> countries = customerService.findAllCountriesOrderByName();
+            model.addAttribute("countries",countries);
+            model.addAttribute("thisCountry",thisCountry);
+            List<AddressFormat> addressFormats = adminService.findAllAddressFormat();
+            model.addAttribute("addressFormats",addressFormats);
+            return "admin/countriesInsertForm";
+        } else {
+            adminService.createCountry(thisCountry);
+            return "redirect:/admin/countries/"+thisCountry.getId();
+        }
+    }
+
+    @RequestMapping(value = "/admin/countries/{countryId}/edit", method = RequestMethod.GET)
+    public String countriesEditForm(@PathVariable long countryId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        Country thisCountry = customerService.findCountryById(countryId);
+        model.addAttribute("thisCountry",thisCountry);
+        List<Country> countries = customerService.findAllCountriesOrderByName();
+        model.addAttribute("countries",countries);
+        List<AddressFormat> addressFormats = adminService.findAllAddressFormat();
+        model.addAttribute("addressFormats",addressFormats);
+        return "admin/countriesEditForm";
+    }
+
+    @RequestMapping(value = "/admin/countries/{countryId}/edit", method = RequestMethod.POST)
+    public String countriesEditSave(@PathVariable long countryId, @Valid Country thisCountry, BindingResult result, Model model){
+        logger.info("Country: "+thisCountry.toString());
+        if(result.hasErrors()){
+            int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+            model.addAttribute("menuCategory",menuCategory);
+            List<Country> countries = customerService.findAllCountriesOrderByName();
+            model.addAttribute("countries",countries);
+            model.addAttribute("thisCountry",thisCountry);
+            List<AddressFormat> addressFormats = adminService.findAllAddressFormat();
+            model.addAttribute("addressFormats",addressFormats);
+            return "admin/countriesEditForm";
+        } else {
+            thisCountry.setId(countryId);
+            adminService.updateCountry(thisCountry);
+            return "redirect:/admin/countries/"+countryId;
+        }
+    }
+
+    @RequestMapping(value = "/admin/countries/{countryId}/delete", method = RequestMethod.GET)
+    public String countriesDeleteForm(@PathVariable long countryId, Model model){
+        int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        Country thisCountry = customerService.findCountryById(countryId);
+        model.addAttribute("thisCountry",thisCountry);
+        List<Country> countries = customerService.findAllCountriesOrderByName();
+        model.addAttribute("countries",countries);
+        return "admin/countriesDeleteForm";
+    }
+
+    @RequestMapping(value = "/admin/countries/{countryId}/delete", method = RequestMethod.POST)
+    public String countriesDeleteSave(@PathVariable long countryId, Model model){
+        Country thisCountry = customerService.findCountryById(countryId);
+        adminService.deleteCountry(thisCountry);
+        return "redirect:/admin/countries";
     }
 
     @RequestMapping(value = "/admin/zones", method = RequestMethod.GET)

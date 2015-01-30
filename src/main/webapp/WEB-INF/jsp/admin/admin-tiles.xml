@@ -63,6 +63,18 @@
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countries.jsp" />
     </definition>
 
+    <definition name="admin/countriesInsertForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countriesInsertForm.jsp" />
+    </definition>
+
+    <definition name="admin/countriesEditForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countriesEditForm.jsp" />
+    </definition>
+
+    <definition name="admin/countriesDeleteForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countriesDeleteForm.jsp" />
+    </definition>
+
     <definition name="admin/zones" extends="backend">
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/zones.jsp" />
     </definition>

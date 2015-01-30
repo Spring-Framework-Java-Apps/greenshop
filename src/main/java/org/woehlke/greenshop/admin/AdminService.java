@@ -10,6 +10,8 @@ import org.woehlke.greenshop.catalog.entities.Special;
 import org.woehlke.greenshop.catalog.model.ReviewProduct;
 import org.woehlke.greenshop.checkout.entities.OrderStatus;
 import org.woehlke.greenshop.checkout.entities.OrderStatusId;
+import org.woehlke.greenshop.customer.entities.AddressFormat;
+import org.woehlke.greenshop.customer.entities.Country;
 import org.woehlke.greenshop.customer.entities.Customer;
 import org.woehlke.greenshop.customer.entities.Zone;
 import org.woehlke.greenshop.customer.model.CustomerBean;
@@ -94,4 +96,11 @@ public interface AdminService extends UserDetailsService {
 
     Map<Long, List<Zone>> getZoneMap();
 
+    void createCountry(Country thisCountry);
+
+    List<AddressFormat> findAllAddressFormat();
+
+    void updateCountry(Country thisCountry);
+
+    void deleteCountry(Country thisCountry);
 }

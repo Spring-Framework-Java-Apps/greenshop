@@ -19,13 +19,9 @@ import org.woehlke.greenshop.checkout.entities.OrderTotal;
 import org.woehlke.greenshop.checkout.repository.OrderRepository;
 import org.woehlke.greenshop.checkout.repository.OrderStatusRepository;
 import org.woehlke.greenshop.checkout.repository.OrderTotalRepository;
-import org.woehlke.greenshop.customer.entities.Customer;
-import org.woehlke.greenshop.customer.entities.CustomerInfo;
-import org.woehlke.greenshop.customer.entities.Zone;
+import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.CustomerBean;
-import org.woehlke.greenshop.customer.repository.CustomerInfoRepository;
-import org.woehlke.greenshop.customer.repository.CustomerRepository;
-import org.woehlke.greenshop.customer.repository.ZoneRepository;
+import org.woehlke.greenshop.customer.repository.*;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -97,6 +93,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Inject
     private OrderTotalRepository orderTotalRepository;
+
+    @Inject
+    private CountryRepository countryRepository;
+
+    @Inject
+    private AddressFormatRepository addressFormatRepository;
 
 
     @Override
@@ -385,5 +387,28 @@ public class AdminServiceImpl implements AdminService {
             subZoneList.add(zone);
         }
         return zoneMap;
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void createCountry(Country thisCountry) {
+        countryRepository.save(thisCountry);
+    }
+
+    @Override
+    public List<AddressFormat> findAllAddressFormat() {
+        return addressFormatRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void updateCountry(Country thisCountry) {
+        countryRepository.save(thisCountry);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void deleteCountry(Country thisCountry) {
+        countryRepository.delete(thisCountry);
     }
 }

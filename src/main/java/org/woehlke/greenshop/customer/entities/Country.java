@@ -1,5 +1,9 @@
 package org.woehlke.greenshop.customer.entities;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,24 +36,23 @@ public class Country {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="countries_id",columnDefinition = "INT(11)")
 	private Long id;
-	
-	@Max(128)
+
+    @Length(min=1,max=128)
 	@Column(name="countries_name")
 	@NotNull
 	private String name;
-	
-	@Max(2)
-	@Min(2)
+
+    @Length(min=2,max=2)
 	@Column(name="countries_iso_code_2",length=2,columnDefinition = "char(2)")
 	@NotNull
 	private String isoCode2;
-	
-	@Max(3)
-	@Min(3)
+
+    @Length(min=3,max=3)
 	@Column(name="countries_iso_code_3",length=3,columnDefinition = "char(3)")
 	@NotNull
 	private String isoCode3;
-	
+
+    @NotFound(action= NotFoundAction.IGNORE)
 	@ManyToOne
 	@JoinColumn(name="address_format_id")
 	private AddressFormat addressFormat;
