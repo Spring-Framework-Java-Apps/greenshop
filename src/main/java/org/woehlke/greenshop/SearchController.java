@@ -27,7 +27,7 @@ public class SearchController extends AbstractController {
         super.getDefaultBoxContent(model);
         AdvancedSearchBean advancedSearchBean = new AdvancedSearchBean();
         model.addAttribute("advancedSearchBean", advancedSearchBean);
-        CategoriesBean categoriesBean = super.catalogService.getAllCategories(language);
+        CategoriesBean categoriesBean = super.categoryService.getAllCategories(language);
         model.addAttribute("categoriesBean", categoriesBean);
         return "advancedSearch";
     }

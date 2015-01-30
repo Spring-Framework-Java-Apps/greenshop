@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.woehlke.greenshop.catalog.service.ProductService;
 import org.woehlke.greenshop.customer.service.CountryService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
@@ -44,6 +45,9 @@ public class UserController extends AbstractController {
 
     @Inject
     private CountryService countryService;
+
+    @Inject
+    private ProductService productService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -347,7 +351,7 @@ public class UserController extends AbstractController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String customerEmail = auth.getName();
 		Customer myCustomer = customerService.findCustomerByEmail(customerEmail);
-		ProductDescription product = catalogService.findProductById(productId, language);
+		ProductDescription product = productService.findProductById(productId, language);
 		customerService.addProductNotification(product.getProduct(),myCustomer);
 		return "redirect:/product/"+productId;
 	}

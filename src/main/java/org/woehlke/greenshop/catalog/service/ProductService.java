@@ -3,6 +3,8 @@ package org.woehlke.greenshop.catalog.service;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.Manufacturer;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
+import org.woehlke.greenshop.catalog.model.ProductsByManufacturer;
+import org.woehlke.greenshop.catalog.model.SpecialProduct;
 
 import java.util.List;
 
@@ -20,4 +22,18 @@ public interface ProductService {
     void setProductActive(long productId);
 
     void setProductInactive(long productId);
+
+    ProductDescription findProductById(long productId, Language language);
+
+    List<SpecialProduct> recommenderNewProducts(Language language);
+
+    SpecialProduct getRandomNewProduct(Language language);
+
+    SpecialProduct viewProduct(SpecialProduct thisProduct);
+
+    ProductsByManufacturer findProductsByManufacturer(
+            Manufacturer manufacturer, Language language);
+
+    ProductsByManufacturer findProductsByManufacturerAndCategory(
+            Manufacturer manufacturer, long categoryId, Language language);
 }

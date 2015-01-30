@@ -24,6 +24,7 @@ import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.entities.ProductOption;
 import org.woehlke.greenshop.catalog.model.ProductAttributes;
 import org.woehlke.greenshop.catalog.model.ProductOptionAttribute;
+import org.woehlke.greenshop.catalog.service.ProductService;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Customer;
 
@@ -42,6 +43,9 @@ public class CartServiceImpl implements CartService {
 	
 	@Inject
 	private CatalogService catalogService;
+
+    @Inject
+    private ProductService productService;
 
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
@@ -78,7 +82,7 @@ public class CartServiceImpl implements CartService {
 		List<ProductOptionAttribute> productOptionAttributeList = new ArrayList<ProductOptionAttribute>();
 		TransientProduct transientProduct = new TransientProduct();
 		//fetch Product
-		ProductDescription productDescription = catalogService.findProductById(productId, language);
+		ProductDescription productDescription = productService.findProductById(productId, language);
 		transientProduct.setProductDescription(productDescription);
 		ProductAttributes productAttributes =catalogService.findProductOptionsByProduct(productDescription);
 		Set<Long> options = optionsAndValues.keySet();

@@ -22,9 +22,9 @@ import java.util.List;
  * Created by tw on 30.01.15.
  */
 @Controller
-public class AdminCountryController {
+public class CountryController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminCountryController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CountryController.class);
 
     @Inject
     private CountryService countryService;

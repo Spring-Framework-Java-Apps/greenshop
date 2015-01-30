@@ -30,9 +30,9 @@ import java.util.Map;
  * Created by tw on 30.01.15.
  */
 @Controller
-public class AdminTaxZoneController {
+public class TaxZoneController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminTaxZoneController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TaxZoneController.class);
 
     @Inject
     private CountryService countryService;

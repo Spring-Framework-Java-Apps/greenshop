@@ -21,7 +21,7 @@ import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.Manufacturers;
 import org.woehlke.greenshop.catalog.model.ShareProductBean;
 import org.woehlke.greenshop.catalog.model.SpecialProduct;
-import org.woehlke.greenshop.catalog.service.LanguageService;
+import org.woehlke.greenshop.catalog.service.*;
 import org.woehlke.greenshop.customer.CustomerService;
 import org.woehlke.greenshop.customer.entities.Customer;
 
@@ -35,6 +35,21 @@ public abstract class AbstractController {
 
     @Inject
     protected LanguageService languageService;
+
+    @Inject
+    protected CategoryService categoryService;
+
+    @Inject
+    private ManufacturerService manufacturerService;
+
+    @Inject
+    private ProductService productService;
+
+    @Inject
+    private ReviewService reviewService;
+
+    @Inject
+    private SpecialService specialService;
 	
 	@ModelAttribute("transientBasket")
 	public TransientBasket createTransientBasket(){
@@ -43,17 +58,17 @@ public abstract class AbstractController {
 	
 	protected void getDefaultBoxContent(Model model){
 		Language language = languageService.findLanguageByCode("en");
-		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = productService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers = manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
 	}
 	

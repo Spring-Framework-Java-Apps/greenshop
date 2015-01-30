@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.admin.AdminMenuCategory;
-import org.woehlke.greenshop.admin.AdminService;
-import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.*;
 import org.woehlke.greenshop.catalog.service.LanguageService;
+import org.woehlke.greenshop.catalog.service.SpecialService;
 
 import javax.inject.Inject;
 import java.util.Date;
@@ -23,20 +22,17 @@ import java.util.List;
 public class SpecialController {
 
     @Inject
-    private AdminService adminService;
-
-    @Inject
-    private CatalogService catalogService;
-
-    @Inject
     private LanguageService languageService;
+
+    @Inject
+    private SpecialService specialService;
 
     @RequestMapping(value = "/admin/specials", method = RequestMethod.GET)
     public String specials(Model model){
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         Language language = languageService.findLanguageByCode("en");
-        List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
+        List<SpecialProduct> specials = specialService.getSpecialProducts(language);
         model.addAttribute("specials",specials);
         SpecialProduct thisSpecial = null;
         if(specials.size()>0){
@@ -51,11 +47,11 @@ public class SpecialController {
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         Language language = languageService.findLanguageByCode("en");
-        List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
+        List<SpecialProduct> specials = specialService.getSpecialProducts(language);
         model.addAttribute("specials",specials);
         SpecialProduct thisSpecial = null;
         if(specials.size()>0){
-            thisSpecial = catalogService.findSpecialProductById(productId, language);
+            thisSpecial = specialService.findSpecialProductById(productId, language);
         }
         model.addAttribute("thisSpecial",thisSpecial);
         return "admin/specials";
@@ -66,14 +62,14 @@ public class SpecialController {
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         Language language = languageService.findLanguageByCode("en");
-        SpecialProduct thisSpecial = catalogService.findSpecialProductById(productId, language);
+        SpecialProduct thisSpecial = specialService.findSpecialProductById(productId, language);
         Special special=thisSpecial.getSpecial();
         special.setStatus(false);
         special.setStatusChanged(new Date());
-        adminService.updateSpecial(special);
-        thisSpecial = catalogService.findSpecialProductById(productId,language);
+        specialService.updateSpecial(special);
+        thisSpecial = specialService.findSpecialProductById(productId,language);
         model.addAttribute("thisSpecial",thisSpecial);
-        List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
+        List<SpecialProduct> specials = specialService.getSpecialProducts(language);
         model.addAttribute("specials",specials);
         return "admin/specials";
     }
@@ -83,14 +79,14 @@ public class SpecialController {
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         Language language = languageService.findLanguageByCode("en");
-        SpecialProduct thisSpecial = catalogService.findSpecialProductById(productId,language);
+        SpecialProduct thisSpecial = specialService.findSpecialProductById(productId,language);
         Special special=thisSpecial.getSpecial();
         special.setStatus(true);
         special.setStatusChanged(new Date());
-        adminService.updateSpecial(special);
-        thisSpecial = catalogService.findSpecialProductById(productId,language);
+        specialService.updateSpecial(special);
+        thisSpecial = specialService.findSpecialProductById(productId,language);
         model.addAttribute("thisSpecial",thisSpecial);
-        List<SpecialProduct> specials = catalogService.getSpecialProducts(language);
+        List<SpecialProduct> specials = specialService.getSpecialProducts(language);
         model.addAttribute("specials",specials);
         return "admin/specials";
     }

@@ -26,6 +26,9 @@ import org.woehlke.greenshop.catalog.model.Manufacturers;
 import org.woehlke.greenshop.catalog.model.ProductAttributes;
 import org.woehlke.greenshop.catalog.model.SpecialProduct;
 import org.woehlke.greenshop.catalog.service.LanguageService;
+import org.woehlke.greenshop.catalog.service.ManufacturerService;
+import org.woehlke.greenshop.catalog.service.ReviewService;
+import org.woehlke.greenshop.catalog.service.SpecialService;
 
 @Controller
 @SessionAttributes({"transientBasket"})
@@ -38,6 +41,15 @@ public class CartController extends AbstractController {
 
     @Inject
     private LanguageService languageService;
+
+    @Inject
+    private ManufacturerService manufacturerService;
+
+    @Inject
+    private ReviewService reviewService;
+
+    @Inject
+    private SpecialService specialService;
 	
 	@RequestMapping(value = "/shoppingCart", method = RequestMethod.GET)
 	public String shoppingCart(
@@ -55,19 +67,19 @@ public class CartController extends AbstractController {
             HttpServletResponse response,
 			@PathVariable long productId, Model model){	
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		SpecialProduct thisProduct = specialService.findSpecialProductById(productId, language);
 		model.addAttribute("product", thisProduct);
 		logger.info(thisProduct.toString());
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
 		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
 		Map<Long,Long> optionsAndValues = getOptionsAndValuesFromRequest(request);
 		transientBasket = cartService.addProductToCart(transientBasket,productId,optionsAndValues,language);
@@ -82,19 +94,19 @@ public class CartController extends AbstractController {
             HttpServletResponse response,
 			@PathVariable long productId, Model model){	
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		SpecialProduct thisProduct = specialService.findSpecialProductById(productId, language);
 		model.addAttribute("product", thisProduct);
 		logger.info(thisProduct.toString());
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
 		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
 		Map<Long,Long> optionsAndValues = getOptionsAndValuesFromRequest(request);
 		transientBasket = cartService.removeProductFromCart(transientBasket,productId,optionsAndValues,language);

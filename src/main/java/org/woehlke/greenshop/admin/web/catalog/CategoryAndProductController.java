@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.admin.AdminMenuCategory;
-import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.model.CategoryTree;
 import org.woehlke.greenshop.catalog.model.CategoryTreeNode;
+import org.woehlke.greenshop.catalog.service.CategoryService;
 import org.woehlke.greenshop.catalog.service.LanguageService;
 import org.woehlke.greenshop.catalog.service.ProductService;
 
@@ -28,7 +28,7 @@ public class CategoryAndProductController {
     private static final Logger logger = LoggerFactory.getLogger(CategoryAndProductController.class);
 
     @Inject
-    private CatalogService catalogService;
+    private CategoryService categoryService;
 
     @Inject
     private ProductService productService;
@@ -41,7 +41,7 @@ public class CategoryAndProductController {
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         Language language = languageService.findLanguageByCode("en");
-        CategoryTree rootCategories =  catalogService.getCategoriesTree(0L, language);
+        CategoryTree rootCategories =  categoryService.getCategoriesTree(0L, language);
         model.addAttribute("rootCategories",rootCategories);
         CategoryTreeNode thisCategory = null;
         if(rootCategories.getChildren().size()>0){
@@ -110,13 +110,13 @@ public class CategoryAndProductController {
             long parentId,
             long productId,Model model){
         Language language = languageService.findLanguageByCode("en");
-        CategoryTree rootCategories =  catalogService.getCategoriesTree(parentId, language);
+        CategoryTree rootCategories =  categoryService.getCategoriesTree(parentId, language);
         model.addAttribute("rootCategories",rootCategories);
         model.addAttribute("categoryId",categoryId);
         model.addAttribute("parentId",parentId);
         CategoryTreeNode thisCategory = null;
         if(categoryId != 0){
-            thisCategory = catalogService.findCategoryById(categoryId, language);
+            thisCategory = categoryService.findCategoryById(categoryId, language);
         } else {
             if(rootCategories.getChildren().size()>0) {
                 thisCategory = rootCategories.getChildren().iterator().next();
@@ -135,7 +135,7 @@ public class CategoryAndProductController {
                 productId = pd.getProduct().getId();
             }
         } else {
-            pd = catalogService.findProductById(productId,language);
+            pd = productService.findProductById(productId,language);
             model.addAttribute("thisProduct",pd);
         }
         model.addAttribute("thisProduct",pd);

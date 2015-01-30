@@ -7,12 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.catalog.entities.*;
 import org.woehlke.greenshop.catalog.model.*;
-import org.woehlke.greenshop.catalog.service.LanguageService;
+import org.woehlke.greenshop.catalog.service.*;
 import org.woehlke.greenshop.customer.entities.Customer;
 
 import javax.inject.Inject;
@@ -27,6 +26,21 @@ public class CatalogController extends AbstractController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CatalogController.class);
 
+    @Inject
+    private CategoryService categoryService;
+
+    @Inject
+    private ProductService productService;
+
+    @Inject
+    private ManufacturerService manufacturerService;
+
+    @Inject
+    private ReviewService reviewService;
+
+    @Inject
+    private SpecialService specialService;
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model){
 		super.getDefaultBoxContent(model);
@@ -36,19 +50,19 @@ public class CatalogController extends AbstractController {
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
 	public String category(@PathVariable long categoryId,Model model){
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = productService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(categoryId, language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(categoryId, language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
-		ProductsByCategory productsByCategory = catalogService.getProductsByCategory(categoryId, language);
+		ProductsByCategory productsByCategory = categoryService.getProductsByCategory(categoryId, language);
 		model.addAttribute("productsByCategory", productsByCategory);
 		return "category";
 	}
@@ -69,19 +83,19 @@ public class CatalogController extends AbstractController {
 			@PathVariable long categoryId,
 			@PathVariable long manufacturerId, Model model){
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = productService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(categoryId, language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(categoryId, language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
-		ProductsByCategory productsByCategory = catalogService.getProductsByCategoryAndManufacturer(categoryId, manufacturerId, language);
+		ProductsByCategory productsByCategory = categoryService.getProductsByCategoryAndManufacturer(categoryId, manufacturerId, language);
 		model.addAttribute("productsByCategory", productsByCategory);
 		return "category";
 	}
@@ -92,26 +106,26 @@ public class CatalogController extends AbstractController {
 						  HttpServletResponse response,
 						  Model model){
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId,language);
-		thisProduct = catalogService.viewProduct(thisProduct);
+		SpecialProduct thisProduct = specialService.findSpecialProductById(productId,language);
+		thisProduct = productService.viewProduct(thisProduct);
 		logger.info(thisProduct.toString());
 		model.addAttribute("product", thisProduct);
 		List<ProductImage> images = catalogService.findProductImages(thisProduct.getProductDescription().getProduct());
 		model.addAttribute("images", images);
 		int numberOfReviews = catalogService.getNumberOfReviewsForProduct(thisProduct.getProductDescription().getProduct());
 		model.addAttribute("numberOfReviews", numberOfReviews);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
 		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
 		ShareProductBean shareProductBean = getShareProductBean(request,thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
@@ -128,22 +142,22 @@ public class CatalogController extends AbstractController {
 	public String manufacturer(@PathVariable long manufacturerId,Model model){
 		logger.info("manufacturers_id="+manufacturerId);
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = productService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		manufacturers.setManufacturerId(manufacturerId);
 		model.addAttribute("manufacturers", manufacturers);
-		Manufacturer manufacturer=catalogService.findManufacturerById(manufacturerId);
+		Manufacturer manufacturer=manufacturerService.findManufacturerById(manufacturerId);
 		model.addAttribute("manufacturer", manufacturer);
-		ProductsByManufacturer products = catalogService.findProductsByManufacturer(manufacturer, language);
+		ProductsByManufacturer products = productService.findProductsByManufacturer(manufacturer, language);
 		model.addAttribute("products", products);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
 		return "manufacturer";
 	}
@@ -165,23 +179,23 @@ public class CatalogController extends AbstractController {
 			@PathVariable long categoryId, Model model){
 		logger.info("manufacturers_id="+manufacturerId);
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = productService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		manufacturers.setManufacturerId(manufacturerId);
 		model.addAttribute("manufacturers", manufacturers);
-		Manufacturer manufacturer=catalogService.findManufacturerById(manufacturerId);
+		Manufacturer manufacturer=manufacturerService.findManufacturerById(manufacturerId);
 		model.addAttribute("manufacturer", manufacturer);
-		ProductsByManufacturer products = catalogService.findProductsByManufacturerAndCategory(manufacturer,categoryId,language);
+		ProductsByManufacturer products = productService.findProductsByManufacturerAndCategory(manufacturer,categoryId,language);
 		products.setCategoryId(categoryId);
 		model.addAttribute("products", products);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
 		return "manufacturer";
 	}
@@ -190,14 +204,14 @@ public class CatalogController extends AbstractController {
 	public String manufacturerRedirect(@PathVariable long manufacturerId,Model model) {
 		logger.info("manufacturers_id=" + manufacturerId);
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		ManufacturerInfo manufacturerInfo=catalogService.findManufacturerInfo(manufacturerId,language);
-		manufacturerInfo=catalogService.clickManufacturerUrl(manufacturerInfo);
+		ManufacturerInfo manufacturerInfo=manufacturerService.findManufacturerInfo(manufacturerId,language);
+		manufacturerInfo=manufacturerService.clickManufacturerUrl(manufacturerInfo);
 		model.addAttribute("manufacturer", manufacturerInfo);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
 		return "manufacturerRedirect";
 	}
@@ -208,22 +222,22 @@ public class CatalogController extends AbstractController {
 										HttpServletResponse response,
 										Model model){
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		SpecialProduct thisProduct = specialService.findSpecialProductById(productId, language);
 		model.addAttribute("product", thisProduct);
 		logger.info(thisProduct.toString());
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
 		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
 		CategoryTree categoryTree =
-				catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
+                categoryService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
 		ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
@@ -242,24 +256,24 @@ public class CatalogController extends AbstractController {
 											   HttpServletResponse response,
 											   Model model){
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		SpecialProduct thisProduct = specialService.findSpecialProductById(productId, language);
 		Customer customer = super.getLoggedInCustomer();
 		if(result.hasErrors()){
 			model.addAttribute("product", thisProduct);
 			logger.info(thisProduct.toString());
-			Manufacturers manufacturers=catalogService.findManufacturers();
+			Manufacturers manufacturers=manufacturerService.findManufacturers();
 			model.addAttribute("manufacturers", manufacturers);
 			ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 			logger.info(productAttributes.toString());
 			model.addAttribute("productAttributes", productAttributes);
 			CategoryTree categoryTree =
-					catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
+                    categoryService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 			model.addAttribute("categoryTree", categoryTree);
-			SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+			SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 			model.addAttribute("randomNewProduct", randomNewProduct);
 			ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 			model.addAttribute("shareProductBean", shareProductBean);
@@ -269,7 +283,7 @@ public class CatalogController extends AbstractController {
 			logger.info("##################################");
 			logger.info(writeReviewBean.toString());
 			logger.info("##################################");
-			ReviewDescription reviewDescription = catalogService.
+			ReviewDescription reviewDescription = reviewService.
 			saveReview(writeReviewBean, thisProduct.getProductDescription().getProduct(), customer,language);
 			logger.info(reviewDescription.toString());
 			return "redirect:/product/"+productId;
@@ -282,31 +296,31 @@ public class CatalogController extends AbstractController {
 							   HttpServletResponse response,
 							   Model model){
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		SpecialProduct thisProduct = specialService.findSpecialProductById(productId, language);
 		model.addAttribute("product", thisProduct);
 		logger.info(thisProduct.toString());
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
 		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
 		ShareProductBean shareProductBean = getShareProductBean(request,thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
-		List<ReviewDescription> reviewDescriptions = catalogService.findReviewsForProduct(thisProduct.getProductDescription());
+		List<ReviewDescription> reviewDescriptions = reviewService.findReviewsForProduct(thisProduct.getProductDescription());
 		for(ReviewDescription reviewDescription:reviewDescriptions){
 		  	Review review = reviewDescription.getReview();
 			review.increaseReviewsRead();
-			catalogService.update(review);
+            reviewService.update(review);
 		}
-		reviewDescriptions = catalogService.findReviewsForProduct(thisProduct.getProductDescription());
+		reviewDescriptions = reviewService.findReviewsForProduct(thisProduct.getProductDescription());
 		model.addAttribute("reviewDescriptions", reviewDescriptions);
 		return "showReviews";
 	}
@@ -317,28 +331,28 @@ public class CatalogController extends AbstractController {
 							  HttpServletResponse response,
 							  Model model){
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		ReviewDescription reviewDescription = catalogService.findReviewById(reviewId,language);
+		ReviewDescription reviewDescription = reviewService.findReviewById(reviewId,language);
 		Review review = reviewDescription.getReview();
 		review.increaseReviewsRead();
-		catalogService.update(review);
-		reviewDescription = catalogService.findReviewById(reviewId,language);
+        reviewService.update(review);
+		reviewDescription = reviewService.findReviewById(reviewId,language);
 		model.addAttribute("reviewDescription", reviewDescription);
 		Long productId = reviewDescription.getReview().getProduct().getId();
-		SpecialProduct thisProduct = catalogService.findSpecialProductById(productId, language);
+		SpecialProduct thisProduct = specialService.findSpecialProductById(productId, language);
 		model.addAttribute("product", thisProduct);
 		logger.info(thisProduct.toString());
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
 		ProductAttributes productAttributes = catalogService.findProductOptionsByProduct(thisProduct.getProductDescription());
 		logger.info(productAttributes.toString());
 		model.addAttribute("productAttributes", productAttributes);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(thisProduct.getProductDescription().getProduct().getCategories().iterator().next().getId(), language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
 		ShareProductBean shareProductBean = getShareProductBean(request, thisProduct.getProductDescription());
 		model.addAttribute("shareProductBean", shareProductBean);
@@ -350,17 +364,17 @@ public class CatalogController extends AbstractController {
 						   HttpServletResponse response,
 						   Model model) {
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
-		List<ReviewProduct> reviews = catalogService.getAllReviews(language);
+		List<ReviewProduct> reviews = reviewService.getAllReviews(language);
 		model.addAttribute("reviews", reviews);
 		return "reviews";
 	}
@@ -370,17 +384,17 @@ public class CatalogController extends AbstractController {
 							 HttpServletResponse response,
 							 Model model) {
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
-		List<SpecialProduct> specialProducts = catalogService.getSpecialProducts(language);
+		List<SpecialProduct> specialProducts = specialService.getSpecialProducts(language);
 		model.addAttribute("specialProducts", specialProducts);
 	  	return "specials";
 	}
@@ -390,17 +404,17 @@ public class CatalogController extends AbstractController {
 							  HttpServletResponse response,
 							  Model model){
 		Language language = languageService.findLanguageByCode("en");
-		ReviewDescription randomReview = catalogService.getRandomReview(language);
+		ReviewDescription randomReview = reviewService.getRandomReview(language);
 		model.addAttribute("randomReview", randomReview);
-		SpecialProduct randomSpecialProduct = catalogService.getRandomSpecial(language);
+		SpecialProduct randomSpecialProduct = specialService.getRandomSpecial(language);
 		model.addAttribute("randomSpecialProduct", randomSpecialProduct);
-		Manufacturers manufacturers=catalogService.findManufacturers();
+		Manufacturers manufacturers=manufacturerService.findManufacturers();
 		model.addAttribute("manufacturers", manufacturers);
-		CategoryTree categoryTree = catalogService.getCategoriesTree(0L, language);
+		CategoryTree categoryTree = categoryService.getCategoriesTree(0L, language);
 		model.addAttribute("categoryTree", categoryTree);
-		SpecialProduct randomNewProduct = catalogService.getRandomNewProduct(language);
+		SpecialProduct randomNewProduct = productService.getRandomNewProduct(language);
 		model.addAttribute("randomNewProduct", randomNewProduct);
-		List<SpecialProduct> newProducts = catalogService.recommenderNewProducts(language);
+		List<SpecialProduct> newProducts = productService.recommenderNewProducts(language);
 		model.addAttribute("newProducts", newProducts);
 		return "newproducts";
 	}

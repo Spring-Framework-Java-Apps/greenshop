@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.woehlke.greenshop.admin.model.OrderAdminBean;
 import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.checkout.entities.Order;
@@ -20,7 +21,6 @@ import org.woehlke.greenshop.checkout.entities.OrderTotal;
 import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
 import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
 import org.woehlke.greenshop.checkout.model.OrderStatusHistoryBean;
-import org.woehlke.greenshop.checkout.repository.OrderProductAttributeRepository;
 import org.woehlke.greenshop.checkout.repository.OrderProductRepository;
 import org.woehlke.greenshop.checkout.repository.OrderRepository;
 import org.woehlke.greenshop.checkout.repository.OrderStatusHistoryRepository;
@@ -36,19 +36,7 @@ public class OrderServiceImpl implements OrderService {
 	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 	
 	@Inject
-	private OrderRepository orderRepository;
-	
-	@Inject
 	private OrderProductRepository orderProductRepository;
-	
-	@Inject
-	private OrderProductAttributeRepository orderProductAttributeRepository;
-	
-	@Inject
-	private OrderTotalRepository orderTotalRepository;
-	
-	@Inject
-	private OrderStatusRepository orderStatusRepository;
 
 	@Inject
 	private OrderStatusHistoryRepository orderStatusHistoryRepository;
@@ -56,6 +44,65 @@ public class OrderServiceImpl implements OrderService {
 	@Inject
 	protected CatalogService catalogService;
 
+    @Inject
+    private OrderStatusRepository orderStatusRepository;
+
+    @Inject
+    private OrderRepository orderRepository;
+
+    @Inject
+    private OrderTotalRepository orderTotalRepository;
+
+
+    @Override
+    public List<OrderStatus> findAllOrderStatuses(Language language) {
+        return orderStatusRepository.findByLanguage(language);
+    }
+
+    @Override
+    public OrderStatus findOrderStatusById(OrderStatusId ordersStatusId) {
+        return orderStatusRepository.findOne(ordersStatusId);
+    }
+
+    @Override
+    public List<OrderAdminBean> getAllOrders(Language language) {
+        List<OrderAdminBean> orders = new ArrayList<>();
+        List<Order> myOrders = orderRepository.findAll();
+        for(Order myOrder:myOrders){
+            OrderAdminBean bean = new OrderAdminBean();
+            bean.setOrderId(myOrder.getId());
+            bean.setCustomerName(myOrder.getCustomersName());
+            bean.setOrderPlaced(myOrder.getDatePurchased());
+            OrderTotal orderTotal = orderTotalRepository.findByOrderAndTotalClass(myOrder,"ot_total");
+            bean.setOrderTotal(orderTotal.getValue());
+            OrderStatusId orderStatusId = new OrderStatusId();
+            orderStatusId.setLanguage(language);
+            orderStatusId.setId(myOrder.getOrdersStatus());
+            OrderStatus orderStatus=orderStatusRepository.findOne(orderStatusId);
+            bean.setOrderStatus(orderStatus);
+            bean.setPaymentMethod(myOrder.getPaymentMethod());
+            orders.add(bean);
+        }
+        return orders;
+    }
+
+    @Override
+    public OrderAdminBean findOrderById(long orderId, Language language) {
+        Order myOrder = orderRepository.findOne(orderId);
+        OrderAdminBean bean = new OrderAdminBean();
+        bean.setOrderId(myOrder.getId());
+        bean.setCustomerName(myOrder.getCustomersName());
+        bean.setOrderPlaced(myOrder.getDatePurchased());
+        OrderTotal orderTotal = orderTotalRepository.findByOrderAndTotalClass(myOrder,"ot_total");
+        bean.setOrderTotal(orderTotal.getValue());
+        OrderStatusId orderStatusId = new OrderStatusId();
+        orderStatusId.setLanguage(language);
+        orderStatusId.setId(myOrder.getOrdersStatus());
+        OrderStatus orderStatus=orderStatusRepository.findOne(orderStatusId);
+        bean.setOrderStatus(orderStatus);
+        bean.setPaymentMethod(myOrder.getPaymentMethod());
+        return bean;
+    }
 
 	@Override
 	public List<Order> findOrdersForCustomer(Customer customer) {

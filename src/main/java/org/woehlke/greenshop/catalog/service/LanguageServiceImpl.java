@@ -7,6 +7,7 @@ import org.woehlke.greenshop.catalog.repositories.LanguageRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 /**
  * Created by tw on 30.01.15.
@@ -21,5 +22,15 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public Language findLanguageByCode(String code) {
         return languageRepository.findByCode(code);
+    }
+
+    @Override
+    public List<Language> findAllLanguages() {
+        return languageRepository.findAll();
+    }
+
+    @Override
+    public Language findLanguageById(long languageId) {
+        return languageRepository.findOne(languageId);
     }
 }

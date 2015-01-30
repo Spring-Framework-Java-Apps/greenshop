@@ -16,7 +16,7 @@ import java.util.List;
  * Created by tw on 30.01.15.
  */
 @Controller
-public class AdminZoneController {
+public class ZoneController {
 
     @Inject
     private ZoneService zoneService;

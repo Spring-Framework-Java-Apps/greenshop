@@ -1,9 +1,10 @@
-package org.woehlke.greenshop.admin;
+package org.woehlke.greenshop.admin.web.reports;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.woehlke.greenshop.admin.AdminMenuCategory;
 import org.woehlke.greenshop.catalog.CatalogService;
 import org.woehlke.greenshop.catalog.entities.Language;
 import org.woehlke.greenshop.catalog.entities.ProductDescription;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by tw on 04.01.15.
  */
 @Controller
-public class AdminReportsController {
+public class ReportsController {
 
     @Inject
     private ProductService productService;

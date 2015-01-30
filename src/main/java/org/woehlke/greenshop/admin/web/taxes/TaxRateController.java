@@ -14,7 +14,7 @@ import java.util.List;
  * Created by tw on 04.01.15.
  */
 @Controller
-public class AdminTaxRateController {
+public class TaxRateController {
 
     @Inject
     private TaxRateService taxRateService;

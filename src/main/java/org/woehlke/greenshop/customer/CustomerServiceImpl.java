@@ -22,8 +22,10 @@ import org.woehlke.greenshop.catalog.entities.ProductDescription;
 import org.woehlke.greenshop.catalog.entities.ProductDescriptionId;
 import org.woehlke.greenshop.catalog.repositories.ProductDescriptionRepository;
 import org.woehlke.greenshop.catalog.repositories.ProductRepository;
+import org.woehlke.greenshop.catalog.repositories.ReviewRepository;
 import org.woehlke.greenshop.customer.entities.*;
 import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
+import org.woehlke.greenshop.customer.model.CustomerBean;
 import org.woehlke.greenshop.customer.model.ProductNotificationBean;
 import org.woehlke.greenshop.customer.model.UserDetailsBean;
 import org.woehlke.greenshop.customer.repository.*;
@@ -61,7 +63,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Inject
 	private ProductDescriptionRepository productDescriptionRepository;
 
-	@Override
+    @Inject
+    private ReviewRepository reviewRepository;
+
+
+    @Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void createNewCustomer(
 			CreateNewCustomerFormBean createNewCustomerFormBean) {
@@ -254,4 +260,35 @@ public class CustomerServiceImpl implements CustomerService {
 			customerInfoRepository.save(info);
 		}
 	}
+
+
+
+    @Override
+    public List<CustomerBean> findAllCustomers() {
+        List<CustomerBean> customerBeans = new ArrayList<>();
+        List<Customer> customers = customerRepository.findAll();
+        for(Customer customer:customers){
+            CustomerBean customerBean = new CustomerBean();
+            customerBean.setCustomer(customer);
+            CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+            customerBean.setCustomerInfo(info);
+            customerBeans.add(customerBean);
+        }
+        return customerBeans;
+    }
+
+    @Override
+    public int getNumberOfReviewsForCustomer(Customer customer) {
+        return reviewRepository.findByCustomersId(customer.getId()).size();
+    }
+
+    @Override
+    public CustomerBean getCustomerById(long customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        CustomerBean customerBean = new CustomerBean();
+        customerBean.setCustomer(customer);
+        CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+        customerBean.setCustomerInfo(info);
+        return customerBean;
+    }
 }
