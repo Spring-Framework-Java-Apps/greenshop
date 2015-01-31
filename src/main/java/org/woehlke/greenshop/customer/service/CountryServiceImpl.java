@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.customer.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,11 @@ public class CountryServiceImpl implements CountryService {
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void deleteCountry(Country thisCountry) {
         countryRepository.delete(thisCountry);
+    }
+
+    @Override
+    public Page<Country> findAllCountriesOrderByName(Pageable pageRequest) {
+        return countryRepository.findAll(pageRequest);
     }
 
     @Override

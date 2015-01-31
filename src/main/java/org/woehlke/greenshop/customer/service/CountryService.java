@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.customer.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.woehlke.greenshop.customer.entities.Country;
 
 import java.util.List;
@@ -14,6 +16,8 @@ public interface CountryService {
     void updateCountry(Country thisCountry);
 
     void deleteCountry(Country thisCountry);
+
+    Page<Country> findAllCountriesOrderByName(Pageable pageRequest);
 
     List<Country> findAllCountriesOrderByName();
 
