@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.customer.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.customer.entities.Zone;
@@ -23,8 +25,8 @@ public class ZoneServiceImpl implements ZoneService {
     private ZoneRepository zoneRepository;
 
     @Override
-    public List<Zone> findAllZones() {
-        return zoneRepository.findAll();
+    public Page<Zone> findAllZones(Pageable pageRequest) {
+        return zoneRepository.findAll(pageRequest);
     }
 
     @Override
