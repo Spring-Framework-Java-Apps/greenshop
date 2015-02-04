@@ -18,26 +18,10 @@
                             <td class="dataTableHeadingContent">Tax Zones</td>
                             <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                         </tr>
-                        <c:forEach var="taxZone" items="${taxZones}">
-                            <c:if test="${taxZone.id == thisTaxZone.id}">
-                                <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2&action=list'">
-                                    <td class="dataTableContent"><a href="<c:url value="/admin/taxZone/${taxZone.id}"/>"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;${taxZone.name}</td>
-                                    <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
-                                </tr>
-                            </c:if>
-                            <c:if test="${taxZone.id != thisTaxZone.id}">
-                                <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/taxZones/${taxZone.id}"/>'">
-                                    <td class="dataTableContent"><a href="<c:url value="/admin/taxZone/${taxZone.id}"/>"><img src="resources/admin/images/icons/folder.gif" border="0" alt="Folder" title="Folder" /></a>&nbsp;${taxZone.name}</td>
-                                    <td class="dataTableContent" align="right"><a href="<c:url value="/admin/taxZones/${taxZone.id}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
-                                </tr>
-                            </c:if>
-                        </c:forEach>
+                        <c:import url="taxZonesDataTable.jsp" />
                         <tr>
                             <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                                <tr>
-                                    <td class="smallText">Displaying <strong>1</strong> to <strong>2</strong> (of <strong>2</strong> tax zones)</td>
-                                    <td class="smallText" align="right">Page 1 of 1</td>
-                                </tr>
+                                <c:import url="taxZonesPager.jsp" />
                             </table></td>
                         </tr>
                         <tr>
@@ -63,7 +47,7 @@
                                 <td class="infoBoxContent"><br />Description:<br /><form:input path="description" /><form:errors path="description"/></td>
                             </tr>
                             <tr>
-                                <td align="center" class="infoBoxContent"><br /><span class="tdbLink"><button id="tdb1" type="submit">Save</button></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-disk"}}).addClass("ui-priority-primary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb2" href="http://localhost/oscommerce2/admin/geo_zones.php?zpage=1&zID=2">Cancel</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-close"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                                <td align="center" class="infoBoxContent"><br /><span class="tdbLink"><button id="tdb1" type="submit">Save</button></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-disk"}}).addClass("ui-priority-primary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb2" href="<c:url value="/admin/taxZones/${thisTaxZone.id}?page=${taxZones.number}"/>">Cancel</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-close"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                             </tr>
                         </table>
                     </form:form>

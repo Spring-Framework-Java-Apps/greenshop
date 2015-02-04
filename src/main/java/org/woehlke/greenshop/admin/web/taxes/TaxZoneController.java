@@ -2,13 +2,14 @@ package org.woehlke.greenshop.admin.web.taxes;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.admin.AdminMenuCategory;
 import org.woehlke.greenshop.admin.entities.TaxZone;
 import org.woehlke.greenshop.admin.entities.TaxZone2Zone;
@@ -46,15 +47,20 @@ public class TaxZoneController {
     @Inject
     private TaxZone2ZoneService taxZone2ZoneService;
 
+    private final static int PAGE_SIZE = 20;
+
+    private final static String FIRST_PAGE = "0";
+
     @RequestMapping(value = "/admin/taxZones", method = RequestMethod.GET)
-    public String taxZones(Model model){
+    public String taxZones(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<TaxZone> taxZones = taxZoneService.findAllTaxZones();
+        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = null;
         int numberOfZones = 0;
-        if(taxZones.size()>0){
+        if(taxZones.getContent().size()>0){
             thisTaxZone = taxZones.iterator().next();
             numberOfZones = taxZone2ZoneService.getNumberOfZonesForTaxZone(thisTaxZone);
         }
@@ -64,10 +70,12 @@ public class TaxZoneController {
     }
 
     @RequestMapping(value = "/admin/taxZones/{taxZoneId}", method = RequestMethod.GET)
-    public String taxZoneId(@PathVariable long taxZoneId, Model model){
+    public String taxZoneId(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page,
+                            @PathVariable long taxZoneId, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<TaxZone> taxZones = taxZoneService.findAllTaxZones();
+        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = taxZoneService.findTaxZoneById(taxZoneId);
         int numberOfZones = taxZone2ZoneService.getNumberOfZonesForTaxZone(thisTaxZone);
@@ -77,10 +85,11 @@ public class TaxZoneController {
     }
 
     @RequestMapping(value = "/admin/taxZones/insert", method = RequestMethod.GET)
-    public String taxZonesInsertForm(Model model){
+    public String taxZonesInsertForm(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page,Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<TaxZone> taxZones = taxZoneService.findAllTaxZones();
+        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = new TaxZone();
         model.addAttribute("thisTaxZone",thisTaxZone);
@@ -88,10 +97,12 @@ public class TaxZoneController {
     }
 
     @RequestMapping(value = "/admin/taxZones/insert", method = RequestMethod.POST)
-    public String taxZonesInsertSave(@Valid TaxZone thisTaxZone, BindingResult result, Model model){
+    public String taxZonesInsertSave(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page,
+                                     @Valid TaxZone thisTaxZone, BindingResult result, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<TaxZone> taxZones = taxZoneService.findAllTaxZones();
+        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         if(result.hasErrors()){
             logger.info(result.toString());
@@ -102,15 +113,17 @@ public class TaxZoneController {
             thisTaxZone.setDateAdded(new Date());
             thisTaxZone = taxZoneService.createTaxZone(thisTaxZone);
             model.addAttribute("thisTaxZone",thisTaxZone);
-            return "redirect:/admin/taxZones/"+thisTaxZone.getId();
+            return "redirect:/admin/taxZones/"+thisTaxZone.getId()+"?page="+page;
         }
     }
 
     @RequestMapping(value = "/admin/taxZones/delete/{taxZoneId}", method = RequestMethod.GET)
-    public String taxZoneDeleteForm(@PathVariable long taxZoneId, Model model){
+    public String taxZoneDeleteForm(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page,
+                                    @PathVariable long taxZoneId, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<TaxZone> taxZones = taxZoneService.findAllTaxZones();
+        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = taxZoneService.findTaxZoneById(taxZoneId);
         int numberOfZones = taxZone2ZoneService.getNumberOfZonesForTaxZone(thisTaxZone);
@@ -120,26 +133,30 @@ public class TaxZoneController {
     }
 
     @RequestMapping(value = "/admin/taxZones/delete/{taxZoneId}", method = RequestMethod.POST)
-    public String taxZoneDeletePerform(@PathVariable long taxZoneId,
+    public String taxZoneDeletePerform(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page,
+                                       @PathVariable long taxZoneId,
                                        @Valid TaxZone thisTaxZone,
                                        BindingResult result,
                                        Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<TaxZone> taxZones = taxZoneService.findAllTaxZones();
+        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         thisTaxZone = taxZoneService.findTaxZoneById(taxZoneId);
         if(thisTaxZone != null) {
             taxZoneService.deleteTaxZones(thisTaxZone);
         }
-        return "redirect:/admin/taxZones";
+        return "redirect:/admin/taxZones?page="+page;
     }
 
     @RequestMapping(value = "/admin/taxZones/edit/{taxZoneId}", method = RequestMethod.GET)
-    public String taxZoneEditForm(@PathVariable long taxZoneId, Model model){
+    public String taxZoneEditForm(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page,
+                                  @PathVariable long taxZoneId, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<TaxZone> taxZones = taxZoneService.findAllTaxZones();
+        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = taxZoneService.findTaxZoneById(taxZoneId);
         int numberOfZones = taxZone2ZoneService.getNumberOfZonesForTaxZone(thisTaxZone);
@@ -149,20 +166,22 @@ public class TaxZoneController {
     }
 
     @RequestMapping(value = "/admin/taxZones/edit/{taxZoneId}", method = RequestMethod.POST)
-    public String taxZoneEditPerform(@PathVariable long taxZoneId,
+    public String taxZoneEditPerform(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page,
+                                     @PathVariable long taxZoneId,
                                      @Valid TaxZone thisTaxZone,
                                      BindingResult result,
                                      Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        List<TaxZone> taxZones = taxZoneService.findAllTaxZones();
+        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         if(result.hasErrors()) {
             model.addAttribute("thisTaxZone",thisTaxZone);
             return "admin/taxZonesEditForm";
         } else {
             taxZoneService.updateTaxZone(thisTaxZone);
-            return "redirect:/admin/taxZones/"+taxZoneId;
+            return "redirect:/admin/taxZones/"+taxZoneId+"?page="+page;
         }
     }
 

@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.admin.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.admin.entities.TaxZone;
@@ -51,8 +53,8 @@ public class TaxZoneServiceImpl implements TaxZoneService {
     }
 
     @Override
-    public List<TaxZone> findAllTaxZones() {
-        return taxZoneRepository.findAll();
+    public Page<TaxZone> findAllTaxZones(Pageable pageRequest) {
+        return taxZoneRepository.findAll(pageRequest);
     }
 
     @Override
