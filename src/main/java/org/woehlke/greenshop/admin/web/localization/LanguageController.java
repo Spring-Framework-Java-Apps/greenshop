@@ -32,7 +32,7 @@ public class LanguageController {
             thisLanguage = languages.iterator().next();
         }
         model.addAttribute("thisLanguage",thisLanguage);
-        return "admin/languages";
+        return "admin/localization/languages";
     }
 
     @RequestMapping(value = "/admin/languages/{languageId}", method = RequestMethod.GET)
@@ -43,6 +43,6 @@ public class LanguageController {
         model.addAttribute("languages", languages);
         Language thisLanguage = languageService.findLanguageById(languageId);
         model.addAttribute("thisLanguage",thisLanguage);
-        return "admin/languages";
+        return "admin/localization/languages";
     }
 }

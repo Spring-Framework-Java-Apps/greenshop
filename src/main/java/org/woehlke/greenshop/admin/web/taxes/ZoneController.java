@@ -15,7 +15,6 @@ import org.woehlke.greenshop.customer.service.ZoneService;
 import org.woehlke.greenshop.customer.entities.Zone;
 
 import javax.inject.Inject;
-import java.util.List;
 
 /**
  * Created by tw on 30.01.15.
@@ -43,7 +42,7 @@ public class ZoneController {
             thisZone = zones.iterator().next();
         }
         model.addAttribute("thisZone",thisZone);
-        return "admin/zones";
+        return "admin/taxes/zones";
     }
 
     @RequestMapping(value = "/admin/zones/{zoneId}", method = RequestMethod.GET)
@@ -56,6 +55,6 @@ public class ZoneController {
         Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "country.name");
         Page<Zone> zones = zoneService.findAllZones(pageRequest);
         model.addAttribute("zones",zones);
-        return "admin/zones";
+        return "admin/taxes/zones";
     }
 }

@@ -30,7 +30,7 @@ public class TaxRateController {
             thisTaxRate =  taxRates.iterator().next();
         }
         model.addAttribute("thisTaxRate",thisTaxRate);
-        return "admin/taxRates";
+        return "admin/taxes/taxRates";
     }
 
     @RequestMapping(value = "/admin/taxRates/{taxRateId}", method = RequestMethod.GET)
@@ -44,6 +44,6 @@ public class TaxRateController {
             thisTaxRate =  taxRateService.findTaxRateById(taxRateId);
         }
         model.addAttribute("thisTaxRate",thisTaxRate);
-        return "admin/taxRates";
+        return "admin/taxes/taxRates";
     }
 }

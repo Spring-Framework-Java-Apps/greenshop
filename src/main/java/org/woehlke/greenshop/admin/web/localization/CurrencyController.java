@@ -16,6 +16,6 @@ public class CurrencyController {
     public String currencies(Model model){
         int menuCategory = AdminMenuCategory.LOCALISATION.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        return "admin/currencies";
+        return "admin/localization/currencies";
     }
 }

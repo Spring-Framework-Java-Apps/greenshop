@@ -39,7 +39,7 @@ public class ManufacturerController {
         }
         model.addAttribute("thisManufacturer",thisManufacturer);
         model.addAttribute("productsOfThisManufacturer",productsOfThisManufacturer);
-        return "admin/manufacturers";
+        return "admin/catalog/manufacturers";
     }
 
     @RequestMapping(value = "/admin/manufacturers/{manufacturerId}", method = RequestMethod.GET)
@@ -57,6 +57,6 @@ public class ManufacturerController {
         }
         model.addAttribute("thisManufacturer",thisManufacturer);
         model.addAttribute("productsOfThisManufacturer",productsOfThisManufacturer);
-        return "admin/manufacturers";
+        return "admin/catalog/manufacturers";
     }
 }

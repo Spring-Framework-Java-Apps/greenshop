@@ -66,7 +66,7 @@ public class TaxZoneController {
         }
         model.addAttribute("thisTaxZone",thisTaxZone);
         model.addAttribute("numberOfZones",numberOfZones);
-        return "admin/taxZones";
+        return "admin/taxes/taxZones";
     }
 
     @RequestMapping(value = "/admin/taxZones/{taxZoneId}", method = RequestMethod.GET)
@@ -81,7 +81,7 @@ public class TaxZoneController {
         int numberOfZones = taxZone2ZoneService.getNumberOfZonesForTaxZone(thisTaxZone);
         model.addAttribute("numberOfZones",numberOfZones);
         model.addAttribute("thisTaxZone",thisTaxZone);
-        return "admin/taxZones";
+        return "admin/taxes/taxZones";
     }
 
     @RequestMapping(value = "/admin/taxZones/insert", method = RequestMethod.GET)
@@ -93,7 +93,7 @@ public class TaxZoneController {
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = new TaxZone();
         model.addAttribute("thisTaxZone",thisTaxZone);
-        return "admin/taxZonesInsertForm";
+        return "admin/taxes/taxZonesInsertForm";
     }
 
     @RequestMapping(value = "/admin/taxZones/insert", method = RequestMethod.POST)
@@ -108,7 +108,7 @@ public class TaxZoneController {
             logger.info(result.toString());
             logger.info(thisTaxZone.toString());
             model.addAttribute("thisTaxZone",thisTaxZone);
-            return "admin/taxZonesInsertForm";
+            return "admin/taxes/taxZonesInsertForm";
         } else {
             thisTaxZone.setDateAdded(new Date());
             thisTaxZone = taxZoneService.createTaxZone(thisTaxZone);
@@ -129,7 +129,7 @@ public class TaxZoneController {
         int numberOfZones = taxZone2ZoneService.getNumberOfZonesForTaxZone(thisTaxZone);
         model.addAttribute("numberOfZones",numberOfZones);
         model.addAttribute("thisTaxZone",thisTaxZone);
-        return "admin/taxZonesDeleteForm";
+        return "admin/taxes/taxZonesDeleteForm";
     }
 
     @RequestMapping(value = "/admin/taxZones/delete/{taxZoneId}", method = RequestMethod.POST)
@@ -162,7 +162,7 @@ public class TaxZoneController {
         int numberOfZones = taxZone2ZoneService.getNumberOfZonesForTaxZone(thisTaxZone);
         model.addAttribute("numberOfZones",numberOfZones);
         model.addAttribute("thisTaxZone",thisTaxZone);
-        return "admin/taxZonesEditForm";
+        return "admin/taxes/taxZonesEditForm";
     }
 
     @RequestMapping(value = "/admin/taxZones/edit/{taxZoneId}", method = RequestMethod.POST)
@@ -178,7 +178,7 @@ public class TaxZoneController {
         model.addAttribute("taxZones",taxZones);
         if(result.hasErrors()) {
             model.addAttribute("thisTaxZone",thisTaxZone);
-            return "admin/taxZonesEditForm";
+            return "admin/taxes/taxZonesEditForm";
         } else {
             taxZoneService.updateTaxZone(thisTaxZone);
             return "redirect:/admin/taxZones/"+taxZoneId+"?page="+page;
@@ -198,7 +198,7 @@ public class TaxZoneController {
             thisZone = zones.iterator().next();
         }
         model.addAttribute("thisZone", thisZone);
-        return "admin/taxZone";
+        return "admin/taxes/taxZone";
     }
 
     @RequestMapping(value = "/admin/taxZone/{taxZoneId}/zone/{zoneId}", method = RequestMethod.GET)
@@ -211,7 +211,7 @@ public class TaxZoneController {
         model.addAttribute("zones",zones);
         TaxZone2Zone thisZone = taxZone2ZoneService.findTaxZone2ZoneById(zoneId);
         model.addAttribute("thisZone",thisZone);
-        return "admin/taxZone";
+        return "admin/taxes/taxZone";
     }
 
     @RequestMapping(value = "/admin/taxZone/{taxZoneId}/insert", method = RequestMethod.GET)
@@ -231,7 +231,7 @@ public class TaxZoneController {
         model.addAttribute("zoneMap",zoneMap);
         List<Country> countries = countryService.findAllCountriesOrderByName();
         model.addAttribute("countries",countries);
-        return "admin/taxZoneInsertForm";
+        return "admin/taxes/taxZoneInsertForm";
     }
 
     @RequestMapping(value = "/admin/taxZone/{taxZoneId}/insert", method = RequestMethod.POST)
@@ -253,7 +253,7 @@ public class TaxZoneController {
                 thisZone = zones.iterator().next();
             }
             model.addAttribute("thisZone",thisZone);
-            return "admin/taxZoneInsertForm";
+            return "admin/taxes/taxZoneInsertForm";
         } else {
             Country country = countryService.findCountryById(newSubZoneInfoBean.getZone_country_id());
             Zone subZone = null;
@@ -280,7 +280,7 @@ public class TaxZoneController {
         model.addAttribute("zones",zones);
         TaxZone2Zone thisZone = taxZone2ZoneService.findTaxZone2ZoneById(zoneId);
         model.addAttribute("thisZone",thisZone);
-        return "admin/taxZoneDeleteForm";
+        return "admin/taxes/taxZoneDeleteForm";
     }
 
     @RequestMapping(value = "/admin/taxZone/{taxZoneId}/zone/{zoneId}/delete", method = RequestMethod.POST)
@@ -304,7 +304,7 @@ public class TaxZoneController {
         model.addAttribute("zoneMap",zoneMap);
         List<Country> countries = countryService.findAllCountriesOrderByName();
         model.addAttribute("countries",countries);
-        return "admin/taxZoneEditForm";
+        return "admin/taxes/taxZoneEditForm";
     }
 
     @RequestMapping(value = "/admin/taxZone/{taxZoneId}/zone/{zoneId}/edit", method = RequestMethod.POST)
@@ -322,7 +322,7 @@ public class TaxZoneController {
             List<TaxZone2Zone> zones = taxZone2ZoneService.findZonesByTaxZone(thisTaxZone);
             model.addAttribute("zones",zones);
             model.addAttribute("thisZone",thisZone);
-            return "admin/taxZoneEditForm";
+            return "admin/taxes/taxZoneEditForm";
         } else {
             Country country = countryService.findCountryById(newSubZoneInfoBean.getZone_country_id());
             Zone subZone = null;

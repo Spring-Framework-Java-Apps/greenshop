@@ -3,6 +3,8 @@
 
 <tiles-definitions>
 
+    <!-- layout -->
+
     <definition name="backend" templateExpression="/WEB-INF/jsp/admin/page.jsp">
         <put-attribute name="adminAppMenu" value="/WEB-INF/jsp/admin/adminAppMenu.jsp" />
     </definition>
@@ -16,120 +18,146 @@
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/home.jsp" />
     </definition>
 
-    <definition name="admin/categories" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/categories.jsp" />
+
+    <!-- catalog -->
+
+    <definition name="admin/catalog/categories" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/catalog/categories.jsp" />
     </definition>
 
-    <definition name="admin/manufacturers" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/manufacturers.jsp" />
+    <definition name="admin/catalog/manufacturers" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/catalog/manufacturers.jsp" />
     </definition>
 
-    <definition name="admin/reviews" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/reviews.jsp" />
+    <definition name="admin/catalog/reviews" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/catalog/reviews.jsp" />
     </definition>
 
-    <definition name="admin/specials" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/specials.jsp" />
-    </definition>
-
-    <definition name="admin/customers" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/customers.jsp" />
-    </definition>
-
-    <definition name="admin/orders" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/orders.jsp" />
+    <definition name="admin/catalog/specials" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/catalog/specials.jsp" />
     </definition>
 
 
-    <definition name="admin/administrators" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/administrators.jsp" />
+    <!-- customer -->
+
+    <definition name="admin/customer/customers" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/customer/customers.jsp" />
+    </definition>
+
+    <definition name="admin/customer/orders" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/customer/orders.jsp" />
     </definition>
 
 
-    <definition name="admin/currencies" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/currencies.jsp" />
-    </definition>
+    <!-- configuration -->
 
-    <definition name="admin/languages" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/languages.jsp" />
-    </definition>
-
-    <definition name="admin/ordersStatus" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/ordersStatus.jsp" />
+    <definition name="admin/configuration/administrators" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/configuration/administrators.jsp" />
     </definition>
 
 
-    <definition name="admin/countries" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countries.jsp" />
+    <!-- currencies -->
+
+    <definition name="admin/localization/currencies" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/localization/currencies.jsp" />
     </definition>
 
-    <definition name="admin/countriesInsertForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countriesInsertForm.jsp" />
+    <definition name="admin/localization/languages" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/localization/languages.jsp" />
     </definition>
 
-    <definition name="admin/countriesEditForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countriesEditForm.jsp" />
-    </definition>
-
-    <definition name="admin/countriesDeleteForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/countriesDeleteForm.jsp" />
-    </definition>
-
-    <definition name="admin/zones" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/zones.jsp" />
-    </definition>
-
-    <definition name="admin/taxZones" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZones.jsp" />
-    </definition>
-
-    <definition name="admin/taxZonesEditForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZonesEditForm.jsp" />
-    </definition>
-
-    <definition name="admin/taxZonesDeleteForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZonesDeleteForm.jsp" />
-    </definition>
-
-    <definition name="admin/taxZonesInsertForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZonesInsertForm.jsp" />
-    </definition>
-
-    <definition name="admin/taxZone" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZone.jsp" />
-    </definition>
-
-    <definition name="admin/taxZoneInsertForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZoneInsertForm.jsp" />
-    </definition>
-
-    <definition name="admin/taxZoneDeleteForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZoneDeleteForm.jsp" />
-    </definition>
-
-    <definition name="admin/taxZoneEditForm" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxZoneEditForm.jsp" />
-    </definition>
-
-    <definition name="admin/taxClasses" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxClasses.jsp" />
-    </definition>
-
-    <definition name="admin/taxRates" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxRates.jsp" />
+    <definition name="admin/localization/ordersStatus" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/localization/ordersStatus.jsp" />
     </definition>
 
 
-    <definition name="admin/productsViewed" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/productsViewed.jsp" />
+    <!-- taxes -->
+
+    <definition name="admin/taxes/countries" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/countries.jsp" />
     </definition>
 
-    <definition name="admin/productsPurchased" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/productsPurchased.jsp" />
+    <definition name="admin/taxes/countriesInsertForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/countriesInsertForm.jsp" />
     </definition>
 
-    <definition name="admin/customerOrdersTotal" extends="backend">
-        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/customerOrdersTotal.jsp" />
+    <definition name="admin/taxes/countriesEditForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/countriesEditForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/countriesDeleteForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/countriesDeleteForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/zones" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/zones.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/zonesInsertForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/zonesInsertForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/zonesEditForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/zonesEditForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/zonesDeleteForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/zonesDeleteForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxZones" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxZones.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxZonesEditForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxZonesEditForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxZonesDeleteForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxZonesDeleteForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxZonesInsertForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxZonesInsertForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxZone" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxZone.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxZoneInsertForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxZoneInsertForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxZoneDeleteForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxZoneDeleteForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxZoneEditForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxZoneEditForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxClasses" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxClasses.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxRates" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxRates.jsp" />
+    </definition>
+
+
+    <!-- reports -->
+
+    <definition name="admin/reports/productsViewed" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/reports/productsViewed.jsp" />
+    </definition>
+
+    <definition name="admin/reports/productsPurchased" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/reports/productsPurchased.jsp" />
+    </definition>
+
+    <definition name="admin/reports/customerOrdersTotal" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/reports/customerOrdersTotal.jsp" />
     </definition>
 
 

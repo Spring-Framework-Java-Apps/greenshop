@@ -53,7 +53,7 @@ public class CountryController {
             thisCountry = countries.iterator().next();
         }
         model.addAttribute("thisCountry",thisCountry);
-        return "admin/countries";
+        return "admin/taxes/countries";
     }
 
     @RequestMapping(value = "/admin/countries/{countryId}", method = RequestMethod.GET)
@@ -66,7 +66,7 @@ public class CountryController {
         Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
         model.addAttribute("countries",countries);
-        return "admin/countries";
+        return "admin/taxes/countries";
     }
 
     @RequestMapping(value = "/admin/countries/insert", method = RequestMethod.GET)
@@ -80,7 +80,7 @@ public class CountryController {
         model.addAttribute("thisCountry",thisCountry);
         List<AddressFormat> addressFormats = addressFormatService.findAllAddressFormat();
         model.addAttribute("addressFormats",addressFormats);
-        return "admin/countriesInsertForm";
+        return "admin/taxes/countriesInsertForm";
     }
 
     @RequestMapping(value = "/admin/countries/insert", method = RequestMethod.POST)
@@ -96,7 +96,7 @@ public class CountryController {
             model.addAttribute("thisCountry",thisCountry);
             List<AddressFormat> addressFormats = addressFormatService.findAllAddressFormat();
             model.addAttribute("addressFormats",addressFormats);
-            return "admin/countriesInsertForm";
+            return "admin/taxes/countriesInsertForm";
         } else {
             countryService.createCountry(thisCountry);
             return "redirect:/admin/countries/"+thisCountry.getId()+"?page="+page;
@@ -116,7 +116,7 @@ public class CountryController {
         model.addAttribute("countries",countries);
         List<AddressFormat> addressFormats = addressFormatService.findAllAddressFormat();
         model.addAttribute("addressFormats",addressFormats);
-        return "admin/countriesEditForm";
+        return "admin/taxes/countriesEditForm";
     }
 
     @RequestMapping(value = "/admin/countries/{countryId}/edit", method = RequestMethod.POST)
@@ -133,7 +133,7 @@ public class CountryController {
             model.addAttribute("thisCountry",thisCountry);
             List<AddressFormat> addressFormats = addressFormatService.findAllAddressFormat();
             model.addAttribute("addressFormats",addressFormats);
-            return "admin/countriesEditForm";
+            return "admin/taxes/countriesEditForm";
         } else {
             thisCountry.setId(countryId);
             countryService.updateCountry(thisCountry);
@@ -152,7 +152,7 @@ public class CountryController {
         Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
         model.addAttribute("countries",countries);
-        return "admin/countriesDeleteForm";
+        return "admin/taxes/countriesDeleteForm";
     }
 
     @RequestMapping(value = "/admin/countries/{countryId}/delete", method = RequestMethod.POST)

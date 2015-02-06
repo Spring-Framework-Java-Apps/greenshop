@@ -32,7 +32,7 @@ public class TaxClassController {
             thisTaxClass =  taxClasses.iterator().next();
         }
         model.addAttribute("thisTaxClass",thisTaxClass);
-        return "admin/taxClasses";
+        return "admin/taxes/taxClasses";
     }
 
     @RequestMapping(value = "/admin/taxClasses/{taxClassId}", method = RequestMethod.GET)
@@ -46,6 +46,6 @@ public class TaxClassController {
             thisTaxClass =  taxClassService.findTaxClassById(taxClassId);
         }
         model.addAttribute("thisTaxClass",thisTaxClass);
-        return "admin/taxClasses";
+        return "admin/taxes/taxClasses";
     }
 }

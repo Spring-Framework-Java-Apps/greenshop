@@ -39,7 +39,7 @@ public class AdministratorController {
             thisAdministrator = administrators.iterator().next();
         }
         model.addAttribute("thisAdministrator",thisAdministrator);
-        return "admin/administrators";
+        return "admin/configuration/administrators";
     }
 
     @RequestMapping(value = "/admin/administrators/{administratorId}", method = RequestMethod.GET)
@@ -51,6 +51,6 @@ public class AdministratorController {
         model.addAttribute("thisAdministrator",thisAdministrator);
         List<Administrator> administrators = administratorService.findAllAdministrators();
         model.addAttribute("administrators",administrators);
-        return "admin/administrators";
+        return "admin/configuration/administrators";
     }
 }

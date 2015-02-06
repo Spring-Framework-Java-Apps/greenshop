@@ -39,7 +39,7 @@ public class SpecialController {
             thisSpecial = specials.iterator().next();
         }
         model.addAttribute("thisSpecial",thisSpecial);
-        return "admin/specials";
+        return "admin/catalog/specials";
     }
 
     @RequestMapping(value = "/admin/specials/{productId}", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class SpecialController {
             thisSpecial = specialService.findSpecialProductById(productId, language);
         }
         model.addAttribute("thisSpecial",thisSpecial);
-        return "admin/specials";
+        return "admin/catalog/specials";
     }
 
     @RequestMapping(value = "/admin/specials/setInactive/{productId}", method = RequestMethod.GET)
@@ -71,7 +71,7 @@ public class SpecialController {
         model.addAttribute("thisSpecial",thisSpecial);
         List<SpecialProduct> specials = specialService.getSpecialProducts(language);
         model.addAttribute("specials",specials);
-        return "admin/specials";
+        return "admin/catalog/specials";
     }
 
     @RequestMapping(value = "/admin/specials/setActive/{productId}", method = RequestMethod.GET)
@@ -88,6 +88,6 @@ public class SpecialController {
         model.addAttribute("thisSpecial",thisSpecial);
         List<SpecialProduct> specials = specialService.getSpecialProducts(language);
         model.addAttribute("specials",specials);
-        return "admin/specials";
+        return "admin/catalog/specials";
     }
 }

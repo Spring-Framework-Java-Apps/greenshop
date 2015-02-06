@@ -38,7 +38,7 @@ public class OrderController {
             thisOrder = orders.iterator().next();
         }
         model.addAttribute("thisOrder",thisOrder);
-        return "admin/orders";
+        return "admin/customer/orders";
     }
 
     @RequestMapping(value = "/admin/orders/{orderId}", method = RequestMethod.GET)
@@ -50,6 +50,6 @@ public class OrderController {
         model.addAttribute("orders",orders);
         OrderAdminBean thisOrder = orderService.findOrderById(orderId,language);
         model.addAttribute("thisOrder",thisOrder);
-        return "admin/orders";
+        return "admin/customer/orders";
     }
 }

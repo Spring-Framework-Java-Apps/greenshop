@@ -17,10 +17,10 @@
                         <td class="dataTableHeadingContent" align="center" colspan="2">ISO Codes</td>
                         <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                     </tr>
-                    <c:import url="countriesDataTable.jsp" />
+                    <c:import url="taxes/countriesDataTable.jsp" />
                     <tr>
                         <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                            <c:import url="countriesPager.jsp" />
+                            <c:import url="taxes/countriesPager.jsp" />
                         </table></td>
                     </tr>
                 </table></td>

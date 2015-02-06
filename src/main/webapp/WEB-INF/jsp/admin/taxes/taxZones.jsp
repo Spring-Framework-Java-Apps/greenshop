@@ -18,10 +18,10 @@
                             <td class="dataTableHeadingContent">Tax Zones</td>
                             <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                         </tr>
-                        <c:import url="taxZonesDataTable.jsp" />
+                        <c:import url="taxes/taxZonesDataTable.jsp" />
                         <tr>
                             <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                                <c:import url="taxZonesPager.jsp" />
+                                <c:import url="taxes/taxZonesPager.jsp" />
                             </table></td>
                         </tr>
                         <tr>

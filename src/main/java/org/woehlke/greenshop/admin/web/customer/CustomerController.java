@@ -35,7 +35,7 @@ public class CustomerController {
         }
         model.addAttribute("thisCustomer",thisCustomer);
         model.addAttribute("thisCustomersNumberOfReviews",thisCustomersNumberOfReviews);
-        return "admin/customers";
+        return "admin/customer/customers";
     }
 
     @RequestMapping(value = "/admin/customers/{customerId}", method = RequestMethod.GET)
@@ -48,6 +48,6 @@ public class CustomerController {
         int thisCustomersNumberOfReviews = customerService.getNumberOfReviewsForCustomer(thisCustomer.getCustomer());
         model.addAttribute("thisCustomer",thisCustomer);
         model.addAttribute("thisCustomersNumberOfReviews",thisCustomersNumberOfReviews);
-        return "admin/customers";
+        return "admin/customer/customers";
     }
 }

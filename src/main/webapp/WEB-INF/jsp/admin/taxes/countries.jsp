@@ -18,10 +18,10 @@
                         <td class="dataTableHeadingContent" align="center" colspan="2">ISO Codes</td>
                         <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                     </tr>
-                    <c:import url="countriesDataTable.jsp" />
+                    <c:import url="taxes/countriesDataTable.jsp" />
                     <tr>
                         <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                            <c:import url="countriesPager.jsp" />
+                            <c:import url="taxes/countriesPager.jsp" />
                             <tr>
                                 <td class="smallText" colspan="2" align="right"><span class="tdbLink"><a id="tdb1" href="<c:url value="/admin/countries/insert?page=${countries.number}"/>">New Country</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                             </tr>

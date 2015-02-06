@@ -42,7 +42,7 @@ public class ReviewController {
         model.addAttribute("thisReview",thisReview);
         int averageRating = thisReview.getReview().getReview().getRating();
         model.addAttribute("averageRating",averageRating);
-        return "admin/reviews";
+        return "admin/catalog/reviews";
     }
 
     @RequestMapping(value = "/admin/reviews/{reviewId}", method = RequestMethod.GET)
@@ -59,7 +59,7 @@ public class ReviewController {
         model.addAttribute("thisReview",thisReview);
         int averageRating = thisReview.getReview().getReview().getRating();
         model.addAttribute("averageRating",averageRating);
-        return "admin/reviews";
+        return "admin/catalog/reviews";
     }
 
     @RequestMapping(value = "/admin/reviews/setInactive/{reviewId}", method = RequestMethod.GET)
@@ -77,7 +77,7 @@ public class ReviewController {
         model.addAttribute("reviews",reviews);
         int averageRating = thisReview.getReview().getReview().getRating();
         model.addAttribute("averageRating",averageRating);
-        return "admin/reviews";
+        return "admin/catalog/reviews";
     }
 
     @RequestMapping(value = "/admin/reviews/setActive/{reviewId}", method = RequestMethod.GET)
@@ -95,6 +95,6 @@ public class ReviewController {
         model.addAttribute("reviews",reviews);
         int averageRating = thisReview.getReview().getReview().getRating();
         model.addAttribute("averageRating",averageRating);
-        return "admin/reviews";
+        return "admin/catalog/reviews";
     }
 }

@@ -39,7 +39,7 @@ public class OrderStatusController {
             thisOrderStatus =  orderStatuses.iterator().next();
         }
         model.addAttribute("thisOrderStatus",thisOrderStatus);
-        return "admin/ordersStatus";
+        return "admin/localization/ordersStatus";
     }
 
     @RequestMapping(value = "/admin/ordersStatus/{ordersStatusId}", method = RequestMethod.GET)
@@ -54,6 +54,6 @@ public class OrderStatusController {
         thisOrderStatusId.setLanguage(language);
         OrderStatus thisOrderStatus = orderService.findOrderStatusById(thisOrderStatusId);
         model.addAttribute("thisOrderStatus",thisOrderStatus);
-        return "admin/ordersStatus";
+        return "admin/localization/ordersStatus";
     }
 }

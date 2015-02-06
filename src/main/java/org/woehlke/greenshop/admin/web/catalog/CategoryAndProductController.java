@@ -64,7 +64,7 @@ public class CategoryAndProductController {
         logger.info("################################################");
         logger.info(rootCategories.toString());
         logger.info("################################################");
-        return "admin/categories";
+        return "admin/catalog/categories";
     }
 
     @RequestMapping(value = "/admin/categories/{categoryId}/parent/{parentId}/product/{productId}", method = RequestMethod.GET)
@@ -76,7 +76,7 @@ public class CategoryAndProductController {
         int menuCategory = AdminMenuCategory.CATALOG.ordinal();
         model.addAttribute("menuCategory",menuCategory);
         performCategoryAndProduct(categoryId, parentId, productId, model);
-        return "admin/categories";
+        return "admin/catalog/categories";
     }
 
     @RequestMapping(value = "/admin/categories/{categoryId}/parent/{parentId}/product/{productId}/setActive", method = RequestMethod.GET)
@@ -89,7 +89,7 @@ public class CategoryAndProductController {
         model.addAttribute("menuCategory",menuCategory);
         productService.setProductActive(productId);
         performCategoryAndProduct(categoryId, parentId, productId,model);
-        return "admin/categories";
+        return "admin/catalog/categories";
     }
 
     @RequestMapping(value = "/admin/categories/{categoryId}/parent/{parentId}/product/{productId}/setInactive", method = RequestMethod.GET)
@@ -102,7 +102,7 @@ public class CategoryAndProductController {
         model.addAttribute("menuCategory",menuCategory);
         productService.setProductInactive(productId);
         performCategoryAndProduct(categoryId, parentId, productId,model);
-        return "admin/categories";
+        return "admin/catalog/categories";
     }
 
     private void performCategoryAndProduct(
