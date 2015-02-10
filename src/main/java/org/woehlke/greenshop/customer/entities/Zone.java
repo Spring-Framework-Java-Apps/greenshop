@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.customer.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,10 +34,12 @@ public class Zone {
 	@ManyToOne
 	@JoinColumn(name="zone_country_id")
 	private Country country;
-	
+
+    @Length(max = 32)
 	@Column(name="zone_name")
 	private String name;
-	
+
+    @Length(max = 255)
 	@Column(name="zone_code")
 	private String code;
 
@@ -76,6 +80,28 @@ public class Zone {
 		return "Zone [id=" + id + ", country=" + country + ", name=" + name
 				+ ", code=" + code + "]";
 	}
-	
-	
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Zone)) return false;
+
+        Zone zone = (Zone) o;
+
+        if (code != null ? !code.equals(zone.code) : zone.code != null) return false;
+        if (country != null ? !country.equals(zone.country) : zone.country != null) return false;
+        if (id != null ? !id.equals(zone.id) : zone.id != null) return false;
+        if (name != null ? !name.equals(zone.name) : zone.name != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (code != null ? code.hashCode() : 0);
+        return result;
+    }
 }

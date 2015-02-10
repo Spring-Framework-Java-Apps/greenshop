@@ -25,13 +25,8 @@ public class ZoneServiceImpl implements ZoneService {
     private ZoneRepository zoneRepository;
 
     @Override
-    public Page<Zone> findAllZones(Pageable pageRequest) {
+    public Page<Zone> findAll(Pageable pageRequest) {
         return zoneRepository.findAll(pageRequest);
-    }
-
-    @Override
-    public Zone findZoneById(long zoneId) {
-        return zoneRepository.findOne(zoneId);
     }
 
     @Override
@@ -51,6 +46,29 @@ public class ZoneServiceImpl implements ZoneService {
             subZoneList.add(zone);
         }
         return zoneMap;
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void createZone(Zone thisZone) {
+        thisZone=zoneRepository.save(thisZone);
+    }
+
+    @Override
+    public Zone findById(long zoneId) {
+        return zoneRepository.findOne(zoneId);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void update(Zone thisZone) {
+        thisZone=zoneRepository.save(thisZone);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void delete(Zone thisZone) {
+        zoneRepository.delete(thisZone);
     }
 
 }

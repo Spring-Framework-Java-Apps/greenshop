@@ -12,10 +12,15 @@ import java.util.Map;
  */
 public interface ZoneService {
 
-    Page<Zone> findAllZones(Pageable pageRequest);
-
-    Zone findZoneById(long zoneId);
+    Page<Zone> findAll(Pageable pageRequest);
 
     Map<Long, List<Zone>> getZoneMap();
 
+    void createZone(Zone thisZone);
+
+    Zone findById(long zoneId);
+
+    void update(Zone thisZone);
+
+    void delete(Zone thisZone);
 }

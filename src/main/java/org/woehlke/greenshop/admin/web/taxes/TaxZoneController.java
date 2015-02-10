@@ -258,7 +258,7 @@ public class TaxZoneController {
             Country country = countryService.findCountryById(newSubZoneInfoBean.getZone_country_id());
             Zone subZone = null;
             if(newSubZoneInfoBean.getZone_id()!=null){
-                subZone = zoneService.findZoneById(newSubZoneInfoBean.getZone_id());
+                subZone = zoneService.findById(newSubZoneInfoBean.getZone_id());
             }
             TaxZone2Zone newTaxZone2Zone = new TaxZone2Zone();
             newTaxZone2Zone.setDateAdded(new Date());
@@ -327,7 +327,7 @@ public class TaxZoneController {
             Country country = countryService.findCountryById(newSubZoneInfoBean.getZone_country_id());
             Zone subZone = null;
             if(newSubZoneInfoBean.getZone_id()!=null){
-                subZone = zoneService.findZoneById(newSubZoneInfoBean.getZone_id());
+                subZone = zoneService.findById(newSubZoneInfoBean.getZone_id());
             }
             thisZone.setZoneCountry(country);
             thisZone.setZone(subZone);
