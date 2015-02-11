@@ -141,6 +141,18 @@
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxClasses.jsp" />
     </definition>
 
+    <definition name="admin/taxes/taxClassesInsertForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxClassesInsertForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxClassesEditForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxClassesEditForm.jsp" />
+    </definition>
+
+    <definition name="admin/taxes/taxClassesDeleteForm" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxClassesDeleteForm.jsp" />
+    </definition>
+
     <definition name="admin/taxes/taxRates" extends="backend">
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/taxes/taxRates.jsp" />
     </definition>

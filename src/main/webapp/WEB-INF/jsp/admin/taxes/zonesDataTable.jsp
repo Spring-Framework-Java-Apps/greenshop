@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/layout/taglibs.jsp"%>
 <c:forEach var="zone" items="${zones.content}">
     <c:if test="${zone.id == thisZone.id}">
-        <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/zones.php?page=1&cID=102&action=edit'">
+        <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/zones/${zone.id}/edit?page=${zones.number}"/>'">
             <td class="dataTableContent">${zone.country.name}</td>
             <td class="dataTableContent">${zone.name}</td>
             <td class="dataTableContent" align="center">${zone.code}</td>

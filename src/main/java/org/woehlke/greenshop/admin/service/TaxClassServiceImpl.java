@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.admin.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.admin.entities.TaxClass;
@@ -7,6 +9,7 @@ import org.woehlke.greenshop.admin.repository.TaxClassRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,12 +23,32 @@ public class TaxClassServiceImpl implements TaxClassService {
     private TaxClassRepository taxClassRepository;
 
     @Override
-    public List<TaxClass> findAllTaxClasses() {
-        return taxClassRepository.findAll();
+    public TaxClass findById(long taxClassId) {
+        return taxClassRepository.findOne(taxClassId);
     }
 
     @Override
-    public TaxClass findTaxClassById(long taxClassId) {
-        return taxClassRepository.findOne(taxClassId);
+    public Page<TaxClass> findAll(Pageable pageRequest) {
+        return taxClassRepository.findAll(pageRequest);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void create(TaxClass thisTaxClass) {
+        thisTaxClass.setDateAdded(new Date());
+        thisTaxClass=taxClassRepository.save(thisTaxClass);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void update(TaxClass thisTaxClass) {
+        thisTaxClass.setLastModified(new Date());
+        thisTaxClass=taxClassRepository.save(thisTaxClass);
+    }
+
+    @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void delete(TaxClass thisTaxClass) {
+        taxClassRepository.delete(thisTaxClass);
     }
 }

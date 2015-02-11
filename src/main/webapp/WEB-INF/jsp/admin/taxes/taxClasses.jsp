@@ -17,28 +17,12 @@
                         <td class="dataTableHeadingContent">Tax Classes</td>
                         <td class="dataTableHeadingContent" align="right">Action&nbsp;</td>
                     </tr>
-                    <c:forEach var="taxClass" items="${taxClasses}">
-                        <c:if test="${taxClass.id == thisTaxClass.id}">
-                            <tr id="defaultSelected" class="dataTableRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='http://localhost/oscommerce2/admin/tax_classes.php?page=1&tID=2&action=edit'">
-                                <td class="dataTableContent">${taxClass.title}</td>
-                                <td class="dataTableContent" align="right"><img src="resources/admin/images/icon_arrow_right.gif" border="0" alt="" />&nbsp;</td>
-                            </tr>
-                        </c:if>
-                        <c:if test="${taxClass.id != thisTaxClass.id}">
-                            <tr class="dataTableRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<c:url value="/admin/taxClasses/${taxClass.id}"/>'">
-                                <td class="dataTableContent">${taxClass.title}</td>
-                                <td class="dataTableContent" align="right"><a href="<c:url value="/admin/taxClasses/${taxClass.id}"/>"><img src="resources/admin/images/icon_info.gif" border="0" alt="Info" title="Info" /></a>&nbsp;</td>
-                            </tr>
-                        </c:if>
-                    </c:forEach>
+                    <c:import url="taxes/taxClassesDataTable.jsp" />
                     <tr>
                         <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                            <c:import url="taxes/taxClassesPager.jsp" />
                             <tr>
-                                <td class="smallText" valign="top">Displaying <strong>1</strong> to <strong>2</strong> (of <strong>2</strong> tax classes)</td>
-                                <td class="smallText" align="right">Page 1 of 1</td>
-                            </tr>
-                            <tr>
-                                <td class="smallText" colspan="2" align="right"><span class="tdbLink"><a id="tdb1" href="http://localhost/oscommerce2/admin/tax_classes.php?page=1&action=new">New Tax Class</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                                <td class="smallText" colspan="2" align="right"><span class="tdbLink"><a id="tdb1" href="<c:url value="/admin/taxClasses/insert?page=${taxClasses.number}"/>">New Tax Class</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                             </tr>
                         </table></td>
                     </tr>
@@ -51,7 +35,7 @@
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr>
-                            <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb2" href="http://localhost/oscommerce2/admin/tax_classes.php?page=1&tID=2&action=edit">Edit</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="http://localhost/oscommerce2/admin/tax_classes.php?page=1&tID=2&action=delete">Delete</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                            <td align="center" class="infoBoxContent"><span class="tdbLink"><a id="tdb2" href="<c:url value="/admin/taxClasses/${thisTaxClass.id}/edit?page=${taxClasses.number}"/>">Edit</a></span><script type="text/javascript">$("#tdb2").button({icons:{primary:"ui-icon-document"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script><span class="tdbLink"><a id="tdb3" href="<c:url value="/admin/taxClasses/${thisTaxClass.id}/delete?page=${taxClasses.number}"/>">Delete</a></span><script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-trash"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                         </tr>
                         <tr>
                             <td class="infoBoxContent"><br />Date Added: <fmt:formatDate pattern="MM/dd/yyyy" value="${thisTaxClass.dateAdded}" /></td>
