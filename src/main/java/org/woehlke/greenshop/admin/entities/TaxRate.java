@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.admin.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -40,6 +42,10 @@ public class TaxRate {
 
     @Column(name="tax_rate",columnDefinition = "decimal(7,4)")
     private Double taxRate;
+
+    @Length(max = 255)
+    @Column(name="tax_description",columnDefinition = "varchar(255)")
+    private String description;
 
     @Temporal(value=TemporalType.TIMESTAMP)
     @Column(name="last_modified")
@@ -89,6 +95,14 @@ public class TaxRate {
         this.taxRate = taxRate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Date getLastModified() {
         return lastModified;
     }
@@ -113,6 +127,8 @@ public class TaxRate {
         TaxRate taxRate1 = (TaxRate) o;
 
         if (dateAdded != null ? !dateAdded.equals(taxRate1.dateAdded) : taxRate1.dateAdded != null) return false;
+        if (description != null ? !description.equals(taxRate1.description) : taxRate1.description != null)
+            return false;
         if (id != null ? !id.equals(taxRate1.id) : taxRate1.id != null) return false;
         if (lastModified != null ? !lastModified.equals(taxRate1.lastModified) : taxRate1.lastModified != null)
             return false;
@@ -131,6 +147,7 @@ public class TaxRate {
         result = 31 * result + (taxClass != null ? taxClass.hashCode() : 0);
         result = 31 * result + (priority != null ? priority.hashCode() : 0);
         result = 31 * result + (taxRate != null ? taxRate.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (lastModified != null ? lastModified.hashCode() : 0);
         result = 31 * result + (dateAdded != null ? dateAdded.hashCode() : 0);
         return result;
@@ -144,6 +161,7 @@ public class TaxRate {
                 ", taxClass=" + taxClass +
                 ", priority=" + priority +
                 ", taxRate=" + taxRate +
+                ", description='" + description + '\'' +
                 ", lastModified=" + lastModified +
                 ", dateAdded=" + dateAdded +
                 '}';

@@ -1,5 +1,7 @@
 package org.woehlke.greenshop.admin.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.woehlke.greenshop.admin.entities.TaxRate;
 
 import java.util.List;
@@ -9,7 +11,14 @@ import java.util.List;
  */
 public interface TaxRateService {
 
-    List<TaxRate> findAllTaxRates();
+    Page<TaxRate> findAll(Pageable pageRequest);
 
-    TaxRate findTaxRateById(long taxRateId);
+    TaxRate findById(long taxRateId);
+
+    void delete(TaxRate thisTaxRate);
+
+    void update(TaxRate loadedTaxRate);
+
+    void create(TaxRate thisTaxRate);
+
 }

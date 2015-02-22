@@ -53,6 +53,11 @@ public class TaxZoneServiceImpl implements TaxZoneService {
     }
 
     @Override
+    public List<TaxZone> findAll() {
+        return taxZoneRepository.findAll();
+    }
+
+    @Override
     public Page<TaxZone> findAllTaxZones(Pageable pageRequest) {
         return taxZoneRepository.findAll(pageRequest);
     }

@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface TaxZoneService {
 
+    List<TaxZone> findAll();
+
     Page<TaxZone> findAllTaxZones(Pageable pageRequest);
 
     TaxZone findTaxZoneById(long taxZoneId);

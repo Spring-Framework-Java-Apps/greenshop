@@ -13,6 +13,8 @@ public interface TaxClassService {
 
     TaxClass findById(long taxClassId);
 
+    List<TaxClass> findAll();
+
     Page<TaxClass> findAll(Pageable pageRequest);
 
     void create(TaxClass thisTaxClass);

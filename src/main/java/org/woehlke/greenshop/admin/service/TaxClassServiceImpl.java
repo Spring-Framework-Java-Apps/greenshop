@@ -28,6 +28,11 @@ public class TaxClassServiceImpl implements TaxClassService {
     }
 
     @Override
+    public List<TaxClass> findAll() {
+        return taxClassRepository.findAll();
+    }
+
+    @Override
     public Page<TaxClass> findAll(Pageable pageRequest) {
         return taxClassRepository.findAll(pageRequest);
     }
