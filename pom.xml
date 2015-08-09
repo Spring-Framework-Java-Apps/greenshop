@@ -8,12 +8,12 @@
 	<url>http://shadowfax.fritz.box/p/greenshop</url>
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>4.1.5.RELEASE</org.springframework-version>
-		<spring.integration.version>4.1.2.RELEASE</spring.integration.version>
-		<spring.security.version>3.2.5.RELEASE</spring.security.version>
+		<org.springframework-version>4.1.7.RELEASE</org.springframework-version>
+		<spring.integration.version>4.1.6.RELEASE</spring.integration.version>
+		<spring.security.version>3.2.8.RELEASE</spring.security.version>
 		<org.aspectj-version>1.6.12</org.aspectj-version>
 		<org.slf4j-version>1.7.6</org.slf4j-version>
-		<maven.scm.version>1.9.2</maven.scm.version>
+		<maven.scm.version>1.9.4</maven.scm.version>
         <encoding>UTF-8</encoding>
 	</properties>
 	<dependencies>
@@ -142,7 +142,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.21</version>
+			<version>5.1.36</version>
 		</dependency>
 
 		<!-- JSR 303 with Hibernate Validator -->
