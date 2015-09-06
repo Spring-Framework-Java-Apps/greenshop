@@ -10,6 +10,8 @@ import org.woehlke.greenshop.admin.repository.AdministratorRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -33,9 +35,35 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void update(Administrator thisAdministrator) {
+        Administrator original = administratorRepository.findOne(thisAdministrator.getId());
+        if(original.getUserPassword().compareTo(thisAdministrator.getUserPassword())!=0){
+            thisAdministrator.setUserPassword(md5(thisAdministrator.getUserPassword()));
+        }
+        thisAdministrator = administratorRepository.save(thisAdministrator);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Administrator administrator = administratorRepository.findByUserName(username);
         if(administrator == null) throw new UsernameNotFoundException(username);
         return new AdministratorBean(administrator);
+    }
+
+    private String md5(String input){
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        md.update(input.getBytes());
+        byte[] digest = md.digest();
+        StringBuffer sb = new StringBuffer();
+        for (byte b : digest) {
+            sb.append(String.format("%02x", b & 0xff));
+        }
+        return sb.toString();
     }
 }

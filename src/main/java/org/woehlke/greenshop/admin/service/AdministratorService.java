@@ -14,4 +14,5 @@ public interface AdministratorService extends UserDetailsService {
 
     Administrator findAdministratorById(long administratorId);
 
+    void update(Administrator thisAdministrator);
 }
