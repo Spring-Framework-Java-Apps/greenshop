@@ -46,7 +46,7 @@
                         </c:if>
                     </c:forEach>
                     <tr>
-                        <td class="smallText" colspan="3" align="right"><span class="tdbLink"><a id="tdb1" href="http://localhost/oscommerce2/admin/administrators.php?action=new">Insert</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
+                        <td class="smallText" colspan="3" align="right"><span class="tdbLink"><a id="tdb1" href="<c:url value="/admin/administrators/insert"/>">Insert</a></span><script type="text/javascript">$("#tdb1").button({icons:{primary:"ui-icon-plus"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script></td>
                     </tr>
                 </table></td>
                 <td width="25%" valign="top">

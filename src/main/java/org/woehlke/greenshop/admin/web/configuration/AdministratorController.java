@@ -85,4 +85,32 @@ public class AdministratorController {
             return "redirect:/admin/administrators/"+administratorId;
         }
     }
+
+    @RequestMapping(value = "/admin/administrators/insert", method = RequestMethod.GET)
+    public String administratorInsertForm(Model model){
+        int menuCategory = AdminMenuCategory.CONFIGURATION.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        Administrator thisAdministrator = new Administrator();
+        model.addAttribute("thisAdministrator",thisAdministrator);
+        List<Administrator> administrators = administratorService.findAllAdministrators();
+        model.addAttribute("administrators",administrators);
+        return "admin/configuration/administratorsInsert";
+    }
+
+    @RequestMapping(value = "/admin/administrators/insert", method = RequestMethod.POST)
+    public String administratorInsertSave(
+            @Valid Administrator thisAdministrator, BindingResult result, Model model){
+        int menuCategory = AdminMenuCategory.CONFIGURATION.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        if(result.hasErrors()){
+            model.addAttribute("thisAdministrator",thisAdministrator);
+            List<Administrator> administrators = administratorService.findAllAdministrators();
+            model.addAttribute("administrators",administrators);
+            return "admin/configuration/administratorsInsert";
+        } else {
+            administratorService.create(thisAdministrator);
+            long administratorId = thisAdministrator.getId();
+            return "redirect:/admin/administrators/"+administratorId;
+        }
+    }
 }

@@ -59,6 +59,10 @@
         <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/configuration/administratorsEditForm.jsp" />
     </definition>
 
+    <definition name="admin/configuration/administratorsInsert" extends="backend">
+        <put-attribute name="bodyContent" value="/WEB-INF/jsp/admin/configuration/administratorsInsertForm.jsp" />
+    </definition>
+
 
     <!-- currencies -->
 

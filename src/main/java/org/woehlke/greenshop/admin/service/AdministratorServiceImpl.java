@@ -45,6 +45,13 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
+    @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
+    public void create(Administrator thisAdministrator) {
+        thisAdministrator.setUserPassword(md5(thisAdministrator.getUserPassword()));
+        thisAdministrator = administratorRepository.save(thisAdministrator);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Administrator administrator = administratorRepository.findByUserName(username);
         if(administrator == null) throw new UsernameNotFoundException(username);
