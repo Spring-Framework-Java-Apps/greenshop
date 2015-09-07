@@ -113,4 +113,34 @@ public class AdministratorController {
             return "redirect:/admin/administrators/"+administratorId;
         }
     }
+
+    @RequestMapping(value = "/admin/administrators/{administratorId}/delete", method = RequestMethod.GET)
+    public String administratorDeleteForm(
+            @PathVariable long administratorId, Model model){
+        int menuCategory = AdminMenuCategory.CONFIGURATION.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        Administrator thisAdministrator = administratorService.findAdministratorById(administratorId);
+        model.addAttribute("thisAdministrator",thisAdministrator);
+        List<Administrator> administrators = administratorService.findAllAdministrators();
+        model.addAttribute("administrators",administrators);
+        return "admin/configuration/administratorsDelete";
+    }
+
+    @RequestMapping(value = "/admin/administrators/{administratorId}/delete", method = RequestMethod.POST)
+    public String administratorDeleteSave(
+            @PathVariable long administratorId,
+            @Valid Administrator thisAdministrator, BindingResult result, Model model){
+        int menuCategory = AdminMenuCategory.CONFIGURATION.ordinal();
+        model.addAttribute("menuCategory",menuCategory);
+        if(result.hasErrors()){
+            model.addAttribute("thisAdministrator",thisAdministrator);
+            List<Administrator> administrators = administratorService.findAllAdministrators();
+            model.addAttribute("administrators",administrators);
+            return "admin/configuration/administratorsDelete";
+        } else {
+            thisAdministrator.setId(administratorId);
+            administratorService.delete(thisAdministrator);
+            return "redirect:/admin/administrators";
+        }
+    }
 }

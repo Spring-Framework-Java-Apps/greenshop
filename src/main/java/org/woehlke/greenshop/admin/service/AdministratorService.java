@@ -17,4 +17,6 @@ public interface AdministratorService extends UserDetailsService {
     void update(Administrator thisAdministrator);
 
     void create(Administrator thisAdministrator);
+
+    void delete(Administrator thisAdministrator);
 }
