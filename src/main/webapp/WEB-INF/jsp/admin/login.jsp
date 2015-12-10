@@ -14,7 +14,8 @@
                     <td class="infoBoxHeading"><strong>Administrator Login</strong></td>
                 </tr>
             </table>
-            <form name="login" action='<c:url value="/admin/j_spring_security_check"/>' method="post">
+            <c:url var="loginUrl" value="/admin/j_spring_security_check" />
+            <form action="${loginUrl}" method="post">
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                     <tr>
                         <td class="infoBoxContent">Username:<br /><input type="text" name="j_username" /></td>

@@ -14,10 +14,6 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
         
 	<!-- Spring security -->
-	
-	<!-- 
-	http://static.springsource.org/spring-security/site/docs/3.1.x/reference/springsecurity-single.html
-	 -->
     
     <security:http pattern="/resources/**" security="none"/>
     <security:http pattern="/product/**" security="none"/>
@@ -27,13 +23,18 @@
 
 	<security:http pattern="/admin/**"
 				   authentication-manager-ref="authenticationManagerAdmin"
-				   use-expressions='true'>
+				   use-expressions="true"
+				   disable-url-rewriting="false"
+				   auto-config="false">
+		<security:headers disabled="true"/>
+		<security:csrf disabled="true"/>
 		<security:intercept-url pattern="/admin/login*" access="permitAll"/>
 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<security:form-login
 				login-page="/admin/login"
 				authentication-failure-url="/admin/login?login_error=1"
-				default-target-url="/admin/"/>
+				default-target-url="/admin/"
+				login-processing-url="/admin/j_spring_security_check"/>
 		<security:logout
 				logout-url="/admin/j_spring_security_logout"
 				logout-success-url="/admin/"
@@ -44,7 +45,11 @@
 
     <security:http pattern="/**"
 				   authentication-manager-ref="authenticationManagerCustomer"
-				   use-expressions='true'>
+				   use-expressions='true'
+				   disable-url-rewriting="false"
+				   auto-config="false">
+		<security:headers disabled="true"/>
+		<security:csrf disabled="true"/>
     	<security:intercept-url pattern="/" access="permitAll"/>
     	<security:intercept-url pattern="/product/**" access="permitAll"/>
     	<security:intercept-url pattern="/manufacturer/**" access="permitAll"/>
@@ -61,7 +66,8 @@
     	<security:form-login 
     		login-page="/login"
     		authentication-failure-url="/login?login_error=1" 
-            authentication-success-handler-ref="populateBasketAfterLogin"/>
+            authentication-success-handler-ref="populateBasketAfterLogin"
+			login-processing-url="/j_spring_security_check"/>
     	<security:logout
 				logout-url="/j_spring_security_logout"
 				invalidate-session="true" delete-cookies="JSESSIONID" />
@@ -79,17 +85,23 @@
     		<security:password-encoder hash="md5"/>
     	</security:authentication-provider>
   	</security:authentication-manager>
-  	
+
+	<security:global-method-security pre-post-annotations="enabled" />
+
   	<bean id="authenticationFilterCustomer"
 		  class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
   		<property name="authenticationManager" ref="authenticationManagerCustomer"/>
   		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
+		<property name="usernameParameter" value="j_username"/>
+		<property name="passwordParameter" value="j_password"/>
 	</bean>
 
 	<bean id="authenticationFilterAdmin"
 		  class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
 		<property name="authenticationManager" ref="authenticationManagerAdmin"/>
 		<property name="filterProcessesUrl" value="/admin/j_spring_security_check"/>
+		<property name="usernameParameter" value="j_username"/>
+		<property name="passwordParameter" value="j_password"/>
 	</bean>
 
 </beans>
