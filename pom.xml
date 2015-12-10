@@ -403,10 +403,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.3</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
@@ -547,7 +547,7 @@
 						</links> -->
 					<linksource>true</linksource>
 					<maxmemory>1024m</maxmemory>
-					<source>1.7</source>
+					<source>1.8</source>
 					<encoding>${encoding}</encoding>
 				</configuration>
 			</plugin>
@@ -588,7 +588,7 @@
 				<configuration>
 					<sourceEncoding>${encoding}</sourceEncoding>
 					<minimumTokens>100</minimumTokens>
-					<targetJdk>1.7</targetJdk>
+					<targetJdk>1.8</targetJdk>
 					<excludeRoots>
 						<excludeRoot>target</excludeRoot>
 					</excludeRoots>
@@ -642,6 +642,29 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.4.16</version>
+				<configuration>
+					<container>
+						<containerId>tomcat7x</containerId>
+						<zipUrlInstaller>
+							<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.50/bin/apache-tomcat-7.0.50.zip</url>
+						</zipUrlInstaller>
+					</container>
+					<configuration>
+						<home>${project.build.directory}/tomcat7x/container</home>
+					</configuration>
+						<deployables>
+							<deployable>
+								<properties>
+									<context>greenshop</context>
+								</properties>
+							</deployable>
+						</deployables>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
