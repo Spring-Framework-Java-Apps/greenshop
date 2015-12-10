@@ -649,13 +649,13 @@
 				<version>1.4.16</version>
 				<configuration>
 					<container>
-						<containerId>tomcat7x</containerId>
+						<containerId>tomcat8x</containerId>
 						<zipUrlInstaller>
-							<url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.50/bin/apache-tomcat-7.0.50.zip</url>
+							<url>http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.30/bin/apache-tomcat-8.0.30.zip</url>
 						</zipUrlInstaller>
 					</container>
 					<configuration>
-						<home>${project.build.directory}/tomcat7x/container</home>
+						<home>${project.build.directory}/tomcat8x/container</home>
 					</configuration>
 						<deployables>
 							<deployable>
