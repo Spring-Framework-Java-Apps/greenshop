@@ -27,7 +27,7 @@
 				   disable-url-rewriting="false"
 				   auto-config="false">
 		<security:headers disabled="true"/>
-		<security:csrf disabled="true"/>
+		<security:csrf disabled="false"/>
 		<security:intercept-url pattern="/admin/login*" access="permitAll"/>
 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<security:form-login
@@ -49,7 +49,7 @@
 				   disable-url-rewriting="false"
 				   auto-config="false">
 		<security:headers disabled="true"/>
-		<security:csrf disabled="true"/>
+		<security:csrf disabled="false"/>
     	<security:intercept-url pattern="/" access="permitAll"/>
     	<security:intercept-url pattern="/product/**" access="permitAll"/>
     	<security:intercept-url pattern="/manufacturer/**" access="permitAll"/>
@@ -70,7 +70,8 @@
 			login-processing-url="/j_spring_security_check"/>
     	<security:logout
 				logout-url="/j_spring_security_logout"
-				invalidate-session="true" delete-cookies="JSESSIONID" />
+				invalidate-session="true"
+				delete-cookies="JSESSIONID" />
 		<security:custom-filter before="FORM_LOGIN_FILTER" ref="authenticationFilterCustomer" />
   	</security:http>
 

@@ -28,7 +28,9 @@
 			<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
 		</span>
 	</c:if>
-    
+      <input type="hidden"
+             name="${_csrf.parameterName}"
+             value="${_csrf.token}"/>
     <table border="0" cellspacing="0" cellpadding="2" width="100%">
       <tr>
         <td class="fieldKey">E-Mail Address:</td>

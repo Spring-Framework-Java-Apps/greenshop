@@ -42,7 +42,14 @@
         <td class="headerBarContent" align="right">&nbsp;&nbsp;</td>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <td class="headerBarContent" align="right">Logged in as: admin (<a href='<c:url value="/admin/j_spring_security_logout"/>' class="headerLink">Logoff</a>)&nbsp;&nbsp;</td>
+        <td class="headerBarContent" align="right">Logged in as: admin (
+            <c:url var="logoutUrl" value="/admin/j_spring_security_logout"/>
+            <form action="${logoutUrl}" method="post">
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+                <input class="headerLink" type="submit" value="Logoff"/>
+            </form>)&nbsp;&nbsp;</td>
         </sec:authorize>
     </tr>
 </table>

@@ -17,7 +17,13 @@
         <script type="text/javascript">$("#tdb3").button({icons:{primary:"ui-icon-person"}}).addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>
         <sec:authorize access="fullyAuthenticated">
             <span class="tdbLink">
-                <a id="tdb4" href='<c:url value="/j_spring_security_logout"/>'>Log Off</a>
+                <c:url var="logoutUrl" value="/j_spring_security_logout"/>
+                <form action="${logoutUrl}" method="post">
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                    <input id="tdb4" type="submit" value="Log Off"/>
+                </form>
             </span>
             <script type="text/javascript">$("#tdb4").button().addClass("ui-priority-secondary").parent().removeClass("tdbLink");</script>
         </sec:authorize>

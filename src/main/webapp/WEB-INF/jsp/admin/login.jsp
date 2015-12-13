@@ -16,6 +16,9 @@
             </table>
             <c:url var="loginUrl" value="/admin/j_spring_security_check" />
             <form action="${loginUrl}" method="post">
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
                 <table border="0" width="100%" cellspacing="0" cellpadding="2">
                     <tr>
                         <td class="infoBoxContent">Username:<br /><input type="text" name="j_username" /></td>
