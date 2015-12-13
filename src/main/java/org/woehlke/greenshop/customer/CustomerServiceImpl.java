@@ -9,11 +9,9 @@ import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.catalog.entities.Language;
@@ -66,8 +64,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Inject
     private ReviewRepository reviewRepository;
 
+	@Inject
+	private PasswordEncoder encoder;
 
-    @Override
+	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void createNewCustomer(
 			CreateNewCustomerFormBean createNewCustomerFormBean) {
@@ -114,9 +114,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setGender(createNewCustomerFormBean.getGender());
 		customer.setLastname(createNewCustomerFormBean.getLastname());
 		customer.setNewsletter(createNewCustomerFormBean.getNewsletter());
-		//TODO: password encryption like in PHP
-		PasswordEncoder encoder = new Md5PasswordEncoder();
-		String codedPassword = encoder.encodePassword(createNewCustomerFormBean.getPassword(),null);
+		String codedPassword = encoder.encode(createNewCustomerFormBean.getPassword());
 		customer.setPassword(codedPassword);
 		customer.setTelephone(createNewCustomerFormBean.getTelephone());
 		return customer;

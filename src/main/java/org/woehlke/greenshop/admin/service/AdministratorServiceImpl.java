@@ -2,6 +2,7 @@ package org.woehlke.greenshop.admin.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.woehlke.greenshop.admin.entities.Administrator;
@@ -24,6 +25,9 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Inject
     private AdministratorRepository administratorRepository;
 
+    @Inject
+    private PasswordEncoder encoder;
+
     @Override
     public List<Administrator> findAllAdministrators() {
         return administratorRepository.findAll();
@@ -39,7 +43,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     public void update(Administrator thisAdministrator) {
         Administrator original = administratorRepository.findOne(thisAdministrator.getId());
         if(original.getUserPassword().compareTo(thisAdministrator.getUserPassword())!=0){
-            thisAdministrator.setUserPassword(md5(thisAdministrator.getUserPassword()));
+            thisAdministrator.setUserPassword(encoder.encode(thisAdministrator.getUserPassword()));
         }
         thisAdministrator = administratorRepository.save(thisAdministrator);
     }
@@ -47,7 +51,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void create(Administrator thisAdministrator) {
-        thisAdministrator.setUserPassword(md5(thisAdministrator.getUserPassword()));
+        thisAdministrator.setUserPassword(encoder.encode(thisAdministrator.getUserPassword()));
         thisAdministrator = administratorRepository.save(thisAdministrator);
     }
 
@@ -64,6 +68,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         return new AdministratorBean(administrator);
     }
 
+    /*
     private String md5(String input){
         MessageDigest md = null;
         try {
@@ -79,4 +84,5 @@ public class AdministratorServiceImpl implements AdministratorService {
         }
         return sb.toString();
     }
+    */
 }

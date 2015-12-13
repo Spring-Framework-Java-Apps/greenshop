@@ -75,15 +75,20 @@
 		<security:custom-filter before="FORM_LOGIN_FILTER" ref="authenticationFilterCustomer" />
   	</security:http>
 
+	<!-- https://www.dailycred.com/article/bcrypt-calculator -->
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="10" />
+	</bean>
+
 	<security:authentication-manager alias="authenticationManagerAdmin">
 		<security:authentication-provider user-service-ref="administratorService">
-			<security:password-encoder hash="md5"/>
+			<security:password-encoder ref="encoder"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
   	
   	<security:authentication-manager id="authenticationManagerCustomer">
     	<security:authentication-provider user-service-ref="customerService">
-    		<security:password-encoder hash="md5"/>
+    		<security:password-encoder ref="encoder"/>
     	</security:authentication-provider>
   	</security:authentication-manager>
 
