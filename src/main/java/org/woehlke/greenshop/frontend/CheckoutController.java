@@ -12,15 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.woehlke.greenshop.customer.service.CountryService;
-import org.woehlke.greenshop.cart.model.TransientBasket;
-import org.woehlke.greenshop.checkout.CheckoutService;
-import org.woehlke.greenshop.checkout.model.AddressBean;
-import org.woehlke.greenshop.checkout.model.CheckoutBean;
-import org.woehlke.greenshop.customer.entities.AddressBook;
-import org.woehlke.greenshop.customer.entities.Country;
-import org.woehlke.greenshop.customer.entities.Customer;
-import org.woehlke.greenshop.frontend.AbstractController;
+import org.woehlke.greenshop.oodm.customer.service.CountryService;
+import org.woehlke.greenshop.oodm.cart.model.TransientBasket;
+import org.woehlke.greenshop.oodm.checkout.CheckoutService;
+import org.woehlke.greenshop.oodm.checkout.model.AddressBean;
+import org.woehlke.greenshop.oodm.checkout.model.CheckoutBean;
+import org.woehlke.greenshop.oodm.customer.entities.AddressBook;
+import org.woehlke.greenshop.oodm.customer.entities.Country;
+import org.woehlke.greenshop.oodm.customer.entities.Customer;
 
 @Controller
 @SessionAttributes({"transientBasket","checkout"})

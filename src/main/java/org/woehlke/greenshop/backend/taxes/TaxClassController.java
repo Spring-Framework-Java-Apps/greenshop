@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.woehlke.greenshop.backend.AdminMenuCategory;
-import org.woehlke.greenshop.admin.entities.TaxClass;
-import org.woehlke.greenshop.admin.service.TaxClassService;
+import org.woehlke.greenshop.oodm.admin.entities.TaxClass;
+import org.woehlke.greenshop.oodm.admin.service.TaxClassService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

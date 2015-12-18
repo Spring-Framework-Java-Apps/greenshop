@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.woehlke.greenshop.catalog.entities.Language;
-import org.woehlke.greenshop.catalog.model.AdvancedSearchBean;
-import org.woehlke.greenshop.catalog.model.CategoriesBean;
+import org.woehlke.greenshop.oodm.catalog.entities.Language;
+import org.woehlke.greenshop.oodm.catalog.model.AdvancedSearchBean;
+import org.woehlke.greenshop.oodm.catalog.model.CategoriesBean;
 
 import javax.validation.Valid;
 

@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.woehlke.greenshop.backend.AdminMenuCategory;
-import org.woehlke.greenshop.customer.entities.Country;
-import org.woehlke.greenshop.customer.service.CountryService;
-import org.woehlke.greenshop.customer.service.ZoneService;
-import org.woehlke.greenshop.customer.entities.Zone;
+import org.woehlke.greenshop.oodm.customer.entities.Country;
+import org.woehlke.greenshop.oodm.customer.service.CountryService;
+import org.woehlke.greenshop.oodm.customer.service.ZoneService;
+import org.woehlke.greenshop.oodm.customer.entities.Zone;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

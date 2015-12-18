@@ -18,18 +18,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.woehlke.greenshop.catalog.service.ProductService;
-import org.woehlke.greenshop.customer.service.CountryService;
-import org.woehlke.greenshop.catalog.entities.Language;
-import org.woehlke.greenshop.catalog.entities.ProductDescription;
-import org.woehlke.greenshop.checkout.OrderService;
-import org.woehlke.greenshop.checkout.model.OrderHistoryBean;
-import org.woehlke.greenshop.checkout.model.OrderHistoryDetailsBean;
-import org.woehlke.greenshop.customer.CustomerService;
-import org.woehlke.greenshop.customer.entities.*;
-import org.woehlke.greenshop.customer.model.ChangePasswordBean;
-import org.woehlke.greenshop.customer.model.CustomerAddressBean;
-import org.woehlke.greenshop.customer.model.ProductNotificationBean;
+import org.woehlke.greenshop.oodm.catalog.service.ProductService;
+import org.woehlke.greenshop.oodm.customer.service.CountryService;
+import org.woehlke.greenshop.oodm.catalog.entities.Language;
+import org.woehlke.greenshop.oodm.catalog.entities.ProductDescription;
+import org.woehlke.greenshop.oodm.checkout.OrderService;
+import org.woehlke.greenshop.oodm.checkout.model.OrderHistoryBean;
+import org.woehlke.greenshop.oodm.checkout.model.OrderHistoryDetailsBean;
+import org.woehlke.greenshop.oodm.customer.CustomerService;
+import org.woehlke.greenshop.oodm.customer.entities.*;
+import org.woehlke.greenshop.oodm.customer.model.ChangePasswordBean;
+import org.woehlke.greenshop.oodm.customer.model.CustomerAddressBean;
+import org.woehlke.greenshop.oodm.customer.model.ProductNotificationBean;
 
 @Controller
 @SessionAttributes({"transientBasket"})

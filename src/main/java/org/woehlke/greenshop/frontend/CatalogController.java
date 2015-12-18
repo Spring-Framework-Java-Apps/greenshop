@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.woehlke.greenshop.catalog.entities.*;
-import org.woehlke.greenshop.catalog.model.*;
-import org.woehlke.greenshop.catalog.service.*;
-import org.woehlke.greenshop.customer.entities.Customer;
+import org.woehlke.greenshop.oodm.catalog.entities.*;
+import org.woehlke.greenshop.oodm.catalog.model.*;
+import org.woehlke.greenshop.oodm.catalog.service.*;
+import org.woehlke.greenshop.oodm.customer.entities.Customer;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;

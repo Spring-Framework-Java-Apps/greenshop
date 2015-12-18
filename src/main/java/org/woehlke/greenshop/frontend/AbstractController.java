@@ -12,18 +12,18 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.woehlke.greenshop.cart.model.TransientBasket;
-import org.woehlke.greenshop.catalog.CatalogService;
-import org.woehlke.greenshop.catalog.entities.Language;
-import org.woehlke.greenshop.catalog.entities.ProductDescription;
-import org.woehlke.greenshop.catalog.entities.ReviewDescription;
-import org.woehlke.greenshop.catalog.model.CategoryTree;
-import org.woehlke.greenshop.catalog.model.Manufacturers;
-import org.woehlke.greenshop.catalog.model.ShareProductBean;
-import org.woehlke.greenshop.catalog.model.SpecialProduct;
-import org.woehlke.greenshop.catalog.service.*;
-import org.woehlke.greenshop.customer.CustomerService;
-import org.woehlke.greenshop.customer.entities.Customer;
+import org.woehlke.greenshop.oodm.cart.model.TransientBasket;
+import org.woehlke.greenshop.oodm.catalog.CatalogService;
+import org.woehlke.greenshop.oodm.catalog.entities.Language;
+import org.woehlke.greenshop.oodm.catalog.entities.ProductDescription;
+import org.woehlke.greenshop.oodm.catalog.entities.ReviewDescription;
+import org.woehlke.greenshop.oodm.catalog.model.CategoryTree;
+import org.woehlke.greenshop.oodm.catalog.model.Manufacturers;
+import org.woehlke.greenshop.oodm.catalog.model.ShareProductBean;
+import org.woehlke.greenshop.oodm.catalog.model.SpecialProduct;
+import org.woehlke.greenshop.oodm.catalog.service.*;
+import org.woehlke.greenshop.oodm.customer.CustomerService;
+import org.woehlke.greenshop.oodm.customer.entities.Customer;
 
 public abstract class AbstractController {
 

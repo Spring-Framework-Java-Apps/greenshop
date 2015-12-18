@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.backend.AdminMenuCategory;
-import org.woehlke.greenshop.admin.entities.Administrator;
-import org.woehlke.greenshop.admin.service.AdministratorService;
+import org.woehlke.greenshop.oodm.admin.entities.Administrator;
+import org.woehlke.greenshop.oodm.admin.service.AdministratorService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

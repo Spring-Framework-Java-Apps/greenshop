@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.backend.AdminMenuCategory;
-import org.woehlke.greenshop.catalog.entities.*;
-import org.woehlke.greenshop.catalog.model.*;
-import org.woehlke.greenshop.catalog.service.LanguageService;
-import org.woehlke.greenshop.catalog.service.SpecialService;
+import org.woehlke.greenshop.oodm.catalog.entities.*;
+import org.woehlke.greenshop.oodm.catalog.model.*;
+import org.woehlke.greenshop.oodm.catalog.service.LanguageService;
+import org.woehlke.greenshop.oodm.catalog.service.SpecialService;
 
 import javax.inject.Inject;
 import java.util.Date;

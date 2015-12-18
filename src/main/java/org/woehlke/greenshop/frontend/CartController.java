@@ -17,18 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.woehlke.greenshop.cart.CartService;
-import org.woehlke.greenshop.cart.model.TransientBasket;
-import org.woehlke.greenshop.catalog.entities.Language;
-import org.woehlke.greenshop.catalog.entities.ReviewDescription;
-import org.woehlke.greenshop.catalog.model.CategoryTree;
-import org.woehlke.greenshop.catalog.model.Manufacturers;
-import org.woehlke.greenshop.catalog.model.ProductAttributes;
-import org.woehlke.greenshop.catalog.model.SpecialProduct;
-import org.woehlke.greenshop.catalog.service.LanguageService;
-import org.woehlke.greenshop.catalog.service.ManufacturerService;
-import org.woehlke.greenshop.catalog.service.ReviewService;
-import org.woehlke.greenshop.catalog.service.SpecialService;
+import org.woehlke.greenshop.oodm.cart.CartService;
+import org.woehlke.greenshop.oodm.cart.model.TransientBasket;
+import org.woehlke.greenshop.oodm.catalog.entities.Language;
+import org.woehlke.greenshop.oodm.catalog.entities.ReviewDescription;
+import org.woehlke.greenshop.oodm.catalog.model.CategoryTree;
+import org.woehlke.greenshop.oodm.catalog.model.Manufacturers;
+import org.woehlke.greenshop.oodm.catalog.model.ProductAttributes;
+import org.woehlke.greenshop.oodm.catalog.model.SpecialProduct;
+import org.woehlke.greenshop.oodm.catalog.service.LanguageService;
+import org.woehlke.greenshop.oodm.catalog.service.ManufacturerService;
+import org.woehlke.greenshop.oodm.catalog.service.ReviewService;
+import org.woehlke.greenshop.oodm.catalog.service.SpecialService;
 
 @Controller
 @SessionAttributes({"transientBasket"})

@@ -11,12 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.woehlke.greenshop.backend.AdminMenuCategory;
-import org.woehlke.greenshop.admin.entities.TaxClass;
-import org.woehlke.greenshop.admin.entities.TaxRate;
-import org.woehlke.greenshop.admin.entities.TaxZone;
-import org.woehlke.greenshop.admin.service.TaxClassService;
-import org.woehlke.greenshop.admin.service.TaxRateService;
-import org.woehlke.greenshop.admin.service.TaxZoneService;
+import org.woehlke.greenshop.oodm.admin.entities.TaxClass;
+import org.woehlke.greenshop.oodm.admin.entities.TaxRate;
+import org.woehlke.greenshop.oodm.admin.entities.TaxZone;
+import org.woehlke.greenshop.oodm.admin.service.TaxClassService;
+import org.woehlke.greenshop.oodm.admin.service.TaxRateService;
+import org.woehlke.greenshop.oodm.admin.service.TaxZoneService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

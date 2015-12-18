@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.woehlke.greenshop.backend.AdminMenuCategory;
-import org.woehlke.greenshop.customer.CustomerService;
-import org.woehlke.greenshop.customer.model.CustomerBean;
+import org.woehlke.greenshop.oodm.customer.CustomerService;
+import org.woehlke.greenshop.oodm.customer.model.CustomerBean;
 
 import javax.inject.Inject;
 import java.util.List;

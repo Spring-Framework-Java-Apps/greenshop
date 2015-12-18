@@ -19,10 +19,10 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.woehlke.greenshop.customer.service.CountryService;
-import org.woehlke.greenshop.customer.CustomerService;
-import org.woehlke.greenshop.customer.entities.Country;
-import org.woehlke.greenshop.customer.model.CreateNewCustomerFormBean;
+import org.woehlke.greenshop.oodm.customer.service.CountryService;
+import org.woehlke.greenshop.oodm.customer.CustomerService;
+import org.woehlke.greenshop.oodm.customer.entities.Country;
+import org.woehlke.greenshop.oodm.customer.model.CreateNewCustomerFormBean;
 
 @Controller
 @SessionAttributes({"transientBasket"})
