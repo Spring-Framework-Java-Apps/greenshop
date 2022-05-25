@@ -10,7 +10,7 @@
 		<java-version>1.8</java-version>
 		<org.springframework-version>4.2.3.RELEASE</org.springframework-version>
 		<spring.integration.version>4.2.3.RELEASE</spring.integration.version>
-		<spring.security.version>4.0.3.RELEASE</spring.security.version>
+		<spring.security.version>5.5.7</spring.security.version>
 		<org.aspectj-version>1.6.12</org.aspectj-version>
 		<org.slf4j-version>1.7.6</org.slf4j-version>
 		<maven.scm.version>1.9.4</maven.scm.version>
