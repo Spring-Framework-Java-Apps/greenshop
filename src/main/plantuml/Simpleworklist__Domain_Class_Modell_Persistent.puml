@@ -7,499 +7,458 @@ left to right direction
 'top to bottom direction
 
 scale 1200 width
+
 package org.woehlke.greenshop.oodm {
 
-package org.woehlke.greenshop.oodm.admin.entities {
+    package org.woehlke.greenshop.oodm.admin.entities {
 
-  entity Administrator {
-       - String nameDe
-       - String nameEn
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
+          entity Administrator {
+               - String nameDe
+               - String nameEn
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+          }
+          entity TaxClass {
+              - String name
+              - String description
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+          }
+          entity TaxRate {
+              - String name
+              - String description
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+          }
+          entity TaxZone {
+             - String messageText
+             - Boolean readByReceiver
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+          }
+          entity TaxZone2Zone {
+              - String userEmail
+              - String userPassword
+              - String userFullname
+              - Language defaultLanguage
+              - Date lastLoginTimestamp
+              - Boolean accountNonExpired
+              - Boolean accountNonLocked
+              - Boolean credentialsNonExpired
+              - Boolean enabled
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+          }
+    }
 
-  entity TaxClass {
-      - String name
-      - String description
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
+    package org.woehlke.greenshop.oodm.cart.entities {
 
-  entity TaxRate {
-      - String name
-      - String description
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
+          entity CustomersBasket {
+              - String userPassword
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+          }
+          entity CustomersBasketAttribute {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+          }
+    }
 
-  entity TaxZone {
-     - String messageText
-     - Boolean readByReceiver
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
+    package org.woehlke.greenshop.oodm.catalog.entities {
 
-  entity TaxZone2Zone {
-      - String userEmail
-      - String userPassword
-      - String userFullname
-      - Language defaultLanguage
-      - Date lastLoginTimestamp
-      - Boolean accountNonExpired
-      - Boolean accountNonLocked
-      - Boolean credentialsNonExpired
-      - Boolean enabled
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
+         entity Category {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity CategoryDescription {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity CategoryDescriptionId {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity Language {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity Manufacturer {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ManufacturerInfo {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ManufacturerInfoId {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity Product {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductAttribute {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductDescription {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductDescriptionId {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductImage {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductOption {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductOptionId {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductOptionValue {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductOptionValue2ProductOption {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductOptionValueId {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity Review {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ReviewDescription {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ReviewDescriptionId {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity Special {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+    }
 
-}
+    package org.woehlke.greenshop.oodm.checkout.entities {
 
-package org.woehlke.greenshop.oodm.cart.entities {
+         entity Order {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity OrderProduct {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity OrderProductAttribute {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity OrderStatus {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity OrderStatusHistory {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity OrderStatusId {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity OrderTotal {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+    }
 
-  entity CustomersBasket {
-      - String userPassword
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
+    package org.woehlke.greenshop.oodm.customer.entities {
 
-  entity CustomersBasketAttribute {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
-}
-
-package org.woehlke.greenshop.oodm.catalog.entities {
-
- entity Category {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity CategoryDescription {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity CategoryDescriptionId {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity Language {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity Manufacturer {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ManufacturerInfo {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ManufacturerInfoId {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity Product {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductAttribute {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductDescription {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductDescriptionId {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductImage {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductOption {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductOptionId {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductOptionValue {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductOptionValue2ProductOption {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductOptionValueId {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity Review {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ReviewDescription {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ReviewDescriptionId {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity Special {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-}
-
-package org.woehlke.greenshop.oodm.checkout.entities {
-
- entity Order {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity OrderProduct {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity OrderProductAttribute {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity OrderStatus {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity OrderStatusHistory {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity OrderStatusId {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity OrderTotal {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-}
-
-package org.woehlke.greenshop.oodm.customer.entities {
-
- entity AddressBook {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity AddressFormat {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity Country {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity Customer {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity CustomerInfo {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductNotification {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity ProductNotificationId {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
- entity Zone {
-      - String email
-      - String token
-      - Integer numberOfRetries
-      list()
-      search()
-      addNew()
-      edit()
-      delete()
-  }
-
-}
-
+         entity AddressBook {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity AddressFormat {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity Country {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity Customer {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity CustomerInfo {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductNotification {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity ProductNotificationId {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+         }
+         entity Zone {
+              - String email
+              - String token
+              - Integer numberOfRetries
+              list()
+              search()
+              addNew()
+              edit()
+              delete()
+        }
+    }
 }
 
 @enduml
