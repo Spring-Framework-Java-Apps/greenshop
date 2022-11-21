@@ -13,12 +13,8 @@
 	</parent>
 
 	<name>greenshop</name>
-	<url>http://shadowfax.fritz.box/p/greenshop</url>
-
-	<organization>
-		<name>Thomas Woehlke</name>
-		<url>http://thomas-woehlke.blogspot.de</url>
-	</organization>
+	<description>Mogration of PHP based oscommerce 2.x ecommerce application tp Spring Boot Java MVC Framework</description>
+	<url>https://homepage.ruhr-uni-bochum.de/Thomas.Woehlke/java/greenshop</url>
 	<inceptionYear>2012</inceptionYear>
 
 	<scm>
@@ -27,27 +23,171 @@
 		<developerConnection>scm:svn:https://github.com/phasenraum2010/greenshop.git</developerConnection>
 	</scm>
 
+	<organization>
+		<name>BloodMoney App</name>
+		<url>https://github.com/BloodMoneyApp/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Thomas Wöhlke</name>
+			<email>github@woehlke.org</email>
+			<url>https://github.com/thomaswoehlke/</url>
+		</developer>
+	</developers>
+
 	<issueManagement>
-		<url>http://shadowfax.fritz.box/trac/spring-social/report/3</url>
-		<system>Trac</system>
+		<url>https://github.com/Spring-Framework-Java-Apps/greenshop/issues</url>
+		<system>Github</system>
 	</issueManagement>
 
 	<distributionManagement>
-		<!-- <repository> <id>nexus</id> <name>Nexus Service on Developer Machine</name>
-			<url>http://localhost:8081/nexus/content/groups/public/</url> </repository>
-			<snapshotRepository> <id>nexus</id> <name>Nexus Service on Developer Machine</name>
-			<url>http://localhost:8081/nexus/content/groups/public/</url> </snapshotRepository> -->
 		<site>
-			<id>greenshop.shadowfax.fritz.box</id>
-			<url>file:///opt/local/apache2/htdocs/p/greenshop</url>
+			<id>bloodmoney.public_html</id>
+			<url>file://${user.home}/public_html/java/greenshop</url>
 		</site>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>tw-thinkpad-snapshots</name>
+			<url>file://${user.home}/public_html/java/libs-snapshot-local</url>
+		</snapshotRepository>
+		<repository>
+			<id>central</id>
+			<name>tw-thinkpad-releases</name>
+			<url>file://${user.home}/public_html/java/libs-release-local</url>
+		</repository>
 	</distributionManagement>
 
 	<properties>
-		<java-version>11</java-version>
-		<maven.scm.version>1.13.0</maven.scm.version>
+		<version.java>11</version.java>
         <encoding>UTF-8</encoding>
+
+		<!-- SCM and Releasing -->
+		<version.org.apache.maven.scm>1.13.0</version.org.apache.maven.scm>
+		<version.maven-release-plugin>3.0.0-M6</version.maven-release-plugin>
+
+		<!-- UML -->
+		<version.plantuml-maven-plugin>1.5.2</version.plantuml-maven-plugin>
+		<version.net.sourceforge.plantuml>1.2022.12</version.net.sourceforge.plantuml>
+
+		<version.maven-invoker-plugin>3.3.0</version.maven-invoker-plugin>
+		<version.maven-clean-plugin>3.2.0</version.maven-clean-plugin>
+		<version.maven-dependency-plugin>3.3.0</version.maven-dependency-plugin>
+		<version.maven-compiler-plugin>3.10.1</version.maven-compiler-plugin>
+		<version.maven-install-plugin>3.0.1</version.maven-install-plugin>
+		<version.maven-help-plugin>3.3.0</version.maven-help-plugin>
+		<version.maven-deploy-plugin>3.0.0</version.maven-deploy-plugin>
+		<version.maven-javadoc-plugin>3.4.1</version.maven-javadoc-plugin>
+		<version.maven-source-plugin>3.2.1</version.maven-source-plugin>
+		<version.maven-surefire-plugin>3.0.0-M7</version.maven-surefire-plugin>
+		<version.maven-failsafe-plugin>3.0.0-M7</version.maven-failsafe-plugin>
+		<version.maven-site-plugin>3.12.1</version.maven-site-plugin>
+		<version.maven-project-info-reports-plugin>3.4.1</version.maven-project-info-reports-plugin>
+		<version.maven-checkstyle-plugin>3.2.0</version.maven-checkstyle-plugin>
+		<version.maven-jxr-plugin>3.3.0</version.maven-jxr-plugin>
+		<version.maven-pmd-plugin>3.19.0</version.maven-pmd-plugin>
+		<version.spotbugs-maven-plugin>4.7.3.0</version.spotbugs-maven-plugin>
+		<version.maven-surefire-report-plugin>3.0.0-M7</version.maven-surefire-report-plugin>
+		<version.asciidoctor-maven-plugin>2.2.2</version.asciidoctor-maven-plugin>
+		<version.liquibase-maven-plugin>4.17.2</version.liquibase-maven-plugin>
+		<version.doxia-module-markdown>1.11.1</version.doxia-module-markdown>
+		<version.maven-enforcer-plugin>3.1.0</version.maven-enforcer-plugin>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Central</name>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>sonatype-releases</id>
+			<name>Sonatype Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>apache-releases</id>
+			<name>Apache Releases</name>
+			<url>https://repository.apache.org/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>atlassian-public</id>
+			<name>Atlassian Repository</name>
+			<url>https://maven.atlassian.com/content/repositories/atlassian-public/</url>
+		</repository>
+		<repository>
+			<id>jboss-releases</id>
+			<name>JBoss Releases Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>jboss-ea</id>
+			<name>JBossEA Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/ea/</url>
+		</repository>
+		<repository>
+			<id>wso2-public</id>
+			<name>WSO2 Public Repository</name>
+			<url>https://maven.wso2.org/nexus/content/repositories/public/</url>
+		</repository>
+		<repository>
+			<id>adobe-public</id>
+			<name>AdobePublic Repository</name>
+			<url>https://repo.adobe.com/nexus/content/repositories/public/</url>
+		</repository>
+		<repository>
+			<id>atlassian-3rdparty</id>
+			<name>Atlassian 3rd-P Old Repository</name>
+			<url>https://packages.atlassian.com/3rdparty/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Central</name>
+			<url>https://repo1.maven.org/maven2/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>sonatype-releases</id>
+			<name>Sonatype Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>apache-releases</id>
+			<name>Apache Releases</name>
+			<url>https://repository.apache.org/content/repositories/releases/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>atlassian-public</id>
+			<name>Atlassian Repository</name>
+			<url>https://maven.atlassian.com/content/repositories/atlassian-public/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>jboss-releases</id>
+			<name>JBoss Releases Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>jboss-ea</id>
+			<name>JBossEA Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/ea/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>wso2-public</id>
+			<name>WSO2 Public Repository</name>
+			<url>https://maven.wso2.org/nexus/content/repositories/public/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>adobe-public</id>
+			<name>AdobePublic Repository</name>
+			<url>https://repo.adobe.com/nexus/content/repositories/public/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>atlassian-3rdparty</id>
+			<name>Atlassian 3rd-P Old Repository</name>
+			<url>https://packages.atlassian.com/3rdparty/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencyManagement>
 
@@ -191,7 +331,9 @@
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
+			<!--
 			<version>1.1.0.Final</version>
+			-->
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -253,7 +395,9 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<!--
 			<version>4.11</version>
+			-->
 			<scope>test</scope>
 		</dependency>
 
@@ -392,6 +536,50 @@
   			<artifactId>jsoup</artifactId>
   			<version>1.7.1</version>
 		</dependency>
+
+		<!-- SCM -->
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-providers-standard</artifactId>
+			<version>${version.org.apache.maven.scm}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-svnexe</artifactId>
+			<version>${version.org.apache.maven.scm}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-svn-commons</artifactId>
+			<version>${version.org.apache.maven.scm}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-gitexe</artifactId>
+			<version>${version.org.apache.maven.scm}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-provider-git-commons</artifactId>
+			<version>${version.org.apache.maven.scm}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-manager-plexus</artifactId>
+			<version>${version.org.apache.maven.scm}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.scm</groupId>
+			<artifactId>maven-scm-client</artifactId>
+			<version>${version.org.apache.maven.scm}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -408,93 +596,11 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<mainClass>org.test.int1.Main</mainClass>
-				</configuration>
-			</plugin>
 
-			<!-- Fuer Continous-Integration et al.: Auschecken von Subversion mittels 
-				Maven. http://maven.apache.org/scm/ -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-scm-plugin</artifactId>
-				<version>${maven.scm.version}</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-provider-gitexe</artifactId>
-				<version>${maven.scm.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm</artifactId>
-				<version>${maven.scm.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-providers</artifactId>
-				<version>${maven.scm.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-providers-git</artifactId>
-				<version>${maven.scm.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-provider-git-commons</artifactId>
-				<version>${maven.scm.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-manager-plexus</artifactId>
-				<version>${maven.scm.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-managers</artifactId>
-				<version>${maven.scm.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-client</artifactId>
-				<version>${maven.scm.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
+				<version>${version.org.apache.maven.scm}</version>
 			</plugin>
 
 			<plugin>
