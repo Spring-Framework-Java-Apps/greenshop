@@ -70,6 +70,7 @@
 		<maven.compiler.target>${version.java}</maven.compiler.target>
 		<spring-boot.repackage.layout>WAR</spring-boot.repackage.layout>
 		<version.spring-boot-maven-plugin>${project.parent.version}</version.spring-boot-maven-plugin>
+		<lombok.version>1.18.24</lombok.version>
 		<version.pmd>6.49.0</version.pmd>
 
 		<skipTests>true</skipTests>
