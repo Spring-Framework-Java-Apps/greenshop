@@ -15,10 +15,10 @@
 	</parent>
 
 	<scm>
-		<url>https://github.com/Spring-Framework-Java-Apps/greenshop.git</url>
 		<connection>scm:git:git@github.com:Spring-Framework-Java-Apps/greenshop.git</connection>
-		<developerConnection>scm:git:git@github.com:Spring-Framework-Java-Apps/greenshop/tree/${project.scm.tag}</developerConnection>
-		<tag>v0.6.0.0</tag>
+		<developerConnection>scm:git:git@github.com:Spring-Framework-Java-Apps/greenshop.git</developerConnection>
+		<url>https://github.com/Spring-Framework-Java-Apps/greenshop/tree/${project.scm.tag}</url>
+		<tag>HEAD</tag>
 	</scm>
 
 	<name>greenshop</name>
