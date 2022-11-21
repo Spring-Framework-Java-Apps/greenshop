@@ -43,14 +43,18 @@
         <class>org.woehlke.greenshop.oodm.admin.entities.TaxZone2Zone</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-
-            <!--<property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
-            <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+                <!--
+                       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+                       <property name="hibernate.hbm2ddl.auto" value="update"/>
+                -->
             <property name="hibernate.hbm2ddl.auto" value="validate"/>
+
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.generate_statistics" value="false"/>
             <property name="jpa.showSql" value="true"/>
+            <!--
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            -->
             <property name="jpa.database" value="MYSQL"/>
 
         </properties>
