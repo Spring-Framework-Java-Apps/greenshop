@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -72,7 +74,8 @@ public class Product {
 	@Column(name="products_ordered",columnDefinition = "INT(11)")
 	private long ordered;
 
-	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany( cascade = CascadeType.REFRESH)
 	@JoinTable(name = "products_to_categories",
 		joinColumns = @JoinColumn(name = "products_id"),
 		inverseJoinColumns = @JoinColumn(name = "categories_id"))

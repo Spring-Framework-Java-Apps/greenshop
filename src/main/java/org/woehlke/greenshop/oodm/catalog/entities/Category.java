@@ -1,5 +1,8 @@
 package org.woehlke.greenshop.oodm.catalog.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.util.Date;
 import java.util.List;
 
@@ -39,8 +42,9 @@ public class Category {
 	@Temporal(value=TemporalType.TIMESTAMP)
 	@Column(name="last_modified")
 	private Date lastModified;
-	
-	@ManyToMany(fetch=FetchType.EAGER, mappedBy="categories")
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(mappedBy="categories")
 	private List<Product> products;
 
 	public Long getId() {

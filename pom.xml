@@ -12,7 +12,6 @@
 		<version>2.7.5</version>
 	</parent>
 
-	<packaging>war</packaging>
 	<name>greenshop</name>
 	<url>http://shadowfax.fritz.box/p/greenshop</url>
 
@@ -46,7 +45,6 @@
 
 	<properties>
 		<java-version>11</java-version>
-		<org.slf4j-version>1.7.6</org.slf4j-version>
 		<maven.scm.version>1.13.0</maven.scm.version>
         <encoding>UTF-8</encoding>
 	</properties>
@@ -164,50 +162,6 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 		</dependency>
-
-		<!-- Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
-			<scope>runtime</scope>
-		</dependency>
-
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -220,17 +174,11 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<!--
-			<version>4.3.2.Final</version>
-			-->
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<!--
-			<version>4.3.2.Final</version>
-			-->
 		</dependency>
 
 		<dependency>
@@ -259,58 +207,38 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<!--
-			<version>${org.springframework-version}</version>
-			-->
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<!--
-			<version>${org.springframework-version}</version>
-			-->
-		</dependency>
+		<!--
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.3</version>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<!--
-			<version>1.7.2.RELEASE</version>
-			-->
 		</dependency>
 
 		<!-- Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<!--
-			<version>${spring.security.version}</version>
-			-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<!--
-			<version>${spring.security.version}</version>
-			-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<!--
-			<version>${spring.security.version}</version>
-			-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<!--
-			<version>${spring.security.version}</version>
-			-->
 		</dependency>
 
 		<!-- Mail -->
@@ -362,17 +290,11 @@
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-core</artifactId>
-			<!--
-			<version>${spring.integration.version}</version>
-			-->
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-mongodb</artifactId>
-			<!--
-       		<version>${spring.integration.version}</version>
-			-->
     </dependency>
 
     <dependency>

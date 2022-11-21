@@ -12,7 +12,7 @@ server:
       enabled: true
 spring:
   config:
-    name: bloodmoney
+    name: greenshop
   liquibase:
     enabled: false
   devtools:
@@ -25,24 +25,24 @@ spring:
     url: jdbc:mysql://localhost:3306/oscommerce2
     username: oscommerce2
     password: oscommerce2pwd
-    driver-class-name: com.mysql.jdbc.Driver
-  jta:
-    atomikos:
-      connectionfactory:
-        xa-connection-factory-class-name: com.mysql.jdbc.JDBC4Connection
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #jta:
+  #  atomikos:
+  #    connectionfactory:
+  #      xa-connection-factory-class-name: com.mysql.jdbc.JDBC4Connection
   jpa:
     open-in-view: true
     show-sql: true
-    database-platform: MYSQL
+    database-platform: MARIADB
     hibernate:
       #ddl-auto: create-drop update
-      ddl-auto: update
+      ddl-auto: validate
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        dialect: org.hibernate.dialect.MariaDB106Dialect
         temp:
           use_jdbc_metadata_defaults: false
         generate_statistics: true
@@ -59,7 +59,7 @@ spring:
     allow-bean-definition-overriding: true
   sql:
     init:
-      platform: POSTGRESQL
+      platform: MYSQL
       mode: ALWAYS
 org:
   woehlke:
@@ -76,7 +76,7 @@ org:
         webAddResourceHandlers:
           - "webjars/"
         webAddResourceHandlersStatic:
-          - "bloodmoney/"
+          - "greenshop/"
           - "icon/"
           - "languages/"
           - "test/"
@@ -91,8 +91,8 @@ org:
         invalidate-http-session: true
         antMatchersFullyAuthenticated: "/**"
         antMatchersPermitAll:
-          - "/bloodmoney"
-          - "/bloodmoney/**"
+          - "/greenshop"
+          - "/greenshop/**"
           - "/icon/**"
           - "/icon"
           - "/languages"
@@ -130,7 +130,7 @@ logging:
       mysql: WARN
       greenshop:
         java:
-          bloodmoney: INFO
+          greenshop: INFO
 debug: false
 ---
 spring:
@@ -161,14 +161,14 @@ logging:
       postgresql: WARN
       woehlke:
         java:
-          bloodmoney: INFO
+          greenshop: INFO
 debug: false
 ---
 spring:
   profiles:
     active: default
   datasource:
-    url: jdbc:postgresql://localhost:5432/bloodmoney
+    url: jdbc:mysql://localhost:3306/oscommerce2
   jta:
     atomikos:
       properties:
@@ -193,7 +193,6 @@ logging:
           internal: WARN
       ch:
         qos: WARN
-      postgresql: WARN
       woehlke:
         java:
           bloodmoney: INFO
