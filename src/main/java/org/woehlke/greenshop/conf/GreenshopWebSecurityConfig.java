@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.woehlke.greenshop.oodm.admin.service.AdministratorService;
 
 
 @SuppressWarnings("deprecation")
@@ -34,7 +33,7 @@ public class GreenshopWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public GreenshopWebSecurityConfig(
             AuthenticationManagerBuilder auth,
-            AdministratorService administratorService,
+            UserDetailsService administratorService,
             GreenshopProperties greenshopProperties
     ) {
         this.authenticationManagerBuilder = auth;

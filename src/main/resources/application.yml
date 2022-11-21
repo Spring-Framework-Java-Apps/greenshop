@@ -33,7 +33,7 @@ spring:
   jpa:
     open-in-view: true
     show-sql: true
-    database-platform: MARIADB
+    database-platform: MYSQL
     hibernate:
       #ddl-auto: create-drop update
       ddl-auto: validate
@@ -66,10 +66,10 @@ org:
     greenshop:
       testDataHowManyTestData: 10
       devTesting: true
-      #userConfig:
-        #userEmail: ${GREENSHOP_USER_EMAIL}
-        #userPassword: ${GREENSHOP_USER_PASSWORD}
-        #userFullname: ${GREENSHOP_USER_FULLNAME}
+      userConfig:
+        userEmail: 'thomas.woehlke@gmail.com'
+        userPassword: 'UHkIifHN3iXbZtoHhiPvPzeKFBpthm0eBXdvm+Q3xNrWyXRheGDLCw=='
+        userFullname: 'Thomas Wöhlke'
       webConfig:
         exportFilename: "measurements.csv"
         exportFilenameSeparator: ";"
@@ -113,9 +113,9 @@ org:
           - "/fehler*"
         usernameParameter: "userEmail"
         passwordParameter: "userPassword"
-        #secret: ${GREENSHOP_USER_SECRET}
-        #iterations: ${GREENSHO_USER_ITERATIONS}
-        #hashWidth: ${GREENSHO_USER_HASH_WIDTH}
+        secret: '25D8484AB208F08C59FFAFE57DB9FF87'
+        iterations: 4096
+        hashWidth: 256
 logging:
   level:
     root: INFO
