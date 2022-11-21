@@ -33,13 +33,13 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Override
     public Administrator findAdministratorById(long administratorId) {
-        return administratorRepository.findOne(administratorId);
+        return administratorRepository.getOne(administratorId);
     }
 
     @Override
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void update(Administrator thisAdministrator) {
-        Administrator original = administratorRepository.findOne(thisAdministrator.getId());
+        Administrator original = administratorRepository.getOne(thisAdministrator.getId());
         if(original.getUserPassword().compareTo(thisAdministrator.getUserPassword())!=0){
             thisAdministrator.setUserPassword(encoder.encode(thisAdministrator.getUserPassword()));
         }

@@ -24,7 +24,7 @@ public class TaxClassServiceImpl implements TaxClassService {
 
     @Override
     public TaxClass findById(long taxClassId) {
-        return taxClassRepository.findOne(taxClassId);
+        return taxClassRepository.getOne(taxClassId);
     }
 
     @Override

@@ -39,13 +39,13 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer getManufacturerById(long manufacturerId) {
-        return manufacturerRepository.findOne(manufacturerId);
+        return manufacturerRepository.getOne(manufacturerId);
     }
 
     //TODO: doppelte entfernen
     @Override
     public Manufacturers findManufacturers() {
-        Sort sort = new Sort(Sort.Direction.ASC,"name");
+        Sort sort = Sort.by(Sort.Direction.ASC,"name");
         List<Manufacturer> manufacturers = manufacturerRepository.findAll(sort);
         Manufacturers m = new Manufacturers();
         m.setManufacturers(manufacturers);
@@ -55,16 +55,16 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     //TODO: doppelte entfernen
     @Override
     public Manufacturer findManufacturerById(Long manufacturerId) {
-        return manufacturerRepository.findOne(manufacturerId);
+        return manufacturerRepository.getOne(manufacturerId);
     }
 
     @Override
     public ManufacturerInfo findManufacturerInfo(long manufacturerId, Language language) {
-        Manufacturer manufacturer = manufacturerRepository.findOne(manufacturerId);
+        Manufacturer manufacturer = manufacturerRepository.getOne(manufacturerId);
         ManufacturerInfoId manufacturerInfoId = new ManufacturerInfoId();
         manufacturerInfoId.setLanguage(language);
         manufacturerInfoId.setManufacturer(manufacturer);
-        return manufacturerInfoRepository.findOne(manufacturerInfoId);
+        return manufacturerInfoRepository.getOne(manufacturerInfoId);
     }
 
     @Override

@@ -210,8 +210,8 @@ public class CategoryServiceImpl implements CategoryService {
             long categoryId, long manufacturerId, Language language) {
         ProductsByCategory productsByCategory = new ProductsByCategory();
         productsByCategory.setManufacturerId(manufacturerId);
-        Category category = categoryRepository.findOne(categoryId);
-        Manufacturer manufacturer = manufacturerRepository.findOne(manufacturerId);
+        Category category = categoryRepository.getOne(categoryId);
+        Manufacturer manufacturer = manufacturerRepository.getOne(manufacturerId);
         List<SpecialProduct> products = new ArrayList<SpecialProduct>();
         List<ProductDescription> productDescriptions=productDescriptionRepositoryDao.findByCategoryAndManufacturer(category,manufacturer,language);
         for(ProductDescription productDescription:productDescriptions){
@@ -232,7 +232,7 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryDescriptionId categoryDescriptionId = new CategoryDescriptionId();
         categoryDescriptionId.setLanguage(language);
         categoryDescriptionId.setCategory(category);
-        CategoryDescription thisCategory = categoryDescriptionRepository.findOne(categoryDescriptionId);
+        CategoryDescription thisCategory = categoryDescriptionRepository.getOne(categoryDescriptionId);
         productsByCategory.setThisCategory(thisCategory);
         List<CategoryDescription> childCategories = categoryDescriptionRepositoryDao.findCategoriesByParentId(categoryId, language);
         productsByCategory.setChildCategories(childCategories);
@@ -242,7 +242,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public ProductsByCategory getProductsByCategory(long categoryId,Language language){
         ProductsByCategory productsByCategory = new ProductsByCategory();
-        Category category = categoryRepository.findOne(categoryId);
+        Category category = categoryRepository.getOne(categoryId);
         List<SpecialProduct> products = new ArrayList<SpecialProduct>();
         List<ProductDescription> productDescriptions=productDescriptionRepositoryDao.findByCategory(category, language);
         for(ProductDescription productDescription:productDescriptions){
@@ -263,7 +263,7 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryDescriptionId categoryDescriptionId = new CategoryDescriptionId();
         categoryDescriptionId.setLanguage(language);
         categoryDescriptionId.setCategory(category);
-        CategoryDescription thisCategory = categoryDescriptionRepository.findOne(categoryDescriptionId);
+        CategoryDescription thisCategory = categoryDescriptionRepository.getOne(categoryDescriptionId);
         productsByCategory.setThisCategory(thisCategory);
         List<CategoryDescription> childCategories = categoryDescriptionRepositoryDao.findCategoriesByParentId(categoryId, language);
         productsByCategory.setChildCategories(childCategories);

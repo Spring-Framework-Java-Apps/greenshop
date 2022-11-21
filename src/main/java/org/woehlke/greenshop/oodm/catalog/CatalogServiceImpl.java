@@ -55,11 +55,11 @@ public class CatalogServiceImpl implements CatalogService {
 			ProductOptionId oid = new ProductOptionId();
 			oid.setId(pa.getOptionId());
 			oid.setLanguage(language);
-			ProductOption po = productOptionRepository.findOne(oid);
+			ProductOption po = productOptionRepository.getOne(oid);
 			ProductOptionValueId povid = new ProductOptionValueId();
 			povid.setId(pa.getValueId());
 			povid.setLanguage(language);
-			ProductOptionValue pov = productOptionValueRepository.findOne(povid);
+			ProductOptionValue pov = productOptionValueRepository.getOne(povid);
 			ProductOptionAttribute poa = new ProductOptionAttribute();
 			poa.setProductAttribute(pa);
 			poa.setProductOption(po);

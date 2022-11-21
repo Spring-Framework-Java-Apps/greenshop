@@ -71,7 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void createNewCustomer(
 			CreateNewCustomerFormBean createNewCustomerFormBean) {
-		Country country = countryRepository.findOne(createNewCustomerFormBean.getCountry());
+		Country country = countryRepository.getOne(createNewCustomerFormBean.getCountry());
 		List<Zone> zones = zoneRepository.findByCountry(country);
 		AddressBook defaultAddress = createNewCustomerFormBean2AddressBook(createNewCustomerFormBean);
 		//set Customer and Zone to addressBook
@@ -132,7 +132,7 @@ public class CustomerServiceImpl implements CustomerService {
 		for(AddressBook a:addresses){
 			addressBookRepository.delete(a);
 		}
-		customerInfoRepository.delete(c.getId());
+		customerInfoRepository.deleteById(c.getId());
 		customerRepository.delete(c);
 	}
 
@@ -142,7 +142,7 @@ public class CustomerServiceImpl implements CustomerService {
 			throws UsernameNotFoundException {
 		Customer customer = customerRepository.findByEmailAddress(username);
 		if(customer == null) throw new UsernameNotFoundException(username);
-		CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+		CustomerInfo info = customerInfoRepository.getOne(customer.getId());
 		info.setLastLogin(new Date());
 		info.incNumberOfLogons();
 		customerInfoRepository.save(info);
@@ -152,7 +152,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void updateCustomer(Customer customer) {
-		CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+		CustomerInfo info = customerInfoRepository.getOne(customer.getId());
 		info.setAccountLastModified(new Date());
 		customerInfoRepository.save(info);
 		customer=customerRepository.save(customer);
@@ -165,7 +165,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public AddressBook findAddressById(long addressId) {
-		return addressBookRepository.findOne(addressId);
+		return addressBookRepository.getOne(addressId);
 	}
 
 
@@ -178,7 +178,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
 	public void deleteAddress(AddressBook customersAddress) {
-		addressBookRepository.delete(customersAddress.getId());	
+		addressBookRepository.deleteById(customersAddress.getId());
 	}
 
 	@Override
@@ -189,7 +189,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public CustomerInfo findCustomerInfoByCustomer(Customer customer) {
-		return customerInfoRepository.findOne(customer.getId());
+		return customerInfoRepository.getOne(customer.getId());
 	}
 
 	@Override
@@ -203,11 +203,11 @@ public class CustomerServiceImpl implements CustomerService {
 		List<ProductNotification> notifications = productNotificationDao.findAllProductNotificationsForCustomerId(customer.getId());
 		List<ProductNotificationBean> notificationBeans = new ArrayList<ProductNotificationBean>();
 		for(ProductNotification notification:notifications){
-			Product product = productRepository.findOne(notification.getId().getProductId());
+			Product product = productRepository.getOne(notification.getId().getProductId());
 			ProductDescriptionId id = new ProductDescriptionId();
 			id.setLanguage(language);
 			id.setProduct(product);
-			ProductDescription productDescription=productDescriptionRepository.findOne(id);
+			ProductDescription productDescription=productDescriptionRepository.getOne(id);
 			ProductNotificationBean bean = new ProductNotificationBean();
 			bean.setProductId(notification.getId().getProductId());
 			bean.setProductName(productDescription.getName());
@@ -222,14 +222,14 @@ public class CustomerServiceImpl implements CustomerService {
 		ProductNotificationId id = new ProductNotificationId();
 		id.setCustomerId(customer.getId());
 		id.setProductId(product.getId());
-		ProductNotification notification = productNotificationRepository.findOne(id);
+		ProductNotification notification = productNotificationRepository.getOne(id);
 		if (notification == null){
 			notification = new ProductNotification();
 			notification.setId(id);
 		}
 		notification.setDateAdded(new Date());
 		productNotificationRepository.save(notification);
-		CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+		CustomerInfo info = customerInfoRepository.getOne(customer.getId());
 		info.setAccountLastModified(new Date());
 		customerInfoRepository.save(info);
 	}
@@ -253,7 +253,7 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 		}
 		if(changed){
-			CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+			CustomerInfo info = customerInfoRepository.getOne(customer.getId());
 			info.setAccountLastModified(new Date());
 			customerInfoRepository.save(info);
 		}
@@ -268,7 +268,7 @@ public class CustomerServiceImpl implements CustomerService {
         for(Customer customer:customers){
             CustomerBean customerBean = new CustomerBean();
             customerBean.setCustomer(customer);
-            CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+            CustomerInfo info = customerInfoRepository.getOne(customer.getId());
             customerBean.setCustomerInfo(info);
             customerBeans.add(customerBean);
         }
@@ -282,10 +282,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerBean getCustomerById(long customerId) {
-        Customer customer = customerRepository.findOne(customerId);
+        Customer customer = customerRepository.getOne(customerId);
         CustomerBean customerBean = new CustomerBean();
         customerBean.setCustomer(customer);
-        CustomerInfo info = customerInfoRepository.findOne(customer.getId());
+        CustomerInfo info = customerInfoRepository.getOne(customer.getId());
         customerBean.setCustomerInfo(info);
         return customerBean;
     }

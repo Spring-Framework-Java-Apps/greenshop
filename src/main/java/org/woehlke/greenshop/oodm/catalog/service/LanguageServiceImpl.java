@@ -31,6 +31,6 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public Language findLanguageById(long languageId) {
-        return languageRepository.findOne(languageId);
+        return languageRepository.getOne(languageId);
     }
 }

@@ -47,12 +47,12 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public List<Country> findAllCountriesOrderByName() {
-        Sort sort = new Sort("name");
+        Sort sort = Sort.by("name");
         return countryRepository.findAll(sort);
     }
 
     @Override
     public Country findCountryById(long countryId) {
-        return countryRepository.findOne(countryId);
+        return countryRepository.getOne(countryId);
     }
 }

@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDescription> findProductsViewed(Language language) {
-        Sort sort = new Sort(Sort.Direction.DESC,"viewed");
+        Sort sort = Sort.by(Sort.Direction.DESC,"viewed");
         return productDescriptionRepository.findAll(sort);
     }
 
@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
             ProductDescriptionId id = new ProductDescriptionId();
             id.setProduct(product);
             id.setLanguage(language);
-            ProductDescription productDescription = productDescriptionRepository.findOne(id);
+            ProductDescription productDescription = productDescriptionRepository.getOne(id);
             productsByCategoryId.add(productDescription);
         }
         return productsByCategoryId;
@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void setProductActive(long productId) {
-        Product product = productRepository.findOne(productId);
+        Product product = productRepository.getOne(productId);
         product.setStatus(true);
         productRepository.save(product);
     }
@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void setProductInactive(long productId) {
-        Product product = productRepository.findOne(productId);
+        Product product = productRepository.getOne(productId);
         product.setStatus(false);
         productRepository.save(product);
     }
@@ -154,7 +154,7 @@ public class ProductServiceImpl implements ProductService {
             CategoryDescriptionId id = new CategoryDescriptionId();
             id.setCategory(category);
             id.setLanguage(language);
-            CategoryDescription cd = categoryDescriptionRepository.findOne(id);
+            CategoryDescription cd = categoryDescriptionRepository.getOne(id);
             categoriesOfProducts.add(cd);
         }
         productsByManufacturer.setCategoriesOfProducts(categoriesOfProducts);
@@ -164,7 +164,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductsByManufacturer findProductsByManufacturerAndCategory(
             Manufacturer manufacturer, long categoryId, Language language) {
-        Category thisCategory=categoryRepository.findOne(categoryId);
+        Category thisCategory=categoryRepository.getOne(categoryId);
         List<ProductDescription> products = productDescriptionRepositoryDao.findByCategoryAndManufacturer(thisCategory,manufacturer,language);
         ProductsByManufacturer productsByManufacturer = new ProductsByManufacturer();
         productsByManufacturer.setProducts(products);
@@ -182,7 +182,7 @@ public class ProductServiceImpl implements ProductService {
             CategoryDescriptionId id = new CategoryDescriptionId();
             id.setCategory(category);
             id.setLanguage(language);
-            CategoryDescription cd = categoryDescriptionRepository.findOne(id);
+            CategoryDescription cd = categoryDescriptionRepository.getOne(id);
             categoriesOfProducts.add(cd);
         }
         productsByManufacturer.setCategoriesOfProducts(categoriesOfProducts);

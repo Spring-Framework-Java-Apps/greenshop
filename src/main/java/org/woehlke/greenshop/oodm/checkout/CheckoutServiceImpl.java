@@ -209,8 +209,8 @@ public class CheckoutServiceImpl implements CheckoutService {
 		order.setDeliverySuburb(checkout.getShippingAddress().getSuburb());
 		order.setDeliveryCountry(checkout.getShippingAddress().getCountryName());
 		order.setCustomersAddressFormat(customer.getDefaultAddress().getCountry().getAddressFormat());
-		order.setBillingAddressFormat(countryRepository.findOne(checkout.getPaymentAddress().getCountryId()).getAddressFormat());
-		order.setDeliveryAddressFormat(countryRepository.findOne(checkout.getShippingAddress().getCountryId()).getAddressFormat());
+		order.setBillingAddressFormat(countryRepository.getOne(checkout.getPaymentAddress().getCountryId()).getAddressFormat());
+		order.setDeliveryAddressFormat(countryRepository.getOne(checkout.getShippingAddress().getCountryId()).getAddressFormat());
 	}
 	
 	

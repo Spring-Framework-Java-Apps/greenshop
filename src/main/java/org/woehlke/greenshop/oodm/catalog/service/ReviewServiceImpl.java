@@ -42,15 +42,15 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public ReviewProduct getReviewById(long reviewId, Language language) {
-        Review review = reviewRepository.findOne(reviewId);
+        Review review = reviewRepository.getOne(reviewId);
         ReviewDescriptionId reviewDescriptionId = new ReviewDescriptionId();
         reviewDescriptionId.setLanguage(language);
         reviewDescriptionId.setReview(review);
-        ReviewDescription reviewDescription = reviewDescriptionRepository.findOne(reviewDescriptionId);
+        ReviewDescription reviewDescription = reviewDescriptionRepository.getOne(reviewDescriptionId);
         ProductDescriptionId id = new ProductDescriptionId();
         id.setLanguage(language);
         id.setProduct(review.getProduct());
-        ProductDescription productDescription=productDescriptionRepository.findOne(id);
+        ProductDescription productDescription=productDescriptionRepository.getOne(id);
         ReviewProduct reviewProduct = new ReviewProduct();
         reviewProduct.setProduct(productDescription);
         reviewProduct.setReview(reviewDescription);
@@ -86,7 +86,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public ReviewDescription saveReview(WriteReviewBean writeReviewBean,
                                         Product product, Customer customer, Language language) {
-        language=languageRepository.findOne(language.getId());
+        language=languageRepository.getOne(language.getId());
         ReviewDescription reviewDescription = new ReviewDescription();
         Review review = new Review();
         if(customer==null){

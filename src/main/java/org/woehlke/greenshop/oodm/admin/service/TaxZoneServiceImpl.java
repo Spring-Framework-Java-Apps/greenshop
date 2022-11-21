@@ -36,16 +36,16 @@ public class TaxZoneServiceImpl implements TaxZoneService {
     @Override
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void deleteTaxZones(TaxZone thisTaxZone) {
-        TaxZone tz =taxZoneRepository.findOne(thisTaxZone.getId());
+        TaxZone tz =taxZoneRepository.getOne(thisTaxZone.getId());
         List<TaxZone2Zone> list = taxZone2ZoneRepository.findByTaxZone(tz);
-        taxZone2ZoneRepository.delete(list);
+        taxZone2ZoneRepository.deleteInBatch(list);
         taxZoneRepository.delete(tz);
     }
 
     @Override
     @Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW)
     public void updateTaxZone(TaxZone thisTaxZone) {
-        TaxZone tz =taxZoneRepository.findOne(thisTaxZone.getId());
+        TaxZone tz =taxZoneRepository.getOne(thisTaxZone.getId());
         tz.setLastModified(new Date());
         tz.setName(thisTaxZone.getName());
         tz.setDescription(thisTaxZone.getDescription());
@@ -64,6 +64,6 @@ public class TaxZoneServiceImpl implements TaxZoneService {
 
     @Override
     public TaxZone findTaxZoneById(long taxZoneId) {
-        return taxZoneRepository.findOne(taxZoneId);
+        return taxZoneRepository.getOne(taxZoneId);
     }
 }

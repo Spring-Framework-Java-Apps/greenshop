@@ -2,6 +2,7 @@ package org.woehlke.greenshop.oodm.checkout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -60,8 +61,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderStatus findOrderStatusById(OrderStatusId ordersStatusId) {
-        return orderStatusRepository.findOne(ordersStatusId);
+    public Optional<OrderStatus> findOrderStatusById(OrderStatusId ordersStatusId) {
+        return orderStatusRepository.findById(ordersStatusId);
     }
 
     @Override
@@ -78,8 +79,8 @@ public class OrderServiceImpl implements OrderService {
             OrderStatusId orderStatusId = new OrderStatusId();
             orderStatusId.setLanguage(language);
             orderStatusId.setId(myOrder.getOrdersStatus());
-            OrderStatus orderStatus=orderStatusRepository.findOne(orderStatusId);
-            bean.setOrderStatus(orderStatus);
+			Optional<OrderStatus> orderStatus=orderStatusRepository.findById(orderStatusId);
+            bean.setOrderStatus(orderStatus.get());
             bean.setPaymentMethod(myOrder.getPaymentMethod());
             orders.add(bean);
         }
@@ -88,7 +89,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderAdminBean findOrderById(long orderId, Language language) {
-        Order myOrder = orderRepository.findOne(orderId);
+		Optional<Order> myOrderOptional = orderRepository.findById(orderId);
+		Order myOrder = myOrderOptional.get();
         OrderAdminBean bean = new OrderAdminBean();
         bean.setOrderId(myOrder.getId());
         bean.setCustomerName(myOrder.getCustomersName());
@@ -98,7 +100,8 @@ public class OrderServiceImpl implements OrderService {
         OrderStatusId orderStatusId = new OrderStatusId();
         orderStatusId.setLanguage(language);
         orderStatusId.setId(myOrder.getOrdersStatus());
-        OrderStatus orderStatus=orderStatusRepository.findOne(orderStatusId);
+		Optional<OrderStatus> orderStatusOptional = orderStatusRepository.findById(orderStatusId);
+        OrderStatus orderStatus=orderStatusOptional.get();
         bean.setOrderStatus(orderStatus);
         bean.setPaymentMethod(myOrder.getPaymentMethod());
         return bean;
@@ -113,12 +116,14 @@ public class OrderServiceImpl implements OrderService {
 	public OrderHistoryDetailsBean findOrderDetailsById(long orderId, Language language) {
 		//Language language = catalogService.findLanguageByCode("en");
 		OrderHistoryDetailsBean o = new OrderHistoryDetailsBean();
-		Order order = orderRepository.findOne(orderId);
+		Optional<Order> orderOptional = orderRepository.findById(orderId);
+		Order order = orderOptional.get();
 		o.setOrder(order);
 		OrderStatusId id = new OrderStatusId();
 		id.setLanguage(language);
 		id.setId(order.getOrdersStatus());
-		OrderStatus orderStatus = orderStatusRepository.findOne(id);
+		Optional<OrderStatus> orderStatusOptional = orderStatusRepository.findById(id);
+		OrderStatus orderStatus = orderStatusOptional.get();
 		o.setOrderStatus(orderStatus);
 		List<OrderProduct> orderProducts = orderProductRepository.findByOrder(order);
 		o.setOrderProducts(orderProducts);
@@ -140,7 +145,8 @@ public class OrderServiceImpl implements OrderService {
 			OrderStatusId orderStatusId = new OrderStatusId();
 			orderStatusId.setLanguage(language);
 			orderStatusId.setId(order.getOrdersStatus());
-			OrderStatus orderStatus=orderStatusRepository.findOne(orderStatusId);
+			Optional<OrderStatus> orderStatusOptional = orderStatusRepository.findById(orderStatusId);
+			OrderStatus orderStatus = orderStatusOptional.get();
 			int quantityOfProducts = 0;
 			for(OrderProduct orderProduct:orderProducts){
 				quantityOfProducts += orderProduct.getProductsQuantity();

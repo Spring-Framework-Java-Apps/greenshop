@@ -56,7 +56,7 @@ public class ZoneServiceImpl implements ZoneService {
 
     @Override
     public Zone findById(long zoneId) {
-        return zoneRepository.findOne(zoneId);
+        return zoneRepository.getOne(zoneId);
     }
 
     @Override

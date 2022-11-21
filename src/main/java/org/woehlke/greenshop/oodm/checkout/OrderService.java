@@ -1,6 +1,7 @@
 package org.woehlke.greenshop.oodm.checkout;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.woehlke.greenshop.oodm.admin.model.OrderAdminBean;
 import org.woehlke.greenshop.oodm.catalog.entities.Language;
@@ -21,7 +22,7 @@ public interface OrderService {
 
     List<OrderStatus> findAllOrderStatuses(Language language);
 
-    OrderStatus findOrderStatusById(OrderStatusId ordersStatusId);
+    Optional<OrderStatus> findOrderStatusById(OrderStatusId ordersStatusId);
 
     List<OrderAdminBean> getAllOrders(Language language);
 

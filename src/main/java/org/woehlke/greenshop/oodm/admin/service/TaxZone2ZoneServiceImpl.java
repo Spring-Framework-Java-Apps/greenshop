@@ -50,6 +50,6 @@ public class TaxZone2ZoneServiceImpl implements TaxZone2ZoneService {
 
     @Override
     public TaxZone2Zone findTaxZone2ZoneById(long zoneId) {
-        return taxZone2ZoneRepository.findOne(zoneId);
+        return taxZone2ZoneRepository.getOne(zoneId);
     }
 }

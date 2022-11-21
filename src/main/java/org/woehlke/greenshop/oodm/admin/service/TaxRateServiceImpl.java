@@ -28,7 +28,7 @@ public class TaxRateServiceImpl implements TaxRateService {
 
     @Override
     public TaxRate findById(long taxRateId) {
-        return taxRateRepository.findOne(taxRateId);
+        return taxRateRepository.getOne(taxRateId);
     }
 
     @Override
