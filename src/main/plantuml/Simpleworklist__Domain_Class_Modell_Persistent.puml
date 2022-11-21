@@ -1,7 +1,6 @@
 @startuml
 
-
-title Simpleworklist Domain Class Modell
+title Greenshop Domain Class Modell
 'https://plantuml.com/class-diagram
 
 left to right direction
@@ -9,26 +8,19 @@ left to right direction
 
 scale 1200 width
 
-package persistent {
+package org.woehlke.greenshop.oodm.admin.entities {
 
-  entity Context {
+  entity Administrator {
        - String nameDe
        - String nameEn
-       Context[] list()
-       Context search()
-       Context addNew()
-       Context edit()
-       void delete()
-  }
-
-  entity Project {
-      - String name
-      - String description
-      listVisitsOfPet()
+      list()
+      search()
       addNew()
+      edit()
+      delete()
   }
 
-  entity Task {
+  entity TaxClass {
       - String name
       - String description
       list()
@@ -38,7 +30,17 @@ package persistent {
       delete()
   }
 
-  entity ChatMessage {
+  entity TaxRate {
+      - String name
+      - String description
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+  entity TaxZone {
      - String messageText
      - Boolean readByReceiver
       list()
@@ -48,7 +50,7 @@ package persistent {
       delete()
   }
 
-  entity UserAccount {
+  entity TaxZone2Zone {
       - String userEmail
       - String userPassword
       - String userFullname
@@ -65,7 +67,11 @@ package persistent {
       delete()
   }
 
-  entity UserAccountPassword {
+}
+
+package org.woehlke.greenshop.oodm.cart.entities {
+
+  entity CustomersBasket {
       - String userPassword
       list()
       search()
@@ -74,7 +80,7 @@ package persistent {
       delete()
   }
 
-  entity UserPasswordRecovery {
+  entity CustomersBasketAttribute {
       - String email
       - String token
       - Integer numberOfRetries
@@ -85,7 +91,11 @@ package persistent {
       delete()
   }
 
-  entity UserRegistration {
+}
+
+package org.woehlke.greenshop.oodm.catalog.entities {
+
+ entity Category {
       - String email
       - String token
       - Integer numberOfRetries
@@ -96,15 +106,396 @@ package persistent {
       delete()
   }
 
-  Context "many"  o-->  "one" UserAccount: userAccount
-  Project "many"  o-->  "one" Context: context
-  Task "many"  o-->  "one" Project: project
-  ChatMessage "many"  o-->  "one" UserAccount: sender
-  ChatMessage "many"  o-->  "one" UserAccount: receiver
-  UserAccount "one"  o-->  "one" Context: defaultContext
-  UserAccountPassword "one"  o-->  "one" UserAccount: userAccount
-  UserRegistration "one"  o-->  "one" UserAccount: userAccount
-  UserPasswordRecovery "many"  o-->  "one" UserAccount: userAccount
+ entity CategoryDescription {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity CategoryDescriptionId {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity Language {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity Manufacturer {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ManufacturerInfo {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ManufacturerInfoId {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity Product {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductAttribute {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductDescription {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductDescriptionId {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductImage {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductOption {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductOptionId {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductOptionValue {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductOptionValue2ProductOption {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductOptionValueId {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity Review {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ReviewDescription {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ReviewDescriptionId {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity Special {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+}
+
+package org.woehlke.greenshop.oodm.checkout.entities {
+
+ entity Order {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity OrderProduct {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity OrderProductAttribute {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity OrderStatus {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity OrderStatusHistory {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity OrderStatusId {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity OrderTotal {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+}
+
+package org.woehlke.greenshop.oodm.customer.entities {
+
+ entity AddressBook {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity AddressFormat {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity Country {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity Customer {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity CustomerInfo {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductNotification {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity ProductNotificationId {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
+
+ entity Zone {
+      - String email
+      - String token
+      - Integer numberOfRetries
+      list()
+      search()
+      addNew()
+      edit()
+      delete()
+  }
 
 }
 
