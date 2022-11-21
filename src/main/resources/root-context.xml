@@ -5,7 +5,6 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:int="http://www.springframework.org/schema/integration"
-	xmlns:int-mongodb="http://www.springframework.org/schema/integration/mongodb"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/tx 
@@ -14,26 +13,9 @@
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/data/jpa
     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-	http://www.springframework.org/schema/integration/mongodb
-	http://www.springframework.org/schema/integration/mongodb/spring-integration-mongodb.xsd
 	http://www.springframework.org/schema/integration
 	http://www.springframework.org/schema/integration/spring-integration.xsd">
 
-	<!--
-	<bean id="mongoDbFactory"
-		class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
-		<constructor-arg>
-			<bean class="com.mongodb.Mongo" />
-		</constructor-arg>
-		<constructor-arg value="test" />
-	</bean>
-
-	<bean id="mongoDbMessageStore"
-		class="org.springframework.integration.mongodb.store.MongoDbMessageStore">
-		<constructor-arg ref="mongoDbFactory" />
-	</bean>
-	-->
-	
 	<jpa:repositories base-package="org.woehlke.greenshop" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -84,7 +66,8 @@
 	<!--  
 	<int:service-activator input-channel="emailChannel"
 		output-channel="nullChannel" id="sendMail"
-		ref="registrationService" method="sendMail" />-->
+		ref="registrationService" method="sendMail" />
+	-->
 		
 	<!-- Mail service -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
