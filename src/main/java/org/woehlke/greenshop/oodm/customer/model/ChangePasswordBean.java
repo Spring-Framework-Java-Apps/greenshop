@@ -2,7 +2,7 @@ package org.woehlke.greenshop.oodm.customer.model;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+//import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.security.crypto.password.Md4PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -10,17 +10,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ChangePasswordBean {
 
 	@Length(min=5)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String passwordCurrent;
 	
 	@Length(min=5)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String passwordNew;
 	
 	@Length(min=5)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String passwordConfirmation;
 

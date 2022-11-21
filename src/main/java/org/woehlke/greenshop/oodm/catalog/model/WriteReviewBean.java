@@ -2,7 +2,7 @@ package org.woehlke.greenshop.oodm.catalog.model;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+//import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,7 +16,7 @@ public class WriteReviewBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Length(min=50)
-    @SafeHtml
+    //@SafeHtml
     @NotBlank
     private String reviewText;
 

@@ -2,7 +2,7 @@ package org.woehlke.greenshop.oodm.admin.entities;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+//import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,13 +28,13 @@ public class TaxZone {
     @Column(name="geo_zone_id",columnDefinition = "INT(11)")
     private Long id;
 
-    @SafeHtml
+    //@SafeHtml
     @NotBlank
     @Length(max=32)
     @Column(name="geo_zone_name",columnDefinition = "varchar(32)")
     private String name;
 
-    @SafeHtml
+    //@SafeHtml
     @NotBlank
     @Length(max=255)
     @Column(name="geo_zone_description",columnDefinition = "varchar(255)")

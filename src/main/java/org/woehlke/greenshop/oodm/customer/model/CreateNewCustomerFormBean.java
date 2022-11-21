@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.SafeHtml;
+//import org.hibernate.validator.constraints.SafeHtml;
 
 public class CreateNewCustomerFormBean {
 	
@@ -18,48 +18,48 @@ public class CreateNewCustomerFormBean {
 	private String gender;
 	
 	@Length(min=2)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String firstname;
 	
 	@Length(min=2)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String lastname;
 	
-	@SafeHtml
+	//@SafeHtml
 	@NotNull
 	private String dob;
 	
 	@Length(min=6)
-	@SafeHtml
+	//@SafeHtml
 	@Email
 	@NotBlank
 	private String emailAddress;
 	
-	@SafeHtml
+	//@SafeHtml
 	private String company;
 	
 	@Length(min=5)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String streetAddress;
 	
-	@SafeHtml
+	//@SafeHtml
 	private String suburb;
 	
 	@Length(min=4)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String postcode;
 	
 	@Length(min=3)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String city;
 	
 	@Length(min=2)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String state;
 	
@@ -67,22 +67,22 @@ public class CreateNewCustomerFormBean {
 	private long country;
 	
 	@Length(min=3)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String telephone;
 	
-	@SafeHtml
+	//@SafeHtml
 	private String fax;
 	
 	private boolean newsletter=false;
 	
 	@Length(min=5)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank
 	private String password;
 	
 	@Length(min=5)
-	@SafeHtml
+	//@SafeHtml
 	@NotBlank 
 	private String confirmation;
 	

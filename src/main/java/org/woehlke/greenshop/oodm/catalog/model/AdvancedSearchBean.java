@@ -1,7 +1,7 @@
 package org.woehlke.greenshop.oodm.catalog.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.SafeHtml;
+//import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ public class AdvancedSearchBean implements Serializable {
 
     @NotNull
     @NotEmpty
-    @SafeHtml
+    //@SafeHtml
     private String searchKeywords;
 
     private Long category;
