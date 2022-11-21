@@ -55,7 +55,7 @@ public class TaxZoneController {
     public String taxZones(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = null;
@@ -74,7 +74,7 @@ public class TaxZoneController {
                             @PathVariable long taxZoneId, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = taxZoneService.findTaxZoneById(taxZoneId);
@@ -88,7 +88,7 @@ public class TaxZoneController {
     public String taxZonesInsertForm(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page,Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = new TaxZone();
@@ -101,7 +101,7 @@ public class TaxZoneController {
                                      @Valid TaxZone thisTaxZone, BindingResult result, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         if(result.hasErrors()){
@@ -122,7 +122,7 @@ public class TaxZoneController {
                                     @PathVariable long taxZoneId, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = taxZoneService.findTaxZoneById(taxZoneId);
@@ -140,7 +140,7 @@ public class TaxZoneController {
                                        Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         thisTaxZone = taxZoneService.findTaxZoneById(taxZoneId);
@@ -155,7 +155,7 @@ public class TaxZoneController {
                                   @PathVariable long taxZoneId, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         TaxZone thisTaxZone = taxZoneService.findTaxZoneById(taxZoneId);
@@ -173,7 +173,7 @@ public class TaxZoneController {
                                      Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<TaxZone> taxZones = taxZoneService.findAllTaxZones(pageRequest);
         model.addAttribute("taxZones",taxZones);
         if(result.hasErrors()) {

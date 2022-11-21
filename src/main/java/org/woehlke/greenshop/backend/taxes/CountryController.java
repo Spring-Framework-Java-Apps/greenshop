@@ -45,7 +45,7 @@ public class CountryController {
     public String countries(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
         model.addAttribute("countries",countries);
         Country thisCountry = null;
@@ -63,7 +63,7 @@ public class CountryController {
         model.addAttribute("menuCategory",menuCategory);
         Country thisCountry = countryService.findCountryById(countryId);
         model.addAttribute("thisCountry",thisCountry);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
         model.addAttribute("countries",countries);
         return "admin/taxes/countries";
@@ -73,7 +73,7 @@ public class CountryController {
     public String countriesInsertForm(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
         model.addAttribute("countries",countries);
         Country thisCountry = new Country();
@@ -90,7 +90,7 @@ public class CountryController {
         if(result.hasErrors()){
             int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
             model.addAttribute("menuCategory",menuCategory);
-            Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+            Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
             Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
             model.addAttribute("countries",countries);
             model.addAttribute("thisCountry",thisCountry);
@@ -111,7 +111,7 @@ public class CountryController {
         model.addAttribute("menuCategory",menuCategory);
         Country thisCountry = countryService.findCountryById(countryId);
         model.addAttribute("thisCountry",thisCountry);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
         model.addAttribute("countries",countries);
         List<AddressFormat> addressFormats = addressFormatService.findAllAddressFormat();
@@ -127,7 +127,7 @@ public class CountryController {
         if(result.hasErrors()){
             int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
             model.addAttribute("menuCategory",menuCategory);
-            Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+            Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
             Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
             model.addAttribute("countries",countries);
             model.addAttribute("thisCountry",thisCountry);
@@ -149,7 +149,7 @@ public class CountryController {
         model.addAttribute("menuCategory",menuCategory);
         Country thisCountry = countryService.findCountryById(countryId);
         model.addAttribute("thisCountry",thisCountry);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "name");
         Page<Country> countries = countryService.findAllCountriesOrderByName(pageRequest);
         model.addAttribute("countries",countries);
         return "admin/taxes/countriesDeleteForm";

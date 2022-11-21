@@ -1,27 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>org.woehlke</groupId>
 	<artifactId>greenshop</artifactId>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.6-SNAPSHOT</version>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.5</version>
+	</parent>
+
 	<name>greenshop</name>
 	<url>http://shadowfax.fritz.box/p/greenshop</url>
 	<properties>
-		<java-version>1.8</java-version>
-		<org.springframework-version>4.2.3.RELEASE</org.springframework-version>
-		<spring.integration.version>4.2.3.RELEASE</spring.integration.version>
-		<spring.security.version>4.0.3.RELEASE</spring.security.version>
-		<org.aspectj-version>1.6.12</org.aspectj-version>
+		<java-version>11</java-version>
 		<org.slf4j-version>1.7.6</org.slf4j-version>
-		<maven.scm.version>1.9.4</maven.scm.version>
+		<maven.scm.version>1.13.0</maven.scm.version>
         <encoding>UTF-8</encoding>
 	</properties>
+
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version>
 			<exclusions>
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
@@ -33,7 +100,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version}</version>
 			<exclusions>
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
@@ -45,29 +111,24 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
-			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
-			<version>${org.springframework-version}</version>
 		</dependency>
 
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
 		</dependency>
 
 		<!-- Logging -->
@@ -125,20 +186,19 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
+			<!--
 			<version>4.3.2.Final</version>
+			-->
 		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
+			<!--
 			<version>4.3.2.Final</version>
+			-->
 		</dependency>
-		<!--  
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.5.6-Final</version>
-		</dependency>
-		-->
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -161,17 +221,20 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
+			<!--
 			<version>${org.springframework-version}</version>
+			-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
+			<!--
 			<version>${org.springframework-version}</version>
+			-->
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -181,29 +244,39 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
+			<!--
 			<version>1.7.2.RELEASE</version>
+			-->
 		</dependency>
 
 		<!-- Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
+			<!--
 			<version>${spring.security.version}</version>
+			-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
+			<!--
 			<version>${spring.security.version}</version>
+			-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
+			<!--
 			<version>${spring.security.version}</version>
+			-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
+			<!--
 			<version>${spring.security.version}</version>
+			-->
 		</dependency>
 
 		<!-- Mail -->
@@ -221,10 +294,13 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
+			<!--
 			<version>${org.springframework-version}</version>
+			-->
 		</dependency>
 
 		<dependency>
@@ -252,28 +328,30 @@
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-core</artifactId>
+			<!--
 			<version>${spring.integration.version}</version>
+			-->
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-mongodb</artifactId>
-			<version>${spring.integration.version}</version>
-		</dependency>
+			<!--
+       		<version>${spring.integration.version}</version>
+			-->
+    </dependency>
 
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-jpa</artifactId>
-			<version>${spring.integration.version}</version>
-		</dependency>
+    <dependency>
+        <groupId>org.springframework.integration</groupId>
+        <artifactId>spring-integration-jpa</artifactId>
+    </dependency>
 
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-test</artifactId>
-			<version>${spring.integration.version}</version>
-		</dependency>
+    <dependency>
+        <groupId>org.springframework.integration</groupId>
+        <artifactId>spring-integration-test</artifactId>
+    </dependency>
 
-		<!-- Apache Tiles -->
+    <!-- Apache Tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>

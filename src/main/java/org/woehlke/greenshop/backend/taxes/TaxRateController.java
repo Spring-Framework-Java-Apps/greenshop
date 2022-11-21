@@ -48,7 +48,7 @@ public class TaxRateController {
     public String taxRates(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
         Page<TaxRate> taxRates = taxRateService.findAll(pageRequest);
         model.addAttribute("taxRates",taxRates);
         TaxRate thisTaxRate = null;
@@ -65,7 +65,7 @@ public class TaxRateController {
                             Model model) {
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory", menuCategory);
-        Pageable pageRequest = new PageRequest(page, PAGE_SIZE, Sort.Direction.ASC, "priority");
+        Pageable pageRequest = PageRequest.of(page, PAGE_SIZE, Sort.Direction.ASC, "priority");
         Page<TaxRate> taxRates = taxRateService.findAll(pageRequest);
         model.addAttribute("taxRates", taxRates);
         TaxRate thisTaxRate = null;
@@ -80,7 +80,7 @@ public class TaxRateController {
     public String taxRateInsertForm(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
         Page<TaxRate> taxRates = taxRateService.findAll(pageRequest);
         model.addAttribute("taxRates",taxRates);
         TaxRate thisTaxRate = new TaxRate();
@@ -99,7 +99,7 @@ public class TaxRateController {
         if(result.hasErrors()){
             int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
             model.addAttribute("menuCategory",menuCategory);
-            Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
+            Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
             Page<TaxRate> taxRates = taxRateService.findAll(pageRequest);
             model.addAttribute("taxRates",taxRates);
             model.addAttribute("thisTaxRate",thisTaxRate);
@@ -118,7 +118,7 @@ public class TaxRateController {
         model.addAttribute("menuCategory",menuCategory);
         TaxRate thisTaxRate =  taxRateService.findById(taxRateId);
         model.addAttribute("thisTaxRate",thisTaxRate);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
         Page<TaxRate> taxRates = taxRateService.findAll(pageRequest);
         model.addAttribute("taxRates",taxRates);
         List<TaxZone> taxZones = taxZoneService.findAll();
@@ -137,7 +137,7 @@ public class TaxRateController {
             int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
             model.addAttribute("menuCategory",menuCategory);
             model.addAttribute("thisTaxRate",thisTaxRate);
-            Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
+            Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
             Page<TaxRate> taxRates = taxRateService.findAll(pageRequest);
             model.addAttribute("taxRates",taxRates);
             return "admin/taxes/taxRatesEditForm";
@@ -161,7 +161,7 @@ public class TaxRateController {
         model.addAttribute("menuCategory",menuCategory);
         TaxRate thisTaxRate =  taxRateService.findById(taxRateId);
         model.addAttribute("thisTaxRate",thisTaxRate);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "priority");
         Page<TaxRate> taxRates = taxRateService.findAll(pageRequest);
         model.addAttribute("taxRates",taxRates);
         return "admin/taxes/taxRatesDeleteForm";

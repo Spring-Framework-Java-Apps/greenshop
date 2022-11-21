@@ -39,7 +39,7 @@ public class TaxClassController {
     public String taxClasses(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "title");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "title");
         Page<TaxClass> taxClasses = taxClassService.findAll(pageRequest);
         model.addAttribute("taxClasses",taxClasses);
         TaxClass thisTaxClass = null;
@@ -56,7 +56,7 @@ public class TaxClassController {
                              Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "title");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "title");
         Page<TaxClass> taxClasses = taxClassService.findAll(pageRequest);
         model.addAttribute("taxClasses",taxClasses);
         TaxClass thisTaxClass = null;
@@ -71,7 +71,7 @@ public class TaxClassController {
     public String taxClassInsertForm(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "title");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "title");
         Page<TaxClass> taxClasses = taxClassService.findAll(pageRequest);
         model.addAttribute("taxClasses",taxClasses);
         TaxClass thisTaxClass = new TaxClass();
@@ -86,7 +86,7 @@ public class TaxClassController {
         if(result.hasErrors()){
             int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
             model.addAttribute("menuCategory",menuCategory);
-            Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "title");
+            Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "title");
             Page<TaxClass> taxClasses = taxClassService.findAll(pageRequest);
             model.addAttribute("taxClasses",taxClasses);
             model.addAttribute("thisTaxClass",thisTaxClass);
@@ -105,7 +105,7 @@ public class TaxClassController {
         model.addAttribute("menuCategory",menuCategory);
         TaxClass thisTaxClass =  taxClassService.findById(taxClassId);
         model.addAttribute("thisTaxClass",thisTaxClass);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "title");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "title");
         Page<TaxClass> taxClasses = taxClassService.findAll(pageRequest);
         model.addAttribute("taxClasses",taxClasses);
         return "admin/taxes/taxClassesEditForm";
@@ -120,7 +120,7 @@ public class TaxClassController {
             int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
             model.addAttribute("menuCategory",menuCategory);
             model.addAttribute("thisTaxClass",thisTaxClass);
-            Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "title");
+            Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "title");
             Page<TaxClass> taxClasses = taxClassService.findAll(pageRequest);
             model.addAttribute("taxClasses",taxClasses);
             return "admin/taxes/taxClassesEditForm";
@@ -141,7 +141,7 @@ public class TaxClassController {
         model.addAttribute("menuCategory",menuCategory);
         TaxClass thisTaxClass =  taxClassService.findById(taxClassId);
         model.addAttribute("thisTaxClass",thisTaxClass);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "title");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "title");
         Page<TaxClass> taxClasses = taxClassService.findAll(pageRequest);
         model.addAttribute("taxClasses",taxClasses);
         return "admin/taxes/taxClassesDeleteForm";

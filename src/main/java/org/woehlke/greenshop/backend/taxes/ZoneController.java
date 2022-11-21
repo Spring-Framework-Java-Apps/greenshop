@@ -45,7 +45,7 @@ public class ZoneController {
     public String zones(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
         Page<Zone> zones = zoneService.findAll(pageRequest);
         model.addAttribute("zones",zones);
         Zone thisZone = null;
@@ -63,7 +63,7 @@ public class ZoneController {
         model.addAttribute("menuCategory",menuCategory);
         Zone thisZone = zoneService.findById(zoneId);
         model.addAttribute("thisZone",thisZone);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
         Page<Zone> zones = zoneService.findAll(pageRequest);
         model.addAttribute("zones",zones);
         return "admin/taxes/zones";
@@ -73,7 +73,7 @@ public class ZoneController {
     public String zonesInsertForm(@RequestParam(value="page",defaultValue=FIRST_PAGE) int page, Model model){
         int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
         model.addAttribute("menuCategory",menuCategory);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
         Page<Zone> zones = zoneService.findAll(pageRequest);
         model.addAttribute("zones",zones);
         Zone thisZone = new Zone();
@@ -90,7 +90,7 @@ public class ZoneController {
         if(result.hasErrors()){
             int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
             model.addAttribute("menuCategory",menuCategory);
-            Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
+            Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
             Page<Zone> zones = zoneService.findAll(pageRequest);
             model.addAttribute("zones",zones);
             model.addAttribute("thisZone",thisZone);
@@ -111,7 +111,7 @@ public class ZoneController {
         model.addAttribute("menuCategory",menuCategory);
         Zone thisZone = zoneService.findById(zoneId);
         model.addAttribute("thisZone",thisZone);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
         Page<Zone> zones = zoneService.findAll(pageRequest);
         model.addAttribute("zones",zones);
         List<Country> countries = countryService.findAllCountriesOrderByName();
@@ -127,7 +127,7 @@ public class ZoneController {
         if(result.hasErrors()){
             int menuCategory = AdminMenuCategory.LOCATION_TAXES.ordinal();
             model.addAttribute("menuCategory",menuCategory);
-            Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
+            Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
             Page<Zone> zones = zoneService.findAll(pageRequest);
             model.addAttribute("zones",zones);
             model.addAttribute("thisZone",thisZone);
@@ -149,7 +149,7 @@ public class ZoneController {
         model.addAttribute("menuCategory",menuCategory);
         Zone thisZone = zoneService.findById(zoneId);
         model.addAttribute("thisZone",thisZone);
-        Pageable pageRequest = new PageRequest(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
+        Pageable pageRequest = PageRequest.of(page,PAGE_SIZE, Sort.Direction.ASC, "country.name","name");
         Page<Zone> zones = zoneService.findAll(pageRequest);
         model.addAttribute("zones",zones);
         return "admin/taxes/zonesDeleteForm";
