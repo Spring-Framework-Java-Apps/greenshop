@@ -62,7 +62,7 @@ public class ProductDescriptionRepositoryTest {
 	@Test
 	public void findByManufacturerTest()  throws Exception {
 		Language language=languageRepository.findByCode("en");
-		Manufacturer manufacturer =  manufacturerRepository.findOne(4L);
+		Manufacturer manufacturer =  manufacturerRepository.getOne(4L);
 		List<ProductDescription> page = productDescriptionRepositoryDao.findByManufacturer(manufacturer, language);
 		logger.info("------------------------------------------------------");
 		for (ProductDescription p : page){
