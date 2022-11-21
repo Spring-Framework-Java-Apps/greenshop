@@ -359,20 +359,24 @@
   			<version>1.7.1</version>
 		</dependency>
 	</dependencies>
+
 	<organization>
 		<name>Thomas Woehlke</name>
 		<url>http://thomas-woehlke.blogspot.de</url>
 	</organization>
 	<inceptionYear>2012</inceptionYear>
+
 	<scm>
 		<url>https://github.com/phasenraum2010/greenshop.git</url>
 		<connection>scm:svn:https://github.com/phasenraum2010/greenshop.git</connection>
 		<developerConnection>scm:svn:https://github.com/phasenraum2010/greenshop.git</developerConnection>
 	</scm>
+
 	<issueManagement>
 		<url>http://shadowfax.fritz.box/trac/spring-social/report/3</url>
 		<system>Trac</system>
 	</issueManagement>
+
 	<distributionManagement>
 		<!-- <repository> <id>nexus</id> <name>Nexus Service on Developer Machine</name> 
 			<url>http://localhost:8081/nexus/content/groups/public/</url> </repository> 
@@ -383,6 +387,7 @@
 			<url>file:///opt/local/apache2/htdocs/p/greenshop</url>
 		</site>
 	</distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>
