@@ -1,0 +1,200 @@
+server:
+  port: 8080
+  error:
+    path: /fehler
+  compression:
+    enabled: true
+    min-response-size: 2048
+  servlet:
+    context-path: "/"
+  endpoints:
+    shutdown:
+      enabled: true
+spring:
+  config:
+    name: bloodmoney
+  liquibase:
+    enabled: false
+  devtools:
+    livereload:
+      enabled: true
+  application:
+    admin:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/oscommerce2
+    username: oscommerce2
+    password: oscommerce2pwd
+    driver-class-name: com.mysql.jdbc.Driver
+  jta:
+    atomikos:
+      connectionfactory:
+        xa-connection-factory-class-name: com.mysql.jdbc.JDBC4Connection
+  jpa:
+    open-in-view: true
+    show-sql: true
+    database-platform: MYSQL
+    hibernate:
+      #ddl-auto: create-drop update
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+        generate_statistics: true
+  thymeleaf:
+    cache: false
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: ALWAYS
+      cleanup-cron: 0 * * * * *
+      #schema: classpath:/org/springframework/session/jdbc/schema-h2.sql
+      #table-name: SPRING_SESSION
+  main:
+    allow-bean-definition-overriding: true
+  sql:
+    init:
+      platform: POSTGRESQL
+      mode: ALWAYS
+org:
+  woehlke:
+    greenshop:
+      testDataHowManyTestData: 10
+      devTesting: true
+      #userConfig:
+        #userEmail: ${GREENSHOP_USER_EMAIL}
+        #userPassword: ${GREENSHOP_USER_PASSWORD}
+        #userFullname: ${GREENSHOP_USER_FULLNAME}
+      webConfig:
+        exportFilename: "measurements.csv"
+        exportFilenameSeparator: ";"
+        webAddResourceHandlers:
+          - "webjars/"
+        webAddResourceHandlersStatic:
+          - "bloodmoney/"
+          - "icon/"
+          - "languages/"
+          - "test/"
+          - "favicon.ico"
+      webSecurity:
+        loginProcessingUrl: "/j_spring_security_check"
+        failureForwardUrl: "/login?login_error=1"
+        defaultSuccessUrl: "/"
+        login-page: "/login"
+        logout-url: "/logout"
+        delete-cookies: "JSESSIONID"
+        invalidate-http-session: true
+        antMatchersFullyAuthenticated: "/**"
+        antMatchersPermitAll:
+          - "/bloodmoney"
+          - "/bloodmoney/**"
+          - "/icon/**"
+          - "/icon"
+          - "/languages"
+          - "/languages/**"
+          - "/favicon.ico"
+          - "/webjars/**"
+          - "/webjars"
+          - "/test*/**"
+          - "/rest"
+          - "/rest/**"
+          - "/bpm"
+          - "/login*"
+          - "/register*"
+          - "/confirm*/**"
+          - "/resetPassword*"
+          - "/passwordResetConfirm*/**"
+          - "/error*"
+          - "/fehler*"
+        usernameParameter: "userEmail"
+        passwordParameter: "userPassword"
+        #secret: ${GREENSHOP_USER_SECRET}
+        #iterations: ${GREENSHO_USER_ITERATIONS}
+        #hashWidth: ${GREENSHO_USER_HASH_WIDTH}
+logging:
+  level:
+    root: INFO
+    org:
+      springframework: INFO
+      hibernate:
+        SQL: INFO
+        engine:
+          internal: WARN
+      ch:
+        qos: WARN
+      mysql: WARN
+      greenshop:
+        java:
+          bloodmoney: INFO
+debug: false
+---
+spring:
+  profiles:
+    active: dev
+  thymeleaf:
+    cache: false
+  devtools:
+    livereload:
+      enabled: true
+  application:
+    admin:
+      enabled: false
+server:
+  compression:
+    enabled: false
+logging:
+  level:
+    root: INFO
+    org:
+      springframework: INFO
+      hibernate:
+        SQL: INFO
+        engine:
+          internal: WARN
+      ch:
+        qos: WARN
+      postgresql: WARN
+      woehlke:
+        java:
+          bloodmoney: INFO
+debug: false
+---
+spring:
+  profiles:
+    active: default
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bloodmoney
+  jta:
+    atomikos:
+      properties:
+        transaction-manager-unique-name: tx-manager-bloodmoney
+    transaction-manager-id: tx-manager-bloodmoney
+    log-dir: transaction-logs/tx-logs-bloodmoney
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: ${PORT}
+  compression:
+    enabled: true
+logging:
+  level:
+    root: INFO
+    org:
+      springframework: INFO
+      hibernate:
+        SQL: INFO
+        engine:
+          internal: WARN
+      ch:
+        qos: WARN
+      postgresql: WARN
+      woehlke:
+        java:
+          bloodmoney: INFO
+debug: false
