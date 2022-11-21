@@ -1,6 +1,6 @@
 @startuml
 
-title Transient Class Modell
+title Greenshop Transient Class Modell
 'https://plantuml.com/class-diagram
 
 left to right direction
@@ -8,67 +8,103 @@ left to right direction
 
 scale 1200 width
 
-package transient {
+package org.woehlke.greenshop.oodm {
 
-  package requestScope {
+    package org.woehlke.greenshop.oodm.admin.model {
 
-    class Breadcrumb {
-      - BreadcrumbItem[] breadcrumb
-      - Locale locale
-      int size()
-      void addProjectRoot()
-      void addProject(Project thisProject)
-      void addTask(Task task)
-      void addTaskstate(String taskStateView, String urlTaskstate)
-      void addPage(String name, String url)
-    }
-    class BreadcrumbItem {
-      - String name
-      - String url
-    }
-    class ChatMessageForm {
-      - String messageText
-    }
-    class LoginForm {
-      - String userEmail
-      - String userPassword
-    }
-    class NewContextForm {
-      - String nameDe
-      - String nameEn
-    }
-    class UserAccountForm {
-      - String userEmail
-      - String userFullname
-      - String userPassword
-      - String userPasswordConfirmation
-      boolean passwordsAreTheSame()
-    }
-    class UserChangeLanguageForm {
-    - Language defaultLanguage
-    }
-    class UserDetailsDto {
-      - String username
-      - String password
-      - boolean accountNonExpired
-      - boolean accountNonLocked
-      - boolean credentialsNonExpired
-      - boolean enabled
-    }
-  }
+        class Breadcrumb {
+          - BreadcrumbItem[] breadcrumb
+          - Locale locale
+          int size()
+          void addProjectRoot()
+          void addProject(Project thisProject)
+          void addTask(Task task)
+          void addTaskstate(String taskStateView, String urlTaskstate)
+          void addPage(String name, String url)
+        }
+        class BreadcrumbItem {
+          - String name
+          - String url
+        }
+        class ChatMessageForm {
+          - String messageText
+        }
+        class LoginForm {
+          - String userEmail
+          - String userPassword
+        }
+        class NewContextForm {
+          - String nameDe
+          - String nameEn
+        }
+        class UserAccountForm {
+          - String userEmail
+          - String userFullname
+          - String userPassword
+          - String userPasswordConfirmation
+          boolean passwordsAreTheSame()
+        }
+        class UserChangeLanguageForm {
+        - Language defaultLanguage
+        }
+        class UserDetailsDto {
+          - String username
+          - String password
+          - boolean accountNonExpired
+          - boolean accountNonLocked
+          - boolean credentialsNonExpired
+          - boolean enabled
+        }
+      }
 
-  package sessionScope {
-    class UserSessionBean {
-      - Long userAccountid
-      - Long lastContextId
-      - Long lastProjectId
-      - Long lastTaskId
-      - TaskState lastTaskState
-      - String lastSearchterm
+    package org.woehlke.greenshop.oodm.cart.model {
+
+        class UserSessionBean {
+          - Long userAccountid
+          - Long lastContextId
+          - Long lastProjectId
+          - Long lastTaskId
+          - TaskState lastTaskState
+          - String lastSearchterm
+        }
+
+        ' Breadcrumb "one" o--> "many"  BreadcrumbItem
     }
 
-    Breadcrumb "one" o--> "many"  BreadcrumbItem
-  }
+    package org.woehlke.greenshop.oodm.catalog.model {
+        class UserSessionBean {
+          - Long userAccountid
+          - Long lastContextId
+          - Long lastProjectId
+          - Long lastTaskId
+          - TaskState lastTaskState
+          - String lastSearchterm
+        }
+    }
+
+    package org.woehlke.greenshop.oodm.checkout.model {
+        class UserSessionBean {
+          - Long userAccountid
+          - Long lastContextId
+          - Long lastProjectId
+          - Long lastTaskId
+          - TaskState lastTaskState
+          - String lastSearchterm
+        }
+    }
+
+    package org.woehlke.greenshop.oodm.customer.model {
+
+        class UserSessionBean {
+          - Long userAccountid
+          - Long lastContextId
+          - Long lastProjectId
+          - Long lastTaskId
+          - TaskState lastTaskState
+          - String lastSearchterm
+        }
+    }
+
 }
 
 @enduml

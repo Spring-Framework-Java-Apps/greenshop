@@ -7,6 +7,7 @@ left to right direction
 'top to bottom direction
 
 scale 1200 width
+package org.woehlke.greenshop.oodm {
 
 package org.woehlke.greenshop.oodm.admin.entities {
 
@@ -496,6 +497,8 @@ package org.woehlke.greenshop.oodm.customer.entities {
       edit()
       delete()
   }
+
+}
 
 }
 
