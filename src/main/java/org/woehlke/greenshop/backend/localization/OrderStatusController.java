@@ -52,7 +52,7 @@ public class OrderStatusController {
         OrderStatusId thisOrderStatusId = new OrderStatusId();
         thisOrderStatusId.setId(ordersStatusId);
         thisOrderStatusId.setLanguage(language);
-        OrderStatus thisOrderStatus = orderService.findOrderStatusById(thisOrderStatusId);
+        OrderStatus thisOrderStatus = orderService.findOrderStatusById(thisOrderStatusId).get();
         model.addAttribute("thisOrderStatus",thisOrderStatus);
         return "admin/localization/ordersStatus";
     }
