@@ -15,21 +15,29 @@ public class AddressBean implements Serializable {
 
 	@Pattern(regexp="m|f") private String gender;
 
-	//@SafeHtml private String firstname;
+	//@SafeHtml
+	private String firstname;
 	
-	//@SafeHtml private String lastname;
+	//@SafeHtml 
+ private String lastname;
 	
-	//@SafeHtml private String company;
+	//@SafeHtml 
+ private String company;
 	
-	//@SafeHtml private String streetAddress;
+	//@SafeHtml 
+ private String streetAddress;
 	
-	//@SafeHtml private String suburb;
+	//@SafeHtml 
+ private String suburb;
 	
-	//@SafeHtml private String postcode;
+	//@SafeHtml 
+ private String postcode;
 	
-	//@SafeHtml private String city;
+	//@SafeHtml 
+ private String city;
 	
-	//@SafeHtml private String state;
+	//@SafeHtml 
+ private String state;
 	
 	private long countryId;
 
