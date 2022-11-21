@@ -110,7 +110,7 @@ package org.woehlke.greenshop.oodm {
               edit()
               delete()
          }
-         entity CategoryDescriptionId {
+         class CategoryDescriptionId {
               - String email
               - String token
               - Integer numberOfRetries
@@ -150,7 +150,7 @@ package org.woehlke.greenshop.oodm {
               edit()
               delete()
          }
-         entity ManufacturerInfoId {
+         class ManufacturerInfoId {
               - String email
               - String token
               - Integer numberOfRetries
@@ -190,7 +190,7 @@ package org.woehlke.greenshop.oodm {
               edit()
               delete()
          }
-         entity ProductDescriptionId {
+         class ProductDescriptionId {
               - String email
               - String token
               - Integer numberOfRetries
@@ -220,7 +220,7 @@ package org.woehlke.greenshop.oodm {
               edit()
               delete()
          }
-         entity ProductOptionId {
+         class ProductOptionId {
               - String email
               - String token
               - Integer numberOfRetries
@@ -250,7 +250,7 @@ package org.woehlke.greenshop.oodm {
               edit()
               delete()
          }
-         entity ProductOptionValueId {
+         class ProductOptionValueId {
               - String email
               - String token
               - Integer numberOfRetries
@@ -280,7 +280,7 @@ package org.woehlke.greenshop.oodm {
               edit()
               delete()
          }
-         entity ReviewDescriptionId {
+         class ReviewDescriptionId {
               - String email
               - String token
               - Integer numberOfRetries
@@ -438,7 +438,7 @@ package org.woehlke.greenshop.oodm {
               edit()
               delete()
          }
-         entity ProductNotificationId {
+         class ProductNotificationId {
               - String email
               - String token
               - Integer numberOfRetries

@@ -14,13 +14,9 @@ package org.woehlke.greenshop.oodm {
 
         class Breadcrumb {
           - BreadcrumbItem[] breadcrumb
-          - Locale locale
+          - String name
           int size()
           void addProjectRoot()
-          void addProject(Project thisProject)
-          void addTask(Task task)
-          void addTaskstate(String taskStateView, String urlTaskstate)
-          void addPage(String name, String url)
         }
         class BreadcrumbItem {
           - String name
