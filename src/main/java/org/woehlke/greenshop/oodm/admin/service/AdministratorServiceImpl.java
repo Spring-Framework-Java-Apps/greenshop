@@ -1,5 +1,6 @@
 package org.woehlke.greenshop.oodm.admin.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,7 +10,6 @@ import org.woehlke.greenshop.oodm.admin.entities.Administrator;
 import org.woehlke.greenshop.oodm.admin.model.AdministratorBean;
 import org.woehlke.greenshop.oodm.admin.repository.AdministratorRepository;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
@@ -20,11 +20,14 @@ import java.util.List;
 @Transactional(readOnly=true, propagation= Propagation.REQUIRED)
 public class AdministratorServiceImpl implements AdministratorService {
 
-    @Inject
-    private AdministratorRepository administratorRepository;
+    private final AdministratorRepository administratorRepository;
+    private final PasswordEncoder encoder;
 
-    @Inject
-    private PasswordEncoder encoder;
+    @Autowired
+    public AdministratorServiceImpl(AdministratorRepository administratorRepository, PasswordEncoder encoder) {
+        this.administratorRepository = administratorRepository;
+        this.encoder = encoder;
+    }
 
     @Override
     public List<Administrator> findAllAdministrators() {
