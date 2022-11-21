@@ -59,8 +59,14 @@
 	</distributionManagement>
 
 	<properties>
-		<version.java>11</version.java>
         <encoding>UTF-8</encoding>
+		<java.version>11</java.version>
+		<version.maven>3.6.3</version.maven>
+		<version.java>${java.version}</version.java>
+		<maven.compiler.source>${version.java}</maven.compiler.source>
+		<maven.compiler.target>${version.java}</maven.compiler.target>
+		<spring-boot.repackage.layout>JAR</spring-boot.repackage.layout>
+		<version.spring-boot-maven-plugin>${project.parent.version}</version.spring-boot-maven-plugin>
 
 		<!-- SCM and Releasing -->
 		<version.org.apache.maven.scm>1.13.0</version.org.apache.maven.scm>
