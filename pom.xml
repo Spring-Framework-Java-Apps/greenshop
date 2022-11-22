@@ -23,7 +23,7 @@
 
 	<name>greenshop</name>
 	<description>Mogration of PHP based oscommerce 2.x ecommerce application tp Spring Boot Java MVC Framework</description>
-	<url>https://homepage.ruhr-uni-bochum.de/Thomas.Woehlke/java/greenshop</url>
+	<url>https://java.woehlke.org/greenshop</url>
 	<inceptionYear>2012</inceptionYear>
 
 	<organization>
@@ -33,9 +33,11 @@
 
 	<developers>
 		<developer>
-			<name>Thomas Wöhlke</name>
-			<email>github@woehlke.org</email>
-			<url>https://github.com/thomaswoehlke/</url>
+			<id>thomaswoehlke</id>
+			<name>Thomas Woehlke</name>
+			<email>thomas.woehlke@gmail.com</email>
+			<url>https://github.com/thomaswoehlke</url>
+			<timezone>Europe/Paris</timezone>
 		</developer>
 	</developers>
 
