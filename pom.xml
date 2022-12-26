@@ -4,7 +4,7 @@
 
 	<groupId>org.woehlke</groupId>
 	<artifactId>greenshop</artifactId>
-	<version>0.6.0.4-SNAPSHOT</version>
+	<version>0.6.0.4</version>
 	<packaging>war</packaging>
 
 	<parent>
@@ -18,7 +18,7 @@
 		<connection>scm:git:git@github.com:Spring-Framework-Java-Apps/greenshop.git</connection>
 		<developerConnection>scm:git:git@github.com:Spring-Framework-Java-Apps/greenshop.git</developerConnection>
 		<url>https://github.com/Spring-Framework-Java-Apps/greenshop/tree/${project.scm.tag}</url>
-		<tag>HEAD</tag>
+		<tag>v0.6.0.4</tag>
 	</scm>
 
 	<name>greenshop</name>
