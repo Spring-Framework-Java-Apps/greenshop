@@ -1201,19 +1201,34 @@
 	</reporting>
 
 	<profiles>
-
 		<profile>
-			<id>test</id>
+			<id>run</id>
 			<properties>
-				<skipTests>false</skipTests>
-				<skipIntegrationTests>false</skipIntegrationTests>
+				<skipTests>true</skipTests>
+				<skipIntegrationTests>true</skipIntegrationTests>
 			</properties>
 			<build>
 				<finalName>${project.artifactId}</finalName>
-				<defaultGoal>clean dependency:list install spring-boot:repackage</defaultGoal>
+				<defaultGoal>clean install spring-boot:run</defaultGoal>
 			</build>
 		</profile>
-
+		<profile>
+			<id>build</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<skipTests>false</skipTests>
+				<skip.unit.tests>false</skip.unit.tests>
+				<skip.integration.tests>false</skip.integration.tests>
+			</properties>
+			<build>
+				<finalName>${project.artifactId}</finalName>
+				<defaultGoal>
+					clean dependency:purge-local-repository dependency:resolve dependency:resolve-plugins dependency:sources install spring-boot:repackage site site:deploy site:jar source:test-jar source:jar javadoc:jar javadoc:test-jar
+				</defaultGoal>
+			</build>
+		</profile>
 		<profile>
 			<id>war</id>
 			<properties>
@@ -1222,11 +1237,11 @@
 			</properties>
 			<build>
 				<finalName>${project.artifactId}</finalName>
-				<defaultGoal>clean dependency:list install spring-boot:repackage</defaultGoal>
+				<defaultGoal>
+					clean dependency:purge-local-repository dependency:resolve dependency:resolve-plugins dependency:sources install spring-boot:repackage site site:deploy site:jar source:test-jar source:jar javadoc:jar javadoc:test-jar
+				</defaultGoal>
 			</build>
 		</profile>
-
-
 		<profile>
 			<id>uml</id>
 			<properties>
@@ -1295,6 +1310,5 @@
 				</plugins>
 			</build>
 		</profile>
-
 	</profiles>
 </project>
