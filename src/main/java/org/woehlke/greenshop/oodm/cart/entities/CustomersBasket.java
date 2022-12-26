@@ -41,8 +41,7 @@ mysql> select * from customers_basket;
  *
  * 26{3}9 := ProductId{Product Option}Option Value
  * @see <a href="http://localhost/oscommerce2/product_info.php?cPath=1_9&products_id=26">a</a>
- * @see <a href="http://localhost/oscommerce2/product_info.php?products_id=26{3}9">b</a>
- *
+ * http :// localhost/oscommerce2/product_info.php?products_id=26{3}9
  */
 @Entity
 @Table(name="customers_basket")
