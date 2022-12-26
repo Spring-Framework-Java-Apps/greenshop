@@ -39,9 +39,10 @@ mysql> select * from customers_basket;
 |                  11 |            9 | 26{3}9      |                         1 |        NULL | 20130326                    |
 +---------------------+--------------+-------------+---------------------------+-------------+-----------------------------+
  *
- * 26{3}9 := http://localhost/oscommerce2/product_info.php?cPath=1_9&products_id=26 
- *           http://localhost/oscommerce2/product_info.php?products_id=26{3}9
- *           ProductId{Product Option}Option Value
+ * 26{3}9 := ProductId{Product Option}Option Value
+ * @see <a href="http://localhost/oscommerce2/product_info.php?cPath=1_9&products_id=26">a</a>
+ * @see <a href="http://localhost/oscommerce2/product_info.php?products_id=26{3}9">b</a>
+ *
  */
 @Entity
 @Table(name="customers_basket")
