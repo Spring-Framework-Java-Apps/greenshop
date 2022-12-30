@@ -23,7 +23,7 @@
 
 	<name>greenshop</name>
 	<description>Mogration of PHP based oscommerce 2.x ecommerce application tp Spring Boot Java MVC Framework</description>
-	<url>https://java.woehlke.org/greenshop</url>
+	<url>https://java.woehlke.org/spring/greenshop</url>
 	<inceptionYear>2012</inceptionYear>
 
 	<organization>
@@ -49,7 +49,7 @@
 	<distributionManagement>
 		<site>
 			<id>bloodmoney.public_html</id>
-			<url>file://${user.home}/public_html/java/greenshop</url>
+			<url>file://${user.home}/public_html/java/spring/greenshop</url>
 		</site>
 		<snapshotRepository>
 			<id>snapshots</id>
